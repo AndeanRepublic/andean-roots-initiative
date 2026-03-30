@@ -1,0 +1,51 @@
+---
+import UpRightArrowIcon from '../icons/UpRightArrowIcon.astro';
+
+type ButtonVariant =
+  | 'desktop-primary'
+  | 'desktop-secondary'
+  | 'mobile-primary'
+  | 'mobile-secondary';
+
+interface Props {
+  href?: string;
+  text?: string;
+  variant?: ButtonVariant;
+  class?: string;
+}
+
+const {
+  href = '#',
+  text = 'GET INVOLVED',
+  variant = 'desktop-primary',
+  class: className = '',
+} = Astro.props as Props;
+
+const isPrimary = variant === 'desktop-primary' || variant === 'mobile-primary';
+const isMobile = variant === 'mobile-primary' || variant === 'mobile-secondary';
+
+const baseClass = 'group inline-flex shrink-0 items-center transition-opacity hover:opacity-90';
+const variantClass = isPrimary
+  ? 'rounded-full bg-main text-white gap-lg pl-xl pr-sm py-sm'
+  : 'text-main gap-sm';
+const textClass = isMobile
+  ? 'text-[14px] font-semibold leading-[1.5]'
+  : 'body-md-sb';
+const iconWrapperClass = isPrimary
+  ? isMobile
+    ? 'flex items-center justify-center rounded-full bg-light p-xs'
+    : 'flex items-center justify-center rounded-full bg-light p-sm'
+  : 'flex items-center justify-center';
+const iconClass = isPrimary
+  ? isMobile
+    ? 'size-4 text-main'
+    : 'size-5 text-main'
+  : 'size-4 text-main';
+---
+
+<a href={href} class={`${baseClass} ${variantClass} ${className}`.trim()}>
+  <span class={textClass}>{text}</span>
+  <span class={iconWrapperClass}>
+    <UpRightArrowIcon class={iconClass} />
+  </span>
+</a>

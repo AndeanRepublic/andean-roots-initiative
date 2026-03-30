@@ -1,0 +1,71 @@
+---
+import HamburgerIcon from '../icons/HamburgerIcon.astro';
+
+const navLinks = [
+  { label: 'Home', href: '#', active: true },
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Campaigns', href: '#campaigns' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6xl pt-3xl">
+  <nav class="navbar mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full p-lg">
+    <a href="/" class="flex items-center px-lg" aria-label="Andean Roots Initiative - Inicio">
+      <img src="/home-assets/logo.png" alt="Andean Roots Initiative" class="h-10 w-auto" width="68" height="40" />
+    </a>
+
+    <ul class="flex items-center gap-3xl" role="menubar">
+      {navLinks.map((link) => (
+        <li role="none">
+          <a
+            href={link.href}
+            class={`rounded-full px-xl py-sm body-md-sb transition-colors ${
+              link.active
+                ? 'bg-white text-main'
+                : 'text-white body-md-l hover:opacity-90'
+            }`}
+            role="menuitem"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-lg">
+      <a
+        href="#contact"
+        class="rounded-full border border-white px-xl py-sm body-md-l text-white transition-opacity hover:opacity-90"
+      >
+        Let's Talk
+      </a>
+      <button
+        type="button"
+        class="flex size-10 items-center justify-center rounded-full bg-white"
+        aria-label="Abrir menú"
+      >
+        <HamburgerIcon class="size-6 text-main" />
+      </button>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .navbar {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+  }
+
+  @media (max-width: 768px) {
+    header {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 1rem;
+    }
+
+    .navbar ul {
+      display: none;
+    }
+  }
+</style>

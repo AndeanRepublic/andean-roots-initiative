@@ -1,0 +1,43 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 32 32"
+  fill="none"
+  class={className}
+  aria-hidden="true"
+>
+  <g clip-path="url(#clip-target-icon)">
+    <path
+      d="M16 16L28 4"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M24.4849 7.51499C22.3594 5.39451 19.5154 4.14902 16.5156 4.0249C13.5159 3.90079 10.5787 4.90709 8.28535 6.84474C5.99196 8.78239 4.50935 11.5102 4.13082 14.4886C3.7523 17.467 4.50543 20.479 6.24123 22.9287C7.97702 25.3785 10.569 27.0875 13.5045 27.7177C16.44 28.3479 19.5051 27.8533 22.0934 26.332C24.6817 24.8106 26.6048 22.3731 27.4821 19.5018C28.3594 16.6305 28.1271 13.5345 26.8311 10.8262"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M20.2425 11.7575C19.25 10.7661 17.9415 10.1539 16.5444 10.0272C15.1473 9.90051 13.75 10.2673 12.5953 11.0639C11.4406 11.8605 10.6016 13.0365 10.2239 14.3875C9.8463 15.7386 9.954 17.1792 10.5283 18.459C11.1026 19.7389 12.1072 20.7771 13.3675 21.3931C14.6278 22.0092 16.0641 22.1642 17.4268 21.8312C18.7895 21.4982 19.9924 20.6982 20.8265 19.5703C21.6607 18.4424 22.0732 17.058 21.9925 15.6575"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+  <defs>
+    <clipPath id="clip-target-icon">
+      <rect width="32" height="32" fill="white" />
+    </clipPath>
+  </defs>
+</svg>

@@ -1,0 +1,106 @@
+---
+import TargetIcon from '../../../icons/TargetIcon.astro';
+import BreakChainIcon from '../../../icons/BreakChainIcon.astro';
+---
+
+<section id="vision" class="bg-white px-6xl py-6xl">
+  <div class="mx-auto flex w-full max-w-[1312px] flex-col items-center gap-4xl">
+    <div class="flex w-full max-w-[1000px] flex-col items-center gap-4xl">
+      <div class="flex items-center justify-center gap-sm rounded-full">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+        <p class="body-md-sb text-main">EL DESAFIO QUE ENFRENTAMOS</p>
+      </div>
+
+      <p class="max-w-[900px] text-center text-black heading-md-sb">
+        Muchas comunidades andinas enfrentan barreras para acceder a educacion de calidad, herramientas tecnologicas y
+        oportunidades economicas.
+        <span class="text-gray">
+          {' '}A pesar del enorme potencial cultural y productivo de los Andes, existe una{' '}
+        </span>
+        brecha significativa
+        <span class="text-gray"> que limita el desarrollo sostenible.</span>
+      </p>
+    </div>
+
+    <div class="grid w-full max-w-[948px] gap-xl lg:grid-cols-3">
+      <article class="flex h-[350px] flex-col justify-between rounded-lg bg-light p-xl">
+        <h3 class="body-md-sb uppercase text-main">ACCESO LIMITADO A LA EDUCACION DEL FUTURO</h3>
+
+        <div class="flex flex-col gap-sm">
+          <p class="heading-lg-sb text-black">BARRERA</p>
+          <p class="body-sm-l text-black">
+            La brecha digital y la falta de formacion en habilidades STEAM y tecnologias emergentes limitan las
+            oportunidades de jovenes en zonas rurales.
+          </p>
+        </div>
+      </article>
+
+      <article class="relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg p-xl text-white">
+        <img
+          src="/home-assets/Problem/2.png"
+          alt="Comunidad andina en un espacio rural"
+          class="absolute inset-0 size-full object-cover"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/60"></div>
+
+        <div class="relative z-10 flex">
+          <span class="flex size-12 items-center justify-center rounded-full border border-white/30 bg-main/25 backdrop-blur-sm">
+            <TargetIcon class="size-6 text-white" />
+          </span>
+        </div>
+
+        <div class="relative z-10 flex flex-col gap-sm">
+          <h3 class="heading-sm-sb text-white">PARADOJA</h3>
+          <p class="body-sm-l text-white">
+            Los productores poseen un enorme potencial productivo y cultural, pero carecen de acceso a herramientas de
+            calidad y mercados sostenibles.
+          </p>
+        </div>
+      </article>
+
+      <article class="flex h-[350px] flex-col justify-between rounded-lg bg-main p-xl text-white">
+        <div class="flex flex-col gap-lg">
+          <p class="body-sm-l text-white">Tradicion, Estancamiento, Riesgo</p>
+          <h3 class="heading-sm-sb text-center text-white">EL TRABAJO QUE NO GENERA RIQUEZA</h3>
+        </div>
+
+        <div class="flex flex-col gap-md">
+          <div class="flex items-center">
+            <img
+              src="/home-assets/Problem/hands image.png"
+              alt="Manos de artesano andino"
+              class="z-0 size-[70px] rounded-full object-cover"
+              loading="lazy"
+            />
+            <span class="-ml-md flex size-[70px] items-center justify-center rounded-full bg-light">
+              <BreakChainIcon class="size-10 text-black" />
+            </span>
+          </div>
+
+          <p class="body-sm-l text-light">
+            Sin acceso a mercados digitales, los mejores productos del mundo son invisibles.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1024px) {
+    section {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

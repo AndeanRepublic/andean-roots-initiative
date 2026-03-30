@@ -1,0 +1,90 @@
+---
+import ButtonLink from '../../../components/ButtonLink.astro';
+import DownArrowIcon from '../../../icons/DownArrowIcon.astro';
+
+interface Props {
+  titleTop?: string;
+  titleBottom?: string;
+  subheading?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  titleTop = "Raíces andinas",
+  titleBottom = "que transforman el futuro",
+  subheading = "Impulsamos educación, innovación y emprendimiento en comunidades andinas para generar oportunidades sostenibles y conectar el talento local con el mundo.",
+  ctaText = "SÉ UN ALIADO",
+  ctaHref = "#impacto",
+} = Astro.props;
+
+---
+
+<section class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden px-6xl pt-3xl pb-6xl">
+  <div class="absolute inset-0" aria-hidden="true">
+    <img
+      src="/home-assets/Hero/Hero.png"
+      alt=""
+      class="absolute inset-0 size-full object-cover object-center"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/70" />
+  </div>
+
+  <div class="hero__body relative z-10 flex w-full max-w-[1312px] items-end justify-between self-center">
+    <div class="flex max-w-[64rem] flex-col gap-xl">
+      <h1 class="hero__title text-white flex flex-col">
+        <span class=" font-skrawk-serif text-[10rem] font-[400] leading-[100%]">{titleTop}</span>
+        <span class=" heading-xl-sb">{titleBottom}</span>
+      </h1>
+      <div class="flex justify-between items-center gap-3xl">
+        <p class="max-w-[520px] body-md-sb text-white">{subheading}</p>
+        <ButtonLink href={ctaHref} text={ctaText} variant="desktop-primary" class="hero__cta" />
+      </div>
+    </div>
+
+    <a
+      href="#vision"
+      class="hero__scroll flex flex-col items-center gap-lg text-white transition-opacity hover:opacity-80"
+      aria-label="Desplazarse hacia abajo"
+    >
+      <span class="flex items-center rounded-full border border-white/60 px-sm py-lg">
+        <DownArrowIcon class="size-4 text-white" />
+      </span>
+      <span class="body-sm-l uppercase tracking-wide">SCROLL DOWN</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1024px) {
+    .hero__body {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .hero__scroll {
+      align-self: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+    }
+
+    .hero__body > div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

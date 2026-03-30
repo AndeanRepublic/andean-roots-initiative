@@ -1,40 +1,6 @@
 ---
 import ActionProgramCard from './ActionProgramCard.astro';
-
-const programs = [
-  {
-    imageSrc: '/home-assets/Actions/education-img.png',
-    imageAlt: 'Formacion digital en comunidad andina',
-    title: 'Educacion del Futuro',
-    description:
-      'Formamos a jovenes en habilidades digitales y pensamiento critico, preparandolos para liderar la economia digital desde sus comunidades.',
-    icon: 'computer' as const,
-  },
-  {
-    imageSrc: '/home-assets/Actions/development-img.png',
-    imageAlt: 'Participante del programa de desarrollo productivo',
-    title: 'Desarrollo Productivo',
-    description:
-      'Elevamos la competitividad local mediante innovacion en diseno de producto, estandares de calidad y branding con identidad cultural.',
-    icon: 'gear' as const,
-  },
-  {
-    imageSrc: '/home-assets/Actions/estrategic-img.png',
-    imageAlt: 'Alianza estrategica para desarrollo territorial',
-    title: 'Articulacion Estrategica',
-    description:
-      'Actuamos como el motor de enlace entre gobiernos, empresas privadas para financiar y escalar el desarrollo territorial.',
-    icon: 'chess' as const,
-  },
-  {
-    imageSrc: '/home-assets/Actions/market-img.png',
-    imageAlt: 'Acceso a mercados digitales para productos andinos',
-    title: 'Acceso a Mercados',
-    description:
-      'Conectamos el talento andino con plataformas de e-commerce y canales de exportacion para asegurar ingresos justos y sostenibles.',
-    icon: 'cart' as const,
-  },
-];
+import { actionContent } from '../../../data/home-content';
 ---
 
 <section id="actions" class="bg-white px-6xl py-6xl">
@@ -42,20 +8,17 @@ const programs = [
     <div class="flex flex-col gap-lg">
       <div class="flex items-center gap-sm">
         <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
-        <p class="body-md-sb text-main">NUESTRA ACCION</p>
+        <p class="body-md-sb text-main">{actionContent.label}</p>
       </div>
 
       <div class="grid items-end gap-2xl lg:grid-cols-[1fr_400px]">
-        <h2 class="max-w-[693px] heading-lg-sb text-main">Transformando el Talento en Oportunidad Sostenible</h2>
-        <p class="body-md-l pb-sm text-gray">
-          Impulsamos programas que cierran la brecha entre el potencial rural y los mercados globales, integrando
-          educacion tecnologica con desarrollo productivo de alto nivel.
-        </p>
+        <h2 class="max-w-[693px] heading-lg-sb text-main">{actionContent.heading}</h2>
+        <p class="body-md-l pb-sm text-gray">{actionContent.subheading}</p>
       </div>
     </div>
 
     <div class="grid gap-5xl xl:grid-cols-2">
-      {programs.map((program) => (
+      {actionContent.programs.map((program) => (
         <ActionProgramCard
           imageSrc={program.imageSrc}
           imageAlt={program.imageAlt}

@@ -1,104 +1,60 @@
 ---
 import ButtonLink from '../../../components/ButtonLink.astro';
+import { cn } from '../../../cn';
+import { aboutContent } from '../../../data/home-content';
 
-const tags = [
-  'Educacion del Futuro',
-  'Desarrollo Productivo',
-  'Acceso a Mercados',
-  'Tecnologias Emergentes',
-  'Alianzas Estrategicas',
-  'Estandares de Calidad',
-];
+const sectionClass = cn('bg-white px-4 py-12', 'tablet:px-6', 'desktop:px-6xl desktop:py-6xl');
+const articleClass = cn(
+  'z-10 mt-3 flex w-full flex-col gap-5 rounded-lg bg-white p-5',
+  'tablet:absolute tablet:bottom-10 tablet:left-10 tablet:mt-0 tablet:w-101.25',
+  'tablet:max-w-[calc(100%-2rem)] tablet:gap-3xl tablet:p-2xl',
+);
 ---
 
-<section id="about" class="bg-white px-6xl py-6xl">
+<section id="about" class={sectionClass}>
   <div class="mx-auto flex w-full max-w-[1312px] flex-col gap-4xl">
     <div class="flex flex-col gap-2xl">
       <div class="grid items-center gap-xl lg:grid-cols-2">
         <div class="flex items-center gap-sm">
           <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
-          <p class="body-md-sb text-main">SOBRE LA INICIATIVA</p>
+          <p class="body-md-sb text-main">{aboutContent.label}</p>
         </div>
 
-        <h2 class="heading-lg-sb text-main">Arquitectos del Desarrollo Andino</h2>
+        <h2 class="flex max-w-150 flex-col justify-center text-main">
+          <span class="heading-md-sb">{aboutContent.titleTop}</span>
+          <span class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]">{aboutContent.titleBottom}</span>
+        </h2>
       </div>
 
       <div class="grid items-end gap-xl lg:grid-cols-2">
         <div class="flex flex-wrap gap-md">
-          {tags.map((tag) => (
+          {aboutContent.tags.map((tag) => (
             <span class="rounded-full border border-main px-lg py-sm body-md-l text-main">
               {tag}
             </span>
           ))}
         </div>
 
-        <p class="body-md-l text-gray">
-          Andean Roots Initiative es una plataforma de innovacion social que opera en la interseccion del talento local y
-          las oportunidades globales. Nuestro modelo fortalece comunidades andinas mediante un sistema de tres
-          dimensiones: desarrollamos capacidades en habilidades digitales y productivas, articulamos alianzas con
-          instituciones clave y garantizamos el acceso a mercados competitivos. No solo impulsamos emprendimientos;
-          construimos las cadenas de valor sostenibles que el futuro exige.
-        </p>
+        <p class="body-md-l text-gray">{aboutContent.description}</p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg ">
+    <div class="relative overflow-hidden rounded-lg">
       <img
         src="/home-assets/About/banner-about.png"
-        alt="Miembros de la iniciativa en comunidad andina"
-        class="h-[500px] w-full object-cover"
+        alt={aboutContent.bannerImageAlt}
+        class="h-90 w-full object-cover object-center tablet:h-125"
         loading="lazy"
       />
 
-      <article class="about__card absolute bottom-10 left-10 z-10 flex w-[405px] max-w-[calc(100%-2rem)] flex-col gap-3xl rounded-lg bg-white p-2xl">
+      <article class={articleClass}>
         <div class="flex flex-col gap-lg">
-          <h3 class="font-manrope text-[14px] md:text-[24px] leading-[1.4] font-semibold text-black">EL ORIGEN DEL CAMBIO</h3>
-          <p class="body-sm-l text-gray">
-            Descubre la historia y los valores que impulsan nuestra mision de transformar los Andes a traves de la
-            innovacion social.
-          </p>
+          <h3 class="font-manrope text-[0.875rem] leading-[1.4] font-semibold text-black tablet:text-[1.5rem]">{aboutContent.originTitle}</h3>
+          <p class="body-sm-l text-gray">{aboutContent.originDescription}</p>
         </div>
 
-        <ButtonLink href="#history" text="CONOCE NUESTRA HISTORIA" variant="desktop-secondary" />
+        <ButtonLink href={aboutContent.originCtaHref} text={aboutContent.originCtaText} variant="desktop-secondary" />
       </article>
     </div>
   </div>
 </section>
-
-<style>
-  @media (max-width: 1024px) {
-    section {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
-
-    section h2 {
-      font-size: 2.5rem !important;
-      line-height: 1.2 !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    section {
-      padding-left: 1rem;
-      padding-right: 1rem;
-      gap: 2rem;
-    }
-
-    section img {
-      height: 360px;
-      object-position: center;
-    }
-
-    .about__card {
-      position: static;
-      max-width: none;
-      width: 100%;
-      margin-top: 0.75rem;
-      padding: 1.25rem;
-      gap: 1.25rem;
-    }
-  }
-</style>

@@ -1,6 +1,7 @@
 ---
 import ButtonLink from '../../../components/ButtonLink.astro';
 import DownArrowIcon from '../../../icons/DownArrowIcon.astro';
+import { heroContent } from '../../../data/home-content';
 
 interface Props {
   titleTop?: string;
@@ -11,11 +12,11 @@ interface Props {
 }
 
 const {
-  titleTop = "Raíces andinas",
-  titleBottom = "que transforman el futuro",
-  subheading = "Impulsamos educación, innovación y emprendimiento en comunidades andinas para generar oportunidades sostenibles y conectar el talento local con el mundo.",
-  ctaText = "SÉ UN ALIADO",
-  ctaHref = "#impacto",
+  titleTop = heroContent.titleTop,
+  titleBottom = heroContent.titleBottom,
+  subheading = heroContent.subheading,
+  ctaText = heroContent.ctaText,
+  ctaHref = heroContent.ctaHref,
 } = Astro.props;
 
 ---
@@ -32,9 +33,9 @@ const {
   </div>
 
   <div class="hero__body relative z-10 flex w-full max-w-[1312px] items-end justify-between self-center">
-    <div class="flex max-w-[64rem] flex-col gap-xl">
+    <div class="flex max-w-5xl flex-col gap-xl">
       <h1 class="hero__title text-white flex flex-col">
-        <span class=" font-skrawk-serif text-[10rem] font-[400] leading-[100%]">{titleTop}</span>
+        <span class=" font-skrawk-serif text-[10rem] font-normal leading-[100%]">{titleTop}</span>
         <span class=" heading-xl-sb">{titleBottom}</span>
       </h1>
       <div class="flex justify-between items-center gap-3xl">
@@ -46,12 +47,12 @@ const {
     <a
       href="#vision"
       class="hero__scroll flex flex-col items-center gap-lg text-white transition-opacity hover:opacity-80"
-      aria-label="Desplazarse hacia abajo"
+      aria-label={heroContent.scrollAriaLabel}
     >
       <span class="flex items-center rounded-full border border-white/60 px-sm py-lg">
         <DownArrowIcon class="size-4 text-white" />
       </span>
-      <span class="body-sm-l uppercase tracking-wide">SCROLL DOWN</span>
+      <span class="body-sm-l uppercase tracking-wide">{heroContent.scrollLabel}</span>
     </a>
   </div>
 </section>

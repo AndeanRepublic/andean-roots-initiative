@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "./figma_var.css";
+
+@font-face {
+  font-family: 'Skrawk Serif';
+  src: url('../assets/fonts/Skrawk-Serif.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-skrawk-serif {
+  font-family: 'Skrawk Serif', serif;
+}

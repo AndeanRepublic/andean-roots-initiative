@@ -1,0 +1,14 @@
+---
+description: Figma implementation constraints for this project
+alwaysApply: true
+---
+
+# Figma To Code Requirements
+
+When implementing any section from Figma in this project:
+
+- Use design tokens and utility classes from `src/styles/figma_var.css`.
+- Use project assets from `public/` (prefer existing files over remote URLs).
+- Use icon components from `src/icons/` instead of inline SVG duplication.
+- Follow Astro component patterns already used in `src/pages/Home/_components/`.
+- Preserve visual fidelity to the selected Figma node while keeping responsive behavior.

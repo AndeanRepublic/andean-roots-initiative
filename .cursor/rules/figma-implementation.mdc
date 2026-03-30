@@ -12,3 +12,5 @@ When implementing any section from Figma in this project:
 - Use icon components from `src/icons/` instead of inline SVG duplication.
 - Follow Astro component patterns already used in `src/pages/Home/_components/`.
 - Preserve visual fidelity to the selected Figma node while keeping responsive behavior.
+- Use `rem` units by default for sizing/spacing/typography; avoid `px` unless strictly necessary.
+- Always use the existing responsive breakpoints from `src/styles/figma_var.css` (`desktop-lg`, `desktop`, `tablet`, `mobile`) for responsive behavior.

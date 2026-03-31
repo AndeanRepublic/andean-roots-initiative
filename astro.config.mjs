@@ -1,10 +1,12 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
+import lenis from "astro-lenis";
 
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+	integrations: [lenis()],
 	vite: {
 		plugins: [tailwindcss()],
 	},

@@ -67,7 +67,8 @@ export const aboutContent = {
 
 export const actionContent = {
 	label: "NUESTRA ACCION",
-	heading: "Transformando el Talento en Oportunidad Sostenible",
+	headingTop: "Transformando el Talento en",
+	headingBottom: "Oportunidad Sostenible",
 	subheading:
 		"Impulsamos programas que cierran la brecha entre el potencial rural y los mercados globales, integrando educacion tecnologica con desarrollo productivo de alto nivel.",
 	programs: [
@@ -104,4 +105,93 @@ export const actionContent = {
 			icon: "cart" as const,
 		},
 	],
+};
+
+export const numbersContent = {
+	description:
+		"Sincronizamos el talento andino con la economía global para crear un impacto territorial sostenible.",
+	stats: [
+		{ value: "100%", label: "Comercio Justo Garantizado" },
+		{ value: "5+", label: "Comunidades Articuladas" },
+		{ value: "10+", label: "Emprendimientos con Acceso a Mercado" },
+	],
+};
+
+export const strategicProgramsContent = {
+	label: "PROGRAMAS ESTRATÉGICOS",
+	heading: "Innovación Social en Acción",
+	ctaText: "VER TODOS LOS PROGRAMAS",
+	ctaHref: "#programs",
+	location: "Cusco, Peru",
+	readMoreText: "LEER MAS",
+	readMoreHref: "#program-detail",
+	items: [
+		{
+			title: "Andean Future Lab",
+			imageSrc: "/home-assets/Programs/andean-future-lab-img.png",
+			imageAlt: "Jovenes participando en sesion de trabajo",
+			description:
+				"Empoderamos a la juventud andina con habilidades en STEAM, Inteligencia Artificial y pensamiento crítico, cerrando brechas tecnológicas en zonas rurales.",
+			metrics: [
+				{ label: "JÓVENES CAPACITADOS", value: "50+" },
+				{ label: "IMPACTO", value: "Aumento en habilidades digitales" },
+			],
+		},
+		{
+			title: "Andean Makers Program",
+			imageSrc: "/home-assets/Programs/andean-markets-program-img.png",
+			imageAlt: "Programa de tejido y produccion artesanal",
+			description:
+				"Fortalecemos la competitividad de artesanos y productores con innovación en diseño, control de calidad premium y branding cultural.",
+			metrics: [
+				{ label: "PRODUCTORES FORTALECIDOS", value: "100+" },
+				{ label: "COMUNIDADES FORTALECIDAS", value: "5+" },
+				{ label: "IMPACTO", value: "Mejora en rentabilidad productiva" },
+			],
+		},
+		{
+			title: "Andean Market Access",
+			imageSrc: "/home-assets/Programs/andean-market-access-img.png",
+			imageAlt: "Alianza comercial para acceso a mercado",
+			description:
+				"Articulamos la conexión con mercados de alto valor, ferias comerciales y el marketplace Andean Republic, asegurando comercio justo y sostenible.",
+			metrics: [
+				{ label: "EMPRENDIMIENTOS CONECTADOS", value: "10+" },
+				{ label: "ALIANZAS COMERCIALES", value: "12 empresas compradoras" },
+				{ label: "INGRESOS GENERADOS", value: "S/.50 000+" },
+			],
+		},
+	],
+};
+
+export const partnersContent = {
+	label: "NUESTROS COLABORADORES",
+	description:
+		"Sumamos esfuerzos con instituciones que comparten nuestra visión de un mundo donde el talento andino no tiene fronteras ni brechas tecnológicas.",
+	logos: [
+		{
+			src: "/home-assets/Partnership/partner-logo.svg",
+			alt: "Logo de institución colaboradora",
+		},
+		{
+			src: "/home-assets/Partnership/partner-logo.svg",
+			alt: "Logo de institución colaboradora",
+		},
+		{
+			src: "/home-assets/Partnership/partner-logo.svg",
+			alt: "Logo de institución colaboradora",
+		},
+		{
+			src: "/home-assets/Partnership/partner-logo.svg",
+			alt: "Logo de institución colaboradora",
+		},
+	],
+};
+
+export const ctaContent = {
+	title: "Transformemos juntos el territorio andino",
+	description:
+		"Únete como aliado estratégico y ayúdanos a conectar el talento de nuestras comunidades con las oportunidades de la economía global",
+	ctaText: "SÉ UN ALIADO",
+	ctaHref: "#contact",
 };

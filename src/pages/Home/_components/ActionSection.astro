@@ -11,8 +11,11 @@ import { actionContent } from '../../../data/home-content';
         <p class="body-md-sb text-main">{actionContent.label}</p>
       </div>
 
-      <div class="grid items-end gap-2xl lg:grid-cols-[1fr_400px]">
-        <h2 class="max-w-[693px] heading-lg-sb text-main">{actionContent.heading}</h2>
+      <div class="grid items-end gap-2xl lg:grid-cols-[1fr_25rem]">
+        <h2 class="flex max-w-187.75 flex-col text-main">
+          <span class="heading-md-sb">{actionContent.headingTop}</span>
+          <span class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]">{actionContent.headingBottom}</span>
+        </h2>
         <p class="body-md-l pb-sm text-gray">{actionContent.subheading}</p>
       </div>
     </div>
@@ -47,9 +50,8 @@ import { actionContent } from '../../../data/home-content';
       padding-right: 1rem;
     }
 
-    section h2 {
-      font-size: 2.25rem !important;
-      line-height: 1.2 !important;
+    section h2 > span:last-child {
+      font-size: 3rem !important;
     }
   }
 </style>

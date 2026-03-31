@@ -1,0 +1,36 @@
+---
+import { partnersContent } from '../../../data/home-content';
+---
+
+<section id="partners" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
+  <div
+    class="mx-auto flex w-full max-w-328 flex-col gap-8 p-8 desktop:flex-row desktop:items-center desktop:gap-10 desktop:p-16"
+  >
+    <div
+      class="flex shrink-0 flex-col gap-1 border-b border-gray/50 pb-8 desktop:border-r desktop:border-b-0 desktop:pb-0 desktop:pr-10"
+    >
+      <div class="flex items-center gap-sm">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+        <p class="body-md-sb text-main">{partnersContent.label}</p>
+      </div>
+      <p class="max-w-[400px] body-md-l text-gray">{partnersContent.description}</p>
+    </div>
+
+    <div
+      class="flex min-h-0 min-w-0 flex-1 flex-wrap items-center justify-center gap-8 desktop:justify-start desktop:gap-12"
+    >
+      {partnersContent.logos.map((logo: { src: string; alt: string }) => (
+        <div class="flex h-8 w-40 shrink-0 items-center justify-center">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            class="max-h-8 w-full max-w-40 object-contain object-left"
+            loading="lazy"
+            width="160"
+            height="32"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

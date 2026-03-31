@@ -1,0 +1,98 @@
+---
+import MailIcon from '../icons/MailIcon.astro';
+import PhoneIcon from '../icons/PhoneIcon.astro';
+import { footerContent } from '../data/footer-content';
+---
+
+<footer id="contact" class="bg-black px-4 py-12 text-white tablet:px-6 desktop:px-6xl desktop:py-6xl">
+  <div class="mx-auto flex w-full max-w-328 flex-col gap-12">
+    <div class="border-gray/50 flex flex-col gap-10 border-b-[0.025rem] pb-12 desktop:flex-row desktop:justify-between">
+      <div class="w-full desktop:w-100">
+        <a href="/" class="inline-flex w-fit items-center" aria-label="Andean Roots Initiative">
+          <img
+            src="/home-assets/logo.png"
+            alt="Andean Roots Initiative"
+            width="168"
+            height="99"
+            class="h-24.75 w-42 object-contain"
+            loading="lazy"
+          />
+        </a>
+      </div>
+
+      <div class="grid gap-10 tablet:grid-cols-2 desktop:grid-cols-[6.0625rem_8.8125rem_11.375rem] desktop:gap-30">
+        <div class="flex flex-col gap-6">
+          <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{footerContent.quickLinksTitle}</h3>
+          <ul class="flex flex-col gap-4">
+            {footerContent.quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="body-md-l text-light transition-opacity hover:opacity-80">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{footerContent.supportTitle}</h3>
+          <ul class="flex flex-col gap-4">
+            {footerContent.supportLinks.map((link) => (
+              <li>
+                <a href={link.href} class="body-md-l text-light transition-opacity hover:opacity-80">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-8 desktop:gap-20">
+          <div class="flex flex-col gap-6">
+            <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{footerContent.contactsTitle}</h3>
+            <ul class="flex flex-col gap-4">
+              <li>
+                <a
+                  href={footerContent.contacts.email.href}
+                  class="inline-flex items-center gap-4 text-light/90 transition-opacity hover:opacity-80"
+                >
+                  <MailIcon class="size-6" />
+                  <span class="body-md-l">{footerContent.contacts.email.label}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={footerContent.contacts.phone.href}
+                  class="inline-flex items-center gap-4 text-light/90 transition-opacity hover:opacity-80"
+                >
+                  <PhoneIcon class="size-6" />
+                  <span class="body-md-l">{footerContent.contacts.phone.label}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <ul class="flex items-center gap-4">
+            {footerContent.socialLinks.map((socialLink) => (
+              <li>
+                <a
+                  href={socialLink.href}
+                  class="body-md-sb flex size-10 items-center justify-center rounded-full bg-light text-black transition-opacity hover:opacity-85"
+                  aria-label={socialLink.label}
+                >
+                  {socialLink.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <p class="body-md-sb text-center text-white">
+        {footerContent.copyright}
+      </p>
+    </div>
+  </div>
+</footer>

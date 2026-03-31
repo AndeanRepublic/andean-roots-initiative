@@ -3,8 +3,10 @@ import UpRightArrowIcon from '../icons/UpRightArrowIcon.astro';
 
 type ButtonVariant =
   | 'desktop-primary'
+  | 'desktop-primary-inverse'
   | 'desktop-secondary'
   | 'mobile-primary'
+  | 'mobile-primary-inverse'
   | 'mobile-secondary';
 
 interface Props {
@@ -21,13 +23,22 @@ const {
   class: className = '',
 } = Astro.props as Props;
 
-const isPrimary = variant === 'desktop-primary' || variant === 'mobile-primary';
-const isMobile = variant === 'mobile-primary' || variant === 'mobile-secondary';
+const isPrimary =
+  variant === 'desktop-primary' || variant === 'mobile-primary';
+const isInverse =
+  variant === 'desktop-primary-inverse' || variant === 'mobile-primary-inverse';
+const isMobile =
+  variant === 'mobile-primary' ||
+  variant === 'mobile-secondary' ||
+  variant === 'mobile-primary-inverse';
 
-const baseClass = 'group inline-flex shrink-0 items-center transition-opacity hover:opacity-90';
-const variantClass = isPrimary
-  ? 'rounded-full bg-main text-white gap-lg pl-xl pr-sm py-sm'
-  : 'text-main gap-sm';
+const baseClass =
+  'group inline-flex shrink-0 items-center transition-opacity hover:opacity-90';
+const variantClass = isInverse
+  ? 'rounded-full bg-white text-main gap-md pl-lg pr-xs py-xs tablet:gap-lg tablet:pl-xl tablet:pr-sm tablet:py-sm'
+  : isPrimary
+    ? 'rounded-full bg-main text-white gap-lg pl-xl pr-sm py-sm'
+    : 'text-main gap-sm';
 const textClass = isMobile
   ? 'text-[14px] font-semibold leading-[1.5]'
   : 'body-md-sb';
@@ -35,12 +46,20 @@ const iconWrapperClass = isPrimary
   ? isMobile
     ? 'flex items-center justify-center rounded-full bg-light p-xs'
     : 'flex items-center justify-center rounded-full bg-light p-sm'
-  : 'flex items-center justify-center';
+  : isInverse
+    ? isMobile
+      ? 'flex items-center justify-center rounded-full bg-main p-xs'
+      : 'flex items-center justify-center rounded-full bg-main p-sm'
+    : 'flex items-center justify-center';
 const iconClass = isPrimary
   ? isMobile
     ? 'size-4 text-main'
     : 'size-5 text-main'
-  : 'size-4 text-main';
+  : isInverse
+    ? isMobile
+      ? 'size-4 text-light'
+      : 'size-5 text-light'
+    : 'size-4 text-main';
 ---
 
 <a href={href} class={`${baseClass} ${variantClass} ${className}`.trim()}>

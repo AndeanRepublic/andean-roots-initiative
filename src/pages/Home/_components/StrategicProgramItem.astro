@@ -1,0 +1,64 @@
+---
+import UbicationIcon from '../../../icons/UbicationIcon.astro';
+import UpRightArrowIcon from '../../../icons/UpRightArrowIcon.astro';
+
+interface Metric {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  location: string;
+  readMoreText: string;
+  readMoreHref: string;
+  imageSrc: string;
+  imageAlt: string;
+  description: string;
+  metrics: Metric[];
+}
+
+const {
+  title,
+  location,
+  readMoreText,
+  readMoreHref,
+  imageSrc,
+  imageAlt,
+  description,
+  metrics,
+} = Astro.props as Props;
+---
+
+<article class="grid gap-6 border-b border-gray/50 py-10 desktop:grid-cols-[11rem_25rem_1fr] desktop:items-center desktop:gap-10 desktop:px-14">
+  <div class="flex h-full flex-col justify-between gap-4">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4">
+        <UbicationIcon class="size-6 text-black" />
+        <p class="body-sm-l text-black">{location}</p>
+      </div>
+      <h3 class="font-manrope text-[2rem] leading-[1.2] font-semibold text-black">{title}</h3>
+    </div>
+
+    <a href={readMoreHref} class="inline-flex items-center gap-2 body-md-sb text-main hover:opacity-90">
+      {readMoreText}
+      <UpRightArrowIcon class="size-4 text-main" />
+    </a>
+  </div>
+
+  <div class="overflow-hidden rounded-lg">
+    <img src={imageSrc} alt={imageAlt} class="h-62.5 w-full object-cover" loading="lazy" />
+  </div>
+
+  <div class="flex flex-col gap-6 text-black">
+    <p class="body-md-l">{description}</p>
+    <div class="flex flex-col">
+      {metrics.map((metric, index) => (
+        <div class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-b border-gray/50' : ''}`}>
+          <p class="body-md-l">{metric.label}</p>
+          <p class="body-md-sb text-right">{metric.value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</article>

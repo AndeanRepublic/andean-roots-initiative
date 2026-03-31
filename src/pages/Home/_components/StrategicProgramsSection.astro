@@ -1,0 +1,42 @@
+---
+import ButtonLink from '../../../components/ButtonLink.astro';
+import StrategicProgramItem from './StrategicProgramItem.astro';
+import { strategicProgramsContent } from '../../../data/home-content';
+---
+
+<section id="programs" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
+  <div class="mx-auto w-full max-w-328 rounded-lg bg-light p-6 tablet:p-10">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-sm">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+        <p class="body-md-sb text-main">{strategicProgramsContent.label}</p>
+      </div>
+
+      <div class="flex flex-col gap-6 desktop:flex-row desktop:items-end desktop:justify-between">
+        <h2 class="font-skrawk-serif text-[3rem] leading-[0.8] text-main tablet:text-[4.25rem]">
+          {strategicProgramsContent.heading}
+        </h2>
+        <ButtonLink
+          href={strategicProgramsContent.ctaHref}
+          text={strategicProgramsContent.ctaText}
+          variant="desktop-primary"
+        />
+      </div>
+    </div>
+
+    <div class="mt-10">
+      {strategicProgramsContent.items.map((item) => (
+        <StrategicProgramItem
+          title={item.title}
+          location={strategicProgramsContent.location}
+          readMoreText={strategicProgramsContent.readMoreText}
+          readMoreHref={strategicProgramsContent.readMoreHref}
+          imageSrc={item.imageSrc}
+          imageAlt={item.imageAlt}
+          description={item.description}
+          metrics={item.metrics}
+        />
+      ))}
+    </div>
+  </div>
+</section>

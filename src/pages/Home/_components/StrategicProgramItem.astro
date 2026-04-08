@@ -1,4 +1,5 @@
 ---
+import { cn } from '../../../cn';
 import UbicationIcon from '../../../icons/UbicationIcon.astro';
 import UpRightArrowIcon from '../../../icons/UpRightArrowIcon.astro';
 
@@ -18,29 +19,39 @@ interface Props {
   metrics: Metric[];
 }
 
-const {
-  title,
-  location,
-  readMoreText,
-  readMoreHref,
-  imageSrc,
-  imageAlt,
-  description,
-  metrics,
-} = Astro.props as Props;
+const { title, location, readMoreText, readMoreHref, imageSrc, imageAlt, description, metrics } =
+  Astro.props as Props;
 ---
 
-<article class="grid gap-6 border-b border-gray/50 py-10 desktop:grid-cols-[11rem_25rem_1fr] desktop:items-center desktop:gap-10 desktop:px-14">
+<article
+  class={cn(
+    'bg-light tablet:bg-transparent',
+    'p-4 tablet:p-0 py-4 tablet:py-10',
+    'rounded-[0.875rem] tablet:rounded-none',
+    'shadow-lg tablet:shadow-none',
+    'grid gap-6 tablet:border-b border-gray/50 desktop:grid-cols-[11rem_25rem_1fr] desktop:items-center desktop:gap-10 desktop:px-14',
+  )}
+>
   <div class="flex h-full flex-col justify-between gap-4">
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-4">
         <UbicationIcon class="size-6 text-black" />
         <p class="body-sm-l text-black">{location}</p>
       </div>
-      <h3 class="font-manrope text-[2rem] leading-[1.2] font-semibold text-black">{title}</h3>
+      <h3
+        class={cn(
+          'text-[2rem] tablet:text-[1.25rem] desktop:text-[1.5rem]',
+          'font-nunito-sans font-semibold leading-[140%] tracking-normal text-black',
+        )}
+      >
+        {title}
+      </h3>
     </div>
 
-    <a href={readMoreHref} class="inline-flex items-center gap-2 body-md-sb text-main hover:opacity-90">
+    <a
+      href={readMoreHref}
+      class="inline-flex items-center gap-2 body-md-sb text-main hover:opacity-90"
+    >
       {readMoreText}
       <UpRightArrowIcon class="size-4 text-main" />
     </a>
@@ -53,12 +64,16 @@ const {
   <div class="flex flex-col gap-6 text-black">
     <p class="body-md-l">{description}</p>
     <div class="flex flex-col">
-      {metrics.map((metric, index) => (
-        <div class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-b border-gray/50' : ''}`}>
-          <p class="body-md-l">{metric.label}</p>
-          <p class="body-md-sb text-right">{metric.value}</p>
-        </div>
-      ))}
+      {
+        metrics.map((metric, index) => (
+          <div
+            class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-b border-gray/50' : ''}`}
+          >
+            <p class="body-md-l">{metric.label}</p>
+            <p class="body-md-sb text-right">{metric.value}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </article>

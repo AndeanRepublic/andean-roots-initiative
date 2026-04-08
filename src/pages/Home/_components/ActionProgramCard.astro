@@ -3,6 +3,7 @@ import ComputerIcon from '../../../icons/ComputerIcon.astro';
 import GearIcon from '../../../icons/GearIcon.astro';
 import ChessHorseIcon from '../../../icons/ChessHorseIcon.astro';
 import CartIcon from '../../../icons/CartIcon.astro';
+import { cn } from '../../../cn';
 
 type IconName = 'computer' | 'gear' | 'chess' | 'cart';
 
@@ -17,12 +18,25 @@ interface Props {
 const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
 ---
 
-<article class="action-program-card grid items-stretch gap-[14px] xl:grid-cols-[308px_1fr]">
+<article class="grid items-stretch gap-[14px] xl:grid-cols-[308px_1fr]">
   <div class="overflow-hidden rounded-lg">
-    <img src={imageSrc} alt={imageAlt} class="h-[280px] w-full object-cover" loading="lazy" />
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      class="h-[230px] w-full object-cover tablet:h-[280px]"
+      loading="lazy"
+    />
   </div>
 
-  <div class="flex h-[280px] flex-col justify-between rounded-lg bg-light p-xl">
+  <div
+    class={cn(
+      'flex flex-col justify-between rounded-lg bg-light',
+      'tablet:h-[280px] tablet:min-h-0 ',
+      'items-center tablet:items-start',
+      'gap-5 tablet:gap-0',
+      'tablet:p-[16px] desktop:p-[24px] p-[24px]',
+    )}
+  >
     <span class="flex size-12 items-center justify-center rounded-full bg-main">
       {icon === 'computer' && <ComputerIcon class="h-6 w-8 text-white" />}
       {icon === 'gear' && <GearIcon class="size-7 text-white" />}
@@ -30,22 +44,9 @@ const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
       {icon === 'cart' && <CartIcon class="h-6 w-6 text-white" />}
     </span>
 
-    <div class="flex flex-col gap-md">
+    <div class={cn('flex flex-col gap-md', 'text-center tablet:text-start')}>
       <h3 class="font-manrope text-[24px] leading-[1.4] font-semibold text-black">{title}</h3>
       <p class="body-md-l text-gray">{description}</p>
     </div>
   </div>
 </article>
-
-<style>
-  @media (max-width: 768px) {
-    .action-program-card img {
-      height: 230px;
-    }
-
-    .action-program-card > div:last-child {
-      height: auto;
-      min-height: 230px;
-    }
-  }
-</style>

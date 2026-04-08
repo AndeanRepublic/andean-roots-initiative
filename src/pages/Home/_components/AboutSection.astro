@@ -2,58 +2,87 @@
 import ButtonLink from '../../../components/ButtonLink.astro';
 import { cn } from '../../../cn';
 import { aboutContent } from '../../../data/home-content';
-
-const sectionClass = cn('bg-white px-4 py-12', 'tablet:px-6', 'desktop:px-6xl desktop:py-6xl');
-const articleClass = cn(
-  'z-10 mt-3 flex w-full flex-col gap-5 rounded-lg bg-white p-5',
-  'tablet:absolute tablet:bottom-10 tablet:left-10 tablet:mt-0 tablet:w-101.25',
-  'tablet:max-w-[calc(100%-2rem)] tablet:gap-3xl tablet:p-2xl',
-);
 ---
 
-<section id="about" class={sectionClass}>
+<section
+  id="about"
+  class={cn(
+    'bg-white px-4 tablet:px-6xl',
+    'pt-6xl',
+    'pb-[80px] tablet:pb-[48px] desktop:pb-[64px]',
+  )}
+>
   <div class="mx-auto flex w-full max-w-[1312px] flex-col gap-4xl">
-    <div class="flex flex-col gap-2xl">
+    <div class="flex flex-col gap-4xl tablet:gap-2xl">
       <div class="grid items-center gap-xl lg:grid-cols-2">
-        <div class="flex items-center gap-sm">
+        <div
+          class={cn(
+            'hidden tablet:flex items-center gap-sm',
+            'justify-center tablet:justify-start',
+          )}
+        >
           <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
           <p class="body-md-sb text-main">{aboutContent.label}</p>
         </div>
 
-        <h2 class="flex max-w-150 flex-col justify-center text-main">
+        <h2
+          class={cn(
+            'flex max-w-150 flex-col justify-center text-main',
+            'text-center tablet:text-left',
+          )}
+        >
           <span class="heading-md-sb">{aboutContent.titleTop}</span>
-          <span class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]">{aboutContent.titleBottom}</span>
+          <span class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]"
+            >{aboutContent.titleBottom}</span
+          >
         </h2>
       </div>
 
-      <div class="grid items-end gap-xl lg:grid-cols-2">
+      <div class="grid items-end gap-4xl tablet:gap-xl lg:grid-cols-2">
         <div class="flex flex-wrap gap-md">
-          {aboutContent.tags.map((tag) => (
-            <span class="rounded-full border border-main px-lg py-sm body-md-l text-main">
-              {tag}
-            </span>
-          ))}
+          {
+            aboutContent.tags.map((tag) => (
+              <span class="rounded-full border border-main px-lg py-sm body-md-l text-main">
+                {tag}
+              </span>
+            ))
+          }
         </div>
 
         <p class="body-md-l text-gray">{aboutContent.description}</p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg">
+    <div class="relative overflow-visible">
       <img
         src="/home-assets/About/banner-about.png"
         alt={aboutContent.bannerImageAlt}
-        class="h-90 w-full object-cover object-center tablet:h-125"
+        class="h-90 w-full object-cover object-center tablet:h-125 rounded-lg"
         loading="lazy"
       />
 
-      <article class={articleClass}>
+      <article
+        class={cn(
+          'z-20 mt-3 flex flex-col gap-5 rounded-lg bg-white shadow-md p-5 ',
+          'w-[90%] tablet:w-101.25',
+          'absolute left-1/2 -translate-x-1/2 -bottom-20 tablet:bottom-10 tablet:left-10 tablet:mt-20 tablet:translate-x-0 tablet:translate-y-0',
+          'tablet:gap-3xl tablet:p-2xl',
+        )}
+      >
         <div class="flex flex-col gap-lg">
-          <h3 class="font-manrope text-[0.875rem] leading-[1.4] font-semibold text-black tablet:text-[1.5rem]">{aboutContent.originTitle}</h3>
+          <h3
+            class="font-manrope text-[0.875rem] leading-[1.4] font-semibold text-black tablet:text-[1.5rem]"
+          >
+            {aboutContent.originTitle}
+          </h3>
           <p class="body-sm-l text-gray">{aboutContent.originDescription}</p>
         </div>
 
-        <ButtonLink href={aboutContent.originCtaHref} text={aboutContent.originCtaText} variant="desktop-secondary" />
+        <ButtonLink
+          href={aboutContent.originCtaHref}
+          text={aboutContent.originCtaText}
+          variant="desktop-secondary"
+        />
       </article>
     </div>
   </div>

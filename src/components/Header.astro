@@ -3,28 +3,42 @@ import HamburgerIcon from '../icons/HamburgerIcon.astro';
 import { headerContent } from '../data/home-content';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-6xl pt-3xl max-md:px-4 max-md:pt-4">
-  <nav class="mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 px-2xl py-lg backdrop-blur-md max-md:gap-4 max-md:px-4 max-md:py-3">
-    <a href="/" class="flex items-center px-lg max-md:px-0" aria-label={headerContent.brandAriaLabel}>
-      <img src="/home-assets/logo.png" alt="Andean Roots Initiative" class="h-10 w-auto" width="68" height="40" />
+<header class="fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4">
+  <nav
+    class="mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 px-2xl py-lg backdrop-blur-md max-md:gap-4 max-md:px-4 max-md:py-3"
+  >
+    <a
+      href="/"
+      class="flex items-center px-lg max-md:px-0"
+      aria-label={headerContent.brandAriaLabel}
+    >
+      <img
+        src="/home-assets/logo.png"
+        alt="Andean Roots Initiative"
+        class="h-10 w-auto"
+        width="68"
+        height="40"
+      />
     </a>
 
     <ul class="flex items-center gap-sm max-md:hidden" role="menubar">
-      {headerContent.navLinks.map((link) => (
-        <li role="none">
-          <a
-            href={link.href}
-            class={`rounded-full px-xl py-sm transition-colors ${
-              link.active
-                ? 'bg-white text-main body-md-sb'
-                : 'text-white body-md-l hover:opacity-90'
-            }`}
-            role="menuitem"
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
+      {
+        headerContent.navLinks.map((link) => (
+          <li role="none">
+            <a
+              href={link.href}
+              class={`rounded-full px-xl py-sm transition-colors ${
+                link.active
+                  ? 'bg-white text-main body-md-sb'
+                  : 'text-white body-md-l hover:opacity-90'
+              }`}
+              role="menuitem"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
     <details class="relative hidden max-md:block">
@@ -34,22 +48,27 @@ import { headerContent } from '../data/home-content';
       >
         <HamburgerIcon class="size-6 text-white" />
       </summary>
-      <ul class="absolute right-0 top-[calc(100%+0.5rem)] flex min-w-[220px] flex-col gap-2 rounded-2xl border border-white/20 bg-black/55 p-3 backdrop-blur-md" role="menu">
-        {headerContent.navLinks.map((link) => (
-          <li role="none">
-            <a
-              href={link.href}
-              class={`block rounded-full px-lg py-sm text-center transition-colors ${
-                link.active
-                  ? 'bg-white text-main body-md-sb'
-                  : 'text-white body-md-l hover:bg-white/10'
-              }`}
-              role="menuitem"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
+      <ul
+        class="absolute right-0 top-[calc(100%+0.5rem)] flex min-w-[220px] flex-col gap-2 rounded-2xl border border-white/20 bg-black/55 p-3 backdrop-blur-md"
+        role="menu"
+      >
+        {
+          headerContent.navLinks.map((link) => (
+            <li role="none">
+              <a
+                href={link.href}
+                class={`block rounded-full px-lg py-sm text-center transition-colors ${
+                  link.active
+                    ? 'bg-white text-main body-md-sb'
+                    : 'text-white body-md-l hover:bg-white/10'
+                }`}
+                role="menuitem"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </details>
   </nav>

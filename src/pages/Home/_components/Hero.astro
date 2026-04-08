@@ -2,6 +2,7 @@
 import ButtonLink from '../../../components/ButtonLink.astro';
 import DownArrowIcon from '../../../icons/DownArrowIcon.astro';
 import { heroContent } from '../../../data/home-content';
+import { cn } from '../../../cn';
 
 interface Props {
   titleTop?: string;
@@ -18,10 +19,11 @@ const {
   ctaText = heroContent.ctaText,
   ctaHref = heroContent.ctaHref,
 } = Astro.props;
-
 ---
 
-<section class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden px-6xl pt-3xl pb-6xl">
+<section
+  class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden px-6xl pt-3xl pb-6xl"
+>
   <div class="absolute inset-0" aria-hidden="true">
     <img
       src="/home-assets/Hero/Hero.png"
@@ -29,16 +31,30 @@ const {
       class="absolute inset-0 size-full object-cover object-center"
       fetchpriority="high"
     />
-    <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/70" />
+    <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/70"></div>
   </div>
 
-  <div class="hero__body relative z-10 flex w-full max-w-[1312px] items-end justify-between self-center">
+  <div
+    class="hero__body relative z-10 flex w-full max-w-[1312px] items-end justify-between self-center"
+  >
     <div class="flex max-w-5xl flex-col gap-xl">
       <h1 class="hero__title text-white flex flex-col">
-        <span class=" font-skrawk-serif text-[10rem] font-normal leading-[100%]">{titleTop}</span>
-        <span class=" heading-xl-sb">{titleBottom}</span>
+        <span
+          class={cn(
+            ' font-skrawk-serif font-normal ',
+            'text-[6rem] desktop:text-[10rem]',
+            'leading-[0.8]',
+          )}>{titleTop}</span
+        >
+        <span class="heading-xl-sb">{titleBottom}</span>
       </h1>
-      <div class="flex justify-between items-center gap-3xl">
+      <div
+        class={cn(
+          'flex justify-between items-center gap-3xl',
+          'tablet:gap-4xl desktop:gap-6xl',
+          'flex-col tablet:flex-row',
+        )}
+      >
         <p class="max-w-[520px] body-md-sb text-white">{subheading}</p>
         <ButtonLink href={ctaHref} text={ctaText} variant="desktop-primary" class="hero__cta" />
       </div>
@@ -46,7 +62,10 @@ const {
 
     <a
       href="#vision"
-      class="hero__scroll flex flex-col items-center gap-lg text-white transition-opacity hover:opacity-80"
+      class={cn(
+        'hero__scroll flex flex-col items-center gap-lg text-white transition-opacity hover:opacity-80',
+        'hidden tablet:flex',
+      )}
       aria-label={heroContent.scrollAriaLabel}
     >
       <span class="flex items-center rounded-full border border-white/60 px-sm py-lg">

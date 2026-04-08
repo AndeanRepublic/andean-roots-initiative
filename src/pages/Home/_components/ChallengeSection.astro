@@ -2,15 +2,22 @@
 import TargetIcon from '../../../icons/TargetIcon.astro';
 import BreakChainIcon from '../../../icons/BreakChainIcon.astro';
 import { challengeContent } from '../../../data/home-content';
+import { cn } from '../../../cn';
 ---
 
-<section id="vision" class="bg-white px-6xl py-6xl">
+<section id="vision" class={cn('bg-white px-2xl py-6xl', 'tablet:px-6 tablet:py-12')}>
   <div class="mx-auto flex w-full max-w-[1312px] flex-col items-center gap-4xl">
     <div class="flex w-full max-w-[1000px] flex-col items-center gap-4xl">
-      <div class="flex items-center justify-center gap-sm rounded-full">
+      <div class="items-center justify-center gap-sm rounded-full hidden tablet:flex">
         <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
         <p class="body-md-sb text-main">{challengeContent.label}</p>
       </div>
+      <p class="heading-lg-sb text-main tablet:hidden text-center">
+        {
+          challengeContent.label.charAt(0).toUpperCase() +
+            challengeContent.label.slice(1).toLowerCase()
+        }
+      </p>
 
       <p class="max-w-[900px] text-center text-black heading-md-sb">
         {challengeContent.introStart}
@@ -23,16 +30,29 @@ import { challengeContent } from '../../../data/home-content';
     </div>
 
     <div class="grid w-full max-w-[948px] gap-xl lg:grid-cols-3">
-      <article class="flex h-[350px] flex-col justify-between rounded-lg bg-light p-xl">
-        <h3 class="font-manrope text-[24px] leading-[1.4] font-semibold text-main">{challengeContent.firstCardTitle}</h3>
+      <article
+        class={cn(
+          'flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
+          'tablet:h-[350px] h-[250px]',
+        )}
+      >
+        <h3 class="font-manrope text-[24px] leading-[1.4] font-semibold text-main">
+          {challengeContent.firstCardTitle}
+        </h3>
 
         <div class="flex flex-col gap-sm">
-          <p class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-md:text-[40px]">{challengeContent.firstCardHeadline}</p>
+          <p
+            class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-md:text-[40px]"
+          >
+            {challengeContent.firstCardHeadline}
+          </p>
           <p class="body-sm-l text-black">{challengeContent.firstCardDescription}</p>
         </div>
       </article>
 
-      <article class="relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg p-xl text-white">
+      <article
+        class="relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg p-xl text-white"
+      >
         <img
           src="/home-assets/Problem/2.png"
           alt={challengeContent.secondCardImageAlt}
@@ -42,21 +62,34 @@ import { challengeContent } from '../../../data/home-content';
         <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/60"></div>
 
         <div class="relative z-10 flex">
-          <span class="flex size-12 items-center justify-center rounded-full border border-white/30 bg-main/25 backdrop-blur-sm">
+          <span
+            class="flex size-12 items-center justify-center rounded-full border border-white/30 bg-main/25 backdrop-blur-sm"
+          >
             <TargetIcon class="size-6 text-white" />
           </span>
         </div>
 
         <div class="relative z-10 flex flex-col gap-sm">
-          <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-md:text-[44px]">{challengeContent.secondCardTitle}</h3>
+          <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-md:text-[44px]">
+            {challengeContent.secondCardTitle}
+          </h3>
           <p class="body-sm-l text-white">{challengeContent.secondCardDescription}</p>
         </div>
       </article>
 
-      <article class="flex h-[350px] flex-col justify-between rounded-lg bg-main p-xl text-white">
+      <article
+        class={cn(
+          'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
+          'tablet:h-[350px] h-[280px]',
+        )}
+      >
         <div class="flex flex-col gap-lg">
           <p class="body-sm-l text-white text-center">{challengeContent.thirdCardTag}</p>
-          <h3 class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]">{challengeContent.thirdCardTitle}</h3>
+          <h3
+            class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]"
+          >
+            {challengeContent.thirdCardTitle}
+          </h3>
         </div>
 
         <div class="flex flex-col gap-md">
@@ -67,7 +100,9 @@ import { challengeContent } from '../../../data/home-content';
               class="z-0 size-[70px] rounded-full object-cover"
               loading="lazy"
             />
-            <span class="-ml-4 flex size-[70px] items-center justify-center rounded-full bg-light z-10">
+            <span
+              class="-ml-4 flex size-[70px] items-center justify-center rounded-full bg-light z-10"
+            >
               <BreakChainIcon class="size-10 text-black" />
             </span>
           </div>
@@ -78,21 +113,3 @@ import { challengeContent } from '../../../data/home-content';
     </div>
   </div>
 </section>
-
-<style>
-  @media (max-width: 1024px) {
-    section {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    section {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-</style>

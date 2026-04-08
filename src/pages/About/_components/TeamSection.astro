@@ -1,0 +1,71 @@
+---
+import { aboutTeamContent } from '../../../data/about-content';
+---
+
+<section class="relative overflow-hidden bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
+  <p
+    class="pointer-events-none absolute top-14 right-16 hidden text-[20rem] leading-[0.8] font-semibold tracking-[-0.8rem] text-light desktop:block"
+    aria-hidden="true"
+  >
+    {aboutTeamContent.backgroundWord}
+  </p>
+
+  <div class="relative mx-auto flex w-full max-w-328 flex-col gap-8 desktop:gap-16">
+    <div class="max-w-100 pt-4">
+      <div class="flex items-center gap-sm">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+        <p class="body-md-sb text-main">{aboutTeamContent.label}</p>
+      </div>
+      <p class="mt-10 body-md-l text-gray">{aboutTeamContent.description}</p>
+    </div>
+
+    <div class="grid gap-6 desktop:grid-cols-4 desktop:items-end desktop:gap-6">
+      {
+        aboutTeamContent.members.map((member) => (
+          <article class={`relative ${member.offsetClass ?? ''}`}>
+            <div class="relative h-115 overflow-hidden rounded-lg">
+              <img
+                src={member.imageSrc}
+                alt={member.imageAlt}
+                class="size-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div
+              class="absolute right-4 bottom-4 left-4 flex items-center gap-6 rounded-2xl bg-black/45 px-4 py-2 backdrop-blur-md"
+            >
+              <div class="flex-1 text-white">
+                <p class="text-[1.125rem] leading-[1.4] font-semibold">{member.name}</p>
+                <p class="body-sm-l text-light">{member.role}</p>
+              </div>
+              <span class="flex size-10 items-center justify-center rounded-full bg-white/10 body-md-sb text-light">IG</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center justify-end gap-4">
+      <button
+        type="button"
+        aria-label={aboutTeamContent.slider.prevAriaLabel}
+        class="flex size-10 items-center justify-center rounded-full border border-main text-main"
+      >
+        &larr;
+      </button>
+
+      <p class="body-md-sb text-main">
+        {aboutTeamContent.slider.current} <span class="body-md-l text-gray">- {aboutTeamContent.slider.total}</span>
+      </p>
+
+      <button
+        type="button"
+        aria-label={aboutTeamContent.slider.nextAriaLabel}
+        class="flex size-10 items-center justify-center rounded-full bg-main text-white"
+      >
+        &rarr;
+      </button>
+    </div>
+  </div>
+</section>

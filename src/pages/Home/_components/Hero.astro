@@ -22,31 +22,29 @@ const {
 ---
 
 <section
-  class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden px-6xl pt-3xl pb-6xl"
+  class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden bg-main px-4 pt-6 pb-8 tablet:px-6xl tablet:pt-3xl tablet:pb-6xl"
 >
-  <div class="absolute inset-0" aria-hidden="true">
-    <img
-      src="/home-assets/Hero/Hero.png"
-      alt=""
-      class="absolute inset-0 size-full object-cover object-center"
-      fetchpriority="high"
-    />
-    <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/70"></div>
+  <div class="hero__bg absolute inset-0 z-0" aria-hidden="true">
+    <img src="/home-assets/Hero/Hero.png" alt="" class="hero__bg-img" fetchpriority="high" />
+    <div
+      class="hero__bg-gradient pointer-events-none absolute inset-0 bg-linear-to-b from-black/0 to-black/70"
+    >
+    </div>
   </div>
 
   <div
-    class="hero__body relative z-10 flex w-full max-w-[1312px] items-end justify-between self-center"
+    class="hero__body relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-8 self-center desktop:flex-row desktop:items-end desktop:justify-between desktop:gap-0"
   >
-    <div class="flex max-w-5xl flex-col gap-xl">
-      <h1 class="hero__title text-white flex flex-col">
+    <div class="hero__content flex max-w-5xl flex-col items-start gap-xl">
+      <h1 class="hero__title flex flex-col text-white">
         <span
           class={cn(
-            ' font-skrawk-serif font-normal ',
-            'text-[6rem] desktop:text-[10rem]',
-            'leading-[0.8]',
+            'hero__title-line',
+            'font-skrawk-serif font-normal',
+            'text-2xl leading-[1.2] tablet:text-[6rem] tablet:leading-[0.8] desktop:text-[10rem]',
           )}>{titleTop}</span
         >
-        <span class="heading-xl-sb">{titleBottom}</span>
+        <span class="hero__title-line heading-xl-sb">{titleBottom}</span>
       </h1>
       <div
         class={cn(
@@ -55,7 +53,7 @@ const {
           'flex-col tablet:flex-row',
         )}
       >
-        <p class="max-w-[520px] body-md-sb text-white">{subheading}</p>
+        <p class="hero__subtitle max-w-[520px] body-md-sb text-white">{subheading}</p>
         <ButtonLink href={ctaHref} text={ctaText} variant="desktop-primary" class="hero__cta" />
       </div>
     </div>
@@ -63,8 +61,8 @@ const {
     <a
       href="#vision"
       class={cn(
-        'hero__scroll flex flex-col items-center gap-lg text-white transition-opacity hover:opacity-80',
-        'hidden tablet:flex',
+        'hero__scroll hidden flex-col items-center gap-lg self-center text-white transition-opacity hover:opacity-80',
+        'tablet:flex desktop:self-auto',
       )}
       aria-label={heroContent.scrollAriaLabel}
     >
@@ -76,35 +74,110 @@ const {
   </div>
 </section>
 
-<style>
-  @media (max-width: 1024px) {
-    .hero__body {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2rem;
+<script>
+  import gsap from 'gsap';
+  import CustomEase from 'gsap/CustomEase';
+
+  gsap.registerPlugin(CustomEase);
+  CustomEase.create('hop', '0.9, 0, 0.1, 1');
+
+  const initHeroIntro = () => {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const heroBg = hero.querySelector('.hero__bg');
+    const heroImg = hero.querySelector('.hero__bg-img');
+    const titleLines = hero.querySelectorAll('.hero__title-line');
+    const subtitle = hero.querySelector('.hero__subtitle');
+    const cta = hero.querySelector('.hero__cta');
+    const scrollHint = hero.querySelector('.hero__scroll');
+
+    const targets = [titleLines, subtitle, cta, scrollHint].flatMap((target) =>
+      target ? Array.from(target instanceof NodeList ? target : [target]) : [],
+    );
+
+    if (!heroBg || !heroImg || targets.length === 0) return;
+
+    const siteHeader = document.querySelector<HTMLElement>('[data-hero-header]');
+    const revealTargets = [heroBg, heroImg, ...(siteHeader ? [siteHeader] : [])];
+    gsap.killTweensOf([...revealTargets, ...targets]);
+    gsap.set(targets, { clearProps: 'all' });
+    gsap.set(heroBg, { clearProps: 'clipPath' });
+    gsap.set(heroImg, { clearProps: 'transform' });
+    if (siteHeader) gsap.set(siteHeader, { clearProps: 'opacity,transform' });
+
+    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+    // Hero background reveal part 1
+    tl.to(heroBg, {
+      clipPath: 'polygon(35% 35%, 65% 35%, 65% 65%, 35% 65%)',
+      duration: 1.5,
+      ease: 'hop',
+    });
+    tl.to(
+      heroImg,
+      {
+        scale: 0.4,
+        duration: 1.5,
+        ease: 'hop',
+      },
+      '<',
+    );
+
+    // Hero background reveal part 2
+    tl.to(
+      heroBg,
+      {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+        duration: 2,
+        ease: 'hop',
+      },
+      '>',
+    );
+    tl.to(
+      heroImg,
+      {
+        scale: 1,
+        duration: 2,
+        ease: 'hop',
+      },
+      '<',
+    );
+
+    if (siteHeader) {
+      tl.to(siteHeader, { opacity: 1, y: 0, duration: 1 });
     }
 
-    .hero__scroll {
-      align-self: center;
+    // Title lines reveal (after header; baseline from CSS / Tailwind on header)
+    tl.fromTo(targets, { opacity: 0 }, { opacity: 1, duration: 1, stagger: 0.05 }, '<');
+
+    if (scrollHint) {
+      tl.fromTo(scrollHint, { opacity: 0 }, { opacity: 1, duration: 0.45 }, '-=0.25');
     }
+  };
+
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', initHeroIntro);
+  else initHeroIntro();
+
+  document.addEventListener('astro:page-load', initHeroIntro);
+</script>
+
+<style>
+  .hero__bg {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    will-change: clip-path;
   }
 
-  @media (max-width: 768px) {
-    .hero {
-      padding-left: 1rem;
-      padding-right: 1rem;
-      padding-top: 1.5rem;
-      padding-bottom: 2rem;
-    }
-
-    .hero h1 {
-      font-size: 2rem !important;
-      line-height: 1.2 !important;
-    }
-
-    .hero__body > div {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .hero__bg-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: translate(-50%, -50%) scale(0.6);
+    will-change: transform;
   }
 </style>

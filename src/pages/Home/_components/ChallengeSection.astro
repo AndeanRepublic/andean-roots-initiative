@@ -29,10 +29,10 @@ import { cn } from '../../../cn';
       </p>
     </div>
 
-    <div class="grid w-full max-w-[948px] gap-xl lg:grid-cols-3">
+    <div class="challenge-cards grid w-full max-w-[948px] gap-xl lg:grid-cols-3">
       <article
         class={cn(
-          'flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
+          'challenge-card flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
           'tablet:h-[350px] h-[250px]',
         )}
       >
@@ -51,7 +51,7 @@ import { cn } from '../../../cn';
       </article>
 
       <article
-        class="relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg p-xl text-white"
+        class="challenge-card relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg p-xl text-white"
       >
         <img
           src="/home-assets/Problem/2.png"
@@ -79,7 +79,7 @@ import { cn } from '../../../cn';
 
       <article
         class={cn(
-          'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
+          'challenge-card flex flex-col justify-between rounded-lg bg-main p-xl text-white',
           'tablet:h-[350px] h-[280px]',
         )}
       >
@@ -113,3 +113,87 @@ import { cn } from '../../../cn';
     </div>
   </div>
 </section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let mm: ReturnType<typeof gsap.matchMedia> | null = null;
+
+  const initChallengeReveal = () => {
+    const section = document.querySelector('#vision');
+    const cards = section?.querySelectorAll('.challenge-card');
+    if (!section || !cards || cards.length === 0) return;
+
+    mm?.revert();
+    mm = null;
+
+    ScrollTrigger.getAll()
+      .filter((trigger) => trigger.vars?.id === 'challenge-reveal')
+      .forEach((trigger) => trigger.kill());
+
+    gsap.killTweensOf(cards);
+    gsap.set(cards, { clearProps: 'all' });
+
+    mm = gsap.matchMedia();
+    mm.add('(min-width: 1200px)', () => {
+      gsap.fromTo(
+        cards,
+        {
+          y: 70,
+          opacity: 0,
+          rotateX: -10,
+          transformOrigin: 'top center',
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          stagger: 0.14,
+          scrollTrigger: {
+            id: 'challenge-reveal',
+            trigger: section,
+            start: 'top 80%',
+            once: true,
+          },
+        },
+      );
+    });
+
+    mm.add('(max-width: 1199px)', () => {
+      gsap.fromTo(
+        cards,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            id: 'challenge-reveal',
+            trigger: section,
+            start: 'top 88%',
+            once: true,
+          },
+        },
+      );
+    });
+
+    // Ensure trigger positions are recalculated after layout settles.
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+
+  const bootChallengeReveal = () => initChallengeReveal();
+
+  // First full-page load
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootChallengeReveal);
+  else bootChallengeReveal();
+
+  // Re-init when Astro performs client-side navigations/swaps
+  document.addEventListener('astro:page-load', bootChallengeReveal);
+</script>

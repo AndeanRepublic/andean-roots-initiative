@@ -22,6 +22,10 @@ export const heroContent = {
 
 export const challengeContent = {
   label: 'EL DESAFIO QUE ENFRENTAMOS',
+  // stickyHeadline: 'Tres frentes, un mismo desafío',
+  firstCardCoverSrc: '/home-assets/Problem/card_cover_1.png',
+  secondCardCoverSrc: '/home-assets/Problem/card_cover_2.png',
+  thirdCardCoverSrc: '/home-assets/Problem/card_cover_3.png',
   introStart:
     'Muchas comunidades andinas enfrentan barreras para acceder a educacion de calidad, herramientas tecnologicas y oportunidades economicas.',
   introMutedStart: ' A pesar del enorme potencial cultural y productivo de los Andes, existe una ',

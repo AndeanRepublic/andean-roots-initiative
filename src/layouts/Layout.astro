@@ -7,7 +7,8 @@ interface Props {
   description?: string;
 }
 
-const { title = 'Andean Roots Initiative', description = 'Astro + TypeScript + Tailwind + GSAP' } = Astro.props;
+const { title = 'Andean Roots Initiative', description = 'Astro + TypeScript + Tailwind + GSAP' } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -26,9 +27,9 @@ const { title = 'Andean Roots Initiative', description = 'Astro + TypeScript + T
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-		<Font cssVariable='--font-skrawk-serif' preload />
+    <Font cssVariable="--font-skrawk-serif" preload />
   </head>
-  <body class="min-h-screen bg-light text-black font-manrope antialiased">
+  <body class="min-h-screen bg-white text-black font-manrope antialiased">
     <slot />
   </body>
 </html>

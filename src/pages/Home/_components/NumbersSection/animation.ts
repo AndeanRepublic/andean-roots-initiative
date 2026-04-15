@@ -13,6 +13,7 @@ type CounterParts = {
   decimals: number;
 };
 
+/** Extrae prefijo/sufijo/valor numérico para animar counters con formatos como 100%, 5+, S/.50 000+. */
 function parseCounterValue(raw: string): CounterParts | null {
   const match = raw.match(/-?\d[\d.,\s]*/);
   if (!match) return null;
@@ -69,6 +70,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       if (meta) gsap.set(meta, { opacity: 0, x: -24 });
       if (cards.length) gsap.set(cards, { opacity: 0, y: 30, filter: 'blur(4px)' });
 
+      /** Restablece texto base para replay limpio cuando la sección sale por arriba. */
       const resetCounters = () => {
         counters.forEach((counter) => {
           const raw = counter.dataset.numbersCounter;
@@ -77,6 +79,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         });
       };
 
+      /** Recorre cada stat y anima el número desde 0 hasta su target formateado. */
       const runCounters = () => {
         counterTweens.forEach((tween) => tween.kill());
         counterTweens.length = 0;
@@ -107,6 +110,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         });
       };
 
+      /** Reveal coordinado de bloque + cards + counters al entrar al viewport. */
       const revealSection = () => {
         if (meta) {
           gsap.to(meta, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out' });
@@ -124,6 +128,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         runCounters();
       };
 
+      /** Salida al hacer scroll hacia atrás para permitir replay del count-up. */
       const hideSection = () => {
         counterTweens.forEach((tween) => tween.kill());
         counterTweens.length = 0;

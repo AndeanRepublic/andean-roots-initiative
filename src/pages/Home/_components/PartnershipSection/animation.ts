@@ -11,6 +11,7 @@ const T_LABEL = 0.14;
 const T_DESCRIPTION = 0.3;
 const T_LOGOS = 0.48;
 
+/** Parte el texto descriptivo para stagger por palabra en reveal/reverse. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-partners-text-words]');
   const description = root.querySelector<HTMLElement>('[data-partners-text-words]');
@@ -30,7 +31,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearPartnershipStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const labelDesktop = root.querySelector<HTMLElement>('[data-anim="label-desktop"]');
       const labelMobile = root.querySelector<HTMLElement>('[data-anim="label-mobile"]');
       const logos = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="logo-item"]'));
@@ -47,6 +48,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
       let descriptionIn = false;
       let logosIn = false;
 
+      /** Secuencia de entrada: labels -> descripción -> logos. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.52;
 

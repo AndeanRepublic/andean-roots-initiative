@@ -13,6 +13,7 @@ const T_TITLE = 0.18;
 const T_SUB = 0.32;
 const T_PROGRAMS = 0.48;
 
+/** Prepara los nodos de texto partidos para stagger y devuelve referencias animables. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-action-text-line], [data-action-text-words]');
 
@@ -38,20 +39,19 @@ export const initActionSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearActionSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
-      const label = root.querySelector<HTMLElement>('[data-anim="label"]');
-      const title = root.querySelector<HTMLElement>('[data-anim="title"]');
-      const subheading = root.querySelector<HTMLElement>('[data-anim="subheading"]');
-      const programs = root.querySelector<HTMLElement>('[data-anim="programs"]');
-      const programCards = programs
-        ? Array.from(programs.querySelectorAll<HTMLElement>('[data-anim="program-card"]'))
-        : [];
+    const label = root.querySelector<HTMLElement>('[data-anim="label"]');
+    const title = root.querySelector<HTMLElement>('[data-anim="title"]');
+    const subheading = root.querySelector<HTMLElement>('[data-anim="subheading"]');
+    const programs = root.querySelector<HTMLElement>('[data-anim="programs"]');
+    const programCards = programs
+      ? Array.from(programs.querySelectorAll<HTMLElement>('[data-anim="program-card"]'))
+      : [];
+    const { titleChars, subheadingWords } = buildTextNodes(root);
+    const titleTargets =
+      titleChars.length > 0 ? titleChars : title ? Array.from(title.children) : [];
 
-      const { titleChars, subheadingWords } = buildTextNodes(root);
-
-      const titleTargets =
-        titleChars.length > 0 ? titleChars : title ? Array.from(title.children) : [];
-
+    /** Estado visual base para que cada reinicio del controller sea determinista. */
+    const setInitialState = () => {
       if (label) gsap.set(label, { opacity: 0, y: 20, rotateZ: -2 });
       if (titleTargets.length) gsap.set(titleTargets, { opacity: 0, yPercent: 45 });
       if (subheadingWords.length > 0) {
@@ -62,7 +62,42 @@ export const initActionSectionAnimation = createScrollSectionController({
       if (programCards.length) {
         gsap.set(programCards, { opacity: 0, y: 36, scale: 0.94, rotateZ: -2 });
       }
+    };
 
+    /** Reveal global usado por desktop cuando el timeline cruza el umbral de programas. */
+    const revealPrograms = (immediate: boolean) => {
+      if (!programCards.length) return;
+      gsap.to(programCards, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateZ: 0,
+        duration: immediate ? 0 : 0.55,
+        stagger: immediate ? 0 : 0.1,
+        ease: 'power2.out',
+      });
+    };
+
+    /** Estado de salida global para desktop al retroceder el scroll por debajo del umbral. */
+    const hidePrograms = (immediate: boolean) => {
+      if (!programCards.length) return;
+      gsap.to(programCards, {
+        opacity: 0,
+        y: 36,
+        scale: 0.94,
+        rotateZ: -2,
+        duration: immediate ? 0 : 0.55,
+        stagger: immediate ? 0 : -0.08,
+        ease: 'power2.in',
+      });
+    };
+
+    /**
+     * Trigger principal de sección:
+     * - siempre controla label/title/subheading
+     * - opcionalmente controla programs (desktop)
+     */
+    const createSectionThresholdTrigger = (includeProgramThreshold: boolean) => {
       let labelIn = false;
       let titleIn = false;
       let subIn = false;
@@ -155,28 +190,12 @@ export const initActionSectionAnimation = createScrollSectionController({
           }
         }
 
-        if (programCards.length) {
+        if (includeProgramThreshold && programCards.length) {
           if (p >= T_PROGRAMS && !programsIn) {
-            gsap.to(programCards, {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              rotateZ: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.1,
-              ease: 'power2.out',
-            });
+            revealPrograms(immediate);
             programsIn = true;
           } else if (p < T_PROGRAMS && programsIn) {
-            gsap.to(programCards, {
-              opacity: 0,
-              y: 36,
-              scale: 0.94,
-              rotateZ: -2,
-              duration: d,
-              stagger: immediate ? 0 : -0.08,
-              ease: 'power2.in',
-            });
+            hidePrograms(immediate);
             programsIn = false;
           }
         }
@@ -193,9 +212,71 @@ export const initActionSectionAnimation = createScrollSectionController({
       });
 
       handleThresholds(st.progress, false);
+      return st;
+    };
+
+    /**
+     * En mobile/tablet cada card se revela con su propio trigger de viewport.
+     * Evita que todas entren juntas en listas largas.
+     */
+    const createProgramCardTriggers = () => {
+      return programCards.map((card) =>
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 60%',
+          end: 'bottom 15%',
+          onEnter: () => {
+            gsap.to(card, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateZ: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+            });
+          },
+          onEnterBack: () => {
+            gsap.to(card, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateZ: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, {
+              opacity: 0,
+              y: 36,
+              scale: 0.94,
+              rotateZ: -2,
+              duration: 0.35,
+              ease: 'power2.in',
+            });
+          },
+        }),
+      );
+    };
+
+    mm.add('(min-width: 1200px)', () => {
+      setInitialState();
+      const sectionTrigger = createSectionThresholdTrigger(true);
 
       return () => {
-        st.kill();
+        sectionTrigger.kill();
+        clearActionSectionStyles(root);
+      };
+    });
+
+    mm.add('(max-width: 1199px)', () => {
+      setInitialState();
+      const sectionTrigger = createSectionThresholdTrigger(false);
+      const cardTriggers = createProgramCardTriggers();
+
+      return () => {
+        sectionTrigger.kill();
+        cardTriggers.forEach((trigger) => trigger.kill());
         clearActionSectionStyles(root);
       };
     });

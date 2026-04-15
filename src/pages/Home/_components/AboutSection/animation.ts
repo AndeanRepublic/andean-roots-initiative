@@ -17,6 +17,7 @@ const T_DESC = 0.5;
 const T_IMAGE = 0.9;
 const T_CARD = 0.9;
 
+/** Construye targets de texto para stagger y conserva el texto original para cleanup/reinit. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-about-text-line], [data-about-text-words]');
 
@@ -45,7 +46,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearAboutSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
       const title = root.querySelector<HTMLElement>('[data-anim="title"]');
       const tagsContainer = root.querySelector<HTMLElement>('[data-anim="tags"]');
@@ -97,6 +98,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
 
       const tweenDur = (immediate: boolean) => (immediate ? 0 : 0.55);
 
+      /** Máquina de umbrales: activa/desactiva bloques según progreso de la sección. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = tweenDur(immediate);
 

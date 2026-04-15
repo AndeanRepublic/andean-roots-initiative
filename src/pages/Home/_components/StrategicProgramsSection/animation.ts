@@ -12,6 +12,7 @@ const T_TITLE = 0.2;
 const T_CTA = 0.34;
 const T_CARDS = 0.46;
 
+/** Genera nodos partidos para título y descripciones de cards. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-programs-text-line], [data-programs-text-words]');
   const title = root.querySelector<HTMLElement>('[data-programs-text-line]');
@@ -35,7 +36,7 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
   triggerIds: [ST_ID],
   clearStyles: clearStrategicProgramsStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const labelDesktop = root.querySelector<HTMLElement>('[data-anim="label-desktop"]');
       const labelMobile = root.querySelector<HTMLElement>('[data-anim="label-mobile"]');
       const cta = root.querySelector<HTMLElement>('[data-anim="cta"]');
@@ -66,6 +67,7 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       let ctaIn = false;
       let cardsIn = false;
 
+      /** Orquesta reveal por etapas (label -> title -> cta -> cards). */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 

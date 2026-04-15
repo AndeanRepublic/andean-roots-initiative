@@ -1,6 +1,6 @@
 ---
-import { cn } from '../../../cn';
-import { partnersContent } from '../../../data/home-content';
+import { cn } from '../../../../cn';
+import { partnersContent } from '../../../../data/home-content';
 ---
 
 <section id="partners" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
@@ -9,18 +9,21 @@ import { partnersContent } from '../../../data/home-content';
   >
     <div
       class="flex shrink-0 flex-col gap-1 border-r-0 border-gray/50 pb-8 desktop:border-r desktop:pb-0 desktop:pr-10"
+      data-anim="intro"
     >
-      <div class="items-center justify-start gap-sm rounded-full hidden tablet:flex">
-        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+      <div class="items-center justify-start gap-sm rounded-full hidden tablet:flex" data-anim="label-desktop">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true" data-anim="label-dot"></span>
         <p class="body-md-sb text-main">{partnersContent.label}</p>
       </div>
-      <p class="heading-lg-sb text-main tablet:hidden text-center pb-4">
+      <p class="heading-lg-sb text-main tablet:hidden text-center pb-4" data-anim="label-mobile">
         {
           partnersContent.label.charAt(0).toUpperCase() +
             partnersContent.label.slice(1).toLowerCase()
         }
       </p>
-      <p class="max-w-[400px] body-md-l text-gray">{partnersContent.description}</p>
+      <p class="max-w-[400px] body-md-l text-gray" data-anim="description" data-partners-text-words>
+        {partnersContent.description}
+      </p>
     </div>
 
     <div
@@ -28,15 +31,17 @@ import { partnersContent } from '../../../data/home-content';
         'flex min-h-0 min-w-0 flex-1 flex-wrap items-center justify-center desktop:justify-start desktop:gap-12',
         'gap-8 ',
       )}
+      data-anim="logos"
     >
       {
         partnersContent.logos.map((logo: { src: string; alt: string }) => (
-          <div class="w-36 desktop:w-40 h-full overflow-hidden">
+          <div class="w-36 desktop:w-40 h-full overflow-hidden" data-anim="logo-item" data-partner-logo-hover>
             <img
               src={logo.src}
               alt={logo.alt}
               class="w-full h-auto object-contain "
               loading="lazy"
+              data-anim="logo-image"
             />
           </div>
         ))
@@ -44,3 +49,11 @@ import { partnersContent } from '../../../data/home-content';
     </div>
   </div>
 </section>
+
+<script>
+  import { initPartnershipSectionAnimation } from './animation';
+
+  const init = () => initPartnershipSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

@@ -1,8 +1,8 @@
 ---
-import ButtonLink from '../../../components/ButtonLink.astro';
+import ButtonLink from '../../../../components/ButtonLink.astro';
 import StrategicProgramItem from './StrategicProgramItem.astro';
-import { strategicProgramsContent } from '../../../data/home-content';
-import { cn } from '../../../cn';
+import { strategicProgramsContent } from '../../../../data/home-content';
+import { cn } from '../../../../cn';
 ---
 
 <section id="programs" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
@@ -14,23 +14,25 @@ import { cn } from '../../../cn';
     )}
   >
     <div class="flex flex-col gap-4">
-      <div class="items-center justify-center gap-sm rounded-full hidden tablet:flex">
-        <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+      <div class="items-center justify-center gap-sm rounded-full hidden tablet:flex" data-anim="label-desktop">
+        <span class="size-2 rounded-full bg-main" aria-hidden="true" data-anim="label-dot"></span>
         <p class="body-md-sb text-main">{strategicProgramsContent.label}</p>
       </div>
-      <p class="heading-md-sb text-main tablet:hidden text-center">
+      <p class="heading-md-sb text-main tablet:hidden text-center" data-anim="label-mobile">
         {
           strategicProgramsContent.label.charAt(0).toUpperCase() +
             strategicProgramsContent.label.slice(1).toLowerCase()
         }
       </p>
 
-      <div class="flex flex-col gap-6 desktop:flex-row desktop:items-end desktop:justify-between">
+      <div class="flex flex-col gap-6 desktop:flex-row desktop:items-end desktop:justify-between" data-anim="header">
         <h2
           class={cn(
             'font-skrawk-serif text-[3rem] leading-[0.8] text-main tablet:text-[4.25rem]',
             'text-center tablet:text-start',
           )}
+          data-anim="title"
+          data-programs-text-line
         >
           {strategicProgramsContent.heading}
         </h2>
@@ -39,11 +41,12 @@ import { cn } from '../../../cn';
           text={strategicProgramsContent.ctaText}
           variant="desktop-primary"
           class="self-center tablet:self-start desktop:self-auto"
+          data-anim="cta"
         />
       </div>
     </div>
 
-    <div class="mt-10 gap-4 tablet:gap-0 flex flex-col">
+    <div class="mt-10 gap-4 tablet:gap-0 flex flex-col" data-anim="program-list">
       {
         strategicProgramsContent.items.map((item) => (
           <StrategicProgramItem
@@ -61,3 +64,11 @@ import { cn } from '../../../cn';
     </div>
   </div>
 </section>
+
+<script>
+  import { initStrategicProgramsSectionAnimation } from './animation';
+
+  const init = () => initStrategicProgramsSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

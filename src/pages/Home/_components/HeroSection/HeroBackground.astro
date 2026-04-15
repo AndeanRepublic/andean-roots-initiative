@@ -1,0 +1,13 @@
+---
+interface Props {
+  imageSrc: string;
+}
+
+const { imageSrc } = Astro.props as Props;
+---
+
+<div class="hero__bg absolute inset-0 z-0" data-anim="bg" aria-hidden="true">
+  <img src={imageSrc} alt="" class="hero__bg-img" data-anim="bg-image" fetchpriority="high" />
+  <div class="hero__bg-gradient pointer-events-none absolute inset-0 bg-linear-to-b from-black/0 to-black/70">
+  </div>
+</div>

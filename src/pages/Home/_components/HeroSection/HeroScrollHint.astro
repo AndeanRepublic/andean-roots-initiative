@@ -1,0 +1,26 @@
+---
+import { cn } from '../../../../cn';
+import DownArrowIcon from '../../../../icons/DownArrowIcon.astro';
+
+interface Props {
+  ariaLabel: string;
+  label: string;
+}
+
+const { ariaLabel, label } = Astro.props as Props;
+---
+
+<a
+  href="#vision"
+  class={cn(
+    'hero__scroll hidden flex-col items-center gap-lg self-center text-white transition-opacity hover:opacity-80',
+    'tablet:flex desktop:self-auto',
+  )}
+  data-anim="scroll"
+  aria-label={ariaLabel}
+>
+  <span class="flex items-center rounded-full border border-white/60 px-sm py-lg">
+    <DownArrowIcon class="size-4 text-white" />
+  </span>
+  <span class="body-sm-l uppercase tracking-wide">{label}</span>
+</a>

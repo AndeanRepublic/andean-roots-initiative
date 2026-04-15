@@ -1,9 +1,9 @@
 ---
-import ComputerIcon from '../../../icons/ComputerIcon.astro';
-import GearIcon from '../../../icons/GearIcon.astro';
-import ChessHorseIcon from '../../../icons/ChessHorseIcon.astro';
-import CartIcon from '../../../icons/CartIcon.astro';
-import { cn } from '../../../cn';
+import { cn } from '../../../../cn';
+import ComputerIcon from '../../../../icons/ComputerIcon.astro';
+import GearIcon from '../../../../icons/GearIcon.astro';
+import ChessHorseIcon from '../../../../icons/ChessHorseIcon.astro';
+import CartIcon from '../../../../icons/CartIcon.astro';
 
 type IconName = 'computer' | 'gear' | 'chess' | 'cart';
 
@@ -18,12 +18,12 @@ interface Props {
 const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
 ---
 
-<article class="grid items-stretch gap-[14px] xl:grid-cols-[308px_1fr]">
+<article data-anim="program-card" class="grid items-stretch gap-[14px] xl:grid-cols-[308px_1fr]">
   <div class="overflow-hidden rounded-lg">
     <img
       src={imageSrc}
       alt={imageAlt}
-      class="h-[230px] w-full object-cover tablet:h-[280px]"
+      class="tablet:h-[280px] h-[230px] w-full object-cover"
       loading="lazy"
     />
   </div>
@@ -37,7 +37,7 @@ const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
       'tablet:p-[16px] desktop:p-[24px] p-[24px]',
     )}
   >
-    <span class="flex size-12 items-center justify-center rounded-full bg-main">
+    <span class="bg-main flex size-12 items-center justify-center rounded-full">
       {icon === 'computer' && <ComputerIcon class="h-6 w-8 text-white" />}
       {icon === 'gear' && <GearIcon class="size-7 text-white" />}
       {icon === 'chess' && <ChessHorseIcon class="h-7 w-5 text-white" />}

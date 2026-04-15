@@ -63,14 +63,14 @@ export function createScrollSectionController({
     scheduleRefresh();
 
     // -- Setup Resize Listener
-    if (!resizeAttached) {
-      resizeAttached = true;
-      let timer: ReturnType<typeof setTimeout>;
-      window.addEventListener('resize', () => {
-        clearTimeout(timer);
-        timer = setTimeout(() => init(), resizeDebounceMs);
-      });
-    }
+    // if (!resizeAttached) {
+    //   resizeAttached = true;
+    //   let timer: ReturnType<typeof setTimeout>;
+    //   window.addEventListener('resize', () => {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => init(), resizeDebounceMs);
+    //   });
+    // }
   };
 
   return init;

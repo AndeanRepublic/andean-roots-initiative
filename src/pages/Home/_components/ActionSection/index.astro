@@ -1,0 +1,26 @@
+---
+import { cn } from '../../../../cn';
+import ActionSectionHeading from './ActionSectionHeading.astro';
+import ActionSectionPrograms from './ActionSectionPrograms.astro';
+---
+
+<section
+  id="actions"
+  class={cn('bg-white px-4 tablet:px-6xl', 'py-6xl')}
+>
+  <div class="mx-auto flex w-full max-w-[1312px] flex-col gap-6xl">
+    <ActionSectionHeading />
+    <ActionSectionPrograms />
+  </div>
+</section>
+
+<script>
+  import { initActionSectionAnimation } from './animation';
+
+  const boot = () => initActionSectionAnimation();
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  document.addEventListener('astro:page-load', boot);
+</script>

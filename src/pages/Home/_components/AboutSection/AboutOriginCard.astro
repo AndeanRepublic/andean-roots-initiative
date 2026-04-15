@@ -1,0 +1,37 @@
+---
+import ButtonLink from '../../../../components/ButtonLink.astro';
+import { cn } from '../../../../cn';
+import { aboutContent } from '../../../../data/home-content';
+---
+
+<article
+  class={cn(
+    'z-20 mt-3',
+    'w-[90%] tablet:w-101.25',
+    'absolute left-1/2 -translate-x-1/2 -bottom-20 tablet:bottom-10 tablet:left-10 tablet:mt-20 tablet:translate-x-0 tablet:translate-y-0',
+  )}
+  data-anim="origin-card"
+>
+  <div
+    class={cn(
+      'flex flex-col gap-5 rounded-lg bg-white shadow-md p-5',
+      'tablet:gap-3xl tablet:p-2xl',
+    )}
+    data-anim="origin-card-inner"
+  >
+    <div class="gap-lg flex flex-col">
+      <h3
+        class="font-manrope tablet:text-[1.5rem] text-[0.875rem] leading-[1.4] font-semibold text-black"
+      >
+        {aboutContent.originTitle}
+      </h3>
+      <p class="body-sm-l text-gray">{aboutContent.originDescription}</p>
+    </div>
+
+    <ButtonLink
+      href={aboutContent.originCtaHref}
+      text={aboutContent.originCtaText}
+      variant="desktop-secondary"
+    />
+  </div>
+</article>

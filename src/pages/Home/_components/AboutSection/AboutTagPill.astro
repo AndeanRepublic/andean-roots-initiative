@@ -1,0 +1,96 @@
+---
+import { cn } from '../../../../cn';
+import type { AboutTagIconKey } from '../../../../data/home-content';
+import BulbIcon from '../../../../icons/Bulb.astro';
+import CartIcon from '../../../../icons/CartIcon.astro';
+import ComputerIcon from '../../../../icons/ComputerIcon.astro';
+import GearIcon from '../../../../icons/GearIcon.astro';
+import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
+import TargetIcon from '../../../../icons/TargetIcon.astro';
+
+interface Props {
+  label: string;
+  icon: AboutTagIconKey;
+}
+
+const { label, icon } = Astro.props;
+
+const tagIconComponents: Record<AboutTagIconKey, typeof ComputerIcon> = {
+  computer: ComputerIcon,
+  gear: GearIcon,
+  cart: CartIcon,
+  bulb: BulbIcon,
+  handshake: HandshakeIcon,
+  target: TargetIcon,
+};
+
+const Icon = tagIconComponents[icon];
+---
+
+<div
+  data-anim="tag-pill"
+  data-about-tag-tilt
+  data-tag-view="text"
+  class={cn(
+    'inline-flex border-main cursor-pointer rounded-full border',
+    'relative min-h-11 min-w-40 max-w-[16rem]',
+    'transform-3d',
+  )}
+>
+  <div class="grid w-full grid-cols-1 grid-rows-1 place-items-center px-lg py-sm">
+    <span class="about-tag-label body-md-l text-main col-start-1 row-start-1 max-w-full text-center">
+      {label}
+    </span>
+    <span
+      class="about-tag-icon-wrap pointer-events-none col-start-1 row-start-1 flex items-center justify-center text-main"
+      aria-hidden="true"
+    >
+      <Icon class="size-8 shrink-0" />
+    </span>
+  </div>
+</div>
+
+<style>
+  /* Crossfade texto ↔ icono: transiciones CSS (GSAP no interpola bien blur; además evita duration 0 con prefers-reduced-motion). */
+  .about-tag-label,
+  .about-tag-icon-wrap {
+    grid-area: 1 / 1;
+    transform-origin: center center;
+    --about-tag-ease: 0.48s cubic-bezier(0.33, 1, 0.68, 1);
+    transition:
+      opacity var(--about-tag-ease),
+      transform var(--about-tag-ease),
+      filter var(--about-tag-ease);
+  }
+
+  .about-tag-label {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  .about-tag-icon-wrap {
+    opacity: 0;
+    transform: scale(0.68);
+    filter: blur(10px);
+  }
+
+  [data-about-tag-tilt][data-tag-view='icon'] .about-tag-label {
+    opacity: 0;
+    transform: scale(0.88);
+    filter: blur(6px);
+  }
+
+  [data-about-tag-tilt][data-tag-view='icon'] .about-tag-icon-wrap {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-tag-label,
+    .about-tag-icon-wrap {
+      transition-duration: 0.22s;
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import { cn } from '../../../../cn';
+import { aboutContent } from '../../../../data/home-content';
+import AboutOriginCard from './AboutOriginCard.astro';
+import AboutSectionHeading from './AboutSectionHeading.astro';
+import AboutSectionMeta from './AboutSectionMeta.astro';
+---
+
+<section
+  id="about"
+  class={cn(
+    'bg-white px-4 tablet:px-6xl',
+    'pt-6xl',
+    'pb-[80px] tablet:pb-[48px] desktop:pb-[64px]',
+  )}
+>
+  <div class="gap-4xl mx-auto flex w-full max-w-[1312px] flex-col">
+    <div class="gap-4xl tablet:gap-2xl flex flex-col">
+      <AboutSectionHeading />
+      <AboutSectionMeta />
+    </div>
+
+    <div class="relative overflow-visible">
+      <img
+        src="/home-assets/About/banner-about.png"
+        alt={aboutContent.bannerImageAlt}
+        class="tablet:h-125 h-90 w-full rounded-lg object-cover object-center"
+        loading="lazy"
+        data-anim="image"
+      />
+      <AboutOriginCard />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initAboutSectionAnimation } from './animation';
+
+  const boot = () => initAboutSectionAnimation();
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  document.addEventListener('astro:page-load', boot);
+</script>

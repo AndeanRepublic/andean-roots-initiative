@@ -46,18 +46,20 @@ export const challengeContent = {
   thirdCardImageAlt: 'Manos de artesano andino',
 };
 
+export type AboutTagIconKey = 'computer' | 'gear' | 'cart' | 'bulb' | 'handshake' | 'target';
+
 export const aboutContent = {
   label: 'SOBRE LA INICIATIVA',
   titleTop: 'Arquitectos del',
   titleBottom: 'Desarrollo andino',
   tags: [
-    'Educacion del Futuro',
-    'Desarrollo Productivo',
-    'Acceso a Mercados',
-    'Tecnologias Emergentes',
-    'Alianzas Estrategicas',
-    'Estandares de Calidad',
-  ],
+    { label: 'Educacion del Futuro', icon: 'computer' },
+    { label: 'Desarrollo Productivo', icon: 'gear' },
+    { label: 'Acceso a Mercados', icon: 'cart' },
+    { label: 'Tecnologias Emergentes', icon: 'bulb' },
+    { label: 'Alianzas Estrategicas', icon: 'handshake' },
+    { label: 'Estandares de Calidad', icon: 'target' },
+  ] as const satisfies readonly { label: string; icon: AboutTagIconKey }[],
   description:
     'Andean Roots Initiative es una plataforma de innovacion social que opera en la interseccion del talento local y las oportunidades globales. Nuestro modelo fortalece comunidades andinas mediante un sistema de tres dimensiones: desarrollamos capacidades en habilidades digitales y productivas, articulamos alianzas con instituciones clave y garantizamos el acceso a mercados competitivos. No solo impulsamos emprendimientos; construimos las cadenas de valor sostenibles que el futuro exige.',
   originTitle: 'EL ORIGEN DEL CAMBIO',

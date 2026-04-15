@@ -1,0 +1,31 @@
+---
+import { challengeContent } from '../../../../data/home-content';
+import { cn } from '../../../../cn';
+---
+
+<div class="gap-xl flex w-full max-w-[1000px] flex-col items-center">
+  <div class="gap-sm tablet:flex hidden items-center justify-center rounded-full">
+    <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
+    <p class="body-md-sb text-main">{challengeContent.label}</p>
+  </div>
+
+  <p class="heading-lg-sb text-main tablet:hidden text-center">
+    {challengeContent.label.charAt(0).toUpperCase() + challengeContent.label.slice(1).toLowerCase()}
+  </p>
+
+  <p
+    class={cn(
+      'text-[1.25rem] tablet:text-[1.5rem] desktop-lg:text-[2rem]',
+      'font-nunito-sans font-semibold leading-[140%] tracking-normal text-black',
+      'max-w-[900px] text-center',
+    )}
+    data-challenge-intro-reveal
+  >
+    <span data-intro-segment>{challengeContent.introStart}</span>
+    <span class="text-gray" data-intro-segment>
+      {challengeContent.introMutedStart}
+    </span>
+    <span data-intro-segment>{challengeContent.introHighlight}</span>
+    <span class="text-gray" data-intro-segment>{challengeContent.introEnd}</span>
+  </p>
+</div>

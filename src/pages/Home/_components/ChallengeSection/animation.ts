@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ST_ID = 'challenge-section-cards-flip';
 const ST_TEXT_ID = 'challenge-section-intro-text-reveal';
+const MOBILE_CARD_SELECTOR = '[data-anim="mobile-card"]';
 
 /** Divide el intro en caracteres preservando segmentos para animación progresiva por scroll. */
 function buildIntroChars(root: HTMLElement) {
@@ -58,20 +59,17 @@ function setupIntroTextReveal(root: HTMLElement) {
 }
 
 function clearVisionCardStyles(root: HTMLElement) {
-  root
-    .querySelectorAll(
-      '.challenge-flip-stage .card, .challenge-flip-stage .card-container, .sticky-section',
-    )
-    .forEach((el) => {
-      (el as HTMLElement).removeAttribute('style');
-    });
-  gsap.killTweensOf(
-    gsap.utils.toArray(
-      root.querySelectorAll(
-        '.challenge-flip-stage .card, .challenge-flip-stage .card-container, .sticky-section',
-      ),
-    ),
-  );
+  const animatedSelectors = [
+    '.challenge-flip-stage .card',
+    '.challenge-flip-stage .card-container',
+    MOBILE_CARD_SELECTOR,
+    '.sticky-section',
+  ];
+
+  root.querySelectorAll(animatedSelectors.join(', ')).forEach((el) => {
+    (el as HTMLElement).removeAttribute('style');
+  });
+  gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll(animatedSelectors.join(', '))));
 }
 
 export const initChallengeSectionCards = createScrollSectionController({
@@ -81,9 +79,62 @@ export const initChallengeSectionCards = createScrollSectionController({
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => {
       const clearTextAnimation = setupIntroTextReveal(root);
-      clearVisionCardStyles(root);
+      const mobileCards = Array.from(root.querySelectorAll<HTMLElement>(MOBILE_CARD_SELECTOR));
+
+      if (mobileCards.length) {
+        gsap.set(mobileCards, {
+          opacity: 0,
+          y: 34,
+          scale: 0.96,
+          rotateZ: (index: number) => (index % 2 === 0 ? -1.4 : 1.4),
+        });
+      }
+
+      /** En mobile/tablet cada card entra al llegar al viewport para mantener lectura progresiva. */
+      const cardTriggers = mobileCards.map((card, index) => {
+        const initialRotate = index % 2 === 0 ? -1.4 : 1.4;
+
+        return ScrollTrigger.create({
+          trigger: card,
+          start: 'top 60%',
+          end: 'bottom 20%',
+          onEnter: () => {
+            gsap.to(card, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateZ: 0,
+              duration: 0.5,
+              ease: 'power3.out',
+            });
+          },
+          onEnterBack: () => {
+            gsap.to(card, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateZ: 0,
+              duration: 0.4,
+              ease: 'power2.out',
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, {
+              opacity: 0,
+              y: 34,
+              scale: 0.96,
+              rotateZ: initialRotate,
+              duration: 0.3,
+              ease: 'power2.in',
+            });
+          },
+        });
+      });
+
       return () => {
+        cardTriggers.forEach((trigger) => trigger.kill());
         clearTextAnimation();
+        clearVisionCardStyles(root);
       };
     });
 

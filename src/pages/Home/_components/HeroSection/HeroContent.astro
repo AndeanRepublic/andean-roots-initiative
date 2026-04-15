@@ -13,13 +13,13 @@ interface Props {
 const { titleTop, titleBottom, subheading, ctaText, ctaHref } = Astro.props as Props;
 ---
 
-<div class="hero__content flex max-w-5xl flex-col items-start gap-xl">
-  <h1 class="hero__title flex flex-col text-white">
+<div class="hero__content gap-xl flex max-w-5xl flex-col items-start">
+  <h1 class="hero__title space-y-md flex flex-col text-white">
     <span
       class={cn(
         'hero__title-line',
         'font-skrawk-serif font-normal',
-        'text-2xl leading-[1.2] tablet:text-[6rem] tablet:leading-[0.8] desktop:text-[10rem]',
+        'text-[5.5rem] leading-[0.8] tablet:text-[6rem] tablet:leading-[0.8] desktop:text-[10rem]',
       )}
       data-anim="title-line">{titleTop}</span
     >
@@ -33,7 +33,9 @@ const { titleTop, titleBottom, subheading, ctaText, ctaHref } = Astro.props as P
       'flex-col tablet:flex-row',
     )}
   >
-    <p class="hero__subtitle max-w-[520px] body-md-sb text-white" data-anim="subtitle">{subheading}</p>
+    <p class="hero__subtitle body-md-sb max-w-[520px] text-white" data-anim="subtitle">
+      {subheading}
+    </p>
     <div data-anim="cta">
       <ButtonLink href={ctaHref} text={ctaText} variant="desktop-primary" class="hero__cta" />
     </div>

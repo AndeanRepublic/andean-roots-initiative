@@ -273,7 +273,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
       const st = ScrollTrigger.create({
         id: ST_ID,
         trigger: root,
-        start: 'top 40%',
+        start: 'top 70%',
         end: 'top top',
         onUpdate: (self) => {
           handleThresholds(self.progress, false);

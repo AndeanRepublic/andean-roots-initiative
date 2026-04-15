@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ST_ID = 'partnership-section-reveal';
 const T_LABEL = 0.14;
-const T_DESCRIPTION = 0.3;
-const T_LOGOS = 0.48;
+const T_DESCRIPTION = 0.2;
+const T_LOGOS = 0.3;
 
 /** Parte el texto descriptivo para stagger por palabra en reveal/reverse. */
 function buildTextNodes(root: HTMLElement) {
@@ -40,8 +40,15 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
       const descriptionWords = buildTextNodes(root);
 
       if (labelTargets.length) gsap.set(labelTargets, { opacity: 0, y: 16 });
-      if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.12, y: 12, filter: 'blur(2px)' });
-      if (logos.length) gsap.set(logos, { opacity: 0, y: 20, scale: 0.92, rotateZ: (i: number) => (i % 2 ? -1.4 : 1.4) });
+      if (descriptionWords.length)
+        gsap.set(descriptionWords, { opacity: 0.12, y: 12, filter: 'blur(2px)' });
+      if (logos.length)
+        gsap.set(logos, {
+          opacity: 0,
+          y: 20,
+          scale: 0.92,
+          rotateZ: (i: number) => (i % 2 ? -1.4 : 1.4),
+        });
       if (logoImages.length) gsap.set(logoImages, { filter: 'grayscale(100%) brightness(0.88)' });
 
       let labelIn = false;
@@ -140,7 +147,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
       const st = ScrollTrigger.create({
         id: ST_ID,
         trigger: root,
-        start: 'top 70%',
+        start: 'top 80%',
         end: 'bottom 18%',
         onUpdate: (self) => handleThresholds(self.progress),
       });

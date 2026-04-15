@@ -204,7 +204,7 @@ export const initActionSectionAnimation = createScrollSectionController({
       const st = ScrollTrigger.create({
         id: ST_ID,
         trigger: root,
-        start: 'top 40%',
+        start: 'top 70%',
         end: 'top top',
         onUpdate: (self) => {
           handleThresholds(self.progress, false);
@@ -223,7 +223,7 @@ export const initActionSectionAnimation = createScrollSectionController({
       return programCards.map((card) =>
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 60%',
+          start: 'top 70%',
           end: 'bottom 15%',
           onEnter: () => {
             gsap.to(card, {

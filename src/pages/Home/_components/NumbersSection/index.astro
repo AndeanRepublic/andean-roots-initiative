@@ -1,0 +1,58 @@
+---
+import WorldIcon from '../../../../icons/WorldIcon.astro';
+import { numbersContent } from '../../../../data/home-content';
+import { cn } from '../../../../cn';
+import NumbersStatCard from './NumbersStatCard.astro';
+---
+
+<section
+  id="impact"
+  data-anim="section"
+  class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl"
+>
+  <div class="mx-auto w-full max-w-328">
+    <div class="relative overflow-hidden rounded-lg bg-main px-6 py-10 tablet:px-10">
+      <img
+        src="/home-assets/Numbers/vector.png"
+        alt=""
+        class="pointer-events-none absolute inset-0 size-full object-cover opacity-75"
+        loading="lazy"
+        aria-hidden="true"
+      />
+
+      <div
+        class="relative flex flex-col gap-10 desktop:flex-row desktop:items-end desktop:justify-between"
+      >
+        <div
+          data-anim="meta"
+          class={cn('flex max-w-90 flex-col gap-10', 'items-center tablet:items-start')}
+        >
+          <span
+            class="flex desktop:size-10 size-16 items-center justify-center rounded-full bg-light p-2"
+          >
+            <WorldIcon class="desktop:size-6 size-10" />
+          </span>
+
+          <p class="body-md-l text-white text-center tablet:text-start">
+            {numbersContent.description}
+          </p>
+        </div>
+
+        <div data-anim="stats" class="grid flex-1 gap-8 tablet:grid-cols-3">
+          {numbersContent.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initNumbersSectionAnimation } from './animation';
+
+  const boot = () => initNumbersSectionAnimation();
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  document.addEventListener('astro:page-load', boot);
+</script>

@@ -116,9 +116,9 @@ export const numbersContent = {
   description:
     'Sincronizamos el talento andino con la economía global para crear un impacto territorial sostenible.',
   stats: [
-    { value: '100%', label: 'Comercio Justo Garantizado' },
-    { value: '5+', label: 'Comunidades Articuladas' },
-    { value: '10+', label: 'Emprendimientos con Acceso a Mercado' },
+    { value: '5+', label: 'Comunidades Articuladas y Fortalecidas' },
+    { value: '10+', label: 'Emprendedores con Acceso a Mercado' },
+    { value: '100%', label: 'Comercio Justo Garantizado para Productores y Emprendedores' },
   ],
 };
 

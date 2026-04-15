@@ -2,15 +2,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
 import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
-import { setupProgramCardsHover } from './card-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ST_ID = 'strategic-programs-reveal';
 const T_LABEL = 0.1;
-const T_TITLE = 0.2;
-const T_CTA = 0.34;
-const T_CARDS = 0.46;
+const T_TITLE = 0.15;
+const T_CTA = 0.18;
 
 /** Genera nodos partidos para título y descripciones de cards. */
 function buildTextNodes(root: HTMLElement) {
@@ -36,17 +34,18 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
   triggerIds: [ST_ID],
   clearStyles: clearStrategicProgramsStyles,
   setup: ({ root, mm }) => {
-    mm.add('(min-width: 0px)', () => {
-      const labelDesktop = root.querySelector<HTMLElement>('[data-anim="label-desktop"]');
-      const labelMobile = root.querySelector<HTMLElement>('[data-anim="label-mobile"]');
-      const cta = root.querySelector<HTMLElement>('[data-anim="cta"]');
-      const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-card"]'));
-      const images = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-image"]'));
-      const metricRows = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-metric-row"]'));
-      const { titleChars, bodyWords } = buildTextNodes(root);
+    const labelDesktop = root.querySelector<HTMLElement>('[data-anim="label-desktop"]');
+    const labelMobile = root.querySelector<HTMLElement>('[data-anim="label-mobile"]');
+    const cta = root.querySelector<HTMLElement>('[data-anim="cta"]');
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-card"]'));
+    const images = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-image"]'));
+    const metricRows = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-anim="program-metric-row"]'),
+    );
+    const { titleChars, bodyWords } = buildTextNodes(root);
+    const labelTargets = [labelDesktop, labelMobile].filter(Boolean) as HTMLElement[];
 
-      const labelTargets = [labelDesktop, labelMobile].filter(Boolean) as HTMLElement[];
-
+    const setInitialState = () => {
       if (labelTargets.length) gsap.set(labelTargets, { opacity: 0, y: 18 });
       if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 42 });
       if (cta) gsap.set(cta, { opacity: 0, x: 20 });
@@ -61,13 +60,143 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       if (images.length) gsap.set(images, { scale: 1.08, yPercent: 8, filter: 'saturate(0.84)' });
       if (bodyWords.length) gsap.set(bodyWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
       if (metricRows.length) gsap.set(metricRows, { opacity: 0.2, x: -10 });
+    };
+
+    const revealProgramCard = (card: HTMLElement, immediate = false) => {
+      const d = immediate ? 0 : 0.48;
+      const body = card.querySelector<HTMLElement>('[data-programs-text-words]');
+      const bodyWordSpans = body
+        ? Array.from(body.querySelectorAll<HTMLElement>('.programs-body-word'))
+        : [];
+      const rows = Array.from(
+        card.querySelectorAll<HTMLElement>('[data-anim="program-metric-row"]'),
+      );
+      const image = card.querySelector<HTMLElement>('[data-anim="program-image"]');
+
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateZ: 0,
+        duration: d,
+        ease: 'power3.out',
+      });
+      if (bodyWordSpans.length) {
+        gsap.to(bodyWordSpans, {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: immediate ? 0 : 0.34,
+          stagger: immediate ? 0 : 0.02,
+          ease: 'power2.out',
+        });
+      } else if (body) {
+        gsap.to(body, {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: immediate ? 0 : 0.34,
+          ease: 'power2.out',
+        });
+      }
+      if (rows.length) {
+        gsap.to(rows, {
+          opacity: 1,
+          x: 0,
+          duration: immediate ? 0 : 0.35,
+          stagger: immediate ? 0 : 0.04,
+          ease: 'power2.out',
+        });
+      }
+      if (image) {
+        gsap.to(image, {
+          scale: 1,
+          yPercent: 0,
+          filter: 'saturate(1)',
+          duration: d,
+          ease: 'power2.out',
+        });
+      }
+    };
+
+    const hideProgramCard = (card: HTMLElement, immediate = false) => {
+      const d = immediate ? 0 : 0.34;
+      const body = card.querySelector<HTMLElement>('[data-programs-text-words]');
+      const bodyWordSpans = body
+        ? Array.from(body.querySelectorAll<HTMLElement>('.programs-body-word'))
+        : [];
+      const rows = Array.from(
+        card.querySelectorAll<HTMLElement>('[data-anim="program-metric-row"]'),
+      );
+      const image = card.querySelector<HTMLElement>('[data-anim="program-image"]');
+
+      gsap.to(card, {
+        opacity: 0,
+        y: 46,
+        scale: 0.95,
+        rotateZ: -2,
+        duration: d,
+        ease: 'power2.in',
+      });
+      if (bodyWordSpans.length) {
+        gsap.to(bodyWordSpans, {
+          opacity: 0.15,
+          y: 12,
+          filter: 'blur(2px)',
+          duration: immediate ? 0 : 0.2,
+          stagger: immediate ? 0 : -0.015,
+          ease: 'power2.in',
+        });
+      } else if (body) {
+        gsap.to(body, {
+          opacity: 0.15,
+          y: 12,
+          filter: 'blur(2px)',
+          duration: immediate ? 0 : 0.2,
+          ease: 'power2.in',
+        });
+      }
+      if (rows.length) {
+        gsap.to(rows, {
+          opacity: 0.2,
+          x: -10,
+          duration: immediate ? 0 : 0.2,
+          stagger: immediate ? 0 : -0.03,
+          ease: 'power2.in',
+        });
+      }
+      if (image) {
+        gsap.to(image, {
+          scale: 1.08,
+          yPercent: 8,
+          filter: 'saturate(0.84)',
+          duration: d,
+          ease: 'power2.in',
+        });
+      }
+    };
+
+    /** Misma revelación por card en todos los breakpoints (scroll por elemento). */
+    const createProgramCardScrollTriggers = () =>
+      cards.map((card) =>
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 70%',
+          end: 'bottom 20%',
+          onEnter: () => revealProgramCard(card),
+          onEnterBack: () => revealProgramCard(card),
+          onLeaveBack: () => hideProgramCard(card),
+        }),
+      );
+
+    mm.add('(min-width: 1200px)', () => {
+      setInitialState();
 
       let labelIn = false;
       let titleIn = false;
       let ctaIn = false;
-      let cardsIn = false;
 
-      /** Orquesta reveal por etapas (label -> title -> cta -> cards). */
+      /** Desktop: intro con scrub (label -> title -> cta); cards vía triggers como mobile. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 
@@ -124,97 +253,98 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
             ctaIn = false;
           }
         }
-
-        if (cards.length) {
-          if (p >= T_CARDS && !cardsIn) {
-            gsap.to(cards, {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              rotateZ: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.09,
-              ease: 'power3.out',
-            });
-            if (bodyWords.length) {
-              gsap.to(bodyWords, {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 0.44,
-                stagger: immediate ? 0 : 0.004,
-                ease: 'power2.out',
-              });
-            }
-            if (metricRows.length) {
-              gsap.to(metricRows, {
-                opacity: 1,
-                x: 0,
-                duration: 0.42,
-                stagger: immediate ? 0 : 0.008,
-                ease: 'power2.out',
-              });
-            }
-            cardsIn = true;
-          } else if (p < T_CARDS && cardsIn) {
-            gsap.to(cards, {
-              opacity: 0,
-              y: 46,
-              scale: 0.95,
-              rotateZ: (index: number) => (index % 2 === 0 ? -2 : 2),
-              duration: d,
-              stagger: immediate ? 0 : -0.07,
-              ease: 'power2.in',
-            });
-            if (bodyWords.length) {
-              gsap.to(bodyWords, {
-                opacity: 0.15,
-                y: 12,
-                filter: 'blur(2px)',
-                duration: 0.2,
-                stagger: immediate ? 0 : -0.003,
-                ease: 'power2.in',
-              });
-            }
-            if (metricRows.length) {
-              gsap.to(metricRows, {
-                opacity: 0.2,
-                x: -10,
-                duration: 0.2,
-                stagger: immediate ? 0 : -0.006,
-                ease: 'power2.in',
-              });
-            }
-            cardsIn = false;
-          }
-        }
-
-        if (images.length) {
-          gsap.to(images, {
-            scale: 1.08 - p * 0.08,
-            yPercent: 8 - p * 8,
-            filter: `saturate(${0.84 + p * 0.16})`,
-            duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
-          });
-        }
       };
 
       const st = ScrollTrigger.create({
         id: ST_ID,
         trigger: root,
-        start: 'top 65%',
+        start: 'top 80%',
         end: 'bottom 18%',
         onUpdate: (self) => handleThresholds(self.progress),
       });
 
       handleThresholds(st.progress, true);
-
-      const cleanupCardsHover = setupProgramCardsHover(root);
+      const cardTriggers = createProgramCardScrollTriggers();
 
       return () => {
         st.kill();
-        cleanupCardsHover();
+        cardTriggers.forEach((trigger) => trigger.kill());
+        clearStrategicProgramsStyles(root);
+      };
+    });
+
+    mm.add('(max-width: 1199px)', () => {
+      setInitialState();
+
+      const sectionTrigger = ScrollTrigger.create({
+        id: ST_ID,
+        trigger: root,
+        start: 'top 78%',
+        end: 'bottom top',
+        onEnter: () => {
+          if (labelTargets.length) {
+            gsap.to(labelTargets, {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.03,
+              ease: 'power2.out',
+            });
+          }
+          if (titleChars.length) {
+            gsap.to(titleChars, {
+              opacity: 1,
+              yPercent: 0,
+              duration: 0.45,
+              stagger: 0.01,
+              ease: 'power2.out',
+            });
+          }
+          if (cta) gsap.to(cta, { opacity: 1, x: 0, duration: 0.42, ease: 'power2.out' });
+        },
+        onEnterBack: () => {
+          if (labelTargets.length) {
+            gsap.to(labelTargets, {
+              opacity: 1,
+              y: 0,
+              duration: 0.35,
+              stagger: 0.02,
+              ease: 'power2.out',
+            });
+          }
+          if (titleChars.length) {
+            gsap.to(titleChars, {
+              opacity: 1,
+              yPercent: 0,
+              duration: 0.35,
+              stagger: 0.008,
+              ease: 'power2.out',
+            });
+          }
+          if (cta) gsap.to(cta, { opacity: 1, x: 0, duration: 0.32, ease: 'power2.out' });
+        },
+        onLeaveBack: () => {
+          if (labelTargets.length) {
+            gsap.to(labelTargets, { opacity: 0, y: 18, duration: 0.28, ease: 'power2.in' });
+          }
+          if (titleChars.length) {
+            gsap.to(titleChars, {
+              opacity: 0,
+              yPercent: 42,
+              duration: 0.28,
+              stagger: -0.006,
+              ease: 'power2.in',
+            });
+          }
+          if (cta) gsap.to(cta, { opacity: 0, x: 20, duration: 0.25, ease: 'power2.in' });
+        },
+      });
+
+      const cardTriggers = createProgramCardScrollTriggers();
+
+      return () => {
+        sectionTrigger.kill();
+        cardTriggers.forEach((trigger) => trigger.kill());
         clearStrategicProgramsStyles(root);
       };
     });

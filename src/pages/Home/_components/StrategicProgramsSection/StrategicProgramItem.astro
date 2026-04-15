@@ -32,7 +32,6 @@ const { title, location, readMoreText, readMoreHref, imageSrc, imageAlt, descrip
     'grid gap-6 tablet:border-b border-gray/50 desktop:grid-cols-[11rem_25rem_1fr] desktop:items-center desktop:gap-10 desktop:px-14',
   )}
   data-anim="program-card"
-  data-program-card-hover
 >
   <div class="flex h-full flex-col justify-between gap-4" data-anim="program-meta">
     <div class="flex flex-col gap-4" data-anim="program-meta-top">
@@ -52,16 +51,22 @@ const { title, location, readMoreText, readMoreHref, imageSrc, imageAlt, descrip
 
     <a
       href={readMoreHref}
-      class="inline-flex items-center gap-2 body-md-sb text-main hover:opacity-90"
+      class="body-md-sb text-main inline-flex items-center gap-2 hover:opacity-90"
       data-anim="program-link"
     >
       {readMoreText}
-      <UpRightArrowIcon class="size-4 text-main" />
+      <UpRightArrowIcon class="text-main size-4" />
     </a>
   </div>
 
   <div class="overflow-hidden rounded-lg" data-anim="program-image-wrap">
-    <img src={imageSrc} alt={imageAlt} class="h-62.5 w-full object-cover" loading="lazy" data-anim="program-image" />
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      class="h-62.5 w-full object-cover"
+      loading="lazy"
+      data-anim="program-image"
+    />
   </div>
 
   <div class="flex flex-col gap-6 text-black" data-anim="program-body">
@@ -70,7 +75,7 @@ const { title, location, readMoreText, readMoreHref, imageSrc, imageAlt, descrip
       {
         metrics.map((metric, index) => (
           <div
-            class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-b border-gray/50' : ''}`}
+            class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-gray/50 border-b' : ''}`}
             data-anim="program-metric-row"
           >
             <p class="body-md-l">{metric.label}</p>

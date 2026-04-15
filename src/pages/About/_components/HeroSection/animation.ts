@@ -10,6 +10,7 @@ const ST_ID = 'about-hero-reveal';
 const T_TITLE = 0.2;
 const T_BREADCRUMB = 0.42;
 
+/** Prepara el título partido en chars para stagger y recuperación limpia del texto original. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-hero-text-line]');
   const title = root.querySelector<HTMLElement>('[data-hero-text-line]');
@@ -29,7 +30,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearHeroSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const media = root.querySelector<HTMLElement>('[data-anim="media"]');
       const overlay = root.querySelector<HTMLElement>('[data-anim="overlay"]');
       const breadcrumb = root.querySelector<HTMLElement>('[data-anim="breadcrumb"]');
@@ -46,6 +47,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
       let titleIn = false;
       let breadcrumbIn = false;
 
+      /** Coordina reveal de título/breadcrumb y parallax sutil del hero. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.58;
         if (titleChars.length) {

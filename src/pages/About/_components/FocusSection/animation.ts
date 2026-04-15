@@ -10,6 +10,7 @@ const T_CONTENT = 0.14;
 const T_DESCRIPTION = 0.26;
 const T_CARDS = 0.46;
 
+/** Construye targets de título/descripcion para stagger por char/word. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-focus-text-line], [data-focus-text-words]');
   const title = root.querySelector<HTMLElement>('[data-focus-text-line]');
@@ -33,7 +34,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearFocusSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
       const leftImage = root.querySelector<HTMLElement>('[data-anim="side-image-left"]');
       const rightImage = root.querySelector<HTMLElement>('[data-anim="side-image-right"]');
@@ -60,6 +61,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
       let descriptionIn = false;
       let cardsIn = false;
 
+      /** Secuencia por umbrales: contenido inicial -> texto -> cards -> parallax lateral. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 

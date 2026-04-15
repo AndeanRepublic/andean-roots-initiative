@@ -11,6 +11,7 @@ const T_INTRO = 0.1;
 const T_CARDS = 0.34;
 const T_CONTROLS = 0.6;
 
+/** Divide descripción en palabras para reveal progresivo del intro del team. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-team-text-words]');
   const description = root.querySelector<HTMLElement>('[data-team-text-words]');
@@ -30,7 +31,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearTeamSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
       const bgWord = root.querySelector<HTMLElement>('[data-anim="bg-word"]');
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="member-card"]'));
@@ -55,6 +56,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
       let cardsIn = false;
       let controlsIn = false;
 
+      /** Etapas del team: intro -> cards -> controles/counter. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 

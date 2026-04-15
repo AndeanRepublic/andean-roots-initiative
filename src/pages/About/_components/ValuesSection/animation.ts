@@ -11,6 +11,7 @@ const T_HEADER = 0.1;
 const T_DESCRIPTION = 0.24;
 const T_CARDS = 0.44;
 
+/** Prepara título y descripciones de valores para animación escalonada. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-values-text-line], [data-values-text-words]');
   const title = root.querySelector<HTMLElement>('[data-values-text-line]');
@@ -34,7 +35,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearValuesSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="card"]'));
       const { titleChars, descriptionWords } = buildTextNodes(root);
@@ -55,6 +56,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
       let descriptionIn = false;
       let cardsIn = false;
 
+      /** Flujo de la sección: header -> descripción -> cards de valores. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.55;
 

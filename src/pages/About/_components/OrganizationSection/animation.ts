@@ -10,6 +10,7 @@ const T_HEADER = 0.12;
 const T_COVER = 0.28;
 const T_POINTS = 0.48;
 
+/** Construye targets de texto para header y puntos de organización. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-organization-text-line], [data-organization-text-words]');
   const title = root.querySelector<HTMLElement>('[data-organization-text-line]');
@@ -33,7 +34,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearOrganizationSectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
       const coverImage = root.querySelector<HTMLElement>('[data-anim="cover-image"]');
       const pointCards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="point-card"]'));
@@ -57,6 +58,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
       let coverIn = false;
       let pointsIn = false;
 
+      /** Secuencia de reveal: header -> cover -> point cards + iconos. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 

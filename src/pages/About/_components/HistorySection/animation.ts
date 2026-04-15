@@ -10,6 +10,7 @@ const T_TITLE = 0.14;
 const T_CARDS = 0.33;
 const T_BODY = 0.44;
 
+/** Parte título y párrafos para permitir stagger granular en reveal/reverse. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-history-text-line], [data-history-text-words]');
   const title = root.querySelector<HTMLElement>('[data-history-text-line]');
@@ -33,7 +34,7 @@ export const initHistorySectionAnimation = createScrollSectionController({
   triggerIds: [ST_ID],
   clearStyles: clearHistorySectionStyles,
   setup: ({ root, mm }) => {
-    mm.add('all', () => {
+    mm.add('(min-width: 0px)', () => {
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="card"]'));
       const images = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="card-image"]'));
       const { titleChars, paragraphWords } = buildTextNodes(root);
@@ -59,6 +60,7 @@ export const initHistorySectionAnimation = createScrollSectionController({
       let cardsIn = false;
       let bodyIn = false;
 
+      /** Orquestación de etapas: title -> cards -> body + ajuste de imágenes. */
       const handleThresholds = (p: number, immediate = false) => {
         const d = immediate ? 0 : 0.56;
 

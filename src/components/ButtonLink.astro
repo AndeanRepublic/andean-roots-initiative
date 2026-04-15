@@ -21,7 +21,8 @@ const {
   text = 'GET INVOLVED',
   variant = 'desktop-primary',
   class: className = '',
-} = Astro.props as Props;
+  ...anchorAttrs
+} = Astro.props as Props & Record<string, unknown>;
 
 const isPrimary =
   variant === 'desktop-primary' || variant === 'mobile-primary';
@@ -62,7 +63,7 @@ const iconClass = isPrimary
     : 'size-4 text-main';
 ---
 
-<a href={href} class={`${baseClass} ${variantClass} ${className}`.trim()}>
+<a {...anchorAttrs} href={href} class={`${baseClass} ${variantClass} ${className}`.trim()}>
   <span class={textClass}>{text}</span>
   <span class={iconWrapperClass}>
     <UpRightArrowIcon class={iconClass} />

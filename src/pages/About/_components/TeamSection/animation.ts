@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
+import { resetSplitText, splitWords } from '../../../../utils/split-text';
 import { setupTeamControlsHover } from './controls-hover';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,37 +11,8 @@ const T_INTRO = 0.1;
 const T_CARDS = 0.34;
 const T_CONTROLS = 0.6;
 
-function resetSplitText(root: HTMLElement) {
-  root.querySelectorAll<HTMLElement>('[data-team-text-words]').forEach((el) => {
-    const originalText = el.dataset.originalText;
-    if (originalText !== undefined) {
-      el.textContent = originalText;
-    }
-  });
-}
-
-function splitWords(element: HTMLElement, className: string) {
-  const text = element.textContent ?? '';
-  element.dataset.originalText = text;
-  element.textContent = '';
-  const fragment = document.createDocumentFragment();
-  const nodes: HTMLElement[] = [];
-  const parts = text.match(/\S+\s*/g) ?? [];
-
-  parts.forEach((part) => {
-    const span = document.createElement('span');
-    span.className = className;
-    span.textContent = part;
-    fragment.appendChild(span);
-    nodes.push(span);
-  });
-
-  element.appendChild(fragment);
-  return nodes;
-}
-
 function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root);
+  resetSplitText(root, '[data-team-text-words]');
   const description = root.querySelector<HTMLElement>('[data-team-text-words]');
   return description ? splitWords(description, 'about-team-word') : [];
 }
@@ -50,7 +22,7 @@ function clearTeamSectionStyles(root: HTMLElement) {
     (el as HTMLElement).removeAttribute('style');
   });
   gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root);
+  resetSplitText(root, '[data-team-text-words]');
 }
 
 export const initTeamSectionAnimation = createScrollSectionController({

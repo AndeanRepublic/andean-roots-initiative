@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
+import { resetSplitText, splitChars } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,36 +10,8 @@ const ST_ID = 'about-hero-reveal';
 const T_TITLE = 0.2;
 const T_BREADCRUMB = 0.42;
 
-function resetSplitText(root: HTMLElement) {
-  root.querySelectorAll<HTMLElement>('[data-hero-text-line]').forEach((el) => {
-    const originalText = el.dataset.originalText;
-    if (originalText !== undefined) {
-      el.textContent = originalText;
-    }
-  });
-}
-
-function splitChars(element: HTMLElement, className: string) {
-  const text = element.textContent ?? '';
-  element.dataset.originalText = text;
-  element.textContent = '';
-  const fragment = document.createDocumentFragment();
-  const nodes: HTMLElement[] = [];
-
-  for (const char of text) {
-    const span = document.createElement('span');
-    span.className = className;
-    span.textContent = char;
-    fragment.appendChild(span);
-    nodes.push(span);
-  }
-
-  element.appendChild(fragment);
-  return nodes;
-}
-
 function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root);
+  resetSplitText(root, '[data-hero-text-line]');
   const title = root.querySelector<HTMLElement>('[data-hero-text-line]');
   return title ? splitChars(title, 'about-hero-title-char') : [];
 }
@@ -48,7 +21,7 @@ function clearHeroSectionStyles(root: HTMLElement) {
     (el as HTMLElement).removeAttribute('style');
   });
   gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root);
+  resetSplitText(root, '[data-hero-text-line]');
 }
 
 export const initHeroSectionAnimation = createScrollSectionController({

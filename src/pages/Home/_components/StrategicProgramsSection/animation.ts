@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
+import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
 import { setupProgramCardsHover } from './card-hover';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,56 +12,8 @@ const T_TITLE = 0.2;
 const T_CTA = 0.34;
 const T_CARDS = 0.46;
 
-function resetSplitText(root: HTMLElement) {
-  root.querySelectorAll<HTMLElement>('[data-programs-text-line], [data-programs-text-words]').forEach((el) => {
-    const originalText = el.dataset.originalText;
-    if (originalText !== undefined) {
-      el.textContent = originalText;
-    }
-  });
-}
-
-function splitChars(element: HTMLElement, className: string) {
-  const text = element.textContent ?? '';
-  element.dataset.originalText = text;
-  element.textContent = '';
-  const fragment = document.createDocumentFragment();
-  const nodes: HTMLElement[] = [];
-
-  for (const char of text) {
-    const span = document.createElement('span');
-    span.className = className;
-    span.textContent = char;
-    fragment.appendChild(span);
-    nodes.push(span);
-  }
-
-  element.appendChild(fragment);
-  return nodes;
-}
-
-function splitWords(element: HTMLElement, className: string) {
-  const text = element.textContent ?? '';
-  element.dataset.originalText = text;
-  element.textContent = '';
-  const fragment = document.createDocumentFragment();
-  const nodes: HTMLElement[] = [];
-  const parts = text.match(/\S+\s*/g) ?? [];
-
-  parts.forEach((part) => {
-    const span = document.createElement('span');
-    span.className = className;
-    span.textContent = part;
-    fragment.appendChild(span);
-    nodes.push(span);
-  });
-
-  element.appendChild(fragment);
-  return nodes;
-}
-
 function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root);
+  resetSplitText(root, '[data-programs-text-line], [data-programs-text-words]');
   const title = root.querySelector<HTMLElement>('[data-programs-text-line]');
   const descriptions = Array.from(root.querySelectorAll<HTMLElement>('[data-programs-text-words]'));
   return {
@@ -74,7 +27,7 @@ function clearStrategicProgramsStyles(root: HTMLElement) {
     (el as HTMLElement).removeAttribute('style');
   });
   gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root);
+  resetSplitText(root, '[data-programs-text-line], [data-programs-text-words]');
 }
 
 export const initStrategicProgramsSectionAnimation = createScrollSectionController({

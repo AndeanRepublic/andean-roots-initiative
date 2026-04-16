@@ -14,16 +14,16 @@ const { heroEntrance = false } = Astro.props;
 <header
   data-hero-header={heroEntrance ? true : undefined}
   class={cn(
-    'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4',
+    'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4 ',
     heroEntrance && 'opacity-0 -translate-y-4',
   )}
 >
   <nav
-    class="mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 px-2xl py-lg backdrop-blur-md max-md:gap-4 max-md:px-4 max-md:py-3"
+    class="px-2xl py-lg mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md max-md:gap-4 max-md:px-4 max-md:py-3"
   >
     <a
       href="/"
-      class="flex items-center px-lg max-md:px-0"
+      class="px-lg flex items-center max-md:px-0"
       aria-label={headerContent.brandAriaLabel}
     >
       <img
@@ -35,16 +35,16 @@ const { heroEntrance = false } = Astro.props;
       />
     </a>
 
-    <ul class="flex items-center gap-sm max-md:hidden" role="menubar">
+    <ul class="gap-sm flex items-center max-md:hidden" role="menubar">
       {
         headerContent.navLinks.map((link) => (
           <li role="none">
             <a
               href={link.href}
-              class={`rounded-full px-xl py-sm transition-colors ${
+              class={`px-xl py-sm rounded-full transition-colors ${
                 link.active
-                  ? 'bg-white text-main body-md-sb'
-                  : 'text-white body-md-l hover:opacity-90'
+                  ? 'text-main body-md-sb bg-white'
+                  : 'body-md-l text-white hover:opacity-90'
               }`}
               role="menuitem"
             >
@@ -63,7 +63,7 @@ const { heroEntrance = false } = Astro.props;
         <HamburgerIcon class="size-6 text-white" />
       </summary>
       <ul
-        class="absolute right-0 top-[calc(100%+0.5rem)] flex min-w-[220px] flex-col gap-2 rounded-2xl border border-white/20 bg-black/55 p-3 backdrop-blur-md"
+        class="absolute top-[calc(100%+0.5rem)] right-0 flex min-w-[220px] flex-col gap-2 rounded-2xl border border-white/20 bg-black/55 p-3 backdrop-blur-md"
         role="menu"
       >
         {
@@ -71,10 +71,10 @@ const { heroEntrance = false } = Astro.props;
             <li role="none">
               <a
                 href={link.href}
-                class={`block rounded-full px-lg py-sm text-center transition-colors ${
+                class={`px-lg py-sm block rounded-full text-center transition-colors ${
                   link.active
-                    ? 'bg-white text-main body-md-sb'
-                    : 'text-white body-md-l hover:bg-white/10'
+                    ? 'text-main body-md-sb bg-white'
+                    : 'body-md-l text-white hover:bg-white/10'
                 }`}
                 role="menuitem"
               >

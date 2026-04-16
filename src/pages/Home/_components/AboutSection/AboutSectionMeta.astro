@@ -3,7 +3,7 @@ import { aboutContent } from '../../../../data/home-content';
 import AboutTagPill from './AboutTagPill.astro';
 ---
 
-<div class="gap-4xl tablet:gap-xl grid items-end lg:grid-cols-2">
+<div class="gap-xl tablet:gap-xl grid items-end lg:grid-cols-2">
   <div class="gap-md flex flex-wrap" data-anim="tags">
     {aboutContent.tags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
   </div>

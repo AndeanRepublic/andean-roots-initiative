@@ -14,7 +14,7 @@ import { cn } from '../../../../cn';
   <article
     class={cn(
       'flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
-      'tablet:h-[350px] h-[250px]',
+      'desktop:h-[350px] h-[250px]',
     )}
     data-anim="mobile-card"
   >
@@ -33,7 +33,7 @@ import { cn } from '../../../../cn';
   </article>
 
   <article
-    class="p-xl relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg text-white"
+    class="p-xl tablet:h-[400px] relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg text-white"
     data-anim="mobile-card"
   >
     <img
@@ -63,13 +63,15 @@ import { cn } from '../../../../cn';
   <article
     class={cn(
       'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
-      'tablet:h-[350px] h-[280px]',
+      'desktop:h-[350px] h-[280px]',
     )}
     data-anim="mobile-card"
   >
     <div class="gap-lg flex flex-col">
       <p class="body-sm-l text-center text-white">{challengeContent.thirdCardTag}</p>
-      <h3 class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]">
+      <h3
+        class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]"
+      >
         {challengeContent.thirdCardTitle}
       </h3>
     </div>

@@ -18,7 +18,7 @@ interface Props {
 const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
 ---
 
-<article data-anim="program-card" class="grid items-stretch gap-[14px] xl:grid-cols-[308px_1fr]">
+<article data-anim="program-card" class="tablet:grid-cols-[1fr_1fr] grid items-stretch gap-[10px]">
   <div class="overflow-hidden rounded-lg">
     <img
       src={imageSrc}

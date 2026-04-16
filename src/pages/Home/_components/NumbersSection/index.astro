@@ -5,13 +5,9 @@ import { cn } from '../../../../cn';
 import NumbersStatCard from './NumbersStatCard.astro';
 ---
 
-<section
-  id="impact"
-  data-anim="section"
-  class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl"
->
+<section id="impact" data-anim="section" class="px-2xl desktop:py-6xl bg-white py-12">
   <div class="mx-auto w-full max-w-328">
-    <div class="relative overflow-hidden rounded-lg bg-main px-6 py-10 tablet:px-10">
+    <div class="bg-main tablet:px-10 relative overflow-hidden rounded-lg px-6 py-10">
       <img
         src="/home-assets/Numbers/vector.png"
         alt=""
@@ -21,25 +17,29 @@ import NumbersStatCard from './NumbersStatCard.astro';
       />
 
       <div
-        class="relative flex flex-col gap-10 desktop:flex-row desktop:items-end desktop:justify-between"
+        class="desktop:flex-row desktop:items-end desktop:justify-between relative flex flex-col gap-10"
       >
         <div
           data-anim="meta"
           class={cn('flex max-w-90 flex-col gap-10', 'items-center tablet:items-start')}
         >
           <span
-            class="flex desktop:size-10 size-16 items-center justify-center rounded-full bg-light p-2"
+            class="desktop:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
           >
             <WorldIcon class="desktop:size-6 size-10" />
           </span>
 
-          <p class="body-md-l text-white text-center tablet:text-start">
+          <p class="body-md-l tablet:text-start text-center text-white">
             {numbersContent.description}
           </p>
         </div>
 
-        <div data-anim="stats" class="grid flex-1 gap-8 tablet:grid-cols-3">
-          {numbersContent.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
+        <div data-anim="stats" class="tablet:grid-cols-3 grid flex-1 gap-8">
+          {
+            numbersContent.stats.map((stat) => (
+              <NumbersStatCard value={stat.value} label={stat.label} />
+            ))
+          }
         </div>
       </div>
     </div>

@@ -6,12 +6,12 @@ import HeroScrollHint from './HeroScrollHint.astro';
 ---
 
 <section
-  class="hero relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden bg-main px-4 pt-6 pb-8 tablet:px-6xl tablet:pt-3xl tablet:pb-6xl"
+  class="hero bg-main px-2xl tablet:pt-3xl tablet:pb-6xl relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden pt-6 pb-8"
 >
   <HeroBackground imageSrc="/home-assets/Hero/Hero.png" />
 
   <div
-    class="hero__body relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-8 self-center desktop:flex-row desktop:items-end desktop:justify-between desktop:gap-0"
+    class="hero__body desktop:flex-row desktop:items-end desktop:justify-between desktop:gap-0 relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-8 self-center"
   >
     <HeroContent
       titleTop={heroContent.titleTop}

@@ -24,25 +24,22 @@ const {
   ...anchorAttrs
 } = Astro.props as Props & Record<string, unknown>;
 
-const isPrimary =
-  variant === 'desktop-primary' || variant === 'mobile-primary';
-const isInverse =
-  variant === 'desktop-primary-inverse' || variant === 'mobile-primary-inverse';
+const isPrimary = variant === 'desktop-primary' || variant === 'mobile-primary';
+const isInverse = variant === 'desktop-primary-inverse' || variant === 'mobile-primary-inverse';
 const isMobile =
   variant === 'mobile-primary' ||
   variant === 'mobile-secondary' ||
   variant === 'mobile-primary-inverse';
 
-const baseClass =
-  'group inline-flex shrink-0 items-center transition-opacity hover:opacity-90';
+/** Outer: scroll/intro tweens pueden animar transform en el <a>; el magnético vive en el span interno. */
+const outerClass = 'button-link-root group inline-flex shrink-0 items-center transition-opacity ';
+const innerClass = 'button-link will-change-[transform] inline-flex shrink-0 items-center';
 const variantClass = isInverse
   ? 'rounded-full bg-white text-main gap-md pl-lg pr-xs py-xs tablet:gap-lg tablet:pl-xl tablet:pr-sm tablet:py-sm'
   : isPrimary
     ? 'rounded-full bg-main text-white gap-lg pl-xl pr-sm py-sm'
     : 'text-main gap-sm';
-const textClass = isMobile
-  ? 'text-[14px] font-semibold leading-[1.5]'
-  : 'body-md-sb';
+const textClass = isMobile ? 'text-[14px] font-semibold leading-[1.5]' : 'body-md-sb';
 const iconWrapperClass = isPrimary
   ? isMobile
     ? 'flex items-center justify-center rounded-full bg-light p-xs'
@@ -63,9 +60,11 @@ const iconClass = isPrimary
     : 'size-4 text-main';
 ---
 
-<a {...anchorAttrs} href={href} class={`${baseClass} ${variantClass} ${className}`.trim()}>
-  <span class={textClass}>{text}</span>
-  <span class={iconWrapperClass}>
-    <UpRightArrowIcon class={iconClass} />
+<a {...anchorAttrs} href={href} class={`${outerClass} ${className}`.trim()} data-button-link-root>
+  <span class={`${innerClass} ${variantClass}`.trim()} data-button-link>
+    <span class={textClass}>{text}</span>
+    <span class={iconWrapperClass}>
+      <UpRightArrowIcon class={iconClass} />
+    </span>
   </span>
 </a>

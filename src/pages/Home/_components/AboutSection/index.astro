@@ -17,13 +17,15 @@ import AboutSectionMeta from './AboutSectionMeta.astro';
     </div>
 
     <div class="relative overflow-visible">
-      <img
-        src="/home-assets/About/banner-about.png"
-        alt={aboutContent.bannerImageAlt}
-        class="tablet:h-125 h-90 w-full rounded-lg object-cover object-center"
-        loading="lazy"
-        data-anim="image"
-      />
+      <div class="overflow-hidden rounded-lg">
+        <img
+          src="/home-assets/About/banner-about.png"
+          alt={aboutContent.bannerImageAlt}
+          class="tablet:h-125 h-90 w-full object-cover object-center"
+          loading="lazy"
+          data-anim="image"
+        />
+      </div>
       <AboutOriginCard />
     </div>
   </div>

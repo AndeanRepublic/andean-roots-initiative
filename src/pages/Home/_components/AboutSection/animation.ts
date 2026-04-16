@@ -14,7 +14,7 @@ const T_LABEL = 0.06;
 const T_TITLE = 0.18;
 const T_TAGS = 0.3;
 const T_DESC = 0.5;
-const T_IMAGE = 0.9;
+const T_IMAGE = 0.7;
 const T_CARD = 0.9;
 
 /** Construye targets de texto para stagger y conserva el texto original para cleanup/reinit. */

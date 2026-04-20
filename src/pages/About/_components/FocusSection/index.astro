@@ -6,9 +6,12 @@ import SustainabilityIcon from '../../../../icons/SustainabilityIcon.astro';
 import { aboutFocusContent } from '../../../../data/about-content';
 ---
 
-<section id="about-focus" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
-  <div class="mx-auto flex w-full max-w-328 flex-col gap-8 desktop:gap-8">
-    <div class="grid items-end gap-6 desktop:grid-cols-[19.0625rem_1fr_19rem] desktop:gap-px" data-anim="hero-grid">
+<section id="about-focus" class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12">
+  <div class="desktop:gap-8 mx-auto flex w-full max-w-328 flex-col gap-8">
+    <div
+      class="desktop:grid-cols-[19.0625rem_1fr_19rem] desktop:gap-px grid items-end gap-6"
+      data-anim="hero-grid"
+    >
       <div class="overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
         <img
           src={aboutFocusContent.sideImages[0].src}
@@ -20,14 +23,22 @@ import { aboutFocusContent } from '../../../../data/about-content';
       </div>
 
       <div class="flex flex-col items-center gap-8 px-4" data-anim="content">
-        <div class="flex items-center gap-sm" data-anim="label">
-          <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
+        <div class="gap-sm flex items-center" data-anim="label">
+          <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
           <p class="body-md-sb text-main">{aboutFocusContent.label}</p>
         </div>
-        <h2 class="auxiliar-h-lg-skrawk-r text-center text-main" data-anim="title" data-focus-text-line>
+        <h2
+          class="auxiliar-h-lg-skrawk-r text-main text-center"
+          data-anim="title"
+          data-focus-text-line
+        >
           {aboutFocusContent.title}
         </h2>
-        <p class="max-w-140 body-md-l text-center text-gray" data-anim="description" data-focus-text-words>
+        <p
+          class="body-md-l text-gray max-w-140 text-center"
+          data-anim="description"
+          data-focus-text-words
+        >
           {aboutFocusContent.description}
         </p>
       </div>
@@ -43,23 +54,30 @@ import { aboutFocusContent } from '../../../../data/about-content';
       </div>
     </div>
 
-    <div class="grid gap-6 desktop:grid-cols-4 desktop:gap-8" data-anim="cards">
+    <div class="desktop:grid-cols-4 tablet:grid-cols-2 desktop:gap-8 grid gap-6" data-anim="cards">
       {
         aboutFocusContent.cards.map((card) => (
           <article
-            class={`flex min-h-81 flex-col justify-between gap-6 rounded-lg bg-light p-8 ${card.offsetClass ?? ''}`}
+            class={`bg-light desktop:min-h-81 tablet:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
             data-anim="focus-card"
           >
-            <span class="flex size-12 items-center justify-center rounded-full bg-main" data-anim="focus-card-icon">
+            <span
+              class="bg-main flex size-12 items-center justify-center rounded-full"
+              data-anim="focus-card-icon"
+            >
               {card.icon === 'group' && <GroupIcon class="h-5 w-8" />}
-              {card.icon === 'bulb' && <BulbIcon class="h-8 w-6.5" />}
-              {card.icon === 'handshake' && <HandshakeIcon class="h-5 w-8 invert brightness-0 saturate-0" />}
+              {card.icon === 'bulb' && <BulbIcon class="h-8 w-6.5 text-white" />}
+              {card.icon === 'handshake' && (
+                <HandshakeIcon class="h-5 w-8 brightness-0 invert saturate-0" />
+              )}
               {card.icon === 'sustainability' && <SustainabilityIcon class="h-8 w-6.5" />}
             </span>
 
             <div class="flex flex-col gap-4" data-anim="focus-card-body">
               <h3 class="heading-sm-sb text-black">{card.title}</h3>
-              <p class="body-md-l text-gray" data-focus-text-words>{card.description}</p>
+              <p class="body-md-l text-gray" data-focus-text-words>
+                {card.description}
+              </p>
             </div>
           </article>
         ))

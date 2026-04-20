@@ -35,11 +35,16 @@ export const initHeroSectionAnimation = createScrollSectionController({
       const overlay = root.querySelector<HTMLElement>('[data-anim="overlay"]');
       const breadcrumb = root.querySelector<HTMLElement>('[data-anim="breadcrumb"]');
       const crumbItems = breadcrumb
-        ? Array.from(breadcrumb.querySelectorAll<HTMLElement>('[data-anim="crumb-item"], [data-anim="crumb-dot"]'))
+        ? Array.from(
+            breadcrumb.querySelectorAll<HTMLElement>(
+              '[data-anim="crumb-item"], [data-anim="crumb-dot"]',
+            ),
+          )
         : [];
       const titleChars = buildTextNodes(root);
 
-      if (media) gsap.set(media, { scale: 1.16, yPercent: 8, filter: 'saturate(0.78) contrast(0.9)' });
+      if (media)
+        gsap.set(media, { scale: 1.16, yPercent: 8, filter: 'saturate(0.78) contrast(0.9)' });
       if (overlay) gsap.set(overlay, { opacity: 0.72 });
       if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 70, rotateZ: -2 });
       if (crumbItems.length) gsap.set(crumbItems, { opacity: 0, y: 20, filter: 'blur(2px)' });

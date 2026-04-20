@@ -5,29 +5,38 @@ import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
 import { aboutValuesContent } from '../../../../data/about-content';
 ---
 
-<section id="about-values" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
-  <div class="mx-auto flex w-full max-w-328 flex-col gap-8 desktop:gap-16">
+<section id="about-values" class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12">
+  <div class="desktop:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="flex flex-col gap-4" data-anim="header">
-      <div class="flex items-center gap-sm" data-anim="label">
-        <span class="size-2 rounded-full bg-main" aria-hidden="true" data-anim="label-dot"></span>
+      <div class="gap-sm flex items-center" data-anim="label">
+        <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
         <p class="body-md-sb text-main">{aboutValuesContent.label}</p>
       </div>
 
-      <div class="flex flex-col gap-4 desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-10">
+      <div
+        class="desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-10 flex flex-col gap-4"
+      >
         <h2 class="auxiliar-h-lg-skrawk-r text-main" data-anim="title" data-values-text-line>
           {aboutValuesContent.title}
         </h2>
-        <p class="max-w-100 body-md-l text-gray" data-anim="description" data-values-text-words>
+        <p class="body-md-l text-gray max-w-100" data-anim="description" data-values-text-words>
           {aboutValuesContent.description}
         </p>
       </div>
     </div>
 
-    <div class="grid gap-6 desktop:grid-cols-3 desktop:gap-10" data-anim="cards">
+    <div class="desktop:grid-cols-3 desktop:gap-10 grid gap-6" data-anim="cards">
       {
         aboutValuesContent.items.map((item) => (
-          <article class="flex min-h-79 flex-col justify-between gap-8 rounded-lg bg-main p-8 text-white" data-anim="card" data-values-card-tilt>
-            <span class="flex size-12 items-center justify-center rounded-full bg-white" data-anim="card-icon">
+          <article
+            class="desktop:min-h-79 bg-main tablet:min-h-60 flex min-h-70 flex-col justify-between gap-8 rounded-lg p-8 text-white"
+            data-anim="card"
+            data-values-card-tilt
+          >
+            <span
+              class="flex size-12 items-center justify-center rounded-full bg-white"
+              data-anim="card-icon"
+            >
               {item.icon === 'commitment' && <CommitmentIcon class="size-8" />}
               {item.icon === 'chakana' && <ChakanaIcon class="size-8" />}
               {item.icon === 'handshake' && <HandshakeIcon class="h-5 w-8" />}
@@ -35,7 +44,9 @@ import { aboutValuesContent } from '../../../../data/about-content';
 
             <div class="flex flex-col gap-4" data-anim="card-body">
               <h3 class="heading-md-sb text-white">{item.title}</h3>
-              <p class="body-md-l text-white" data-values-text-words>{item.description}</p>
+              <p class="body-md-l text-white" data-values-text-words>
+                {item.description}
+              </p>
             </div>
           </article>
         ))

@@ -10,14 +10,14 @@ export function setupValuesCardHover(root: HTMLElement) {
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
       gsap.to(card, {
-        rotateY: x * 8,
-        rotateX: -y * 6,
+        rotateY: x * 16,
+        rotateX: -y * 12,
         y: -4,
         transformPerspective: 850,
         transformOrigin: 'center center',
         duration: 0.24,
         ease: 'power2.out',
-        overwrite: true,
+        overwrite: 'auto',
       });
     };
 
@@ -28,7 +28,7 @@ export function setupValuesCardHover(root: HTMLElement) {
         y: 0,
         duration: 0.28,
         ease: 'power2.out',
-        overwrite: true,
+        overwrite: 'auto',
       });
     };
 

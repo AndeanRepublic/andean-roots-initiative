@@ -2,11 +2,14 @@
 import { aboutOrganizationContent } from '../../../../data/about-content';
 ---
 
-<section id="about-organization" class="bg-white px-4 py-12 tablet:px-6 desktop:px-6xl desktop:py-6xl">
-  <div class="mx-auto flex w-full max-w-328 flex-col gap-8 desktop:gap-16">
+<section
+  id="about-organization"
+  class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12"
+>
+  <div class="desktop:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="flex flex-col gap-4" data-anim="header">
-      <div class="flex items-center gap-sm" data-anim="label">
-        <span class="size-2 rounded-full bg-main" aria-hidden="true" data-anim="label-dot"></span>
+      <div class="gap-sm flex items-center" data-anim="label">
+        <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
         <p class="body-md-sb text-main">{aboutOrganizationContent.label}</p>
       </div>
       <h2 class="auxiliar-h-lg-skrawk-r text-main" data-anim="title" data-organization-text-line>
@@ -14,7 +17,7 @@ import { aboutOrganizationContent } from '../../../../data/about-content';
       </h2>
     </div>
 
-    <div class="grid gap-8 desktop:grid-cols-[1fr_1fr] desktop:gap-10">
+    <div class="desktop:grid-cols-[1fr_1fr] desktop:gap-10 grid gap-8">
       <div class="overflow-hidden rounded-lg" data-anim="cover-wrap">
         <img
           src={aboutOrganizationContent.coverImageSrc}
@@ -25,22 +28,35 @@ import { aboutOrganizationContent } from '../../../../data/about-content';
         />
       </div>
 
-      <div class="flex flex-col gap-10" data-anim="points">
+      <div
+        class="tablet:flex-row desktop:flex-col tablet:gap-6 desktop:gap-10 flex flex-col gap-10"
+        data-anim="points"
+      >
         {
           aboutOrganizationContent.points.map((point) => (
-            <article class="relative flex min-h-70 flex-col justify-end gap-4 rounded-lg bg-light p-8" data-anim="point-card">
+            <article
+              class="bg-light relative flex min-h-70 flex-col justify-end gap-4 rounded-lg p-8"
+              data-anim="point-card"
+            >
               <img
                 src={point.iconSrc}
                 alt={point.iconAlt}
-                class="pointer-events-none absolute left-8 top-6 h-34 w-auto opacity-40"
+                class="pointer-events-none absolute top-6 left-8 h-34 w-auto opacity-40"
                 loading="lazy"
                 data-anim="point-icon"
               />
 
-              <h3 class="text-right text-[2.5rem] leading-[1.4] font-semibold text-gray" data-anim="point-title">
+              <h3
+                class="text-gray text-right text-[2.5rem] leading-[1.4] font-semibold"
+                data-anim="point-title"
+              >
                 {point.title}
               </h3>
-              <p class="body-md-l text-gray" data-anim="point-description" data-organization-text-words>
+              <p
+                class="body-md-l text-gray"
+                data-anim="point-description"
+                data-organization-text-words
+              >
                 {point.description}
               </p>
             </article>

@@ -24,7 +24,7 @@ export function setupAboutOriginCardHover(root: HTMLElement): () => void {
       x: dx * 6,
       y: dy * 3,
       ease: 'power2.out',
-      overwrite: 'auto',
+      overwrite: true,
     });
   };
 
@@ -36,7 +36,7 @@ export function setupAboutOriginCardHover(root: HTMLElement): () => void {
       x: 0,
       y: 0,
       ease: 'power3.out',
-      overwrite: 'auto',
+      overwrite: true,
     });
   };
 

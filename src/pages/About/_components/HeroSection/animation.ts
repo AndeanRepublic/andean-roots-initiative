@@ -59,6 +59,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.02,
               ease: 'power3.out',
+              overwrite: true,
             });
             titleIn = true;
           } else if (p < T_TITLE && titleIn) {
@@ -69,6 +70,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.015,
               ease: 'power2.in',
+              overwrite: true,
             });
             titleIn = false;
           }
@@ -83,6 +85,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.04,
               ease: 'power2.out',
+              overwrite: true,
             });
             breadcrumbIn = true;
           } else if (p < T_BREADCRUMB && breadcrumbIn) {
@@ -93,6 +96,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.03,
               ease: 'power2.in',
+              overwrite: true,
             });
             breadcrumbIn = false;
           }
@@ -104,7 +108,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
             yPercent: 8 - p * 8,
             filter: `saturate(${0.78 + p * 0.22}) contrast(${0.9 + p * 0.1})`,
             duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
+            overwrite: true,
           });
         }
 
@@ -112,7 +116,7 @@ export const initHeroSectionAnimation = createScrollSectionController({
           gsap.to(overlay, {
             opacity: 0.72 - p * 0.18,
             duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
+            overwrite: true,
           });
         }
       };

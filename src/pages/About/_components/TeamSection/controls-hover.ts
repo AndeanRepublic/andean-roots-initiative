@@ -11,6 +11,7 @@ export function setupTeamControlsHover(root: HTMLElement) {
         y: -1,
         duration: 0.22,
         ease: 'power2.out',
+        overwrite: true,
       });
     };
 
@@ -20,6 +21,7 @@ export function setupTeamControlsHover(root: HTMLElement) {
         y: 0,
         duration: 0.2,
         ease: 'power2.out',
+        overwrite: true,
       });
     };
 

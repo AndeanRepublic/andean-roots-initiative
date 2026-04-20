@@ -97,6 +97,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         value: parsed.target,
         duration,
         ease: 'power3.out',
+        overwrite: true,
         onUpdate: () => {
           counter.textContent = formatCounterValue(parsed, state.value);
         },
@@ -118,7 +119,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       /** Reveal coordinado de bloque + cards + counters al entrar al viewport. */
       const revealSection = () => {
         if (meta) {
-          gsap.to(meta, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out' });
+          gsap.to(meta, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out', overwrite: true });
         }
         if (cards.length) {
           gsap.to(cards, {
@@ -128,6 +129,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
             duration: 0.65,
             stagger: 0.12,
             ease: 'power2.out',
+            overwrite: true,
           });
         }
         counters.forEach((counter) => animateCounter(counter, 1.9));
@@ -137,7 +139,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       const hideSection = () => {
         stopAllCounters();
         if (meta) {
-          gsap.to(meta, { opacity: 0, x: -24, duration: 0.35, ease: 'power2.in' });
+          gsap.to(meta, { opacity: 0, x: -24, duration: 0.35, ease: 'power2.in', overwrite: true });
         }
         if (cards.length) {
           gsap.to(cards, {
@@ -147,6 +149,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
             duration: 0.35,
             stagger: -0.08,
             ease: 'power2.in',
+            overwrite: true,
           });
         }
         counters.forEach((counter) => resetCounter(counter));
@@ -178,13 +181,13 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         start: 'top 82%',
         end: 'bottom top',
         onEnter: () => {
-          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' });
+          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', overwrite: true });
         },
         onEnterBack: () => {
-          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' });
+          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', overwrite: true });
         },
         onLeaveBack: () => {
-          if (meta) gsap.to(meta, { opacity: 0, x: -24, duration: 0.3, ease: 'power2.in' });
+          if (meta) gsap.to(meta, { opacity: 0, x: -24, duration: 0.3, ease: 'power2.in', overwrite: true });
         },
       });
 
@@ -203,6 +206,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
               filter: 'blur(0px)',
               duration: 0.45,
               ease: 'power2.out',
+              overwrite: true,
             });
             if (counter) animateCounter(counter, 1.35);
           },
@@ -213,6 +217,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
               filter: 'blur(0px)',
               duration: 0.4,
               ease: 'power2.out',
+              overwrite: true,
             });
             if (counter) animateCounter(counter, 1.2);
           },
@@ -223,6 +228,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
               filter: 'blur(4px)',
               duration: 0.28,
               ease: 'power2.in',
+              overwrite: true,
             });
             if (counter) {
               counterTweens.get(counter)?.kill();

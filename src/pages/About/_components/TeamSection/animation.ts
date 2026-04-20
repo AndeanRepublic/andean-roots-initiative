@@ -61,7 +61,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
         const d = immediate ? 0 : 0.56;
 
         if (p >= T_INTRO && !introIn) {
-          if (label) gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out' });
+          if (label) gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out', overwrite: true });
           if (descriptionWords.length) {
             gsap.to(descriptionWords, {
               opacity: 1,
@@ -70,6 +70,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: 0.44,
               stagger: immediate ? 0 : 0.008,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           if (bgWord) {
@@ -79,11 +80,12 @@ export const initTeamSectionAnimation = createScrollSectionController({
               scale: 1,
               duration: d,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           introIn = true;
         } else if (p < T_INTRO && introIn) {
-          if (label) gsap.to(label, { opacity: 0, x: -20, duration: d, ease: 'power2.in' });
+          if (label) gsap.to(label, { opacity: 0, x: -20, duration: d, ease: 'power2.in', overwrite: true });
           if (descriptionWords.length) {
             gsap.to(descriptionWords, {
               opacity: 0.15,
@@ -92,6 +94,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: 0.2,
               stagger: immediate ? 0 : -0.006,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           if (bgWord) {
@@ -101,6 +104,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               scale: 1.08,
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           introIn = false;
@@ -115,6 +119,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.09,
               ease: 'power3.out',
+              overwrite: true,
             });
           }
           if (captions.length) {
@@ -124,6 +129,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.07,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           cardsIn = true;
@@ -136,6 +142,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.07,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           if (captions.length) {
@@ -145,32 +152,35 @@ export const initTeamSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.05,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           cardsIn = false;
         }
 
         if (p >= T_CONTROLS && !controlsIn) {
-          if (controls) gsap.to(controls, { opacity: 1, y: 0, duration: d, ease: 'power2.out' });
-          if (counter) gsap.to(counter, { opacity: 1, duration: d, ease: 'power2.out' });
+          if (controls) gsap.to(controls, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
+          if (counter) gsap.to(counter, { opacity: 1, duration: d, ease: 'power2.out', overwrite: true });
           if (controlButtons.length) {
             gsap.to(controlButtons, {
               scale: 1,
               duration: d,
               stagger: immediate ? 0 : 0.06,
               ease: 'back.out(1.4)',
+              overwrite: true,
             });
           }
           controlsIn = true;
         } else if (p < T_CONTROLS && controlsIn) {
-          if (controls) gsap.to(controls, { opacity: 0, y: 18, duration: d, ease: 'power2.in' });
-          if (counter) gsap.to(counter, { opacity: 0.2, duration: d, ease: 'power2.in' });
+          if (controls) gsap.to(controls, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
+          if (counter) gsap.to(counter, { opacity: 0.2, duration: d, ease: 'power2.in', overwrite: true });
           if (controlButtons.length) {
             gsap.to(controlButtons, {
               scale: 0.92,
               duration: d,
               stagger: immediate ? 0 : -0.04,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           controlsIn = false;
@@ -181,7 +191,7 @@ export const initTeamSectionAnimation = createScrollSectionController({
             scale: 1.08 - p * 0.08,
             filter: `saturate(${0.82 + p * 0.18})`,
             duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
+            overwrite: true,
           });
         }
       };

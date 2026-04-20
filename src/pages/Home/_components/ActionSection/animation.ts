@@ -75,6 +75,7 @@ export const initActionSectionAnimation = createScrollSectionController({
         duration: immediate ? 0 : 0.55,
         stagger: immediate ? 0 : 0.1,
         ease: 'power2.out',
+        overwrite: true,
       });
     };
 
@@ -89,6 +90,7 @@ export const initActionSectionAnimation = createScrollSectionController({
         duration: immediate ? 0 : 0.55,
         stagger: immediate ? 0 : -0.08,
         ease: 'power2.in',
+        overwrite: true,
       });
     };
 
@@ -110,7 +112,7 @@ export const initActionSectionAnimation = createScrollSectionController({
 
         if (label) {
           if (p >= T_LABEL && !labelIn) {
-            gsap.to(label, { opacity: 1, y: 0, rotateZ: 0, duration: d, ease: 'power2.out' });
+            gsap.to(label, { opacity: 1, y: 0, rotateZ: 0, duration: d, ease: 'power2.out', overwrite: true });
             labelIn = true;
           } else if (p < T_LABEL && labelIn) {
             gsap.to(label, {
@@ -119,6 +121,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               rotateZ: -2,
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             labelIn = false;
           }
@@ -132,6 +135,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.015,
               ease: 'power2.out',
+              overwrite: true,
             });
             titleIn = true;
           } else if (p < T_TITLE && titleIn) {
@@ -141,6 +145,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.012,
               ease: 'power2.in',
+              overwrite: true,
             });
             titleIn = false;
           }
@@ -155,6 +160,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               duration: 0.5,
               stagger: immediate ? 0 : 0.02,
               ease: 'power2.out',
+              overwrite: true,
             });
             subIn = true;
           } else if (p < T_SUB && subIn) {
@@ -165,6 +171,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               duration: 0.1,
               stagger: immediate ? 0 : -0.015,
               ease: 'power2.in',
+              overwrite: true,
             });
             subIn = false;
           }
@@ -176,6 +183,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               filter: 'blur(0px)',
               duration: d,
               ease: 'power2.out',
+              overwrite: true,
             });
             subIn = true;
           } else if (p < T_SUB && subIn) {
@@ -185,6 +193,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               filter: 'blur(2px)',
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             subIn = false;
           }
@@ -233,6 +242,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               rotateZ: 0,
               duration: 0.45,
               ease: 'power2.out',
+              overwrite: true,
             });
           },
           onEnterBack: () => {
@@ -243,6 +253,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               rotateZ: 0,
               duration: 0.45,
               ease: 'power2.out',
+              overwrite: true,
             });
           },
           onLeaveBack: () => {
@@ -253,6 +264,7 @@ export const initActionSectionAnimation = createScrollSectionController({
               rotateZ: -2,
               duration: 0.35,
               ease: 'power2.in',
+              overwrite: true,
             });
           },
         }),

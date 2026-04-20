@@ -67,6 +67,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.04,
               ease: 'power2.out',
+              overwrite: true,
             });
             labelIn = true;
           } else if (p < T_LABEL && labelIn) {
@@ -76,6 +77,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.03,
               ease: 'power2.in',
+              overwrite: true,
             });
             labelIn = false;
           }
@@ -90,6 +92,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: 0.4,
               stagger: immediate ? 0 : 0.01,
               ease: 'power2.out',
+              overwrite: true,
             });
             descriptionIn = true;
           } else if (p < T_DESCRIPTION && descriptionIn) {
@@ -100,6 +103,7 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: 0.2,
               stagger: immediate ? 0 : -0.008,
               ease: 'power2.in',
+              overwrite: true,
             });
             descriptionIn = false;
           }
@@ -115,12 +119,14 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.06,
               ease: 'power2.out',
+              overwrite: true,
             });
             gsap.to(logoImages, {
               filter: 'grayscale(0%) brightness(1)',
               duration: d,
               stagger: immediate ? 0 : 0.05,
               ease: 'power2.out',
+              overwrite: true,
             });
             logosIn = true;
           } else if (p < T_LOGOS && logosIn) {
@@ -132,12 +138,14 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.05,
               ease: 'power2.in',
+              overwrite: true,
             });
             gsap.to(logoImages, {
               filter: 'grayscale(100%) brightness(0.88)',
               duration: d,
               stagger: immediate ? 0 : -0.04,
               ease: 'power2.in',
+              overwrite: true,
             });
             logosIn = false;
           }

@@ -104,7 +104,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
 
         if (label) {
           if (p >= T_LABEL && !labelIn) {
-            gsap.to(label, { opacity: 1, y: 0, rotateZ: 0, duration: d, ease: 'power2.out' });
+            gsap.to(label, { opacity: 1, y: 0, rotateZ: 0, duration: d, ease: 'power2.out', overwrite: true });
             labelIn = true;
           } else if (p < T_LABEL && labelIn) {
             gsap.to(label, {
@@ -113,6 +113,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               rotateZ: -2,
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             labelIn = false;
           }
@@ -126,6 +127,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.015,
               ease: 'power2.out',
+              overwrite: true,
             });
             titleIn = true;
           } else if (p < T_TITLE && titleIn) {
@@ -135,6 +137,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.012,
               ease: 'power2.in',
+              overwrite: true,
             });
             titleIn = false;
           }
@@ -150,6 +153,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.06,
               ease: 'power2.out',
+              overwrite: true,
             });
             tagsIn = true;
           } else if (p < T_TAGS && tagsIn) {
@@ -161,6 +165,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.05,
               ease: 'power2.in',
+              overwrite: true,
             });
             tagsIn = false;
           }
@@ -175,6 +180,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: 0.5,
               stagger: immediate ? 0 : 0.02,
               ease: 'power2.out',
+              overwrite: true,
             });
             descIn = true;
           } else if (p < T_DESC && descIn) {
@@ -185,6 +191,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               duration: 0.1,
               stagger: immediate ? 0 : -0.015,
               ease: 'power2.in',
+              overwrite: true,
             });
             descIn = false;
           }
@@ -196,6 +203,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               filter: 'blur(0px)',
               duration: d,
               ease: 'power2.out',
+              overwrite: true,
             });
             descIn = true;
           } else if (p < T_DESC && descIn) {
@@ -205,6 +213,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               filter: 'blur(2px)',
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             descIn = false;
           }
@@ -220,6 +229,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               filter: 'saturate(1) contrast(1)',
               duration: d,
               ease: 'power2.out',
+              overwrite: true,
             });
             imageIn = true;
           } else if (p < T_IMAGE && imageIn) {
@@ -231,6 +241,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
               filter: 'saturate(0.65) contrast(0.88)',
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             imageIn = false;
           }
@@ -238,32 +249,34 @@ export const initAboutSectionAnimation = createScrollSectionController({
 
         if (originCardInner && cardInnerChildren.length) {
           if (p >= T_CARD && !cardIn) {
-            gsap.to(originCardInner, { opacity: 1, duration: d, ease: 'power2.out' });
+            gsap.to(originCardInner, { opacity: 1, duration: d, ease: 'power2.out', overwrite: true });
             gsap.to(cardInnerChildren, {
               opacity: 1,
               y: 0,
               duration: d,
               stagger: immediate ? 0 : 0.08,
               ease: 'power2.out',
+              overwrite: true,
             });
             cardIn = true;
           } else if (p < T_CARD && cardIn) {
-            gsap.to(originCardInner, { opacity: 0, duration: d, ease: 'power2.in' });
+            gsap.to(originCardInner, { opacity: 0, duration: d, ease: 'power2.in', overwrite: true });
             gsap.to(cardInnerChildren, {
               opacity: 0,
               y: 22,
               duration: d,
               stagger: immediate ? 0 : -0.06,
               ease: 'power2.in',
+              overwrite: true,
             });
             cardIn = false;
           }
         } else if (originCard) {
           if (p >= T_CARD && !cardIn) {
-            gsap.to(originCard, { opacity: 1, y: 0, duration: d, ease: 'power2.out' });
+            gsap.to(originCard, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
             cardIn = true;
           } else if (p < T_CARD && cardIn) {
-            gsap.to(originCard, { opacity: 0, y: 28, duration: d, ease: 'power2.in' });
+            gsap.to(originCard, { opacity: 0, y: 28, duration: d, ease: 'power2.in', overwrite: true });
             cardIn = false;
           }
         }

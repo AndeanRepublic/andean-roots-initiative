@@ -42,6 +42,7 @@ function setupIntroTextReveal(root: HTMLElement) {
     opacity: 1,
     stagger: 0.02,
     ease: 'none',
+    overwrite: true,
     scrollTrigger: {
       id: ST_TEXT_ID,
       trigger: root,
@@ -106,6 +107,7 @@ export const initChallengeSectionCards = createScrollSectionController({
               rotateZ: 0,
               duration: 0.5,
               ease: 'power3.out',
+              overwrite: true,
             });
           },
           onEnterBack: () => {
@@ -116,6 +118,7 @@ export const initChallengeSectionCards = createScrollSectionController({
               rotateZ: 0,
               duration: 0.4,
               ease: 'power2.out',
+              overwrite: true,
             });
           },
           onLeaveBack: () => {
@@ -126,6 +129,7 @@ export const initChallengeSectionCards = createScrollSectionController({
               rotateZ: initialRotate,
               duration: 0.3,
               ease: 'power2.in',
+              overwrite: true,
             });
           },
         });
@@ -172,25 +176,28 @@ export const initChallengeSectionCards = createScrollSectionController({
           }
 
           if (progress >= 0.35 && !isGapAnimationCompleted) {
-            gsap.to(cardContainer, { gap: '20px', duration: 0.5, ease: 'power3.out' });
+            gsap.to(cardContainer, { gap: '20px', duration: 0.5, ease: 'power3.out', overwrite: true });
             gsap.to([card1, card2, card3], {
               borderRadius: '20px',
               duration: 0.5,
               ease: 'power3.out',
+              overwrite: true,
             });
             isGapAnimationCompleted = true;
           } else if (progress < 0.35 && isGapAnimationCompleted) {
-            gsap.to(cardContainer, { gap: '0px', duration: 0.5, ease: 'power3.out' });
+            gsap.to(cardContainer, { gap: '0px', duration: 0.5, ease: 'power3.out', overwrite: true });
             gsap.to(card1, {
               borderRadius: '20px 0 0 20px',
               duration: 0.5,
               ease: 'power3.out',
+              overwrite: true,
             });
-            gsap.to(card2, { borderRadius: '0px', duration: 0.5, ease: 'power3.out' });
+            gsap.to(card2, { borderRadius: '0px', duration: 0.5, ease: 'power3.out', overwrite: true });
             gsap.to(card3, {
               borderRadius: '0 20px 20px 0',
               duration: 0.5,
               ease: 'power3.out',
+              overwrite: true,
             });
             isGapAnimationCompleted = false;
           }
@@ -201,6 +208,7 @@ export const initChallengeSectionCards = createScrollSectionController({
               duration: 0.75,
               ease: 'power3.inOut',
               stagger: 0.1,
+              overwrite: true,
             });
 
             isFlipAnimationCompleted = true;
@@ -210,6 +218,7 @@ export const initChallengeSectionCards = createScrollSectionController({
               duration: 0.75,
               ease: 'power3.inOut',
               stagger: -0.1,
+              overwrite: true,
             });
 
             isFlipAnimationCompleted = false;

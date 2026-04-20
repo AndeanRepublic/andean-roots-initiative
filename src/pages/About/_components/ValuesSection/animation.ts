@@ -61,7 +61,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
         const d = immediate ? 0 : 0.55;
 
         if (p >= T_HEADER && !headerIn) {
-          if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out' });
+          if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 1,
@@ -69,11 +69,12 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.014,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           headerIn = true;
         } else if (p < T_HEADER && headerIn) {
-          if (label) gsap.to(label, { opacity: 0, y: 18, duration: d, ease: 'power2.in' });
+          if (label) gsap.to(label, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 0,
@@ -81,6 +82,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.01,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           headerIn = false;
@@ -95,6 +97,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: 0.45,
               stagger: immediate ? 0 : 0.004,
               ease: 'power2.out',
+              overwrite: true,
             });
             descriptionIn = true;
           } else if (p < T_DESCRIPTION && descriptionIn) {
@@ -105,6 +108,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: 0.2,
               stagger: immediate ? 0 : -0.003,
               ease: 'power2.in',
+              overwrite: true,
             });
             descriptionIn = false;
           }
@@ -120,6 +124,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.1,
               ease: 'power3.out',
+              overwrite: true,
             });
             cardsIn = true;
           } else if (p < T_CARDS && cardsIn) {
@@ -131,6 +136,7 @@ export const initValuesSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.08,
               ease: 'power2.in',
+              overwrite: true,
             });
             cardsIn = false;
           }

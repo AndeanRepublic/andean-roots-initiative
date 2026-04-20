@@ -17,6 +17,7 @@ export function setupValuesCardHover(root: HTMLElement) {
         transformOrigin: 'center center',
         duration: 0.24,
         ease: 'power2.out',
+        overwrite: true,
       });
     };
 
@@ -27,6 +28,7 @@ export function setupValuesCardHover(root: HTMLElement) {
         y: 0,
         duration: 0.28,
         ease: 'power2.out',
+        overwrite: true,
       });
     };
 

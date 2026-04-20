@@ -34,7 +34,7 @@ export function setupAboutTagPillsHover(root: HTMLElement): () => void {
         x: 0,
         y: 0,
         ease: 'power2.out',
-        overwrite: 'auto',
+        overwrite: true,
       });
     };
 
@@ -47,7 +47,7 @@ export function setupAboutTagPillsHover(root: HTMLElement): () => void {
         x: 0,
         y: 0,
         ease: 'power3.out',
-        overwrite: 'auto',
+        overwrite: true,
       });
     };
 

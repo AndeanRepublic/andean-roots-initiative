@@ -69,6 +69,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: d,
           stagger: immediate ? 0 : 0.014,
           ease: 'power2.out',
+          overwrite: true,
         });
         titleIn = true;
       } else if (p < T_TITLE && titleIn) {
@@ -78,6 +79,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: d,
           stagger: immediate ? 0 : -0.01,
           ease: 'power2.in',
+          overwrite: true,
         });
         titleIn = false;
       }
@@ -92,6 +94,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: d,
           stagger: immediate ? 0 : 0.2,
           ease: 'power3.out',
+          overwrite: true,
         });
         cardsIn = true;
       } else if (p < T_CARDS && cardsIn) {
@@ -102,6 +105,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: d,
           stagger: immediate ? 0 : -0.08,
           ease: 'power2.in',
+          overwrite: true,
         });
         cardsIn = false;
       }
@@ -116,6 +120,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: 0.3,
           stagger: immediate ? 0 : 0.04,
           ease: 'power2.out',
+          overwrite: true,
         });
         bodyIn = true;
       } else if (p < T_BODY && bodyIn) {
@@ -126,6 +131,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
           duration: 0.2,
           stagger: immediate ? 0 : -0.01,
           ease: 'power2.in',
+          overwrite: true,
         });
         bodyIn = false;
       }
@@ -135,8 +141,8 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
       gsap.to(images, {
         scale: 1.4,
         yPercent: -20 + p * 40,
-        duration: immediate ? 0 : 0.35,
-        overwrite: 'auto',
+        duration: immediate ? 0 : 0.5,
+        overwrite: true,
       });
     }
   };
@@ -197,7 +203,7 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           duration: 0.48,
           stagger: 0.01,
           ease: 'power2.out',
-          overwrite: 'auto',
+          overwrite: true,
           scrollTrigger: {
             id: ST_MOBILE_TITLE_ID,
             trigger: root,
@@ -222,7 +228,7 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           y: 0,
           duration: 1,
           ease: 'power2.out',
-          overwrite: 'auto',
+          overwrite: true,
           scrollTrigger: {
             trigger: cardBody,
             start: 'top 70%',
@@ -241,7 +247,7 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           duration: 0.2,
           stagger: 0.01,
           ease: 'power2.out',
-          overwrite: 'auto',
+          overwrite: true,
           scrollTrigger: {
             trigger: cardBody ?? card,
             start: 'top 70%',
@@ -260,7 +266,7 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           filter: 'saturate(1)',
           duration: 0.8,
           ease: 'power2.out',
-          overwrite: 'auto',
+          overwrite: true,
           scrollTrigger: {
             trigger: cardImage,
             start: 'top 70%',

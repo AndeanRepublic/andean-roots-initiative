@@ -66,7 +66,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
         const d = immediate ? 0 : 0.56;
 
         if (p >= T_CONTENT && !contentIn) {
-          if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out' });
+          if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 1,
@@ -74,11 +74,12 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.014,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           contentIn = true;
         } else if (p < T_CONTENT && contentIn) {
-          if (label) gsap.to(label, { opacity: 0, y: 20, duration: d, ease: 'power2.in' });
+          if (label) gsap.to(label, { opacity: 0, y: 20, duration: d, ease: 'power2.in', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 0,
@@ -86,6 +87,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.01,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           contentIn = false;
@@ -100,6 +102,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: 0.44,
               stagger: immediate ? 0 : 0.004,
               ease: 'power2.out',
+              overwrite: true,
             });
             descriptionIn = true;
           } else if (p < T_DESCRIPTION && descriptionIn) {
@@ -110,6 +113,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: 0.2,
               stagger: immediate ? 0 : -0.003,
               ease: 'power2.in',
+              overwrite: true,
             });
             descriptionIn = false;
           }
@@ -125,6 +129,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.08,
               ease: 'power3.out',
+              overwrite: true,
             });
             gsap.to(cardIcons, {
               scale: 1,
@@ -132,6 +137,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.06,
               ease: 'back.out(1.4)',
+              overwrite: true,
             });
             cardsIn = true;
           } else if (p < T_CARDS && cardsIn) {
@@ -143,6 +149,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.07,
               ease: 'power2.in',
+              overwrite: true,
             });
             gsap.to(cardIcons, {
               scale: 0.85,
@@ -150,6 +157,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.05,
               ease: 'power2.in',
+              overwrite: true,
             });
             cardsIn = false;
           }
@@ -161,7 +169,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
             scale: 1.1 - p * 0.1,
             yPercent: 10 - p * 14,
             duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
+            overwrite: true,
           });
         }
 
@@ -171,7 +179,7 @@ export const initFocusSectionAnimation = createScrollSectionController({
             scale: 1.1 - p * 0.1,
             yPercent: -10 + p * 14,
             duration: immediate ? 0 : 0.35,
-            overwrite: 'auto',
+            overwrite: true,
           });
         }
       };

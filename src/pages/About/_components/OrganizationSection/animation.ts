@@ -63,7 +63,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
         const d = immediate ? 0 : 0.56;
 
         if (p >= T_HEADER && !headerIn) {
-          if (label) gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out' });
+          if (label) gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 1,
@@ -71,11 +71,12 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.014,
               ease: 'power2.out',
+              overwrite: true,
             });
           }
           headerIn = true;
         } else if (p < T_HEADER && headerIn) {
-          if (label) gsap.to(label, { opacity: 0, x: -22, duration: d, ease: 'power2.in' });
+          if (label) gsap.to(label, { opacity: 0, x: -22, duration: d, ease: 'power2.in', overwrite: true });
           if (titleChars.length) {
             gsap.to(titleChars, {
               opacity: 0,
@@ -83,6 +84,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.01,
               ease: 'power2.in',
+              overwrite: true,
             });
           }
           headerIn = false;
@@ -96,6 +98,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               clipPath: 'inset(0% 0% 0% 0% round 1rem)',
               duration: d,
               ease: 'power3.out',
+              overwrite: true,
             });
             coverIn = true;
           } else if (p < T_COVER && coverIn) {
@@ -105,6 +108,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               clipPath: 'inset(10% 10% 10% 10% round 1rem)',
               duration: d,
               ease: 'power2.in',
+              overwrite: true,
             });
             coverIn = false;
           }
@@ -119,6 +123,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.1,
               ease: 'power3.out',
+              overwrite: true,
             });
             gsap.to(pointIcons, {
               rotate: 0,
@@ -126,6 +131,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : 0.08,
               ease: 'back.out(1.4)',
+              overwrite: true,
             });
             if (descriptionWords.length) {
               gsap.to(descriptionWords, {
@@ -134,6 +140,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
                 duration: 0.4,
                 stagger: immediate ? 0 : 0.003,
                 ease: 'power2.out',
+                overwrite: true,
               });
             }
             pointsIn = true;
@@ -145,6 +152,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.08,
               ease: 'power2.in',
+              overwrite: true,
             });
             gsap.to(pointIcons, {
               rotate: -10,
@@ -152,6 +160,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               duration: d,
               stagger: immediate ? 0 : -0.06,
               ease: 'power2.in',
+              overwrite: true,
             });
             if (descriptionWords.length) {
               gsap.to(descriptionWords, {
@@ -160,6 +169,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
                 duration: 0.2,
                 stagger: immediate ? 0 : -0.002,
                 ease: 'power2.in',
+                overwrite: true,
               });
             }
             pointsIn = false;

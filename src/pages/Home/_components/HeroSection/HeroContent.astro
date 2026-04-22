@@ -37,7 +37,7 @@ const { titleTop, titleBottom, subheading, ctaText, ctaHref } = Astro.props as P
       {subheading}
     </p>
     <div data-anim="cta">
-      <ButtonLink href={ctaHref} text={ctaText} variant="desktop-primary" class="hero__cta" />
+      <ButtonLink href={ctaHref} text={ctaText} device="desktop" kind="primary" class="hero__cta" />
     </div>
   </div>
 </div>

@@ -1,35 +1,29 @@
 ---
 import UpRightArrowIcon from '../icons/UpRightArrowIcon.astro';
 
-type ButtonVariant =
-  | 'desktop-primary'
-  | 'desktop-primary-inverse'
-  | 'desktop-secondary'
-  | 'mobile-primary'
-  | 'mobile-primary-inverse'
-  | 'mobile-secondary';
+type ButtonDevice = 'desktop' | 'mobile';
+type ButtonKind = 'primary' | 'primary-inverse' | 'secondary';
 
 interface Props {
   href?: string;
   text?: string;
-  variant?: ButtonVariant;
+  device?: ButtonDevice;
+  kind?: ButtonKind;
   class?: string;
 }
 
 const {
   href = '#',
   text = 'GET INVOLVED',
-  variant = 'desktop-primary',
+  device = 'desktop',
+  kind = 'primary',
   class: className = '',
   ...anchorAttrs
 } = Astro.props as Props & Record<string, unknown>;
 
-const isPrimary = variant === 'desktop-primary' || variant === 'mobile-primary';
-const isInverse = variant === 'desktop-primary-inverse' || variant === 'mobile-primary-inverse';
-const isMobile =
-  variant === 'mobile-primary' ||
-  variant === 'mobile-secondary' ||
-  variant === 'mobile-primary-inverse';
+const isPrimary = kind === 'primary';
+const isInverse = kind === 'primary-inverse';
+const isMobile = device === 'mobile';
 
 /** Outer: scroll/intro tweens pueden animar transform en el <a>; el magnético vive en el span interno. */
 const outerClass = 'button-link-root group inline-flex shrink-0 items-center transition-opacity ';

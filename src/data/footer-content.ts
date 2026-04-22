@@ -3,7 +3,7 @@ export const footerContent = {
   quickLinks: [
     { label: 'Home', href: '/Home' },
     { label: 'About', href: '/About' },
-    { label: 'Project', href: '/Home#programs' },
+    { label: 'Project', href: '/programs' },
     { label: 'Contacto', href: '/contact' },
   ],
   supportTitle: 'Support',

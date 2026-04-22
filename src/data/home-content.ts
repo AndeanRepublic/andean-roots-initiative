@@ -4,7 +4,7 @@ export const headerContent = {
   navLinks: [
     { label: 'Home', href: '/Home' },
     { label: 'Sobre nosotros', href: '/About' },
-    { label: 'Programas', href: '/Home#programs' },
+    { label: 'Programas', href: '/programs' },
     { label: 'Contacto', href: '/contact' },
   ],
 };

@@ -11,18 +11,29 @@ interface Props {
 const { heroEntrance = false } = Astro.props;
 
 const pathname = Astro.url.pathname;
-const normalizedPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+const normalizedPath =
+  pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 
-const isActiveHref = (href: string) => {
+const normalizePathPart = (href: string) => {
   const [pathPart] = href.split('#');
-  if (!pathPart || pathPart === '#') return false;
-  const normalizedHref = pathPart.length > 1 && pathPart.endsWith('/') ? pathPart.slice(0, -1) : pathPart;
-  return normalizedHref === normalizedPath;
+  if (!pathPart || pathPart === '#') return '';
+  return pathPart.length > 1 && pathPart.endsWith('/') ? pathPart.slice(0, -1) : pathPart;
 };
+
+const matchingLinks = headerContent.navLinks.filter(
+  (link) => normalizePathPart(link.href) === normalizedPath,
+);
+
+// Keep a single active nav item per route (e.g. /Home should not also activate /Home#programs).
+const activeHref =
+  matchingLinks.find((link) => !link.href.includes('#'))?.href ?? matchingLinks[0]?.href;
+
+const isActiveHref = (href: string) => href === activeHref;
 ---
 
 <header
   data-hero-header={heroEntrance ? true : undefined}
+  transition:persist
   class={cn(
     'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4 ',
     heroEntrance && 'opacity-0 -translate-y-4',
@@ -45,17 +56,24 @@ const isActiveHref = (href: string) => {
       />
     </a>
 
-    <ul class="gap-sm flex items-center max-md:hidden" role="menubar">
+    <ul class="gap-sm relative flex items-center max-md:hidden" role="menubar" data-nav-list>
+      <li
+        class="pointer-events-none absolute top-0 left-0 z-0 rounded-full bg-white opacity-0 transition-[transform,width,height,opacity] duration-300 ease-out"
+        data-nav-indicator
+        role="none"
+        aria-hidden="true"
+      >
+      </li>
       {
         headerContent.navLinks.map((link) => (
-          <li role="none">
+          <li role="none" class="relative z-10">
             <a
               href={link.href}
-              class={`px-xl py-sm rounded-full transition-colors ${
-                isActiveHref(link.href)
-                  ? 'text-main body-md-sb bg-white'
-                  : 'body-md-l text-white hover:opacity-90'
+              class={`body-md-sb px-xl py-sm rounded-full text-white transition-colors ${
+                isActiveHref(link.href) ? 'text-main' : ''
               }`}
+              data-nav-link
+              data-nav-active={isActiveHref(link.href) ? 'true' : 'false'}
               role="menuitem"
             >
               {link.label}
@@ -84,7 +102,7 @@ const isActiveHref = (href: string) => {
                 class={`px-lg py-sm block rounded-full text-center transition-colors ${
                   isActiveHref(link.href)
                     ? 'text-main body-md-sb bg-white'
-                    : 'body-md-l text-white hover:bg-white/10'
+                    : 'body-md-sb text-white hover:bg-white/10'
                 }`}
                 role="menuitem"
               >
@@ -97,3 +115,104 @@ const isActiveHref = (href: string) => {
     </details>
   </nav>
 </header>
+
+<script>
+  const getNormalizedPath = (path: string) =>
+    path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+
+  const normalizePathFromHref = (href: string) => {
+    const [pathPart] = href.split('#');
+    if (!pathPart || pathPart === '#') return '';
+    return getNormalizedPath(pathPart);
+  };
+
+  const getActiveLinkFromLocation = (links: HTMLAnchorElement[]) => {
+    const currentPath = getNormalizedPath(window.location.pathname);
+    const matching = links.filter((link) => normalizePathFromHref(link.getAttribute('href') ?? '') === currentPath);
+    return matching.find((link) => !(link.getAttribute('href') ?? '').includes('#')) ?? matching[0] ?? links[0] ?? null;
+  };
+
+  const initDesktopNavIndicator = () => {
+    const navLists = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-list]'));
+    const cleanups: Array<() => void> = [];
+
+    navLists.forEach((list) => {
+      const indicator = list.querySelector<HTMLElement>('[data-nav-indicator]');
+      const links = Array.from(list.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'));
+      if (!indicator || links.length === 0) return;
+
+      const placeIndicator = (target: HTMLAnchorElement | null, instant = false) => {
+        if (!target) {
+          indicator.style.opacity = '0';
+          links.forEach((link) => {
+            link.classList.remove('text-main');
+            link.classList.add('text-white');
+          });
+          return;
+        }
+
+        const listRect = list.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const x = targetRect.left - listRect.left;
+        const y = targetRect.top - listRect.top;
+
+        if (instant) indicator.style.transitionDuration = '0ms';
+        indicator.style.transform = `translate(${x}px, ${y}px)`;
+        indicator.style.width = `${targetRect.width}px`;
+        indicator.style.height = `${targetRect.height}px`;
+        indicator.style.opacity = '1';
+        links.forEach((link) => {
+          const isCurrent = link === target;
+          link.classList.toggle('text-main', isCurrent);
+          link.classList.toggle('text-white', !isCurrent);
+        });
+        if (instant) requestAnimationFrame(() => (indicator.style.transitionDuration = '300ms'));
+      };
+
+      const getActiveLink = () => getActiveLinkFromLocation(links);
+
+      placeIndicator(getActiveLink(), true);
+
+      const ac = new AbortController();
+      const { signal } = ac;
+
+      links.forEach((link) => {
+        link.addEventListener('mouseenter', () => placeIndicator(link), { signal });
+        link.addEventListener('focus', () => placeIndicator(link), { signal });
+      });
+
+      list.addEventListener('mouseleave', () => placeIndicator(getActiveLink()), { signal });
+      list.addEventListener(
+        'focusout',
+        (event) => {
+          const nextTarget = event.relatedTarget;
+          if (!(nextTarget instanceof Node) || !list.contains(nextTarget)) {
+            placeIndicator(getActiveLink());
+          }
+        },
+        { signal },
+      );
+
+      window.addEventListener('resize', () => placeIndicator(getActiveLink(), true), { signal });
+
+      cleanups.push(() => ac.abort());
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  };
+
+  let cleanupDesktopNavIndicator: (() => void) | undefined;
+
+  const bootDesktopNavIndicator = () => {
+    cleanupDesktopNavIndicator?.();
+    cleanupDesktopNavIndicator = initDesktopNavIndicator();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootDesktopNavIndicator, { once: true });
+  } else {
+    bootDesktopNavIndicator();
+  }
+
+  document.addEventListener('astro:page-load', bootDesktopNavIndicator);
+</script>

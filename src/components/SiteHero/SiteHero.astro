@@ -1,0 +1,96 @@
+---
+type BreadcrumbItem = { label: string; href: string; current?: boolean };
+
+type Props = {
+  rootId: string;
+  title: string;
+  backgroundImageSrc: string;
+  backgroundImageAlt: string;
+  /** Clases extra en la imagen de fondo (ej. `[transform-origin:center]`). */
+  backgroundImageClass?: string;
+  overlayImageSrc?: string;
+  breadcrumbAriaLabel: string;
+  breadcrumb: readonly BreadcrumbItem[];
+};
+
+const props = Astro.props as Props;
+---
+
+<section
+  id={props.rootId}
+  class="relative flex h-148.5 items-end overflow-hidden bg-black"
+  data-site-hero
+  data-site-hero-variant="page"
+>
+  <div class="absolute inset-0" aria-hidden="true" data-anim="media-wrap">
+    <img
+      src={props.backgroundImageSrc}
+      alt={props.backgroundImageAlt}
+      class:list={['size-full object-cover object-center', props.backgroundImageClass]}
+      fetchpriority="high"
+      data-anim="media"
+    />
+    {props.overlayImageSrc ? (
+      <img
+        src={props.overlayImageSrc}
+        alt=""
+        class="absolute inset-0 size-full object-cover object-center opacity-60"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+        data-anim="media-overlay"
+      />
+    ) : null}
+    <div class="absolute inset-0 bg-black/90" data-anim="overlay" />
+  </div>
+
+  <div
+    class="tablet:px-6 tablet:pb-12 desktop:px-0 desktop:pb-19.5 desktop:items-end desktop:justify-end relative mx-auto flex h-full w-full max-w-328 flex-col items-center justify-center px-4 pb-10"
+  >
+    <h1 class="heading-xl-sb text-right text-white" data-anim="title" data-site-hero-title-line>
+      {props.title}
+    </h1>
+
+    <nav
+      aria-label={props.breadcrumbAriaLabel}
+      class="mt-2 flex items-center gap-3.5 text-white"
+      data-anim="breadcrumb"
+    >
+      {props.breadcrumb.map((item, index) => (
+        <>
+          {index > 0 ? (
+            <span
+              class="size-1.25 rounded-full bg-white/80"
+              aria-hidden="true"
+              data-anim="crumb-dot"
+            />
+          ) : null}
+          {item.current ? (
+            <span class="heading-sm-sb text-white" data-anim="crumb-item">
+              {item.label}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class="heading-sm-sb text-white transition-opacity hover:opacity-80"
+              data-anim="crumb-item"
+            >
+              {item.label}
+            </a>
+          )}
+        </>
+      ))}
+    </nav>
+  </div>
+</section>
+
+<script>
+  import { initPageSiteHero } from './animation';
+
+  const boot = () => initPageSiteHero();
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  document.addEventListener('astro:page-load', boot);
+</script>

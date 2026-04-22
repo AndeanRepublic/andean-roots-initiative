@@ -1,0 +1,82 @@
+---
+description: Colocate Home sections as directories—markup components, animation.ts, data-anim hooks, and per-element animation modules
+alwaysApply: true
+---
+
+# Section structure (markup + animation)
+
+Use a **dedicated directory per section** under the page’s `_components` folder, for example `ChallengeSection/`, `AboutSection/`, or `ActionSection/`.
+
+## Markup and subcomponents
+
+- **`index.astro`** is the section entry: layout shell, composition of child `.astro` pieces, and the `<script>` that boots client behavior.
+- **Split UI into colocated `.astro` files** when it helps clarity (heading block, tag row, floating card, etc.). Keep imports shallow (`./AboutTagPill.astro`), not scattered outside the section folder unless the piece is truly shared across pages.
+- **Content** for Home sections should still come from `src/data/home-content.ts` (see `home-content-source-of-truth.mdc`).
+
+## `data-anim` (animación coordinada)
+
+- Use **`data-anim="<name>"`** on elements the section script animates for **reveal, scroll thresholds, or grouped motion**. Names are **local to the section** (examples: About — `tags`, `tag-pill`, `image`; Action — `subheading`, `programs`, `program-card`).
+- Prefer **one clear attribute** for “this node participates in the section timeline” instead of ad-hoc classes or IDs, so `animation.ts` selectors stay stable and grep-friendly.
+
+## Hooks para texto partido (palabras / líneas / letras)
+
+- When client code **splits** text for staggered animation, mark targets with **`data-<section>-text-…`** (or another consistent prefix for that section), for example:
+  - **`data-about-text-line`** / **`data-about-text-words`** (About).
+  - **`data-action-text-line`** / **`data-action-text-words`** (Action).
+- The section’s **`animation.ts`** owns the contract: which attributes it queries, which classes it assigns to generated spans (`about-title-char`, `action-title-char`, …), and **`dataset.originalText`** / reset behavior. **Reuse the same naming pattern** when adding a new section (e.g. `data-challenge-*` in ChallengeSection).
+- When splitting text in multiple sections, reuse shared helpers from **`src/utils/split-text.ts`** (`splitChars`, `splitWords`, `resetSplitText`) instead of re-declaring local split/reset functions in each `animation.ts`.
+- Keep section-specific details local (selector strings and span class names), but keep the split/reset implementation centralized in the shared util.
+
+## `animation.ts` (sección)
+
+- Keep **section-wide** GSAP/ScrollTrigger setup, selectors, tweens, and threshold logic in **`animation.ts`** next to `index.astro`.
+- For **scroll-based lifecycles**, use **`src/utils/create-scroll-section-controller.ts`** instead of duplicating init/cleanup; pass `triggerIds`, `clearStyles`, and `setup` as today.
+- **Lifecycle shared concerns** (kill tracked triggers, `clearStyles`, refresh timing) stay in that utility; **section-specific** behavior stays in the section directory.
+
+## Clean architecture para animaciones (regla general)
+
+- Structure each `animation.ts` in **clear layers** so it is easy to read and maintain:
+  1) selectors + constants (`ST_ID`, thresholds),
+  2) pure helper functions (split text, formatting, value parsing),
+  3) state setters (`setInitialState`, `revealX`, `hideX`),
+  4) trigger builders (`createSectionTrigger`, `createCardTriggers`),
+  5) cleanup.
+- Keep animation orchestration in small functions with **single responsibility**; avoid one long `setup` body with mixed concerns.
+- Favor **strategy by breakpoint** when behavior differs (e.g. desktop timeline vs mobile per-card reveal) using `mm.add(...)` blocks, each with its own cleanup.
+- Name helpers by intent (`revealPrograms`, `hidePrograms`, `buildTextNodes`) rather than by implementation detail.
+- For repeated patterns across sections, extract shared utilities to `src/utils/` (example: `split-text.ts`) and keep section-specific selectors/classes local.
+- Always return deterministic cleanup for everything created in setup (ScrollTriggers, tweens, listeners, hover modules) to avoid lifecycle leaks.
+- Prefer predictable motion contracts: set explicit initial states once, then transition between known states (`from hidden` -> `to visible`).
+
+## Seguimiento y mantenibilidad
+
+- Use stable IDs and naming for traceability:
+  - `ST_ID` must be unique per section.
+  - Threshold constants should use semantic names (`T_LABEL`, `T_CARDS`, etc.).
+- Keep section-specific data hooks grep-friendly (`data-anim="program-card"`, `data-about-text-line`, etc.).
+- When logic grows, split feature-specific animation into colocated modules (`card-hover.ts`, `logo-hover.ts`, `counter.ts`) and compose them from `animation.ts`.
+
+## Comentarios en funciones
+
+- Add **short, high-value comments** for non-obvious functions or tricky behavior only (avoid obvious comments).
+- Good candidates for comments:
+  - why a threshold or start/end trigger value exists,
+  - why behavior differs by breakpoint,
+  - why cleanup order matters,
+  - why a helper exists (contract/side-effects).
+- Keep comments focused on **why**, not repeating **what** the code already says.
+- If a helper has a specific contract, document it in 1-2 lines above the function (inputs, side effects, expected cleanup usage).
+
+## Animaciones puntuales (un solo elemento o subconjunto)
+
+- When behavior is **logically separate** from the main scroll timeline (hover tilt on a card, tag pills, etc.), put it in a **small colocated module** in the same section folder, for example `tag-pills-hover.ts`, `origin-card-hover.ts`, imported from `animation.ts`.
+- Keep **selectors, listeners, and tweens** for that feature inside that module; **export a single `setup…(root)` (or similar) returning cleanup** so `animation.ts` can register it beside the controller teardown.
+
+## Resumen de archivos típicos
+
+| Rol | Ejemplo |
+|-----|--------|
+| Entrada de sección | `SectionName/index.astro` |
+| Piezas de UI | `AboutSection/AboutTagPill.astro`, `ActionSection/ActionSectionHeading.astro`, … |
+| Scroll + orquestación | `SectionName/animation.ts` |
+| Interacción acotada | `SectionName/tag-pills-hover.ts`, … |

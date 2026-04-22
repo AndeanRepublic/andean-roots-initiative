@@ -14,7 +14,7 @@ import { contactChannelsContent } from '../../../../data/contact-content';
     <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-6">
       {
         contactChannelsContent.columns.map((col) => (
-          <article class="group flex h-full flex-col items-center gap-6 p-8">
+          <article class="group flex h-full flex-col items-center gap-6 p-8" data-anim="channel-card">
             <div class="text-main flex size-12 items-center justify-center rounded-full bg-white ring-1 ring-black/5">
               {col.kind === 'phone' && <PhoneIcon class="size-8" />}
               {col.kind === 'hours' && <ClockIcon class="size-8" />}
@@ -42,3 +42,11 @@ import { contactChannelsContent } from '../../../../data/contact-content';
     </div>
   </div>
 </section>
+
+<script>
+  import { initContactChannelsSectionAnimation } from './animation';
+
+  const init = () => initContactChannelsSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

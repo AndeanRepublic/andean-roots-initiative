@@ -13,7 +13,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
     <div
       class="desktop:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] desktop:min-h-88 desktop:gap-14 grid gap-10"
     >
-      <div class="desktop:justify-between flex flex-col gap-8">
+      <div class="desktop:justify-between flex flex-col gap-8" data-anim="form-aside">
         <div class="flex flex-col gap-5">
           <h2
             class="font-bebas-neue tablet:text-[2.8rem] desktop:text-[4rem] text-[2.15rem] leading-[100%] tracking-[0.015em] text-white"
@@ -32,7 +32,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
         </div>
       </div>
 
-      <form class="flex flex-col" data-contact-form novalidate>
+      <form class="flex flex-col" data-contact-form data-anim="form-panel" novalidate>
         <div aria-live="polite" class="body-sm-l mb-4 text-white/85" data-contact-form-status></div>
 
         <div class="flex flex-col gap-5">
@@ -253,4 +253,12 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
       }
     });
   }
+</script>
+
+<script>
+  import { initContactFormSectionAnimation } from './animation';
+
+  const boot = () => initContactFormSectionAnimation();
+  document.addEventListener('DOMContentLoaded', boot, { once: true });
+  document.addEventListener('astro:page-load', boot);
 </script>

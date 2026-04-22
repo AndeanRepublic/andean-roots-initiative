@@ -3,6 +3,7 @@ import { contactQuoteContent } from '../../../../data/contact-content';
 ---
 
 <section
+  id="contact-quote"
   class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-light px-4 py-12"
   aria-labelledby="contact-quote-text"
 >
@@ -11,7 +12,11 @@ import { contactQuoteContent } from '../../../../data/contact-content';
       <div class="bg-main/10 absolute -top-14 right-12 size-40 rounded-full blur-3xl" aria-hidden="true"></div>
       <div class="bg-main/10 absolute -bottom-20 left-12 size-56 rounded-full blur-3xl" aria-hidden="true"></div>
       <div class="relative z-1 mx-auto flex w-full max-w-200 flex-col items-center gap-8">
-    <p class="text-main font-nunito-sans text-[4rem] leading-none font-semibold opacity-90" aria-hidden="true">
+    <p
+      class="text-main font-nunito-sans text-[4rem] leading-none font-semibold opacity-90"
+      aria-hidden="true"
+      data-anim="quote-mark"
+    >
       &ldquo;
     </p>
 
@@ -19,11 +24,12 @@ import { contactQuoteContent } from '../../../../data/contact-content';
       <p
         id="contact-quote-text"
         class="heading-md-sb text-black max-w-160 text-pretty italic tablet:max-w-none"
+        data-anim="quote-text"
       >
         {contactQuoteContent.quote}
       </p>
 
-      <footer class="flex flex-col items-center gap-3">
+      <footer class="flex flex-col items-center gap-3" data-anim="quote-footer">
         <img
           src={contactQuoteContent.portraitSrc}
           alt={contactQuoteContent.portraitAlt}
@@ -44,3 +50,11 @@ import { contactQuoteContent } from '../../../../data/contact-content';
     </div>
   </div>
 </section>
+
+<script>
+  import { initContactQuoteSectionAnimation } from './animation';
+
+  const init = () => initContactQuoteSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

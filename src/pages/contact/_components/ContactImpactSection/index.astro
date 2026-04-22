@@ -4,6 +4,7 @@ import { contactImpactContent } from '../../../../data/contact-content';
 ---
 
 <section
+  id="contact-impact"
   class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12"
   aria-labelledby="contact-impact-heading"
 >
@@ -27,6 +28,7 @@ import { contactImpactContent } from '../../../../data/contact-content';
 
         <h2
           id="contact-impact-heading"
+          data-anim="headline"
           class={cn(
             'text-[1.875rem] tablet:text-[2.625rem] desktop:text-[5rem]',
             'font-bebas-neue font-[500] leading-[105%] tracking-[0.02em]',
@@ -43,9 +45,17 @@ import { contactImpactContent } from '../../../../data/contact-content';
         </h2>
 
         <div class="text-gray flex max-w-200 flex-col gap-4">
-          {contactImpactContent.paragraphs.map((p) => <p class="body-md-l">{p}</p>)}
+          {contactImpactContent.paragraphs.map((p) => <p class="body-md-l" data-anim="impact-p">{p}</p>)}
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  import { initContactImpactSectionAnimation } from './animation';
+
+  const init = () => initContactImpactSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

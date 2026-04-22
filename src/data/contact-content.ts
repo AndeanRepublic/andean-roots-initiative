@@ -11,7 +11,7 @@ export const contactPageMeta = {
 };
 
 export const contactHeroContent = {
-  backgroundImageSrc: '/home-assets/Hero/Hero.png',
+  backgroundImageSrc: '/contact-assets/Hero/contact-hero.png',
   backgroundImageAlt: 'Paisaje andino y comunidad en las montañas',
   title: 'Trabajemos juntos',
   breadcrumbAriaLabel: 'Ruta de navegación',

@@ -1,19 +1,19 @@
 ---
 import { heroContent } from '../../../../data/home-content';
-import HeroBackground from './HeroBackground.astro';
-import HeroContent from './HeroContent.astro';
-import HeroScrollHint from './HeroScrollHint.astro';
+import LandingBackground from './LandingBackground.astro';
+import LandingContent from './LandingContent.astro';
+import LandingScrollHint from './LandingScrollHint.astro';
 ---
 
 <section
   class="hero bg-main px-2xl tablet:pt-3xl tablet:pb-6xl relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden pt-6 pb-8"
 >
-  <HeroBackground imageSrc="/home-assets/Hero/Hero.png" />
+  <LandingBackground imageSrc="/home-assets/Hero/Hero.png" />
 
   <div
     class="hero__body desktop:flex-row desktop:items-end desktop:justify-between desktop:gap-0 relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-8 self-center"
   >
-    <HeroContent
+    <LandingContent
       titleTop={heroContent.titleTop}
       titleBottom={heroContent.titleBottom}
       subheading={heroContent.subheading}
@@ -21,7 +21,7 @@ import HeroScrollHint from './HeroScrollHint.astro';
       ctaHref={heroContent.ctaHref}
     />
 
-    <HeroScrollHint ariaLabel={heroContent.scrollAriaLabel} label={heroContent.scrollLabel} />
+    <LandingScrollHint ariaLabel={heroContent.scrollAriaLabel} label={heroContent.scrollLabel} />
   </div>
 </section>
 

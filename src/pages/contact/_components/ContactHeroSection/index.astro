@@ -1,0 +1,69 @@
+---
+import { contactHeroContent } from '../../../../data/contact-content';
+---
+
+<section id="contact-hero" class="relative h-148.5 overflow-hidden bg-black">
+  <div class="absolute inset-0" aria-hidden="true" data-anim="media-wrap">
+    <img
+      src={contactHeroContent.backgroundImageSrc}
+      alt={contactHeroContent.backgroundImageAlt}
+      class="size-full [transform-origin:center] object-cover object-center"
+      fetchpriority="high"
+      data-anim="media"
+    />
+    <div class="absolute inset-0 bg-black/90" data-anim="overlay"></div>
+  </div>
+
+  <div
+    class="tablet:px-6 tablet:pb-12 desktop:px-0 desktop:pb-19.5 desktop:items-end desktop:justify-end relative mx-auto flex h-full w-full max-w-328 flex-col items-center justify-center px-4 pb-10"
+  >
+    <h1
+      class="heading-xl-sb text-right text-white"
+      data-anim="title"
+      data-contact-hero-text-line
+    >
+      {contactHeroContent.title}
+    </h1>
+
+    <nav
+      aria-label={contactHeroContent.breadcrumbAriaLabel}
+      class="mt-2 flex items-center gap-3.5 text-white"
+      data-anim="breadcrumb"
+    >
+      {
+        contactHeroContent.breadcrumb.map((item, index) => (
+          <>
+            {index > 0 && (
+              <span
+                class="size-1.25 rounded-full bg-white/80"
+                aria-hidden="true"
+                data-anim="crumb-dot"
+              />
+            )}
+            {item.current ? (
+              <span class="heading-sm-sb text-white" data-anim="crumb-item">
+                {item.label}
+              </span>
+            ) : (
+              <a
+                href={item.href}
+                class="heading-sm-sb text-white transition-opacity hover:opacity-80"
+                data-anim="crumb-item"
+              >
+                {item.label}
+              </a>
+            )}
+          </>
+        ))
+      }
+    </nav>
+  </div>
+</section>
+
+<script>
+  import { initContactHeroSectionAnimation } from './animation';
+
+  const init = () => initContactHeroSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

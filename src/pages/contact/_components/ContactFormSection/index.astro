@@ -1,0 +1,256 @@
+---
+import { contactFormContent } from '../../../../data/contact-content';
+import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
+---
+
+<section
+  id={contactFormContent.sectionId}
+  class="tablet:px-6 desktop:px-6xl desktop:py-6xl desktop:scroll-mt-32 scroll-mt-28 px-4 py-12 text-white"
+>
+  <div
+    class="tablet:px-8 desktop:px-12 desktop:py-10 bg-main mx-auto w-full max-w-328 rounded-2xl border px-6 py-8"
+  >
+    <div
+      class="desktop:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] desktop:min-h-88 desktop:gap-14 grid gap-10"
+    >
+      <div class="desktop:justify-between flex flex-col gap-8">
+        <div class="flex flex-col gap-5">
+          <h2
+            class="font-bebas-neue tablet:text-[2.8rem] desktop:text-[4rem] text-[2.15rem] leading-[100%] tracking-[0.015em] text-white"
+          >
+            {contactFormContent.title}
+          </h2>
+          <p class="body-md-l max-w-130 text-white/75">
+            Completa los campos y te responderemos con una propuesta clara para avanzar juntos.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p class="body-sm-l tracking-widest text-white/70 uppercase">
+            {contactFormContent.socialPrompt}
+          </p>
+          <ContactFormSocialLinks />
+        </div>
+      </div>
+
+      <form class="flex flex-col" data-contact-form novalidate>
+        <div aria-live="polite" class="body-sm-l mb-4 text-white/85" data-contact-form-status></div>
+
+        <div class="flex flex-col gap-5">
+          <div class="flex flex-col gap-2">
+            <div class="relative" data-contact-topic-select>
+              <input type="hidden" name="topic" value="" data-contact-topic-input />
+              <button
+                id="contact-topic-trigger"
+                type="button"
+                class="body-md-l w-full border-b-2 border-white/60 pb-2 text-left text-white transition-colors outline-none hover:border-white"
+                data-contact-topic-trigger
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span data-contact-topic-label>{contactFormContent.inquiryTypePlaceholder}</span>
+                <span
+                  class="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 text-white/65"
+                >
+                  <svg viewBox="0 0 24 24" class="size-4 fill-current" aria-hidden="true">
+                    <path
+                      d="M12 13.828L6.485 8.314a1 1 0 1 0-1.414 1.414l6 6a1 1 0 0 0 1.414 0l6-6a1 1 0 0 0-1.414-1.414L12 13.828Z"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+              <div
+                class="absolute top-[calc(100%+0.6rem)] left-0 z-20 hidden w-full rounded-lg border border-white/15 bg-black p-1 shadow-xl"
+                data-contact-topic-menu
+                role="listbox"
+              >
+                {
+                  contactFormContent.inquiryTypes.map((option) => (
+                    <button
+                      type="button"
+                      class="body-md-l w-full rounded-md px-3 py-2 text-left text-white transition-colors hover:bg-white/10"
+                      data-contact-topic-option
+                      data-value={option.value}
+                    >
+                      {option.label}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <input
+              id="contact-full-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
+              placeholder={contactFormContent.fullNameLabel}
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
+              placeholder={contactFormContent.emailLabel}
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              required
+              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
+              placeholder={contactFormContent.messageLabel}></textarea>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <button
+            type="submit"
+            class="body-sm-l hover:bg-main inline-flex items-center justify-center rounded-sm border border-white bg-white px-5 py-1.5 tracking-widest text-black uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+            data-contact-form-submit
+          >
+            {contactFormContent.submitLabel}
+          </button>
+        </div>
+
+        <div class="sr-only" aria-hidden="true">
+          <label for="contact-company">Company</label>
+          <input id="contact-company" name="_honey" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { contactFormContent } from '../../../../data/contact-content';
+
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const statusEl = document.querySelector<HTMLElement>('[data-contact-form-status]');
+  const submitBtn = document.querySelector<HTMLButtonElement>('[data-contact-form-submit]');
+  const topicSelect = document.querySelector<HTMLElement>('[data-contact-topic-select]');
+  const topicTrigger = document.querySelector<HTMLButtonElement>('[data-contact-topic-trigger]');
+  const topicMenu = document.querySelector<HTMLElement>('[data-contact-topic-menu]');
+  const topicLabel = document.querySelector<HTMLElement>('[data-contact-topic-label]');
+  const topicInput = document.querySelector<HTMLInputElement>('[data-contact-topic-input]');
+  const topicOptions = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-contact-topic-option]'),
+  );
+
+  const closeTopicMenu = () => {
+    if (!topicMenu || !topicTrigger) return;
+    topicMenu.classList.add('hidden');
+    topicTrigger.setAttribute('aria-expanded', 'false');
+  };
+
+  const openTopicMenu = () => {
+    if (!topicMenu || !topicTrigger) return;
+    topicMenu.classList.remove('hidden');
+    topicTrigger.setAttribute('aria-expanded', 'true');
+  };
+
+  if (form && statusEl && submitBtn) {
+    if (topicSelect && topicTrigger && topicMenu && topicInput && topicLabel) {
+      topicTrigger.addEventListener('click', () => {
+        if (topicMenu.classList.contains('hidden')) {
+          openTopicMenu();
+        } else {
+          closeTopicMenu();
+        }
+      });
+
+      topicOptions.forEach((option) => {
+        option.addEventListener('click', () => {
+          const value = option.dataset.value ?? '';
+          topicInput.value = value;
+          topicLabel.textContent = option.textContent ?? contactFormContent.inquiryTypePlaceholder;
+          closeTopicMenu();
+          statusEl.textContent = '';
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!topicSelect.contains(event.target as Node)) {
+          closeTopicMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeTopicMenu();
+      });
+    }
+
+    const endpointEmail = import.meta.env.PUBLIC_CONTACT_FORMSUBMIT_EMAIL as string | undefined;
+    const endpoint =
+      endpointEmail && endpointEmail.includes('@')
+        ? `https://formsubmit.co/ajax/${encodeURIComponent(endpointEmail)}`
+        : '';
+
+    if (!endpoint) {
+      statusEl.textContent = contactFormContent.missingConfigMessage;
+      submitBtn.disabled = true;
+    }
+
+    const defaultSubmitLabel = contactFormContent.submitLabel;
+    const sendingLabel = contactFormContent.sendingLabel;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!endpoint) return;
+
+      if (!form.reportValidity()) return;
+      if (topicInput && !topicInput.value) {
+        statusEl.textContent = 'Selecciona un tipo de consulta antes de enviar.';
+        topicTrigger?.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = sendingLabel;
+      statusEl.textContent = '';
+
+      const formData = new FormData(form);
+      const payload: Record<string, string> = {};
+      formData.forEach((value, key) => {
+        payload[key] = String(value);
+      });
+
+      payload._subject = `Contacto web — ${payload.topic ?? 'sin-tema'}`;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`FormSubmit error: ${response.status}`);
+        }
+
+        statusEl.textContent = contactFormContent.successMessage;
+        form.reset();
+        if (topicLabel && topicInput) {
+          topicInput.value = '';
+          topicLabel.textContent = contactFormContent.inquiryTypePlaceholder;
+        }
+      } catch {
+        statusEl.textContent = contactFormContent.errorMessage;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultSubmitLabel;
+      }
+    });
+  }
+</script>

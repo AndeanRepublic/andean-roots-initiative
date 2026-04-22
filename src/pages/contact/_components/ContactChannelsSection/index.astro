@@ -1,0 +1,44 @@
+---
+import MailIcon from '../../../../icons/MailIcon.astro';
+import PhoneIcon from '../../../../icons/PhoneIcon.astro';
+import ClockIcon from '../../../../icons/ClockIcon.astro';
+import { contactChannelsContent } from '../../../../data/contact-content';
+---
+
+<section
+  id={contactChannelsContent.sectionId}
+  class="tablet:px-6 desktop:px-6xl bg-white px-4 py-4"
+  aria-labelledby="contact-channels-heading"
+>
+  <div class="desktop:gap-12 mx-auto flex w-full max-w-328 flex-col gap-10">
+    <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-6">
+      {
+        contactChannelsContent.columns.map((col) => (
+          <article class="group flex h-full flex-col items-center gap-6 p-8">
+            <div class="text-main flex size-12 items-center justify-center rounded-full bg-white ring-1 ring-black/5">
+              {col.kind === 'phone' && <PhoneIcon class="size-8" />}
+              {col.kind === 'hours' && <ClockIcon class="size-8" />}
+              {col.kind === 'email' && <MailIcon class="size-8" />}
+            </div>
+            <div class="flex flex-col items-center gap-4">
+              <h3 class="heading-sm-sb text-black">{col.title}</h3>
+              <ul class="text-gray flex flex-col items-center gap-2">
+                {col.lines.map((line) => (
+                  <li class="body-md-l">
+                    {line.href ? (
+                      <a href={line.href} class="text-main transition-opacity hover:opacity-85">
+                        {line.text}
+                      </a>
+                    ) : (
+                      line.text
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

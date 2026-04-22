@@ -1,10 +1,10 @@
 export const footerContent = {
   quickLinksTitle: 'Quick Links',
   quickLinks: [
-    { label: 'Home', href: '#' },
-    { label: 'About', href: '#about' },
-    { label: 'Project', href: '#programs' },
-    { label: 'Contacto', href: '#contact' },
+    { label: 'Home', href: '/Home' },
+    { label: 'About', href: '/About' },
+    { label: 'Project', href: '/Home#programs' },
+    { label: 'Contacto', href: '/contact' },
   ],
   supportTitle: 'Support',
   supportLinks: [

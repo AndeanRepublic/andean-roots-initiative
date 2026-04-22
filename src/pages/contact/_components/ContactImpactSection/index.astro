@@ -1,0 +1,51 @@
+---
+import { cn } from '../../../../cn';
+import { contactImpactContent } from '../../../../data/contact-content';
+---
+
+<section
+  class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12"
+  aria-labelledby="contact-impact-heading"
+>
+  <div class="mx-auto w-full max-w-328">
+    <div class="tablet:px-8 desktop:px-14 desktop:py-14 relative overflow-hidden px-6 py-10">
+      <!-- <div
+        class="bg-main/15 absolute -top-16 -left-16 size-44 rounded-full blur-2xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="bg-main/10 absolute -right-12 -bottom-16 size-52 rounded-full blur-3xl"
+        aria-hidden="true"
+      >
+      </div> -->
+      <div class="desktop:gap-12 relative z-1 flex flex-col items-center gap-8 text-center">
+        <!-- <div class="gap-sm flex items-center justify-center">
+      <span class="bg-main size-2 shrink-0 rounded-full" aria-hidden="true"></span>
+      <p class="body-md-sb text-main">{contactImpactContent.label}</p>
+    </div> -->
+
+        <h2
+          id="contact-impact-heading"
+          class={cn(
+            'text-[1.875rem] tablet:text-[2.625rem] desktop:text-[5rem]',
+            'font-bebas-neue font-[500] leading-[105%] tracking-[0.02em]',
+            'tablet:max-w-none max-w-220 text-black uppercase',
+          )}
+        >
+          {contactImpactContent.headlineBefore}
+          <span class="relative isolate inline-block align-baseline">
+            <span class="relative z-10">{contactImpactContent.headlineHighlight}</span>
+            <span
+              class="bg-main pointer-events-none absolute inset-x-0 bottom-2 z-0 h-6"
+              aria-hidden="true"></span>
+          </span>.
+        </h2>
+
+        <div class="text-gray flex max-w-200 flex-col gap-4">
+          {contactImpactContent.paragraphs.map((p) => <p class="body-md-l">{p}</p>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

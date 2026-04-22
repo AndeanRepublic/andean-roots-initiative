@@ -9,6 +9,16 @@ interface Props {
 }
 
 const { heroEntrance = false } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const normalizedPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+
+const isActiveHref = (href: string) => {
+  const [pathPart] = href.split('#');
+  if (!pathPart || pathPart === '#') return false;
+  const normalizedHref = pathPart.length > 1 && pathPart.endsWith('/') ? pathPart.slice(0, -1) : pathPart;
+  return normalizedHref === normalizedPath;
+};
 ---
 
 <header
@@ -42,7 +52,7 @@ const { heroEntrance = false } = Astro.props;
             <a
               href={link.href}
               class={`px-xl py-sm rounded-full transition-colors ${
-                link.active
+                isActiveHref(link.href)
                   ? 'text-main body-md-sb bg-white'
                   : 'body-md-l text-white hover:opacity-90'
               }`}
@@ -72,7 +82,7 @@ const { heroEntrance = false } = Astro.props;
               <a
                 href={link.href}
                 class={`px-lg py-sm block rounded-full text-center transition-colors ${
-                  link.active
+                  isActiveHref(link.href)
                     ? 'text-main body-md-sb bg-white'
                     : 'body-md-l text-white hover:bg-white/10'
                 }`}

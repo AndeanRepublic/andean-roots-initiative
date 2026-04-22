@@ -1,0 +1,67 @@
+---
+import { cn } from '../../../../cn';
+import { contactFaqContent } from '../../../../data/contact-content';
+import ButtonLink from '../../../../components/ButtonLink.astro';
+---
+
+<section
+  class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12"
+  aria-labelledby="contact-faq-heading"
+>
+  <div class="desktop:gap-12 desktop:grid-cols-[3fr_4fr] mx-auto grid w-full max-w-328 gap-10">
+    <div class="flex min-w-0 flex-col gap-8">
+      <div class="flex max-w-160 flex-col gap-3">
+        <h2
+          id="contact-faq-heading"
+          class={cn(
+            'text-[1.875rem] tablet:text-[2.5rem] desktop:text-[3rem]',
+            'font-nunito-sans font-semibold leading-[120%] tracking-normal',
+            'text-main',
+          )}
+        >
+          {contactFaqContent.title}
+        </h2>
+        <p class="body-md-l text-gray">
+          Estas son las preguntas más frecuentes sobre Andean Roots. Si tienes alguna pregunta
+          adicional, no dudes en contactarnos.
+        </p>
+      </div>
+      <div class="bg-light overflow-hidden rounded-2xl shadow-xs">
+        <img
+          src={contactFaqContent.sideImageSrc}
+          alt={contactFaqContent.sideImageAlt}
+          class="h-[300px] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+      </div>
+      <ButtonLink
+        href="/contact"
+        text="Ver mas FAQs"
+        device="desktop"
+        kind="primary"
+        class="w-fit"
+      />
+    </div>
+
+    <div class="desktop:sticky desktop:top-32 h-min">
+      <div class="flex flex-col gap-4">
+        {
+          contactFaqContent.items.map((item) => (
+            <details class="group hover:border-main/30 bg-light rounded-xl border border-black/5 p-6 transition-colors open:bg-white open:shadow-sm">
+              <summary class="body-lg-sb flex cursor-pointer list-none items-center justify-between gap-4 text-black [&::-webkit-details-marker]:hidden">
+                <span>{item.q}</span>
+                <span
+                  class="text-main inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-lg leading-none ring-1 ring-black/5 transition-transform group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </summary>
+              <p class="body-md-l text-gray mt-4">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

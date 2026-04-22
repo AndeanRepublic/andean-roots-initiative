@@ -1,0 +1,23 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import { contactPageMeta } from '../../data/contact-content';
+import ContactHeroSection from './_components/ContactHeroSection/index.astro';
+import ContactImpactSection from './_components/ContactImpactSection/index.astro';
+import ContactFormSection from './_components/ContactFormSection/index.astro';
+import ContactChannelsSection from './_components/ContactChannelsSection/index.astro';
+import ContactFaqSection from './_components/ContactFaqSection/index.astro';
+import ContactQuoteSection from './_components/ContactQuoteSection/index.astro';
+---
+
+<Layout title={contactPageMeta.title} description={contactPageMeta.description}>
+  <Header />
+  <ContactHeroSection />
+  <ContactImpactSection />
+  <ContactFormSection />
+  <ContactChannelsSection />
+  <ContactFaqSection />
+  <ContactQuoteSection />
+  <Footer />
+</Layout>

@@ -2,10 +2,10 @@ export const headerContent = {
   brandAriaLabel: 'Andean Roots Initiative - Inicio',
   mobileMenuAriaLabel: 'Abrir navegación',
   navLinks: [
-    { label: 'Home', href: '#', active: true },
-    { label: 'Sobre nosotros', href: '#about' },
-    { label: 'Programas', href: '#actions' },
-    { label: 'Contacto', href: '#contact' },
+    { label: 'Home', href: '/Home' },
+    { label: 'Sobre nosotros', href: '/About' },
+    { label: 'Programas', href: '/Home#programs' },
+    { label: 'Contacto', href: '/contact' },
   ],
 };
 

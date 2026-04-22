@@ -1,0 +1,13 @@
+---
+import SiteHero from '../../../../components/SiteHero/SiteHero.astro';
+import { programsHeroContent } from '../../../../data/programs-content';
+---
+
+<SiteHero
+  rootId="programs-hero"
+  title={programsHeroContent.title}
+  backgroundImageSrc={programsHeroContent.backgroundImageSrc}
+  backgroundImageAlt={programsHeroContent.backgroundImageAlt}
+  breadcrumbAriaLabel={programsHeroContent.breadcrumbAriaLabel}
+  breadcrumb={programsHeroContent.breadcrumb}
+/>

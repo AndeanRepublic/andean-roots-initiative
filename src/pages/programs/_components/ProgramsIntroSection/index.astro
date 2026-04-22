@@ -1,0 +1,111 @@
+---
+import { cn } from '../../../../cn';
+import { programsIntroContent } from '../../../../data/programs-content';
+---
+
+<section
+  id="programs-intro"
+  class="desktop:px-6xl desktop:py-6xl tablet:px-6 bg-white px-4 py-12"
+  aria-labelledby="programs-intro-heading"
+>
+  <div class="mx-auto flex w-full max-w-320 flex-col gap-20">
+    <div class="mx-auto flex w-full max-w-310 flex-col items-center gap-20 text-center">
+      <h2
+        id="programs-intro-heading"
+        class="text-main flex flex-col items-center gap-2"
+        data-anim="title-wrap"
+      >
+        <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
+          <span
+            class={cn(
+              'text-[3rem] tablet:text-[3rem] desktop:text-[5rem]',
+              'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
+            )}
+            data-programs-intro-text-line
+          >
+            {programsIntroContent.titleLeading}
+          </span>
+          <span
+            class={cn(
+              'text-[1.5rem] tablet:text-[1.5rem] desktop:text-[2rem]',
+              'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
+              'pt-1',
+            )}
+            data-programs-intro-text-line
+          >
+            {programsIntroContent.titleMiddle}
+          </span>
+        </span>
+        <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
+          <span
+            class={cn(
+              'text-[1.5rem] tablet:text-[1.5rem] desktop:text-[2rem]',
+              'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
+              'pt-1',
+            )}
+            data-programs-intro-text-line
+          >
+            {programsIntroContent.titleTrailingStart}
+          </span>
+          <span
+            class={cn(
+              'text-[3rem] tablet:text-[3rem] desktop:text-[5rem]',
+              'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
+            )}
+            data-programs-intro-text-line
+          >
+            &nbsp;{programsIntroContent.titleTrailingEmphasis}
+          </span>
+        </span>
+      </h2>
+
+      <p
+        class={cn(
+          'desktop:text-[2rem] desktop:leading-[1.4]',
+          'tablet:text-[1.5rem] tablet:leading-[1.4]',
+          'text-[1.125rem] leading-[1.5] text-black',
+          'font-manrope font-medium',
+        )}
+        data-anim="description"
+      >
+        {programsIntroContent.descriptionLead}
+        <span class="text-gray">{programsIntroContent.descriptionMutedA}</span>
+        {programsIntroContent.descriptionMiddle}
+        <span class="text-gray">{programsIntroContent.descriptionMutedB}</span>
+      </p>
+    </div>
+
+    <div
+      class="tablet:gap-10 desktop:gap-16 mx-auto flex w-full max-w-190 items-stretch justify-center gap-6"
+    >
+      {
+        programsIntroContent.stats.map((item, index) => (
+          <>
+            {index > 0 && (
+              <div class="bg-gray/30 tablet:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
+            )}
+            <article
+              class="flex min-w-0 flex-1 flex-col items-center gap-2 text-center"
+              data-anim="stat-item"
+            >
+              <p class="heading-lg-sb text-black" data-anim="stat-value">
+                {item.value}
+              </p>
+              <p class="body-md-l text-black" data-anim="stat-label">
+                {item.label}
+              </p>
+            </article>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initProgramsIntroSectionAnimation } from './animation';
+
+  const init = () => initProgramsIntroSectionAnimation();
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+</script>

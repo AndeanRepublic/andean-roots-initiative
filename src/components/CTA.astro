@@ -1,5 +1,6 @@
 ---
 import ButtonLink from './ButtonLink.astro';
+import DonationModal from './DonationModal/index';
 import { ctaContent } from '../data/home-content';
 ---
 
@@ -27,16 +28,44 @@ import { ctaContent } from '../data/home-content';
         <p class="body-md-l text-light max-w-150">
           {ctaContent.description}
         </p>
-        <div class="flex w-full justify-center">
+        <div class="tablet:gap-6 flex w-full flex-row items-center justify-center gap-4">
+          <span id="donation-trigger">
+            <ButtonLink
+              class="inline-flex"
+              href="#"
+              text="DONAR AHORA"
+              device="desktop"
+              kind="primary-inverse"
+              bordered
+            >
+              />
+            </ButtonLink>
+          </span>
           <ButtonLink
             class="inline-flex"
             href={ctaContent.ctaHref}
             text={ctaContent.ctaText}
             device="desktop"
-            kind="primary-inverse"
+            kind="primary"
+            bordered
           />
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Island: invisible hasta que se abre, escucha el CustomEvent del botón -->
+  <DonationModal client:load />
+
+  <script>
+    function initDonationTrigger() {
+      document.getElementById('donation-trigger')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.dispatchEvent(new CustomEvent('open-donation-modal'));
+      });
+    }
+
+    initDonationTrigger();
+    document.addEventListener('astro:page-load', initDonationTrigger);
+  </script>
 </section>

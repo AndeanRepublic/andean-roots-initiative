@@ -1,17 +1,17 @@
 export const footerContent = {
-  quickLinksTitle: 'Quick Links',
+  quickLinksTitle: 'Enlaces rápidos',
   quickLinks: [
     { label: 'Home', href: '/Home' },
-    { label: 'About', href: '/About' },
-    { label: 'Project', href: '/programs' },
+    { label: 'Sobre nosotros', href: '/About' },
+    { label: 'Programas', href: '/programs' },
     { label: 'Contacto', href: '/contact' },
   ],
-  supportTitle: 'Support',
+  supportTitle: 'Soporte',
   supportLinks: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms & Conditions', href: '#' },
+    { label: 'Política de privacidad', href: '#' },
+    { label: 'Términos y condiciones', href: '#' },
   ],
-  contactsTitle: 'Contacts',
+  contactsTitle: 'Contacto',
   contacts: {
     email: {
       label: 'hello@onearth.com',
@@ -27,5 +27,5 @@ export const footerContent = {
     { label: 'FB', href: '#' },
     { label: 'YT', href: '#' },
   ],
-  copyright: '© 2026 Andean Roots Initiative. All Rights Reserved.',
+  copyright: '© 2026 Andean Roots Initiative. Todos los derechos reservados.',
 };

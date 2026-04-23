@@ -60,7 +60,7 @@ export const contactChannelsContent = {
     {
       kind: 'hours' as const,
       title: 'Horario de atención',
-      lines: [{ text: 'Lun–Vie: 9:00 – 18:00' }, { text: 'Sábados: 9:00 – 13:00' }],
+      lines: [{ text: 'De lunes a viernes: 9:00 – 18:00' }, { text: 'Sábados: 9:00 – 13:00' }],
     },
     {
       kind: 'email' as const,
@@ -75,12 +75,12 @@ export const contactChannelsContent = {
 
 export const contactFormContent = {
   sectionId: 'contacto-form',
-  title: 'Contactanos y construyamos impacto juntos.',
-  socialPrompt: 'Encuentranos en',
+  title: 'Contáctanos y construyamos impacto juntos.',
+  socialPrompt: 'Encuéntranos en',
   submitLabel: 'Enviar',
   sendingLabel: 'Enviando…',
-  successMessage: 'Listo. Revisa tu correo: te enviamos una copia de confirmación.',
-  errorMessage: 'No pudimos enviar el mensaje. Intenta de nuevo o usa email/teléfono directo.',
+  successMessage: 'Listo. Revisa tu correo: te hemos enviado una copia de confirmación.',
+  errorMessage: 'No pudimos enviar el mensaje. Intenta de nuevo o usa el correo o el teléfono directamente.',
   missingConfigMessage:
     'Configura PUBLIC_CONTACT_FORMSUBMIT_EMAIL para habilitar el envío (FormSubmit).',
   inquiryTypePlaceholder: 'Tipo de consulta',
@@ -104,15 +104,15 @@ export const contactFaqContent = {
   items: [
     {
       q: '¿Puedo solicitar una charla o taller?',
-      a: 'Sí. Indica ciudad/país, audiencia, fecha tentativa y objetivo del evento.',
+      a: 'Sí. Indica ciudad o país, audiencia, fecha tentativa y objetivo del evento.',
     },
     {
       q: '¿Aceptan donaciones o patrocinio?',
       a: 'Sí. Cuéntanos el monto aproximado, el tipo de apoyo y si buscas visibilidad o impacto silencioso.',
     },
     {
-      q: '¿Respondes en inglés?',
-      a: 'Sí. Escríbenos en el idioma que prefieras (ES/EN).',
+      q: '¿Responden en inglés?',
+      a: 'Sí. Escríbanos en el idioma que prefieran (ES/EN).',
     },
     {
       q: '¿Qué información debo incluir?',
@@ -124,7 +124,7 @@ export const contactFaqContent = {
     },
     {
       q: '¿Qué proyectos están en desarrollo?',
-      a: 'Actualmente estamos trabajando en proyectos de educación, innovación y acceso a oportunidades sostenibles y medibles.',
+      a: 'Actualmente trabajamos en proyectos de educación, innovación y acceso a oportunidades sostenibles y medibles.',
     },
   ],
 };
@@ -133,7 +133,7 @@ export const contactQuoteContent = {
   quote:
     'Creemos que el cambio territorial empieza con conversaciones honestas, alianzas claras y acciones que respeten la identidad de cada comunidad.',
   attributionName: 'Daniel Yupanqui',
-  attributionRole: 'Fundador & Director',
+  attributionRole: 'Fundador y director',
   portraitSrc: '/about-assets/team/team-1.png',
   portraitAlt: 'Retrato de Daniel Yupanqui',
 };

@@ -1,11 +1,11 @@
 export const aboutHeroContent = {
   backgroundImageSrc: '/about-assets/hero/hero-img.png',
   backgroundImageAlt: 'Comunidad andina en paisaje rural',
-  title: 'Sobre Nosotros',
+  title: 'Sobre nosotros',
   breadcrumbAriaLabel: 'Ruta de navegación',
   breadcrumb: [
     { label: 'Home', href: '/Home' },
-    { label: 'About', href: '/About', current: true },
+    { label: 'Sobre nosotros', href: '/About', current: true },
   ],
 };
 
@@ -17,21 +17,21 @@ export const aboutHistoryContent = {
       imageAlt: 'Mujer andina en campo de cultivo',
       offsetClass: 'desktop:pt-16',
       paragraphs: [
-        'En los Andes, el talento esta en todas partes. En las manos que tejen, en quienes cultivan la tierra, en jovenes con ideas y ganas de aprender.',
-        'Pero durante anos, ese talento ha crecido con oportunidades limitadas, sin acceso a educacion de calidad, herramientas tecnologicas o caminos claros para desarrollarse.',
+        'En los Andes, el talento está en todas partes. En las manos que tejen, en quienes cultivan la tierra, en jóvenes con ideas y ganas de aprender.',
+        'Pero durante años, ese talento ha crecido con oportunidades limitadas, sin acceso a educación de calidad, herramientas tecnológicas o caminos claros para desarrollarse.',
       ],
     },
     {
       imageSrc: '/about-assets/history/history-2.png',
-      imageAlt: 'Joven andina mostrando artesania',
+      imageAlt: 'Joven andina mostrando artesanía',
       paragraphs: [
-        'Con el tiempo, una idea se vuelve evidente: el desafio no es la falta de talento, sino la falta de oportunidades para potenciarlo.',
-        'En cada comunidad hay creatividad, conocimiento y capacidad, pero sin acceso a formacion, innovacion y conexiones, ese potencial dificilmente logra proyectarse mas alla de su propio territorio.',
+        'Con el tiempo, una idea se vuelve evidente: el desafío no es la falta de talento, sino la falta de oportunidades para potenciarlo.',
+        'En cada comunidad hay creatividad, conocimiento y capacidad, pero sin acceso a formación, innovación y conexiones, ese potencial difícilmente logra proyectarse más allá de su propio territorio.',
       ],
     },
     {
       imageSrc: '/about-assets/history/history-3.png',
-      imageAlt: 'Nina andina con vestimenta tradicional',
+      imageAlt: 'Niña andina con vestimenta tradicional',
       offsetClass: 'desktop:pt-35',
       paragraphs: [
         'Es desde esta realidad que nace Andean Roots Initiative.',
@@ -42,22 +42,22 @@ export const aboutHistoryContent = {
 };
 
 export const aboutOrganizationContent = {
-  label: 'NUESTRA ORGANIZACION',
-  title: 'Nuestro proposito y vision',
+  label: 'NUESTRA ORGANIZACIÓN',
+  title: 'Nuestro propósito y visión',
   coverImageSrc: '/about-assets/mision-vision/mission-vision.png',
   coverImageAlt: 'Representante andino en paisaje altoandino',
   points: [
     {
-      title: 'MISION',
+      title: 'MISIÓN',
       description:
-        'Impulsar la educacion, la innovacion y el emprendimiento en comunidades andinas, fortaleciendo sus capacidades y generando oportunidades sostenibles que contribuyan al desarrollo territorial.',
+        'Impulsar la educación, la innovación y el emprendimiento en comunidades andinas, fortaleciendo sus capacidades y generando oportunidades sostenibles que contribuyan al desarrollo territorial.',
       iconSrc: '/about-assets/mision-vision/flag-icon.png',
       iconAlt: 'Icono de bandera',
     },
     {
-      title: 'VISION',
+      title: 'VISIÓN',
       description:
-        'Ser una organizacion referente en America Latina en innovacion social y desarrollo comunitario, promoviendo un modelo sostenible que conecte el talento de los territorios andinos con oportunidades globales.',
+        'Ser una organización referente en América Latina en innovación social y desarrollo comunitario, promoviendo un modelo sostenible que conecte el talento de los territorios andinos con oportunidades globales.',
       iconSrc: '/about-assets/mision-vision/target-icon.png',
       iconAlt: 'Icono de objetivo',
     },
@@ -68,7 +68,7 @@ export const aboutValuesContent = {
   label: 'NUESTROS VALORES',
   title: 'Lo que nos mueve',
   description:
-    'Nuestros valores guian cada accion, decision y colaboracion que impulsamos en las comunidades andinas.',
+    'Nuestros valores guían cada acción, decisión y colaboración que impulsamos en las comunidades andinas.',
   items: [
     {
       title: 'Compromiso',
@@ -79,13 +79,13 @@ export const aboutValuesContent = {
     {
       title: 'Identidad cultural',
       description:
-        'Reconocemos y valoramos el conocimiento, las tradiciones y la riqueza cultural de los Andes como base para un desarrollo autentico y sostenible.',
+        'Reconocemos y valoramos el conocimiento, las tradiciones y la riqueza cultural de los Andes como base para un desarrollo auténtico y sostenible.',
       icon: 'chakana' as const,
     },
     {
-      title: 'Colaboracion',
+      title: 'Colaboración',
       description:
-        'Creemos en el trabajo conjunto entre comunidades, instituciones y aliados estrategicos para generar impacto real y duradero.',
+        'Creemos en el trabajo conjunto entre comunidades, instituciones y aliados estratégicos para generar impacto real y duradero.',
       icon: 'handshake' as const,
     },
   ],
@@ -95,7 +95,7 @@ export const aboutFocusContent = {
   label: 'ENFOQUE',
   title: 'Fortaleciendo capacidades locales',
   description:
-    'Creemos que el desarrollo sostenible en los Andes no depende unicamente de recursos externos, sino de potenciar el talento, la identidad y las capacidades que ya existen las comunidades, conectandolas con oportunidades reales',
+    'Creemos que el desarrollo sostenible en los Andes no depende únicamente de recursos externos, sino de potenciar el talento, la identidad y las capacidades que ya existen en las comunidades, conectándolas con oportunidades reales.',
   sideImages: [
     {
       src: '/about-assets/enfoque/enfoque-1.png',
@@ -103,7 +103,7 @@ export const aboutFocusContent = {
     },
     {
       src: '/about-assets/enfoque/enfoque-2.png',
-      alt: 'Comunidad andina en paisaje montanoso',
+      alt: 'Comunidad andina en paisaje montañoso',
     },
   ],
   cards: [
@@ -115,16 +115,16 @@ export const aboutFocusContent = {
       offsetClass: 'desktop:self-start',
     },
     {
-      title: 'Innovacion con proposito',
+      title: 'Innovación con propósito',
       description:
-        'Integramos tecnologia, educacion e innovacion para generar soluciones relevantes y sostenibles.',
+        'Integramos tecnología, educación e innovación para generar soluciones relevantes y sostenibles.',
       icon: 'bulb' as const,
       offsetClass: 'desktop:self-end',
     },
     {
-      title: 'Articulacion de actores',
+      title: 'Articulación de actores',
       description:
-        'Conectamos comunidades con empresas, instituciones y aliados estrategicos.',
+        'Conectamos comunidades con empresas, instituciones y aliados estratégicos.',
       icon: 'handshake' as const,
       offsetClass: 'desktop:self-end',
     },
@@ -140,22 +140,22 @@ export const aboutFocusContent = {
 
 export const aboutTeamContent = {
   backgroundWord: 'TEAM',
-  label: 'EL EQUIPO DETRAS DE LA INICIATIVA',
+  label: 'EL EQUIPO DETRÁS DE LA INICIATIVA',
   description:
     'Un equipo que cree en el talento de los Andes y trabaja para convertirlo en oportunidades reales.',
   members: [
     {
       name: 'Daniel Yupanqui',
-      role: 'Fundador & Director',
+      role: 'Fundador y director',
       imageSrc: '/about-assets/team/team-1.png',
       imageAlt: 'Retrato de Daniel Yupanqui',
       offsetClass: 'desktop:pt-20',
     },
     {
-      name: 'Cecilia Nunez',
-      role: 'Manager de operaciones',
+      name: 'Cecilia Núñez',
+      role: 'Gerente de operaciones',
       imageSrc: '/about-assets/team/team-2.png',
-      imageAlt: 'Retrato de Cecilia Nunez',
+      imageAlt: 'Retrato de Cecilia Núñez',
       offsetClass: '',
     },
     {
@@ -166,10 +166,10 @@ export const aboutTeamContent = {
       offsetClass: 'desktop:pt-20',
     },
     {
-      name: 'Marelo Luna',
-      role: 'Disenador',
+      name: 'Marcelo Luna',
+      role: 'Diseñador',
       imageSrc: '/about-assets/team/team-4.png',
-      imageAlt: 'Retrato de Marelo Luna',
+      imageAlt: 'Retrato de Marcelo Luna',
       offsetClass: '',
     },
   ],

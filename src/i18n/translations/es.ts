@@ -8,6 +8,9 @@ const es = {
       { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
       { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
     ],
+    whatsappHref: 'https://wa.me/51984000000',
+    floatingDonateLabel: 'Donar ahora',
+    floatingWhatsappAriaLabel: 'Contáctanos por WhatsApp',
   },
   header: {
     brandAriaLabel: 'Andean Roots Initiative - Inicio',
@@ -208,7 +211,7 @@ const es = {
     supportTitle: 'Soporte',
     supportLinks: [
       { label: 'Política de privacidad', href: '#' },
-      { label: 'Términos y condiciones', href: '#' },
+      { label: 'Términos y condiciones', slug: 'terms' },
     ],
     contactsTitle: 'Contacto',
     contacts: {
@@ -430,7 +433,7 @@ const es = {
       sectionId: 'programs-catalog',
       location: 'Cusco, Perú',
       statusLabel: 'Activo',
-      ctaText: 'VER PROGRAMA',
+      ctaText: 'CONOCER MÁS',
       items: [
         {
           title: 'Andean Future Lab',
@@ -588,6 +591,145 @@ const es = {
       attributionRole: 'Fundador y director',
       portraitSrc: '/about-assets/team/team-1.png',
       portraitAlt: 'Retrato de Daniel Yupanqui',
+    },
+  },
+
+  termsPage: {
+    meta: {
+      title: 'Términos y condiciones | Andean Roots Initiative',
+      description:
+        'Conoce los términos y condiciones de uso del sitio web de Andean Roots Initiative, incluyendo política de donaciones, protección de datos y propiedad intelectual.',
+    },
+    hero: {
+      title: 'Términos y condiciones',
+      backgroundImageSrc: '/about-assets/hero/hero-img.png',
+      backgroundImageAlt: 'Comunidad andina en paisaje rural',
+      breadcrumbAriaLabel: 'Ruta de navegación',
+      breadcrumb: [
+        { label: 'Home', slug: 'Home' },
+        { label: 'Términos y condiciones', slug: 'terms', current: true },
+      ],
+    },
+    content: {
+      lastUpdated: 'Última actualización: 23 de abril de 2026',
+      intro:
+        'Al acceder y utilizar el sitio web de Andean Roots Initiative, usted acepta quedar vinculado por los presentes Términos y Condiciones de Uso. Si no está de acuerdo con alguno de estos términos, le pedimos que se abstenga de utilizar el sitio.',
+      sections: [
+        {
+          number: '01',
+          title: 'Información de la organización',
+          paragraphs: [
+            'Andean Roots Initiative es una organización sin fines de lucro con sede en Cusco, Perú, comprometida con el fortalecimiento de comunidades andinas mediante educación de calidad, innovación tecnológica y acceso a oportunidades económicas sostenibles.',
+            'El sitio web es operado y administrado por Andean Roots Initiative. Su contenido es de carácter exclusivamente informativo y no constituye asesoramiento legal, financiero ni de ningún otro tipo.',
+          ],
+        },
+        {
+          number: '02',
+          title: 'Finalidad del sitio web',
+          paragraphs: [
+            'El sitio web tiene como objetivo informar sobre los programas, proyectos e iniciativas de la organización; facilitar el contacto entre la comunidad y Andean Roots Initiative; permitir donaciones voluntarias para el financiamiento de los programas; y difundir el impacto y los resultados de nuestra labor.',
+          ],
+          items: [
+            'Informar sobre los programas, proyectos e iniciativas de la organización.',
+            'Facilitar el contacto entre la comunidad y Andean Roots Initiative.',
+            'Permitir donaciones voluntarias para el financiamiento de los programas.',
+            'Difundir el impacto y los resultados de nuestra labor.',
+          ],
+        },
+        {
+          number: '03',
+          title: 'Propiedad intelectual',
+          paragraphs: [
+            'Todos los contenidos publicados en el sitio —incluyendo, sin limitación, textos, imágenes, fotografías, videos, logotipos, marcas, diseños, código fuente y material audiovisual— son propiedad de Andean Roots Initiative o de sus respectivos titulares de derechos, y están protegidos por las leyes de propiedad intelectual vigentes en la República del Perú.',
+            'Se prohíbe la reproducción, distribución, modificación, transmisión pública o cualquier otro uso de dichos contenidos sin autorización previa y escrita de Andean Roots Initiative, salvo en los casos expresamente permitidos por la legislación aplicable.',
+          ],
+        },
+        {
+          number: '04',
+          title: 'Uso permitido y conducta del usuario',
+          paragraphs: [
+            'El usuario se compromete a utilizar el sitio de manera lícita y de buena fe, absteniéndose de realizar cualquier actividad que pueda dañar, inutilizar o deteriorar el sitio o interferir con su normal funcionamiento.',
+          ],
+          items: [
+            'Utilizar el sitio de manera lícita y de buena fe.',
+            'No realizar actividades que puedan dañar o deteriorar el sitio.',
+            'No introducir datos falsos, engañosos o que vulneren derechos de terceros.',
+            'No intentar acceder de forma no autorizada a sistemas o bases de datos relacionados con el sitio.',
+          ],
+        },
+        {
+          number: '05',
+          title: 'Donaciones',
+          paragraphs: [
+            'Las donaciones realizadas a través del sitio son voluntarias y, como norma general, no reembolsables, salvo error técnico o cargo duplicado debidamente verificado. Son procesadas de forma segura a través de PayPal; Andean Roots Initiative no almacena datos financieros del donante.',
+            'Los fondos recibidos se destinan exclusivamente al financiamiento de los programas y operaciones de la organización. Andean Roots Initiative emitirá acuse de recibo al correo electrónico registrado durante el proceso de donación. Para consultas, escríbanos a contacto@andeanroots.org.',
+          ],
+        },
+        {
+          number: '06',
+          title: 'Comunicaciones y formulario de contacto',
+          paragraphs: [
+            'Los datos proporcionados a través del formulario de contacto serán utilizados exclusivamente para responder a su consulta y no serán cedidos a terceros sin su consentimiento previo, salvo obligación legal.',
+            'Al enviar el formulario, el usuario acepta que Andean Roots Initiative pueda comunicarse con él mediante el correo electrónico facilitado para dar respuesta a su solicitud.',
+          ],
+        },
+        {
+          number: '07',
+          title: 'Protección de datos personales',
+          paragraphs: [
+            'En cumplimiento de la Ley N° 29733 (Ley de Protección de Datos Personales del Perú) y su Reglamento aprobado por Decreto Supremo N° 003-2013-JUS, Andean Roots Initiative informa que los datos personales recopilados —nombre, correo electrónico y otros voluntariamente proporcionados— son incorporados a un banco de datos de titularidad de la organización.',
+            'Serán tratados con la finalidad de gestionar donaciones, responder consultas y, en su caso, enviar información sobre actividades y programas previa aceptación del usuario. El titular podrá ejercer sus derechos de acceso, rectificación, cancelación, oposición y revocación escribiendo a: contacto@andeanroots.org.',
+          ],
+        },
+        {
+          number: '08',
+          title: 'Cookies',
+          paragraphs: [
+            'El sitio puede utilizar cookies y tecnologías similares para mejorar la experiencia del usuario, analizar el tráfico y personalizar el contenido. El usuario puede configurar su navegador para rechazar las cookies; sin embargo, esto podría afectar algunas funcionalidades del sitio.',
+            'Al continuar navegando, el usuario acepta el uso de cookies conforme a la presente política.',
+          ],
+        },
+        {
+          number: '09',
+          title: 'Enlace a sitios de terceros',
+          paragraphs: [
+            'El sitio puede incluir hipervínculos a páginas web de terceros. Andean Roots Initiative no controla ni es responsable del contenido, las políticas de privacidad ni las prácticas de dichos sitios externos, y su inclusión no implica recomendación ni respaldo de ningún tipo.',
+          ],
+        },
+        {
+          number: '10',
+          title: 'Limitación de responsabilidad',
+          paragraphs: [
+            'Andean Roots Initiative no garantiza la disponibilidad, continuidad o infalibilidad del sitio y, en la medida en que lo permita la legislación aplicable, no será responsable por interrupciones o errores técnicos en el acceso al sitio, daños causados por virus informáticos u otros elementos tecnológicos dañinos, los contenidos de sitios web enlazados, ni el uso indebido del sitio por parte de terceros.',
+          ],
+        },
+        {
+          number: '11',
+          title: 'Modificaciones',
+          paragraphs: [
+            'Andean Roots Initiative se reserva el derecho de actualizar o modificar los presentes Términos en cualquier momento y sin previo aviso. La versión vigente siempre estará disponible en esta página. El uso continuado del sitio tras la publicación de cambios implica la aceptación de los nuevos Términos.',
+          ],
+        },
+        {
+          number: '12',
+          title: 'Ley aplicable y jurisdicción',
+          paragraphs: [
+            'Los presentes Términos se rigen e interpretan de conformidad con las leyes de la República del Perú. Para cualquier controversia derivada de su aplicación, las partes se someten a la jurisdicción de los tribunales competentes de la ciudad de Cusco, renunciando expresamente a cualquier otro fuero que pudiera corresponderles.',
+          ],
+        },
+        {
+          number: '13',
+          title: 'Contacto',
+          paragraphs: [
+            'Para cualquier consulta o aclaración relacionada con estos Términos, puede comunicarse con nosotros en:',
+          ],
+          items: [
+            'Correo electrónico: contacto@andeanroots.org',
+            'Dirección: Cusco, Perú',
+            'Teléfono: +51 984 000 000',
+          ],
+        },
+      ],
     },
   },
 };

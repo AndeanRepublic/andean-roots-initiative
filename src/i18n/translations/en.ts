@@ -9,6 +9,9 @@ const en: Translations = {
       { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
       { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
     ],
+    whatsappHref: 'https://wa.me/51984000000',
+    floatingDonateLabel: 'Donate now',
+    floatingWhatsappAriaLabel: 'Contact us on WhatsApp',
   },
   header: {
     brandAriaLabel: 'Andean Roots Initiative - Home',
@@ -210,7 +213,7 @@ const en: Translations = {
     supportTitle: 'Support',
     supportLinks: [
       { label: 'Privacy policy', href: '#' },
-      { label: 'Terms and conditions', href: '#' },
+      { label: 'Terms and conditions', slug: 'terms' },
     ],
     contactsTitle: 'Contact',
     contacts: {
@@ -432,7 +435,7 @@ const en: Translations = {
       sectionId: 'programs-catalog',
       location: 'Cusco, Peru',
       statusLabel: 'Active',
-      ctaText: 'VIEW PROGRAM',
+      ctaText: 'LEARN MORE',
       items: [
         {
           title: 'Andean Future Lab',
@@ -590,6 +593,145 @@ const en: Translations = {
       attributionRole: 'Founder and director',
       portraitSrc: '/about-assets/team/team-1.png',
       portraitAlt: 'Portrait of Daniel Yupanqui',
+    },
+  },
+
+  termsPage: {
+    meta: {
+      title: 'Terms and Conditions | Andean Roots Initiative',
+      description:
+        'Read the terms and conditions of use for the Andean Roots Initiative website, including donation policy, data protection, and intellectual property.',
+    },
+    hero: {
+      title: 'Terms and Conditions',
+      backgroundImageSrc: '/about-assets/hero/hero-img.png',
+      backgroundImageAlt: 'Andean community in rural landscape',
+      breadcrumbAriaLabel: 'Breadcrumb navigation',
+      breadcrumb: [
+        { label: 'Home', slug: 'Home' },
+        { label: 'Terms and Conditions', slug: 'terms', current: true },
+      ],
+    },
+    content: {
+      lastUpdated: 'Last updated: April 23, 2026',
+      intro:
+        'By accessing and using the Andean Roots Initiative website, you agree to be bound by these Terms and Conditions of Use. If you do not agree with any of these terms, please refrain from using the site.',
+      sections: [
+        {
+          number: '01',
+          title: 'About the Organization',
+          paragraphs: [
+            'Andean Roots Initiative is a non-profit organization based in Cusco, Peru, committed to strengthening Andean communities through quality education, technological innovation, and access to sustainable economic opportunities.',
+            'The website is operated and managed by Andean Roots Initiative. Its content is purely informational and does not constitute legal, financial, or any other type of advice.',
+          ],
+        },
+        {
+          number: '02',
+          title: 'Purpose of the Website',
+          paragraphs: [
+            'The website aims to provide information about the organization\'s programs, projects, and initiatives; facilitate contact between the community and Andean Roots Initiative; enable voluntary donations to fund programs; and share the impact and results of our work.',
+          ],
+          items: [
+            'Provide information about the organization\'s programs, projects, and initiatives.',
+            'Facilitate contact between the community and Andean Roots Initiative.',
+            'Enable voluntary donations to fund programs.',
+            'Share the impact and results of our work.',
+          ],
+        },
+        {
+          number: '03',
+          title: 'Intellectual Property',
+          paragraphs: [
+            'All content published on the site —including, without limitation, texts, images, photographs, videos, logos, trademarks, designs, source code, and audiovisual material— is the property of Andean Roots Initiative or its respective rights holders, and is protected by the intellectual property laws in force in the Republic of Peru.',
+            'Reproduction, distribution, modification, public transmission, or any other use of such content without prior written authorization from Andean Roots Initiative is prohibited, except as expressly permitted by applicable law.',
+          ],
+        },
+        {
+          number: '04',
+          title: 'Permitted Use and User Conduct',
+          paragraphs: [
+            'Users agree to use the site lawfully and in good faith, refraining from any activity that may damage, disable, or impair the site or interfere with its normal operation.',
+          ],
+          items: [
+            'Use the site lawfully and in good faith.',
+            'Refrain from activities that may damage or impair the site.',
+            'Not submit false, misleading, or third-party rights-infringing data.',
+            'Not attempt to gain unauthorized access to systems or databases related to the site.',
+          ],
+        },
+        {
+          number: '05',
+          title: 'Donations',
+          paragraphs: [
+            'Donations made through the site are voluntary and, as a general rule, non-refundable, except in cases of verified technical errors or duplicate charges. They are processed securely through PayPal; Andean Roots Initiative does not store donor financial data.',
+            'Funds received are exclusively allocated to financing the organization\'s programs and operations. Andean Roots Initiative will send an acknowledgment to the email address registered during the donation process. For inquiries, contact us at contacto@andeanroots.org.',
+          ],
+        },
+        {
+          number: '06',
+          title: 'Communications and Contact Form',
+          paragraphs: [
+            'Data provided through the contact form will be used solely to respond to your inquiry and will not be shared with third parties without your prior consent, except as required by law.',
+            'By submitting the form, you consent to Andean Roots Initiative contacting you via the email address provided to address your request.',
+          ],
+        },
+        {
+          number: '07',
+          title: 'Personal Data Protection',
+          paragraphs: [
+            'In accordance with Law No. 29733 (Peruvian Personal Data Protection Act) and its Regulations approved by Supreme Decree No. 003-2013-JUS, Andean Roots Initiative informs that personal data collected —name, email address, and other voluntarily provided information— is incorporated into a database owned by the organization.',
+            'It will be processed to manage donations, respond to inquiries, and, with your consent, send information about activities and programs. Data subjects may exercise their rights of access, rectification, cancellation, opposition, and revocation by contacting: contacto@andeanroots.org.',
+          ],
+        },
+        {
+          number: '08',
+          title: 'Cookies',
+          paragraphs: [
+            'The site may use cookies and similar technologies to enhance user experience, analyze traffic, and personalize content. Users may configure their browsers to reject cookies; however, this may affect some site features.',
+            'By continuing to browse, you accept the use of cookies in accordance with this policy.',
+          ],
+        },
+        {
+          number: '09',
+          title: 'Third-Party Links',
+          paragraphs: [
+            'The site may include hyperlinks to third-party websites. Andean Roots Initiative does not control and is not responsible for the content, privacy policies, or practices of such external sites, and their inclusion does not imply recommendation or endorsement of any kind.',
+          ],
+        },
+        {
+          number: '10',
+          title: 'Limitation of Liability',
+          paragraphs: [
+            'Andean Roots Initiative does not guarantee the availability, continuity, or infallibility of the site and, to the extent permitted by applicable law, shall not be liable for technical interruptions or errors in accessing the site, damage caused by computer viruses or other harmful technological elements, the content of linked websites, or misuse of the site by third parties.',
+          ],
+        },
+        {
+          number: '11',
+          title: 'Modifications',
+          paragraphs: [
+            'Andean Roots Initiative reserves the right to update or modify these Terms at any time without prior notice. The current version will always be available on this page. Continued use of the site after changes are published implies acceptance of the new Terms.',
+          ],
+        },
+        {
+          number: '12',
+          title: 'Governing Law and Jurisdiction',
+          paragraphs: [
+            'These Terms are governed by and interpreted in accordance with the laws of the Republic of Peru. For any disputes arising from their application, the parties submit to the jurisdiction of the competent courts of the city of Cusco, expressly waiving any other jurisdiction that may apply.',
+          ],
+        },
+        {
+          number: '13',
+          title: 'Contact',
+          paragraphs: [
+            'For any questions or clarifications regarding these Terms, you may contact us at:',
+          ],
+          items: [
+            'Email: contacto@andeanroots.org',
+            'Address: Cusco, Peru',
+            'Phone: +51 984 000 000',
+          ],
+        },
+      ],
     },
   },
 };

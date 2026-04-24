@@ -11,6 +11,7 @@ import ContactChannelsSection from '../../contact/_components/ContactChannelsSec
 import ContactFaqSection from '../../contact/_components/ContactFaqSection/index.astro';
 import ContactQuoteSection from '../../contact/_components/ContactQuoteSection/index.astro';
 import Footer from '../../../components/Footer.astro';
+import FloatingActions from '../../../components/FloatingActions.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -29,4 +30,5 @@ const t = useTranslations(lang);
   <ContactFaqSection lang={lang} />
   <ContactQuoteSection lang={lang} />
   <Footer lang={lang} />
+  <FloatingActions lang={lang} />
 </Layout>

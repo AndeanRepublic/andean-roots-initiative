@@ -1,6 +1,15 @@
 import type { Translations } from './es';
+import type { ContactSocialPlatform } from '../types';
 
 const en: Translations = {
+  common: {
+    socialLinks: [
+      { platform: 'twitter' as ContactSocialPlatform, ariaLabel: 'X (Twitter)', href: 'https://twitter.com' },
+      { platform: 'facebook' as ContactSocialPlatform, ariaLabel: 'Facebook', href: 'https://facebook.com' },
+      { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
+      { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
+    ],
+  },
   header: {
     brandAriaLabel: 'Andean Roots Initiative - Home',
     mobileMenuAriaLabel: 'Open navigation',

@@ -1,6 +1,14 @@
-import type { AboutTagIconKey } from '../../data/about-content';
+import type { AboutTagIconKey, ContactSocialPlatform } from '../types';
 
 const es = {
+  common: {
+    socialLinks: [
+      { platform: 'twitter' as ContactSocialPlatform, ariaLabel: 'X (Twitter)', href: 'https://twitter.com' },
+      { platform: 'facebook' as ContactSocialPlatform, ariaLabel: 'Facebook', href: 'https://facebook.com' },
+      { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
+      { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
+    ],
+  },
   header: {
     brandAriaLabel: 'Andean Roots Initiative - Inicio',
     mobileMenuAriaLabel: 'Abrir navegación',

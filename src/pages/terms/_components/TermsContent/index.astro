@@ -1,0 +1,110 @@
+---
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const { content } = t.termsPage;
+---
+
+<section class="bg-white px-4 py-16 tablet:px-6 desktop:px-6xl desktop:py-24">
+  <div class="mx-auto w-full max-w-328">
+
+    <!-- Two-column layout: sticky TOC on left, content on right -->
+    <div class="desktop:grid desktop:grid-cols-[18rem_1fr] desktop:gap-20">
+
+      <!-- Table of contents (desktop sticky sidebar) -->
+      <aside class="hidden desktop:block">
+        <div class="sticky top-32">
+          <p class="body-sm-l mb-4 uppercase tracking-widest text-black/40">
+            {lang === 'es' ? 'Contenido' : 'Contents'}
+          </p>
+          <nav>
+            <ul class="flex flex-col gap-2">
+              {content.sections.map((section) => (
+                <li>
+                  <a
+                    href={`#terms-section-${section.number}`}
+                    class="body-sm-l flex items-start gap-2 text-black/50 transition-colors hover:text-black"
+                  >
+                    <span class="mt-px shrink-0 font-semibold text-black/30">{section.number}</span>
+                    <span>{section.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="flex flex-col gap-12">
+
+        <!-- Intro block -->
+        <div class="border-main/20 flex flex-col gap-4 border-l-4 pl-6">
+          <p class="body-sm-l text-black/50">{content.lastUpdated}</p>
+          <p class="body-md-l text-gray max-w-3xl">{content.intro}</p>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-black/10" />
+
+        <!-- Sections -->
+        <div class="flex flex-col gap-14">
+          {content.sections.map((section) => (
+            <article id={`terms-section-${section.number}`} class="scroll-mt-28 flex flex-col gap-6">
+
+              <!-- Section header -->
+              <div class="flex items-baseline gap-4">
+                <span class="font-skrawk-serif text-main/30 text-[2.5rem] leading-none select-none">
+                  {section.number}
+                </span>
+                <h2 class="heading-sm-sb text-black">{section.title}</h2>
+              </div>
+
+              <!-- Paragraphs -->
+              <div class="flex flex-col gap-4 pl-16">
+                {section.paragraphs.map((paragraph) => (
+                  <p class="body-md-l text-gray">{paragraph}</p>
+                ))}
+
+                <!-- Optional bullet list -->
+                {section.items && section.items.length > 0 && (
+                  <ul class="mt-1 flex flex-col gap-3">
+                    {section.items.map((item) => (
+                      <li class="body-md-l text-gray flex items-start gap-3">
+                        <span class="bg-main mt-2 size-1.5 shrink-0 rounded-full" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Bottom note -->
+        <div class="bg-light mt-4 rounded-xl px-6 py-5">
+          <p class="body-sm-l text-black/60">
+            {lang === 'es'
+              ? 'Si tienes dudas sobre estos términos, escríbenos a '
+              : 'If you have questions about these terms, write to us at '}
+            <a
+              href="mailto:contacto@andeanroots.org"
+              class="text-main font-semibold underline-offset-2 hover:underline"
+            >
+              contacto@andeanroots.org
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

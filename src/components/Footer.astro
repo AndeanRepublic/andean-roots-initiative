@@ -17,6 +17,11 @@ const quickLinks = f.quickLinks.map((link) => ({
   label: link.label,
   href: `/${lang}/${link.slug}`,
 }));
+
+const supportLinks = f.supportLinks.map((link) => ({
+  label: link.label,
+  href: 'slug' in link ? `/${lang}/${link.slug}` : link.href,
+}));
 ---
 
 <footer id="contact" class="bg-black px-4 py-12 text-white tablet:px-6 desktop:px-6xl desktop:py-6xl">
@@ -52,7 +57,7 @@ const quickLinks = f.quickLinks.map((link) => ({
         <div class="flex flex-col gap-6">
           <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{f.supportTitle}</h3>
           <ul class="flex flex-col gap-4">
-            {f.supportLinks.map((link) => (
+            {supportLinks.map((link) => (
               <li>
                 <a href={link.href} class="body-md-l text-light transition-opacity hover:opacity-80">
                   {link.label}

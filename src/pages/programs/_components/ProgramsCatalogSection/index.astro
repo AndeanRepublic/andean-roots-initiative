@@ -12,6 +12,7 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 const pc = t.programsPage.catalog;
+const { common } = t;
 ---
 
 <section
@@ -35,7 +36,7 @@ const pc = t.programsPage.catalog;
           imageSrc={item.imageSrc}
           imageAlt={item.imageAlt}
           description={item.description}
-          href={item.href}
+          href={common.whatsappHref}
           location={pc.location}
           statusLabel={pc.statusLabel}
           ctaText={pc.ctaText}

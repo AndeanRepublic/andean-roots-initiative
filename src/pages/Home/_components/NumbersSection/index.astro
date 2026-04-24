@@ -1,8 +1,18 @@
 ---
 import WorldIcon from '../../../../icons/WorldIcon.astro';
-import { numbersContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
 import NumbersStatCard from './NumbersStatCard.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const n = t.numbers;
 ---
 
 <section id="impact" data-anim="section" class="px-2xl desktop:py-6xl bg-white py-12">
@@ -30,13 +40,13 @@ import NumbersStatCard from './NumbersStatCard.astro';
           </span>
 
           <p class="body-md-l tablet:text-start text-center text-white">
-            {numbersContent.description}
+            {n.description}
           </p>
         </div>
 
         <div data-anim="stats" class="tablet:grid-cols-3 grid flex-1 gap-8">
           {
-            numbersContent.stats.map((stat) => (
+            n.stats.map((stat) => (
               <NumbersStatCard value={stat.value} label={stat.label} />
             ))
           }

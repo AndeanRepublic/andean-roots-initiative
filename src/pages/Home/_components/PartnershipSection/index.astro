@@ -1,6 +1,16 @@
 ---
 import { cn } from '../../../../cn';
-import { partnersContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const p = t.partners;
 ---
 
 <section id="partners" class="px-2xl desktop:px-6xl desktop:py-6xl bg-white py-12">
@@ -16,16 +26,16 @@ import { partnersContent } from '../../../../data/home-content';
         data-anim="label-desktop"
       >
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{partnersContent.label}</p>
+        <p class="body-md-sb text-main">{p.label}</p>
       </div>
       <p class="heading-lg-sb text-main tablet:hidden pb-4 text-center" data-anim="label-mobile">
         {
-          partnersContent.label.charAt(0).toUpperCase() +
-            partnersContent.label.slice(1).toLowerCase()
+          p.label.charAt(0).toUpperCase() +
+            p.label.slice(1).toLowerCase()
         }
       </p>
       <p class="body-md-l text-gray max-w-[400px]" data-anim="description" data-partners-text-words>
-        {partnersContent.description}
+        {p.description}
       </p>
     </div>
 
@@ -37,7 +47,7 @@ import { partnersContent } from '../../../../data/home-content';
       data-anim="logos"
     >
       {
-        partnersContent.logos.map((logo: { src: string; alt: string }) => (
+        p.logos.map((logo: { src: string; alt: string }) => (
           <div
             class="desktop:w-40 h-full w-36 overflow-hidden"
             data-anim="logo-item"

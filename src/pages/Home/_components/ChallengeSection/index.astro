@@ -1,8 +1,16 @@
 ---
 import { cn } from '../../../../cn';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import ChallengeSectionIntro from './ChallengeSectionIntro.astro';
 import ChallengeFlipCardsDesktop from './ChallengeFlipCardsDesktop.astro';
 import ChallengeCardsMobile from './ChallengeCardsMobile.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <section
@@ -10,9 +18,9 @@ import ChallengeCardsMobile from './ChallengeCardsMobile.astro';
   class={cn('sticky-section', 'bg-white px-2xl py-6xl', 'tablet:px-6 tablet:py-12')}
 >
   <div class="gap-md mx-auto flex w-full max-w-[1312px] flex-col items-center">
-    <ChallengeSectionIntro />
-    <ChallengeFlipCardsDesktop />
-    <ChallengeCardsMobile />
+    <ChallengeSectionIntro lang={lang} />
+    <ChallengeFlipCardsDesktop lang={lang} />
+    <ChallengeCardsMobile lang={lang} />
   </div>
 </section>
 

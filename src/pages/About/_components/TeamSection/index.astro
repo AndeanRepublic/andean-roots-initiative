@@ -1,5 +1,15 @@
 ---
-import { aboutTeamContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const tm = t.aboutPage.team;
 ---
 
 <section
@@ -11,17 +21,17 @@ import { aboutTeamContent } from '../../../../data/about-content';
     aria-hidden="true"
     data-anim="bg-word"
   >
-    {aboutTeamContent.backgroundWord}
+    {tm.backgroundWord}
   </p>
 
   <div class="desktop:gap-16 relative mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="max-w-100 pt-4" data-anim="intro">
       <div class="gap-sm flex items-center" data-anim="label">
         <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-        <p class="body-md-sb text-main">{aboutTeamContent.label}</p>
+        <p class="body-md-sb text-main">{tm.label}</p>
       </div>
       <p class="body-md-l text-gray mt-10" data-anim="description" data-team-text-words>
-        {aboutTeamContent.description}
+        {tm.description}
       </p>
     </div>
 
@@ -30,7 +40,7 @@ import { aboutTeamContent } from '../../../../data/about-content';
       data-anim="cards"
     >
       {
-        aboutTeamContent.members.map((member, index) => (
+        tm.members.map((member, index) => (
           <article
             class:list={[
               'relative w-3/4 tablet:w-full',
@@ -72,7 +82,7 @@ import { aboutTeamContent } from '../../../../data/about-content';
     <div class="flex items-center justify-end gap-4" data-anim="controls">
       <button
         type="button"
-        aria-label={aboutTeamContent.slider.prevAriaLabel}
+        aria-label={tm.slider.prevAriaLabel}
         class="border-main text-main flex size-10 items-center justify-center rounded-full border"
         data-anim="control-button"
         data-team-control-hover
@@ -81,13 +91,13 @@ import { aboutTeamContent } from '../../../../data/about-content';
       </button>
 
       <p class="body-md-sb text-main" data-anim="counter">
-        {aboutTeamContent.slider.current}
-        <span class="body-md-l text-gray">- {aboutTeamContent.slider.total}</span>
+        {tm.slider.current}
+        <span class="body-md-l text-gray">- {tm.slider.total}</span>
       </p>
 
       <button
         type="button"
-        aria-label={aboutTeamContent.slider.nextAriaLabel}
+        aria-label={tm.slider.nextAriaLabel}
         class="bg-main flex size-10 items-center justify-center rounded-full text-white"
         data-anim="control-button"
         data-team-control-hover

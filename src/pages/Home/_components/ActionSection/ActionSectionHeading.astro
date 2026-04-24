@@ -1,6 +1,16 @@
 ---
 import { cn } from '../../../../cn';
-import { actionContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const a = t.action;
 ---
 
 <div class="flex flex-col gap-lg">
@@ -9,7 +19,7 @@ import { actionContent } from '../../../../data/home-content';
     data-anim="label"
   >
     <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
-    <p class="body-md-sb text-main">{actionContent.label}</p>
+    <p class="body-md-sb text-main">{a.label}</p>
   </div>
 
   <div class="grid items-end gap-2xl lg:grid-cols-[1fr_25rem]">
@@ -21,14 +31,14 @@ import { actionContent } from '../../../../data/home-content';
       )}
       data-anim="title"
     >
-      <span class="heading-md-sb" data-action-text-line>{actionContent.headingTop}</span>
+      <span class="heading-md-sb" data-action-text-line>{a.headingTop}</span>
       <span
         class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]"
-        data-action-text-line>{actionContent.headingBottom}</span
+        data-action-text-line>{a.headingBottom}</span
       >
     </h2>
     <p class="body-md-l pb-sm text-gray" data-anim="subheading" data-action-text-words>
-      {actionContent.subheading}
+      {a.subheading}
     </p>
   </div>
 </div>

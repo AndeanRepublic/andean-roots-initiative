@@ -1,10 +1,20 @@
 ---
-import { contactFormContent } from '../../../../data/contact-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const cf = t.contactPage.form;
 ---
 
 <section
-  id={contactFormContent.sectionId}
+  id={cf.sectionId}
   class="tablet:px-6 desktop:px-6xl desktop:py-6xl desktop:scroll-mt-32 scroll-mt-28 px-4 py-12 text-white"
 >
   <div
@@ -18,15 +28,15 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
           <h2
             class="font-bebas-neue tablet:text-[2.8rem] desktop:text-[4rem] text-[2.15rem] leading-[100%] tracking-[0.015em] text-white"
           >
-            {contactFormContent.title}
+            {cf.title}
           </h2>
           <p class="body-md-l max-w-130 text-white/75">
-            Completa los campos y te responderemos con una propuesta clara para avanzar juntos.
+            {cf.subtitle}
           </p>
         </div>
         <div class="flex flex-col gap-3">
           <p class="body-sm-l tracking-widest text-white/70 uppercase">
-            {contactFormContent.socialPrompt}
+            {cf.socialPrompt}
           </p>
           <ContactFormSocialLinks />
         </div>
@@ -47,7 +57,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
                 aria-haspopup="listbox"
                 aria-expanded="false"
               >
-                <span data-contact-topic-label>{contactFormContent.inquiryTypePlaceholder}</span>
+                <span data-contact-topic-label>{cf.inquiryTypePlaceholder}</span>
                 <span
                   class="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 text-white/65"
                 >
@@ -64,7 +74,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
                 role="listbox"
               >
                 {
-                  contactFormContent.inquiryTypes.map((option) => (
+                  cf.inquiryTypes.map((option) => (
                     <button
                       type="button"
                       class="body-md-l w-full rounded-md px-3 py-2 text-left text-white transition-colors hover:bg-white/10"
@@ -87,7 +97,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
               autocomplete="name"
               required
               class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={contactFormContent.fullNameLabel}
+              placeholder={cf.fullNameLabel}
             />
           </div>
 
@@ -99,7 +109,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
               autocomplete="email"
               required
               class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={contactFormContent.emailLabel}
+              placeholder={cf.emailLabel}
             />
           </div>
 
@@ -110,7 +120,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
               rows="5"
               required
               class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={contactFormContent.messageLabel}></textarea>
+              placeholder={cf.messageLabel}></textarea>
           </div>
         </div>
 
@@ -120,7 +130,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
             class="body-sm-l hover:bg-main inline-flex items-center justify-center rounded-sm border border-white bg-white px-5 py-1.5 tracking-widest text-black uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
             data-contact-form-submit
           >
-            {contactFormContent.submitLabel}
+            {cf.submitLabel}
           </button>
         </div>
 
@@ -131,11 +141,22 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
       </form>
     </div>
   </div>
+
+  <!-- Pass i18n strings to the client-side script via data attributes -->
+  <div
+    id="contact-form-strings"
+    hidden
+    data-submit-label={cf.submitLabel}
+    data-sending-label={cf.sendingLabel}
+    data-success-message={cf.successMessage}
+    data-error-message={cf.errorMessage}
+    data-missing-config={cf.missingConfigMessage}
+    data-select-topic-error={cf.selectTopicError}
+    data-inquiry-placeholder={cf.inquiryTypePlaceholder}
+  ></div>
 </section>
 
 <script>
-  import { contactFormContent } from '../../../../data/contact-content';
-
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   const statusEl = document.querySelector<HTMLElement>('[data-contact-form-status]');
   const submitBtn = document.querySelector<HTMLButtonElement>('[data-contact-form-submit]');
@@ -147,6 +168,17 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
   const topicOptions = Array.from(
     document.querySelectorAll<HTMLButtonElement>('[data-contact-topic-option]'),
   );
+
+  const stringsEl = document.getElementById('contact-form-strings');
+  const strings = {
+    submitLabel: stringsEl?.dataset.submitLabel ?? 'Send',
+    sendingLabel: stringsEl?.dataset.sendingLabel ?? 'Sending…',
+    successMessage: stringsEl?.dataset.successMessage ?? 'Message sent.',
+    errorMessage: stringsEl?.dataset.errorMessage ?? 'Error sending message.',
+    missingConfigMessage: stringsEl?.dataset.missingConfig ?? 'Missing config.',
+    selectTopicError: stringsEl?.dataset.selectTopicError ?? 'Please select a topic.',
+    inquiryPlaceholder: stringsEl?.dataset.inquiryPlaceholder ?? 'Inquiry type',
+  };
 
   const closeTopicMenu = () => {
     if (!topicMenu || !topicTrigger) return;
@@ -174,7 +206,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
         option.addEventListener('click', () => {
           const value = option.dataset.value ?? '';
           topicInput.value = value;
-          topicLabel.textContent = option.textContent ?? contactFormContent.inquiryTypePlaceholder;
+          topicLabel.textContent = option.textContent ?? strings.inquiryPlaceholder;
           closeTopicMenu();
           statusEl.textContent = '';
         });
@@ -198,12 +230,12 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
         : '';
 
     if (!endpoint) {
-      statusEl.textContent = contactFormContent.missingConfigMessage;
+      statusEl.textContent = strings.missingConfigMessage;
       submitBtn.disabled = true;
     }
 
-    const defaultSubmitLabel = contactFormContent.submitLabel;
-    const sendingLabel = contactFormContent.sendingLabel;
+    const defaultSubmitLabel = strings.submitLabel;
+    const sendingLabel = strings.sendingLabel;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -211,7 +243,7 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
 
       if (!form.reportValidity()) return;
       if (topicInput && !topicInput.value) {
-        statusEl.textContent = 'Selecciona un tipo de consulta antes de enviar.';
+        statusEl.textContent = strings.selectTopicError;
         topicTrigger?.focus();
         return;
       }
@@ -239,14 +271,14 @@ import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
           throw new Error(`FormSubmit error: ${response.status}`);
         }
 
-        statusEl.textContent = contactFormContent.successMessage;
+        statusEl.textContent = strings.successMessage;
         form.reset();
         if (topicLabel && topicInput) {
           topicInput.value = '';
-          topicLabel.textContent = contactFormContent.inquiryTypePlaceholder;
+          topicLabel.textContent = strings.inquiryPlaceholder;
         }
       } catch {
-        statusEl.textContent = contactFormContent.errorMessage;
+        statusEl.textContent = strings.errorMessage;
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = defaultSubmitLabel;

@@ -2,18 +2,28 @@
 import MailIcon from '../../../../icons/MailIcon.astro';
 import PhoneIcon from '../../../../icons/PhoneIcon.astro';
 import ClockIcon from '../../../../icons/ClockIcon.astro';
-import { contactChannelsContent } from '../../../../data/contact-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const cc = t.contactPage.channels;
 ---
 
 <section
-  id={contactChannelsContent.sectionId}
+  id={cc.sectionId}
   class="tablet:px-6 desktop:px-6xl bg-white px-4 py-4"
   aria-labelledby="contact-channels-heading"
 >
   <div class="desktop:gap-12 mx-auto flex w-full max-w-328 flex-col gap-10">
     <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-6">
       {
-        contactChannelsContent.columns.map((col) => (
+        cc.columns.map((col) => (
           <article class="group flex h-full flex-col items-center gap-6 p-8" data-anim="channel-card">
             <div class="text-main flex size-12 items-center justify-center rounded-full bg-white ring-1 ring-black/5">
               {col.kind === 'phone' && <PhoneIcon class="size-8" />}

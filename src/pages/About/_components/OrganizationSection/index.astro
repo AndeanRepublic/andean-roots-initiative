@@ -1,5 +1,15 @@
 ---
-import { aboutOrganizationContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const o = t.aboutPage.organization;
 ---
 
 <section
@@ -10,18 +20,18 @@ import { aboutOrganizationContent } from '../../../../data/about-content';
     <div class="flex flex-col gap-4" data-anim="header">
       <div class="gap-sm flex items-center" data-anim="label">
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{aboutOrganizationContent.label}</p>
+        <p class="body-md-sb text-main">{o.label}</p>
       </div>
       <h2 class="auxiliar-h-lg-skrawk-r text-main" data-anim="title" data-organization-text-line>
-        {aboutOrganizationContent.title}
+        {o.title}
       </h2>
     </div>
 
     <div class="desktop:grid-cols-[1fr_1fr] desktop:gap-10 grid gap-8">
       <div class="overflow-hidden rounded-lg" data-anim="cover-wrap">
         <img
-          src={aboutOrganizationContent.coverImageSrc}
-          alt={aboutOrganizationContent.coverImageAlt}
+          src={o.coverImageSrc}
+          alt={o.coverImageAlt}
           class="h-full min-h-90 w-full object-cover"
           loading="lazy"
           data-anim="cover-image"
@@ -33,7 +43,7 @@ import { aboutOrganizationContent } from '../../../../data/about-content';
         data-anim="points"
       >
         {
-          aboutOrganizationContent.points.map((point) => (
+          o.points.map((point) => (
             <article
               class="bg-light relative flex min-h-70 flex-col justify-end gap-4 rounded-lg p-8"
               data-anim="point-card"

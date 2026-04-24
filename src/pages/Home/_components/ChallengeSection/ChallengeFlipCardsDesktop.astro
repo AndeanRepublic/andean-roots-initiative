@@ -1,8 +1,18 @@
 ---
 import TargetIcon from '../../../../icons/TargetIcon.astro';
 import BreakChainIcon from '../../../../icons/BreakChainIcon.astro';
-import { challengeContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const c = t.challenge;
 ---
 
 <div class="desktop:block hidden w-full">
@@ -31,7 +41,7 @@ import { cn } from '../../../../cn';
         >
           <img
             class="size-full object-cover"
-            src={challengeContent.firstCardCoverSrc}
+            src={c.firstCardCoverSrc}
             alt=""
             loading="lazy"
           />
@@ -51,15 +61,15 @@ import { cn } from '../../../../cn';
             )}
           >
             <h3 class="font-manrope text-main text-[24px] leading-[1.4] font-semibold">
-              {challengeContent.firstCardTitle}
+              {c.firstCardTitle}
             </h3>
             <div class="gap-sm flex flex-col">
               <p
                 class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-md:text-[40px]"
               >
-                {challengeContent.firstCardHeadline}
+                {c.firstCardHeadline}
               </p>
-              <p class="body-sm-l text-black">{challengeContent.firstCardDescription}</p>
+              <p class="body-sm-l text-black">{c.firstCardDescription}</p>
             </div>
           </div>
         </div>
@@ -75,7 +85,7 @@ import { cn } from '../../../../cn';
         >
           <img
             class="size-full object-cover"
-            src={challengeContent.secondCardCoverSrc}
+            src={c.secondCardCoverSrc}
             alt=""
             loading="lazy"
           />
@@ -93,7 +103,7 @@ import { cn } from '../../../../cn';
           >
             <img
               src="/home-assets/Problem/2.png"
-              alt={challengeContent.secondCardImageAlt}
+              alt={c.secondCardImageAlt}
               class="absolute inset-0 size-full object-cover"
               loading="lazy"
             />
@@ -107,9 +117,9 @@ import { cn } from '../../../../cn';
             </div>
             <div class="gap-sm relative z-10 flex flex-col">
               <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-md:text-[44px]">
-                {challengeContent.secondCardTitle}
+                {c.secondCardTitle}
               </h3>
-              <p class="body-sm-l text-white">{challengeContent.secondCardDescription}</p>
+              <p class="body-sm-l text-white">{c.secondCardDescription}</p>
             </div>
           </div>
         </div>
@@ -132,7 +142,7 @@ import { cn } from '../../../../cn';
         >
           <img
             class="size-full object-cover"
-            src={challengeContent.thirdCardCoverSrc}
+            src={c.thirdCardCoverSrc}
             alt=""
             loading="lazy"
           />
@@ -152,18 +162,18 @@ import { cn } from '../../../../cn';
             )}
           >
             <div class="gap-lg flex flex-col">
-              <p class="body-sm-l text-center text-white">{challengeContent.thirdCardTag}</p>
+              <p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
               <h3
                 class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]"
               >
-                {challengeContent.thirdCardTitle}
+                {c.thirdCardTitle}
               </h3>
             </div>
             <div class="gap-md flex flex-col">
               <div class="z-0 flex items-center gap-[-1rem]">
                 <img
                   src="/home-assets/Problem/hands image.png"
-                  alt={challengeContent.thirdCardImageAlt}
+                  alt={c.thirdCardImageAlt}
                   class="z-0 size-[70px] rounded-full object-cover"
                   loading="lazy"
                 />
@@ -173,7 +183,7 @@ import { cn } from '../../../../cn';
                   <BreakChainIcon class="size-10 text-black" />
                 </span>
               </div>
-              <p class="body-sm-l text-light">{challengeContent.thirdCardDescription}</p>
+              <p class="body-sm-l text-light">{c.thirdCardDescription}</p>
             </div>
           </div>
         </div>

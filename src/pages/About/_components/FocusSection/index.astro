@@ -3,7 +3,17 @@ import GroupIcon from '../../../../icons/Group.astro';
 import BulbIcon from '../../../../icons/Bulb.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
 import SustainabilityIcon from '../../../../icons/SustainabilityIcon.astro';
-import { aboutFocusContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const f = t.aboutPage.focus;
 ---
 
 <section id="about-focus" class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12">
@@ -14,8 +24,8 @@ import { aboutFocusContent } from '../../../../data/about-content';
     >
       <div class="overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
         <img
-          src={aboutFocusContent.sideImages[0].src}
-          alt={aboutFocusContent.sideImages[0].alt}
+          src={f.sideImages[0].src}
+          alt={f.sideImages[0].alt}
           class="h-50 w-full object-cover"
           loading="lazy"
           data-anim="side-image-left"
@@ -25,28 +35,28 @@ import { aboutFocusContent } from '../../../../data/about-content';
       <div class="flex flex-col items-center gap-8 px-4" data-anim="content">
         <div class="gap-sm flex items-center" data-anim="label">
           <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-          <p class="body-md-sb text-main">{aboutFocusContent.label}</p>
+          <p class="body-md-sb text-main">{f.label}</p>
         </div>
         <h2
           class="auxiliar-h-lg-skrawk-r text-main text-center"
           data-anim="title"
           data-focus-text-line
         >
-          {aboutFocusContent.title}
+          {f.title}
         </h2>
         <p
           class="body-md-l text-gray max-w-140 text-center"
           data-anim="description"
           data-focus-text-words
         >
-          {aboutFocusContent.description}
+          {f.description}
         </p>
       </div>
 
       <div class="overflow-hidden rounded-lg" data-anim="side-media-right">
         <img
-          src={aboutFocusContent.sideImages[1].src}
-          alt={aboutFocusContent.sideImages[1].alt}
+          src={f.sideImages[1].src}
+          alt={f.sideImages[1].alt}
           class="h-50 w-full object-cover"
           loading="lazy"
           data-anim="side-image-right"
@@ -56,7 +66,7 @@ import { aboutFocusContent } from '../../../../data/about-content';
 
     <div class="desktop:grid-cols-4 tablet:grid-cols-2 desktop:gap-8 grid gap-6" data-anim="cards">
       {
-        aboutFocusContent.cards.map((card) => (
+        f.cards.map((card) => (
           <article
             class={`bg-light desktop:min-h-81 tablet:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
             data-anim="focus-card"

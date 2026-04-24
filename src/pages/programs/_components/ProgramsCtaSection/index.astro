@@ -1,6 +1,16 @@
 ---
 import ButtonLink from '../../../../components/ButtonLink.astro';
-import { programsCtaContent } from '../../../../data/programs-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const pc = t.programsPage.cta;
 ---
 
 <section id="programs-impact" class="desktop:px-6xl bg-white px-4 py-12 desktop:py-6xl">
@@ -9,7 +19,7 @@ import { programsCtaContent } from '../../../../data/programs-content';
       class="bg-main tablet:min-h-112 tablet:px-10 tablet:py-16 desktop:min-h-125 desktop:px-8xl desktop:py-6xl relative flex min-h-88 flex-col items-center justify-center overflow-hidden rounded-lg px-6 py-12"
     >
       <img
-        src={programsCtaContent.backgroundVectorSrc}
+        src={pc.backgroundVectorSrc}
         alt=""
         class="pointer-events-none absolute inset-0 size-full object-cover opacity-25"
         loading="lazy"
@@ -22,16 +32,16 @@ import { programsCtaContent } from '../../../../data/programs-content';
         <h2
           class="font-skrawk-serif tablet:text-[3rem] desktop:text-[3.5rem] desktop:leading-[0.8] text-[2rem] leading-[0.8] text-white"
         >
-          {programsCtaContent.title}
+          {pc.title}
         </h2>
         <p class="body-md-l text-light max-w-150">
-          {programsCtaContent.description}
+          {pc.description}
         </p>
         <div class="flex w-full justify-center">
           <ButtonLink
             class="inline-flex"
-            href={programsCtaContent.ctaHref}
-            text={programsCtaContent.ctaText}
+            href={`/${lang}/${pc.ctaSlug}`}
+            text={pc.ctaText}
             device="desktop"
             kind="primary-inverse"
           />

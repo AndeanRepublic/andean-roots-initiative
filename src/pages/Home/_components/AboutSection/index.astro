@@ -1,9 +1,18 @@
 ---
 import { cn } from '../../../../cn';
-import { aboutContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import AboutOriginCard from './AboutOriginCard.astro';
 import AboutSectionHeading from './AboutSectionHeading.astro';
 import AboutSectionMeta from './AboutSectionMeta.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -12,21 +21,21 @@ import AboutSectionMeta from './AboutSectionMeta.astro';
 >
   <div class="gap-4xl mx-auto flex w-full max-w-[1312px] flex-col">
     <div class="gap-4xl tablet:gap-2xl flex flex-col">
-      <AboutSectionHeading />
-      <AboutSectionMeta />
+      <AboutSectionHeading lang={lang} />
+      <AboutSectionMeta lang={lang} />
     </div>
 
     <div class="relative overflow-visible">
       <div class="overflow-hidden rounded-lg">
         <img
           src="/home-assets/About/banner-about.png"
-          alt={aboutContent.bannerImageAlt}
+          alt={t.about.bannerImageAlt}
           class="tablet:h-125 h-90 w-full object-cover object-center"
           loading="lazy"
           data-anim="image"
         />
       </div>
-      <AboutOriginCard />
+      <AboutOriginCard lang={lang} />
     </div>
   </div>
 </section>

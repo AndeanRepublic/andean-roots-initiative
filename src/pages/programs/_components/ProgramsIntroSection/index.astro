@@ -1,6 +1,16 @@
 ---
 import { cn } from '../../../../cn';
-import { programsIntroContent } from '../../../../data/programs-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const pi = t.programsPage.intro;
 ---
 
 <section
@@ -23,7 +33,7 @@ import { programsIntroContent } from '../../../../data/programs-content';
             )}
             data-programs-intro-text-line
           >
-            {programsIntroContent.titleLeading}
+            {pi.titleLeading}
           </span>
           <span
             class={cn(
@@ -33,7 +43,7 @@ import { programsIntroContent } from '../../../../data/programs-content';
             )}
             data-programs-intro-text-line
           >
-            {programsIntroContent.titleMiddle}
+            {pi.titleMiddle}
           </span>
         </span>
         <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
@@ -45,7 +55,7 @@ import { programsIntroContent } from '../../../../data/programs-content';
             )}
             data-programs-intro-text-line
           >
-            {programsIntroContent.titleTrailingStart}
+            {pi.titleTrailingStart}
           </span>
           <span
             class={cn(
@@ -54,7 +64,7 @@ import { programsIntroContent } from '../../../../data/programs-content';
             )}
             data-programs-intro-text-line
           >
-            &nbsp;{programsIntroContent.titleTrailingEmphasis}
+            &nbsp;{pi.titleTrailingEmphasis}
           </span>
         </span>
       </h2>
@@ -68,10 +78,10 @@ import { programsIntroContent } from '../../../../data/programs-content';
         )}
         data-anim="description"
       >
-        {programsIntroContent.descriptionLead}
-        <span class="text-gray">{programsIntroContent.descriptionMutedA}</span>
-        {programsIntroContent.descriptionMiddle}
-        <span class="text-gray">{programsIntroContent.descriptionMutedB}</span>
+        {pi.descriptionLead}
+        <span class="text-gray">{pi.descriptionMutedA}</span>
+        {pi.descriptionMiddle}
+        <span class="text-gray">{pi.descriptionMutedB}</span>
       </p>
     </div>
 
@@ -79,7 +89,7 @@ import { programsIntroContent } from '../../../../data/programs-content';
       class="tablet:gap-10 desktop:gap-16 mx-auto flex w-full max-w-190 items-stretch justify-center gap-6"
     >
       {
-        programsIntroContent.stats.map((item, index) => (
+        pi.stats.map((item, index) => (
           <>
             {index > 0 && (
               <div class="bg-gray/30 tablet:block mt-2 hidden w-px shrink-0" aria-hidden="true" />

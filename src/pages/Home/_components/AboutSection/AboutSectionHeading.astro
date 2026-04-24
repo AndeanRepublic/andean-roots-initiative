@@ -1,6 +1,16 @@
 ---
 import { cn } from '../../../../cn';
-import { aboutContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const a = t.about;
 ---
 
 <div class="gap-xl grid items-center lg:grid-cols-2">
@@ -9,17 +19,17 @@ import { aboutContent } from '../../../../data/home-content';
     data-anim="label"
   >
     <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-    <p class="body-md-sb text-main">{aboutContent.label}</p>
+    <p class="body-md-sb text-main">{a.label}</p>
   </div>
 
   <h2
     class={cn('flex max-w-150 flex-col justify-center text-main', 'text-center tablet:text-left')}
     data-anim="title"
   >
-    <span class="heading-md-sb" data-about-text-line>{aboutContent.titleTop}</span>
+    <span class="heading-md-sb" data-about-text-line>{a.titleTop}</span>
     <span
       class="font-skrawk-serif tablet:text-[4.25rem] text-[3rem] leading-[0.8]"
-      data-about-text-line>{aboutContent.titleBottom}</span
+      data-about-text-line>{a.titleBottom}</span
     >
   </h2>
 </div>

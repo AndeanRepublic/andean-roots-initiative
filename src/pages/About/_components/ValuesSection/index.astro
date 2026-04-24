@@ -2,7 +2,17 @@
 import CommitmentIcon from '../../../../icons/CommitmentIcon.astro';
 import ChakanaIcon from '../../../../icons/chakanaIcon.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
-import { aboutValuesContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const v = t.aboutPage.values;
 ---
 
 <section id="about-values" class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12">
@@ -10,24 +20,24 @@ import { aboutValuesContent } from '../../../../data/about-content';
     <div class="flex flex-col gap-4" data-anim="header">
       <div class="gap-sm flex items-center" data-anim="label">
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{aboutValuesContent.label}</p>
+        <p class="body-md-sb text-main">{v.label}</p>
       </div>
 
       <div
         class="desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-10 flex flex-col gap-4"
       >
         <h2 class="auxiliar-h-lg-skrawk-r text-main" data-anim="title" data-values-text-line>
-          {aboutValuesContent.title}
+          {v.title}
         </h2>
         <p class="body-md-l text-gray max-w-100" data-anim="description" data-values-text-words>
-          {aboutValuesContent.description}
+          {v.description}
         </p>
       </div>
     </div>
 
     <div class="desktop:grid-cols-3 desktop:gap-10 grid gap-6" data-anim="cards">
       {
-        aboutValuesContent.items.map((item) => (
+        v.items.map((item) => (
           <article
             class="desktop:min-h-79 bg-main tablet:min-h-60 flex min-h-70 flex-col justify-between gap-8 rounded-lg p-8 text-white"
             data-anim="card"

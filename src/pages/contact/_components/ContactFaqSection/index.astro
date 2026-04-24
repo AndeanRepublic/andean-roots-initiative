@@ -1,7 +1,17 @@
 ---
 import { cn } from '../../../../cn';
-import { contactFaqContent } from '../../../../data/contact-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import ButtonLink from '../../../../components/ButtonLink.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const faq = t.contactPage.faq;
 ---
 
 <section
@@ -20,25 +30,24 @@ import ButtonLink from '../../../../components/ButtonLink.astro';
             'text-main',
           )}
         >
-          {contactFaqContent.title}
+          {faq.title}
         </h2>
         <p class="body-md-l text-gray">
-          Estas son las preguntas más frecuentes sobre Andean Roots. Si tienes alguna pregunta
-          adicional, no dudes en contactarnos.
+          {faq.subtitle}
         </p>
       </div>
       <div class="bg-light overflow-hidden rounded-2xl shadow-xs" data-anim="faq-visual">
         <img
-          src={contactFaqContent.sideImageSrc}
-          alt={contactFaqContent.sideImageAlt}
+          src={faq.sideImageSrc}
+          alt={faq.sideImageAlt}
           class="h-[300px] w-full rounded-xl object-cover"
           loading="lazy"
         />
       </div>
       <div data-anim="faq-cta">
         <ButtonLink
-          href="/contact"
-          text="Ver más FAQs"
+          href={`/${lang}/contact`}
+          text={faq.ctaText}
           device="desktop"
           kind="primary"
           class="w-fit"
@@ -49,7 +58,7 @@ import ButtonLink from '../../../../components/ButtonLink.astro';
     <div class="desktop:sticky desktop:top-32 h-min">
       <div class="flex flex-col gap-4">
         {
-          contactFaqContent.items.map((item) => (
+          faq.items.map((item) => (
             <details
               class="group hover:border-main/30 bg-light rounded-xl border border-black/5 p-6 transition-colors open:bg-white open:shadow-sm"
               data-anim="faq-item"

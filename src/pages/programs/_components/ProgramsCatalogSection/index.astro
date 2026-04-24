@@ -1,26 +1,26 @@
 ---
 import { cn } from '../../../../cn';
-import { programsCatalogContent } from '../../../../data/programs-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import ProgramCard from './ProgramCard.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const pc = t.programsPage.catalog;
 ---
 
 <section
-  id={programsCatalogContent.sectionId}
+  id={pc.sectionId}
   class="desktop:px-6xl desktop:py-6xl tablet:px-6 flex flex-col items-center gap-12 bg-white px-4 py-12"
 >
-  <!-- <h2
-    class={cn(
-      'text-[3rem] tablet:text-[3rem] desktop:text-[5rem]',
-      'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
-    )}
-    data-programs-intro-text-line
-  >
-    Programas
-  </h2> -->
   <div
     class={cn(
       'tablet:grid-cols-2 desktop:grid-cols-2 desktop:gap-8 mx-auto grid w-full max-w-328 gap-6',
-      /* Último ítem con total impar: ancho de una columna y centrado en la fila (solo ≥ tablet, 2 cols). */
       'tablet:[&>article:last-child:nth-child(odd)]:col-span-2',
       'tablet:[&>article:last-child:nth-child(odd)]:w-full',
       'tablet:[&>article:last-child:nth-child(odd)]:max-w-[calc((100%-1.5rem)/2)]',
@@ -29,16 +29,16 @@ import ProgramCard from './ProgramCard.astro';
     )}
   >
     {
-      programsCatalogContent.items.map((item) => (
+      pc.items.map((item) => (
         <ProgramCard
           title={item.title}
           imageSrc={item.imageSrc}
           imageAlt={item.imageAlt}
           description={item.description}
           href={item.href}
-          location={programsCatalogContent.location}
-          statusLabel={programsCatalogContent.statusLabel}
-          ctaText={programsCatalogContent.ctaText}
+          location={pc.location}
+          statusLabel={pc.statusLabel}
+          ctaText={pc.ctaText}
         />
       ))
     }

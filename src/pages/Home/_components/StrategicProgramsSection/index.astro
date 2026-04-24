@@ -1,8 +1,18 @@
 ---
 import ButtonLink from '../../../../components/ButtonLink.astro';
 import StrategicProgramItem from './StrategicProgramItem.astro';
-import { strategicProgramsContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const sp = t.strategicPrograms;
 ---
 
 <section id="programs" class="px-2xl desktop:px-6xl desktop:py-6xl bg-white py-12">
@@ -19,12 +29,12 @@ import { cn } from '../../../../cn';
         data-anim="label-desktop"
       >
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{strategicProgramsContent.label}</p>
+        <p class="body-md-sb text-main">{sp.label}</p>
       </div>
       <p class="heading-md-sb text-main tablet:hidden text-center" data-anim="label-mobile">
         {
-          strategicProgramsContent.label.charAt(0).toUpperCase() +
-            strategicProgramsContent.label.slice(1).toLowerCase()
+          sp.label.charAt(0).toUpperCase() +
+            sp.label.slice(1).toLowerCase()
         }
       </p>
 
@@ -40,11 +50,11 @@ import { cn } from '../../../../cn';
           data-anim="title"
           data-programs-text-line
         >
-          {strategicProgramsContent.heading}
+          {sp.heading}
         </h2>
         <ButtonLink
-          href={strategicProgramsContent.ctaHref}
-          text={strategicProgramsContent.ctaText}
+          href={`/${lang}/${sp.ctaSlug}`}
+          text={sp.ctaText}
           device="desktop"
           kind="primary"
           class="tablet:self-start desktop:self-auto self-center"
@@ -55,12 +65,12 @@ import { cn } from '../../../../cn';
 
     <div class="tablet:gap-0 mt-10 flex flex-col gap-4" data-anim="program-list">
       {
-        strategicProgramsContent.items.map((item) => (
+        sp.items.map((item) => (
           <StrategicProgramItem
             title={item.title}
-            location={strategicProgramsContent.location}
-            readMoreText={strategicProgramsContent.readMoreText}
-            readMoreHref={strategicProgramsContent.readMoreHref}
+            location={sp.location}
+            readMoreText={sp.readMoreText}
+            readMoreHref={sp.readMoreHref}
             imageSrc={item.imageSrc}
             imageAlt={item.imageAlt}
             description={item.description}

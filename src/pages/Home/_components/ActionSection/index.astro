@@ -1,13 +1,21 @@
 ---
 import { cn } from '../../../../cn';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import ActionSectionHeading from './ActionSectionHeading.astro';
 import ActionSectionPrograms from './ActionSectionPrograms.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <section id="actions" class={cn('bg-white px-2xl', 'py-6xl')}>
   <div class="gap-6xl mx-auto flex w-full max-w-[1312px] flex-col">
-    <ActionSectionHeading />
-    <ActionSectionPrograms />
+    <ActionSectionHeading lang={lang} />
+    <ActionSectionPrograms lang={lang} />
   </div>
 </section>
 

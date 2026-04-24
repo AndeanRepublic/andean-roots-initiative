@@ -1,5 +1,15 @@
 ---
-import { aboutHistoryContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const h = t.aboutPage.history;
 ---
 
 <section id="about-history" class="tablet:px-6 desktop:px-6xl desktop:py-6xl bg-white px-4 py-12">
@@ -9,12 +19,12 @@ import { aboutHistoryContent } from '../../../../data/about-content';
       data-anim="title"
       data-history-text-line
     >
-      {aboutHistoryContent.title}
+      {h.title}
     </h2>
 
     <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-8" data-anim="cards">
       {
-        aboutHistoryContent.cards.map((card) => (
+        h.cards.map((card) => (
           <article class={`flex flex-col gap-6 ${card.offsetClass ?? ''}`} data-anim="card">
             <div class="overflow-hidden rounded-lg" data-anim="card-media">
               <img

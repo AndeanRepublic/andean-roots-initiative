@@ -1,7 +1,17 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import DonationModal from './DonationModal/index';
-import { ctaContent } from '../data/home-content';
+import type { Locale } from '../i18n/locales';
+import { DEFAULT_LOCALE } from '../i18n/locales';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const c = t.cta;
 ---
 
 <section id="impacto" class="px-2xl desktop:py-6xl bg-white py-12">
@@ -23,17 +33,17 @@ import { ctaContent } from '../data/home-content';
         <h2
           class="font-skrawk-serif tablet:text-[3rem] desktop:text-[3.5rem] desktop:leading-[0.8] text-[2rem] leading-[0.8] text-white"
         >
-          {ctaContent.title}
+          {c.title}
         </h2>
         <p class="body-md-l text-light max-w-150">
-          {ctaContent.description}
+          {c.description}
         </p>
         <div class="tablet:gap-6 flex w-full flex-row items-center justify-center gap-4">
           <span id="donation-trigger">
             <ButtonLink
               class="inline-flex"
               href="#"
-              text="DONAR AHORA"
+              text={c.donateText}
               device="desktop"
               kind="primary-inverse"
               bordered
@@ -43,8 +53,8 @@ import { ctaContent } from '../data/home-content';
           </span>
           <ButtonLink
             class="inline-flex"
-            href={ctaContent.ctaHref}
-            text={ctaContent.ctaText}
+            href={`/${lang}/${c.ctaSlug}`}
+            text={c.ctaText}
             device="desktop"
             kind="primary"
             bordered

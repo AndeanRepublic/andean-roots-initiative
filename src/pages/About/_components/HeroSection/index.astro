@@ -1,14 +1,30 @@
 ---
 import SiteHero from '../../../../components/SiteHero/SiteHero.astro';
-import { aboutHeroContent } from '../../../../data/about-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const h = t.aboutPage.hero;
+
+const breadcrumb = h.breadcrumb.map((item) => ({
+  label: item.label,
+  href: `/${lang}/${item.slug}`,
+  ...(item.current ? { current: true } : {}),
+}));
 ---
 
 <SiteHero
   rootId="about-hero"
-  title={aboutHeroContent.title}
-  backgroundImageSrc={aboutHeroContent.backgroundImageSrc}
-  backgroundImageAlt={aboutHeroContent.backgroundImageAlt}
+  title={h.title}
+  backgroundImageSrc={h.backgroundImageSrc}
+  backgroundImageAlt={h.backgroundImageAlt}
   backgroundImageClass="[transform-origin:center]"
-  breadcrumbAriaLabel={aboutHeroContent.breadcrumbAriaLabel}
-  breadcrumb={aboutHeroContent.breadcrumb}
+  breadcrumbAriaLabel={h.breadcrumbAriaLabel}
+  breadcrumb={breadcrumb}
 />

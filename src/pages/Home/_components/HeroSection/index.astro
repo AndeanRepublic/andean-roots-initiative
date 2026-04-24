@@ -1,8 +1,18 @@
 ---
-import { heroContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import LandingBackground from './LandingBackground.astro';
 import LandingContent from './LandingContent.astro';
 import LandingScrollHint from './LandingScrollHint.astro';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const heroContent = t.hero;
 ---
 
 <section

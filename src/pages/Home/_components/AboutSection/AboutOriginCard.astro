@@ -1,7 +1,17 @@
 ---
 import ButtonLink from '../../../../components/ButtonLink.astro';
 import { cn } from '../../../../cn';
-import { aboutContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const a = t.about;
 ---
 
 <article
@@ -23,14 +33,14 @@ import { aboutContent } from '../../../../data/home-content';
       <h3
         class="font-manrope tablet:text-[1.5rem] text-[0.875rem] leading-[1.4] font-semibold text-black"
       >
-        {aboutContent.originTitle}
+        {a.originTitle}
       </h3>
-      <p class="body-sm-l text-gray">{aboutContent.originDescription}</p>
+      <p class="body-sm-l text-gray">{a.originDescription}</p>
     </div>
 
     <ButtonLink
-      href={aboutContent.originCtaHref}
-      text={aboutContent.originCtaText}
+      href={`/${lang}${a.originCtaHref}`}
+      text={a.originCtaText}
       device="desktop"
       kind="secondary"
     />

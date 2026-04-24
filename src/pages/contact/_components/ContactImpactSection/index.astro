@@ -1,6 +1,16 @@
 ---
 import { cn } from '../../../../cn';
-import { contactImpactContent } from '../../../../data/contact-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const ci = t.contactPage.impact;
 ---
 
 <section
@@ -10,22 +20,7 @@ import { contactImpactContent } from '../../../../data/contact-content';
 >
   <div class="mx-auto w-full max-w-328">
     <div class="tablet:px-8 desktop:px-14 desktop:py-14 relative overflow-hidden px-6 py-10">
-      <!-- <div
-        class="bg-main/15 absolute -top-16 -left-16 size-44 rounded-full blur-2xl"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="bg-main/10 absolute -right-12 -bottom-16 size-52 rounded-full blur-3xl"
-        aria-hidden="true"
-      >
-      </div> -->
       <div class="desktop:gap-12 relative z-1 flex flex-col items-center gap-8 text-center">
-        <!-- <div class="gap-sm flex items-center justify-center">
-      <span class="bg-main size-2 shrink-0 rounded-full" aria-hidden="true"></span>
-      <p class="body-md-sb text-main">{contactImpactContent.label}</p>
-    </div> -->
-
         <h2
           id="contact-impact-heading"
           data-anim="headline"
@@ -35,9 +30,9 @@ import { contactImpactContent } from '../../../../data/contact-content';
             'tablet:max-w-none max-w-220 text-black uppercase',
           )}
         >
-          {contactImpactContent.headlineBefore}
+          {ci.headlineBefore}
           <span class="relative isolate inline-block align-baseline">
-            <span class="relative z-10">{contactImpactContent.headlineHighlight}</span>
+            <span class="relative z-10">{ci.headlineHighlight}</span>
             <span
               class="bg-main pointer-events-none absolute inset-x-0 bottom-2 z-0 h-6"
               aria-hidden="true"></span>
@@ -45,7 +40,7 @@ import { contactImpactContent } from '../../../../data/contact-content';
         </h2>
 
         <div class="text-gray flex max-w-200 flex-col gap-4">
-          {contactImpactContent.paragraphs.map((p) => <p class="body-md-l" data-anim="impact-p">{p}</p>)}
+          {ci.paragraphs.map((p) => <p class="body-md-l" data-anim="impact-p">{p}</p>)}
         </div>
       </div>
     </div>

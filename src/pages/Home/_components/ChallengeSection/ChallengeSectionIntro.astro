@@ -1,16 +1,26 @@
 ---
-import { challengeContent } from '../../../../data/home-content';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const c = t.challenge;
 ---
 
 <div class="gap-xl flex w-full max-w-[1000px] flex-col items-center">
   <div class="gap-sm tablet:flex hidden items-center justify-center rounded-full">
     <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-    <p class="body-md-sb text-main">{challengeContent.label}</p>
+    <p class="body-md-sb text-main">{c.label}</p>
   </div>
 
   <p class="heading-lg-sb text-main tablet:hidden text-center">
-    {challengeContent.label.charAt(0).toUpperCase() + challengeContent.label.slice(1).toLowerCase()}
+    {c.label.charAt(0).toUpperCase() + c.label.slice(1).toLowerCase()}
   </p>
 
   <p
@@ -21,11 +31,11 @@ import { cn } from '../../../../cn';
     )}
     data-challenge-intro-reveal
   >
-    <span data-intro-segment>{challengeContent.introStart}</span>
+    <span data-intro-segment>{c.introStart}</span>
     <span class="text-gray" data-intro-segment>
-      {challengeContent.introMutedStart}
+      {c.introMutedStart}
     </span>
-    <span data-intro-segment>{challengeContent.introHighlight}</span>
-    <span class="text-gray" data-intro-segment>{challengeContent.introEnd}</span>
+    <span data-intro-segment>{c.introHighlight}</span>
+    <span class="text-gray" data-intro-segment>{c.introEnd}</span>
   </p>
 </div>

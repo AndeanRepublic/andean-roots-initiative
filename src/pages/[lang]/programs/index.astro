@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../../../i18n/locales';
+import { LOCALES } from '../../../i18n/locales';
+import { useTranslations } from '../../../i18n/utils';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import ProgramsHeroSection from '../../programs/_components/ProgramsHeroSection/index.astro';
+import ProgramsIntroSection from '../../programs/_components/ProgramsIntroSection/index.astro';
+import ProgramsCatalogSection from '../../programs/_components/ProgramsCatalogSection/index.astro';
+import ProgramsCtaSection from '../../programs/_components/ProgramsCtaSection/index.astro';
+import Footer from '../../../components/Footer.astro';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang} title={t.programsPage.meta.title} description={t.programsPage.meta.description}>
+  <Header lang={lang} />
+  <ProgramsHeroSection lang={lang} />
+  <ProgramsIntroSection lang={lang} />
+  <ProgramsCatalogSection lang={lang} />
+  <ProgramsCtaSection lang={lang} />
+  <Footer lang={lang} />
+</Layout>

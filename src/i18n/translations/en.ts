@@ -534,7 +534,7 @@ const en: Translations = {
       socialPrompt: 'Find us on',
       submitLabel: 'Send',
       sendingLabel: 'Sending…',
-      successMessage: 'Done. Check your inbox: we have sent you a confirmation copy.',
+      successMessage: 'Thank you for reaching out! Your message has been sent. We will get back to you soon.',
       errorMessage: 'We could not send the message. Try again or use email or phone directly.',
       missingConfigMessage:
         'Set PUBLIC_CONTACT_FORMSUBMIT_EMAIL to enable sending (FormSubmit).',

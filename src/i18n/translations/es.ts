@@ -532,7 +532,7 @@ const es = {
       socialPrompt: 'Encuéntranos en',
       submitLabel: 'Enviar',
       sendingLabel: 'Enviando…',
-      successMessage: 'Listo. Revisa tu correo: te hemos enviado una copia de confirmación.',
+      successMessage: '¡Gracias por contactarnos! Tu mensaje ha sido enviado. Te responderemos pronto.',
       errorMessage:
         'No pudimos enviar el mensaje. Intenta de nuevo o usa el correo o el teléfono directamente.',
       missingConfigMessage:

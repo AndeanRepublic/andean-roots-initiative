@@ -1,0 +1,14 @@
+---
+interface Props {
+  /** Marks direct children as reveal targets when true. */
+  asGroup?: boolean;
+  /** Optional hook so section scripts can scope this wrapper. */
+  scope?: string;
+}
+
+const { asGroup = true, scope } = Astro.props as Props;
+---
+
+<div data-text-reveal-root={scope ?? ''} data-text-reveal-group={asGroup ? 'true' : undefined}>
+  <slot />
+</div>

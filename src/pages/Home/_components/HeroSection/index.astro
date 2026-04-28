@@ -2,6 +2,7 @@
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
+import HeroPreloader from './HeroPreloader.astro';
 import LandingBackground from './LandingBackground.astro';
 import LandingContent from './LandingContent.astro';
 import LandingScrollHint from './LandingScrollHint.astro';
@@ -15,8 +16,11 @@ const t = useTranslations(lang);
 const heroContent = t.hero;
 ---
 
+<HeroPreloader />
+
 <section
-  class="hero bg-main px-2xl tablet:pt-3xl tablet:pb-6xl relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden pt-6 pb-8"
+  data-anim="hero-container"
+  class="hero bg-main z-20 px-2xl tablet:pt-3xl tablet:pb-6xl relative flex h-screen min-h-dvh w-full flex-col justify-end overflow-hidden pt-6 pb-8"
 >
   <LandingBackground imageSrc="/home-assets/Hero/Hero.png" />
 
@@ -35,13 +39,24 @@ const heroContent = t.hero;
   </div>
 </section>
 
+<!-- Initial clip on the hero “container” (same as example `.container`). -->
+<style>
+  [data-anim='hero-container'] {
+    clip-path: polygon(0 49%, 0 49%, 0 51%, 0 51%);
+    will-change: clip-path;
+  }
+
+  @media (max-width: 1000px) {
+    [data-anim='hero-container'] {
+      clip-path: polygon(0 49.5%, 0 49.5%, 0 50.5%, 0 50.5%);
+    }
+  }
+</style>
+
 <script>
-  import { initHomeHeroIntroAnimation } from './animation';
+  import { initHomeHeroRevealAnimation } from './animation';
 
-  const boot = () => initHomeHeroIntroAnimation();
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  const boot = () => initHomeHeroRevealAnimation();
 
   document.addEventListener('astro:page-load', boot);
 </script>

@@ -1,6 +1,7 @@
 ---
 import { cn } from '../../../../cn';
 import ButtonLink from '../../../../components/ButtonLink.astro';
+import TextReveal from '../../../../components/TextReveal/TextReveal.astro';
 
 interface Props {
   titleTop: string;
@@ -13,30 +14,37 @@ interface Props {
 const { titleTop, titleBottom, subheading, ctaText, ctaHref } = Astro.props as Props;
 ---
 
-<div class="hero__content gap-xl flex max-w-5xl flex-col items-start">
-  <h1 class="hero__title space-y-md flex flex-col text-white">
-    <span
-      class={cn(
-        'hero__title-line',
-        'font-skrawk-serif font-normal',
-        'text-[5.5rem] leading-[0.8] tablet:text-[6rem] tablet:leading-[0.8] desktop:text-[10rem]',
-      )}
-      data-anim="title-line">{titleTop}</span
-    >
-    <span class="hero__title-line heading-xl-sb" data-anim="title-line">{titleBottom}</span>
-  </h1>
+<div class="hero__content gap-xl flex w-full min-w-0 max-w-5xl flex-col items-start">
+  <TextReveal scope="hero-title">
+    <h1 class="hero__title space-y-md flex w-full min-w-0 flex-col text-white">
+      <span
+        data-hero-text-line
+        class={cn(
+          'hero__title-line',
+          'w-full max-w-full wrap-break-word',
+          'font-skrawk-serif font-normal',
+          'text-[5.5rem] leading-[0.8] tablet:text-[6rem] tablet:leading-[0.8] desktop:text-[10rem]',
+        )}
+      >
+        {titleTop}
+      </span>
+      <span data-hero-text-line class={cn('hero__title-line heading-xl-sb', 'w-full max-w-full wrap-break-word')}>
+        {titleBottom}
+      </span>
+    </h1>
+  </TextReveal>
 
   <div
     class={cn(
-      'flex justify-between items-center gap-3xl',
+      'flex w-full min-w-0 justify-between items-center gap-3xl',
       'tablet:gap-4xl desktop:gap-6xl',
       'flex-col tablet:flex-row',
     )}
   >
-    <p class="hero__subtitle body-md-sb max-w-[520px] text-white" data-anim="subtitle">
+    <p data-hero-sub class="hero__subtitle body-md-sb min-w-0 max-w-full wrap-break-word text-white tablet:max-w-[520px]">
       {subheading}
     </p>
-    <div data-anim="cta">
+    <div data-hero-cta class="w-full max-w-full min-w-0 shrink-0 tablet:w-auto">
       <ButtonLink href={ctaHref} text={ctaText} device="desktop" kind="primary" class="hero__cta" />
     </div>
   </div>

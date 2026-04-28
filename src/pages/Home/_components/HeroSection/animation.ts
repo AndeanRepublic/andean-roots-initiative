@@ -15,6 +15,32 @@ const CONT = '[data-anim="hero-container"]';
 const INTRO = '#home-hero-intro-root';
 
 let heroIntroTl: gsap.core.Timeline | null = null;
+let releaseHeroScrollLock: (() => void) | null = null;
+
+function lockHeroScroll() {
+  releaseHeroScrollLock?.();
+
+  const { body } = document;
+  const scrollY = window.scrollY;
+  const previousBodyOverflow = body.style.overflow;
+  const previousBodyPosition = body.style.position;
+  const previousBodyTop = body.style.top;
+  const previousBodyWidth = body.style.width;
+
+  body.style.overflow = 'hidden';
+  body.style.position = 'fixed';
+  body.style.top = `-${scrollY}px`;
+  body.style.width = '100%';
+
+  releaseHeroScrollLock = () => {
+    body.style.overflow = previousBodyOverflow;
+    body.style.position = previousBodyPosition;
+    body.style.top = previousBodyTop;
+    body.style.width = previousBodyWidth;
+    window.scrollTo({ top: scrollY, behavior: 'auto' });
+    releaseHeroScrollLock = null;
+  };
+}
 
 /** Same DOM as `SplitText` (words,chars) + inner span for the char tween targets. */
 function splitIntroHeadings() {
@@ -60,11 +86,13 @@ export function initHomeHeroRevealAnimation() {
   const ctaEl = container.querySelector<HTMLElement>('[data-hero-cta]');
   const scrollEl = container.querySelector<HTMLElement>('[data-hero-scroll]');
   const titleLineEls = Array.from(container.querySelectorAll<HTMLElement>('[data-hero-text-line]'));
-  const heroTitleRevealRoot = container.querySelector<HTMLElement>('[data-text-reveal-root="hero-title"]');
+  const heroTitleRevealRoot = container.querySelector<HTMLElement>(
+    '[data-text-reveal-root="hero-title"]',
+  );
 
   heroIntroTl?.kill();
   heroIntroTl = null;
-  document.body.style.overflow = '';
+  releaseHeroScrollLock?.();
 
   const isMobile = window.innerWidth <= 1000;
 
@@ -100,14 +128,13 @@ export function initHomeHeroRevealAnimation() {
   titleLineEls.forEach((el) => gsap.set(el, { clearProps: 'opacity,transform' }));
 
   splitIntroHeadings();
-  const titleReveal =
-    heroTitleRevealRoot
-      ? splitTextRevealWords(heroTitleRevealRoot, {
-          targetSelector: '[data-hero-text-line]',
-          charClassName: 'hero-title-char',
-          trim: true,
-        })
-      : { chars: [], words: [] };
+  const titleReveal = heroTitleRevealRoot
+    ? splitTextRevealWords(heroTitleRevealRoot, {
+        targetSelector: '[data-hero-text-line]',
+        charClassName: 'hero-title-char',
+        trim: true,
+      })
+    : { chars: [], words: [] };
 
   const splitInnerSpans = gsap.utils.toArray<HTMLElement>(
     `${SPLIT} .andean .char span, ${SPLIT} .roots .char span, ${SPLIT} .initiative .char span`,
@@ -137,12 +164,15 @@ export function initHomeHeroRevealAnimation() {
     });
   }
 
-  document.body.style.overflow = 'hidden';
+  lockHeroScroll();
 
   const tl = gsap.timeline({
     defaults: { ease: 'hop' },
     onComplete: () => {
-      document.body.style.overflow = '';
+      releaseHeroScrollLock?.();
+    },
+    onInterrupt: () => {
+      releaseHeroScrollLock?.();
     },
   });
 

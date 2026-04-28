@@ -34,3 +34,20 @@ const t = useTranslations(lang);
   <CTA lang={lang} />
   <Footer lang={lang} />
 </Layout>
+
+<script>
+  const resetHomeScrollToTop = () => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetHomeScrollToTop, { once: true });
+  } else {
+    resetHomeScrollToTop();
+  }
+
+  document.addEventListener('astro:page-load', resetHomeScrollToTop);
+</script>

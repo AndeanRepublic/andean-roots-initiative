@@ -45,6 +45,7 @@ function lockHeroScroll() {
 /** Same DOM as `SplitText` (words,chars) + inner span for the char tween targets. */
 function splitIntroHeadings() {
   document.querySelectorAll<HTMLElement>(`${PRE} h2, ${SPLIT} h2`).forEach((h2) => {
+    h2.style.visibility = 'visible';
     const text = h2.textContent ?? '';
     h2.textContent = '';
     for (const char of text) {
@@ -60,6 +61,7 @@ function splitIntroHeadings() {
 
 function resetIntroSplit() {
   document.querySelectorAll<HTMLElement>(`${PRE} h2, ${SPLIT} h2`).forEach((h2) => {
+    h2.style.visibility = 'hidden';
     if (!h2.querySelector('.char')) return;
     const rebuilt = Array.from(h2.querySelectorAll<HTMLElement>('.char'))
       .map((c) => c.querySelector('span')?.textContent ?? '')

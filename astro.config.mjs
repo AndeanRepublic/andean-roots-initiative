@@ -2,13 +2,14 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import lenis from 'astro-lenis';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: node({ mode: 'standalone' }),
+  // Vercel needs this adapter (not @astrojs/node standalone) or the deployment returns 404.
+  adapter: vercel(),
   integrations: [lenis(), react()],
   i18n: {
     defaultLocale: 'es',

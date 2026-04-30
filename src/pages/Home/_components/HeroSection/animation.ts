@@ -78,7 +78,8 @@ export function initHomeHeroRevealAnimation() {
   const container = document.querySelector<HTMLElement>(CONT);
   const preloader = document.querySelector<HTMLElement>(PRE);
   const splitOverlay = document.querySelector<HTMLElement>(SPLIT);
-  if (!container || !preloader || !splitOverlay || !document.querySelector(INTRO)) return;
+  const introRoot = document.querySelector<HTMLElement>(INTRO);
+  if (!container || !preloader || !splitOverlay || !introRoot) return;
 
   const heroImg = container.querySelector<HTMLElement>('.hero-img');
   if (!heroImg) return;
@@ -95,6 +96,8 @@ export function initHomeHeroRevealAnimation() {
   heroIntroTl?.kill();
   heroIntroTl = null;
   releaseHeroScrollLock?.();
+  introRoot.style.visibility = 'visible';
+  introRoot.style.pointerEvents = 'auto';
 
   const isMobile = window.innerWidth <= 1000;
 
@@ -172,9 +175,13 @@ export function initHomeHeroRevealAnimation() {
     defaults: { ease: 'hop' },
     onComplete: () => {
       releaseHeroScrollLock?.();
+      introRoot.style.visibility = 'hidden';
+      introRoot.style.pointerEvents = 'none';
     },
     onInterrupt: () => {
       releaseHeroScrollLock?.();
+      introRoot.style.visibility = 'hidden';
+      introRoot.style.pointerEvents = 'none';
     },
   });
 

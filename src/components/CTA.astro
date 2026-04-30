@@ -3,7 +3,7 @@ import ButtonLink from './ButtonLink.astro';
 import DonationModal from './DonationModal/index';
 import type { Locale } from '../i18n/locales';
 import { DEFAULT_LOCALE } from '../i18n/locales';
-import { useTranslations } from '../i18n/utils';
+import { useTranslations, getLocalizedPath } from '../i18n/utils';
 
 interface Props {
   lang?: Locale;
@@ -53,7 +53,7 @@ const c = t.cta;
           </span>
           <ButtonLink
             class="inline-flex"
-            href={`/${lang}/${c.ctaSlug}`}
+            href={getLocalizedPath(lang, c.ctaSlug)}
             text={c.ctaText}
             device="desktop"
             kind="primary"

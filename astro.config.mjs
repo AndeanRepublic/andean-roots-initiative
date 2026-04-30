@@ -14,7 +14,7 @@ export default defineConfig({
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
-    routing: { prefixDefaultLocale: true },
+    routing: { prefixDefaultLocale: false },
   },
   vite: {
     plugins: [tailwindcss()],

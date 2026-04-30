@@ -1,3 +1,29 @@
 ---
-return Astro.redirect('/es/contact', 301);
+import { DEFAULT_LOCALE } from '../../i18n/locales';
+import { useTranslations } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ContactHeroSection from './_components/ContactHeroSection/index.astro';
+import ContactImpactSection from './_components/ContactImpactSection/index.astro';
+import ContactFormSection from './_components/ContactFormSection/index.astro';
+import ContactChannelsSection from './_components/ContactChannelsSection/index.astro';
+import ContactFaqSection from './_components/ContactFaqSection/index.astro';
+import ContactQuoteSection from './_components/ContactQuoteSection/index.astro';
+import Footer from '../../components/Footer.astro';
+import FloatingActions from '../../components/FloatingActions.astro';
+
+const lang = DEFAULT_LOCALE;
+const t = useTranslations(lang);
 ---
+
+<Layout lang={lang} title={t.contactPage.meta.title} description={t.contactPage.meta.description}>
+  <Header lang={lang} />
+  <ContactHeroSection lang={lang} />
+  <ContactImpactSection lang={lang} />
+  <ContactFormSection lang={lang} />
+  <ContactChannelsSection lang={lang} />
+  <ContactFaqSection lang={lang} />
+  <ContactQuoteSection lang={lang} />
+  <Footer lang={lang} />
+  <FloatingActions lang={lang} />
+</Layout>

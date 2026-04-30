@@ -1,3 +1,27 @@
 ---
-return Astro.redirect('/es/About', 301);
+import { DEFAULT_LOCALE } from '../../i18n/locales';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import HeroSection from './_components/HeroSection/index.astro';
+import HistorySection from './_components/HistorySection/index.astro';
+import OrganizationSection from './_components/OrganizationSection/index.astro';
+import ValuesSection from './_components/ValuesSection/index.astro';
+import FocusSection from './_components/FocusSection/index.astro';
+import TeamSection from './_components/TeamSection/index.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = DEFAULT_LOCALE;
 ---
+
+<Layout lang={lang} title="Sobre nosotros | Andean Roots Initiative">
+  <Header lang={lang} />
+  <HeroSection lang={lang} />
+  <HistorySection lang={lang} />
+  <OrganizationSection lang={lang} />
+  <ValuesSection lang={lang} />
+  <FocusSection lang={lang} />
+  <TeamSection lang={lang} />
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>

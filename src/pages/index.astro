@@ -1,3 +1,46 @@
 ---
-return Astro.redirect('/es/Home');
+import { DEFAULT_LOCALE } from '../i18n/locales';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from './Home/_components/HeroSection/index.astro';
+import ChallengeSection from './Home/_components/ChallengeSection/index.astro';
+import AboutSection from './Home/_components/AboutSection/index.astro';
+import ActionSection from './Home/_components/ActionSection/index.astro';
+import NumbersSection from './Home/_components/NumbersSection/index.astro';
+import StrategicProgramsSection from './Home/_components/StrategicProgramsSection/index.astro';
+import PartnershipSection from './Home/_components/PartnershipSection/index.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = DEFAULT_LOCALE;
 ---
+
+<Layout lang={lang}>
+  <Header lang={lang} heroEntrance />
+  <HeroSection lang={lang} />
+  <ChallengeSection lang={lang} />
+  <AboutSection lang={lang} />
+  <ActionSection lang={lang} />
+  <NumbersSection lang={lang} />
+  <StrategicProgramsSection lang={lang} />
+  <PartnershipSection lang={lang} />
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</Layout>
+
+<script>
+  const resetHomeScrollToTop = () => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetHomeScrollToTop, { once: true });
+  } else {
+    resetHomeScrollToTop();
+  }
+
+  document.addEventListener('astro:page-load', resetHomeScrollToTop);
+</script>

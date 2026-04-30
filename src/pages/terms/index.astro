@@ -1,3 +1,19 @@
 ---
-return Astro.redirect('/es/terms', 301);
+import { DEFAULT_LOCALE } from '../../i18n/locales';
+import { useTranslations } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import TermsHeroSection from './_components/TermsHeroSection/index.astro';
+import TermsContent from './_components/TermsContent/index.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = DEFAULT_LOCALE;
+const t = useTranslations(lang);
 ---
+
+<Layout lang={lang} title={t.termsPage.meta.title} description={t.termsPage.meta.description}>
+  <Header lang={lang} />
+  <TermsHeroSection lang={lang} />
+  <TermsContent lang={lang} />
+  <Footer lang={lang} />
+</Layout>

@@ -2,7 +2,7 @@
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
-import { useTranslations } from '../../../../i18n/utils';
+import { useTranslations, getLocalizedPath } from '../../../../i18n/utils';
 import ButtonLink from '../../../../components/ButtonLink.astro';
 
 interface Props {
@@ -46,7 +46,7 @@ const faq = t.contactPage.faq;
       </div>
       <div data-anim="faq-cta">
         <ButtonLink
-          href={`/${lang}/contact`}
+          href={getLocalizedPath(lang, 'contact')}
           text={faq.ctaText}
           device="desktop"
           kind="primary"

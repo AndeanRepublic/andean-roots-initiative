@@ -2,7 +2,7 @@
 import ButtonLink from '../../../../components/ButtonLink.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
-import { useTranslations } from '../../../../i18n/utils';
+import { useTranslations, getLocalizedPath } from '../../../../i18n/utils';
 
 interface Props {
   lang?: Locale;
@@ -40,7 +40,7 @@ const pc = t.programsPage.cta;
         <div class="flex w-full justify-center">
           <ButtonLink
             class="inline-flex"
-            href={`/${lang}/${pc.ctaSlug}`}
+            href={getLocalizedPath(lang, pc.ctaSlug)}
             text={pc.ctaText}
             device="desktop"
             kind="primary-inverse"

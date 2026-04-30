@@ -2,7 +2,7 @@
 import HamburgerIcon from '../icons/HamburgerIcon.astro';
 import type { Locale } from '../i18n/locales';
 import { DEFAULT_LOCALE } from '../i18n/locales';
-import { useTranslations, getAlternateUrl } from '../i18n/utils';
+import { useTranslations, getAlternateUrl, getLocalizedPath } from '../i18n/utils';
 import { cn } from '../cn';
 
 interface Props {
@@ -18,7 +18,7 @@ const pathname = Astro.url.pathname;
 
 const navLinks = t.header.navLinks.map((link) => ({
   label: link.label,
-  href: `/${lang}/${link.slug}`,
+  href: getLocalizedPath(lang, link.slug),
   slug: link.slug,
 }));
 
@@ -50,7 +50,7 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
     class="px-2xl py-lg mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md max-md:gap-4 max-md:px-4 max-md:py-3"
   >
     <a
-      href={`/${lang}/Home`}
+      href={getLocalizedPath(lang, 'Home')}
       class="px-lg flex items-center max-md:px-0"
       aria-label={t.header.brandAriaLabel}
     >

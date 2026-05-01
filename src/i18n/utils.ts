@@ -21,7 +21,10 @@ function stripLocalePrefix(path: string) {
 }
 
 export function getLocalizedPath(lang: Locale, slug: string) {
-  const slugPath = slug === 'Home' ? '/' : `/${slug}`;
+  if (slug === 'Home') {
+    return lang === DEFAULT_LOCALE ? '/Home' : `/${lang}/Home`;
+  }
+  const slugPath = `/${slug}`;
   const normalized = normalizePath(slugPath);
   return lang === DEFAULT_LOCALE ? normalized : `/${lang}${normalized === '/' ? '' : normalized}`;
 }

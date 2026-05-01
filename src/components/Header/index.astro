@@ -1,0 +1,141 @@
+---
+import MobileMenu from './MobileMenu.astro';
+import type { Locale } from '../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../i18n/locales';
+import { useTranslations, getAlternateUrl, getLocalizedPath } from '../../i18n/utils';
+import { navPathMatchesLink } from '../../i18n/nav-active';
+import { cn } from '../../cn';
+
+interface Props {
+  /** Oculto hasta el final del intro del Home (GSAP). */
+  heroEntrance?: boolean;
+  lang?: Locale;
+}
+
+const { heroEntrance = false, lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+
+const pathname = Astro.url.pathname;
+
+const navLinks = t.header.navLinks.map((link) => ({
+  label: link.label,
+  href: getLocalizedPath(lang, link.slug),
+  slug: link.slug,
+}));
+
+const matchingLinks = navLinks.filter((link) => navPathMatchesLink(pathname, link.href));
+const activeHref =
+  matchingLinks.find((link) => !link.href.includes('#'))?.href ?? matchingLinks[0]?.href;
+const isActiveHref = (href: string) => href === activeHref;
+
+const alternateLang: Locale = lang === 'es' ? 'en' : 'es';
+const alternateUrl = getAlternateUrl(pathname, alternateLang);
+---
+
+<header
+  data-site-header
+  data-hero-header={heroEntrance ? true : undefined}
+  class={cn(
+    'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4',
+    heroEntrance && 'opacity-0 -translate-y-4',
+  )}
+>
+  <nav
+    data-site-header-nav
+    class="py-lg mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-md:gap-4 max-md:px-4 max-md:py-3"
+  >
+    <a
+      href={getLocalizedPath(lang, 'Home')}
+      class="px-lg flex items-center max-md:px-0"
+      aria-label={t.header.brandAriaLabel}
+    >
+      <img
+        src="/home-assets/logo.png"
+        alt="Andean Roots Initiative"
+        class="h-10 w-auto"
+        width="68"
+        height="40"
+      />
+    </a>
+
+    <ul class="gap-sm relative flex items-center max-md:hidden" role="menubar" data-nav-list>
+      <li
+        class="pointer-events-none absolute top-0 left-0 z-0 rounded-full bg-white opacity-0 transition-[transform,width,height,opacity] duration-300 ease-out"
+        data-nav-indicator
+        role="none"
+        aria-hidden="true"
+      >
+      </li>
+      {
+        navLinks.map((link) => (
+          <li role="none" class="relative z-10">
+            <a
+              href={link.href}
+              class={`body-md-sb px-xl py-sm rounded-full text-white transition-colors ${
+                isActiveHref(link.href) ? 'text-main' : ''
+              }`}
+              data-nav-link
+              role="menuitem"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3 max-md:gap-2">
+      <a
+        href={alternateUrl}
+        class="body-md-sb flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 max-md:hidden"
+        aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+      >
+        {lang === 'es' ? 'EN' : 'ES'}
+      </a>
+
+      <button
+        type="button"
+        data-mobile-menu-toggle
+        aria-label={t.header.mobileMenuAriaLabel}
+        aria-expanded="false"
+        class="hidden items-center gap-3 text-white max-md:flex"
+      >
+        <span class="overflow-hidden">
+          <span data-mobile-menu-toggle-label class="body-md-sb block will-change-transform">
+            Menu
+          </span>
+        </span>
+        <span
+          data-mobile-menu-icon
+          class="relative flex size-10 items-center justify-center rounded-full border border-white/40 bg-white/10"
+          aria-hidden="true"
+        >
+          <span
+            data-mobile-menu-icon-top
+            class="absolute h-[1.25px] w-[15px] translate-y-[-3px] bg-white will-change-transform"
+          ></span>
+          <span
+            data-mobile-menu-icon-bottom
+            class="absolute h-[1.25px] w-[15px] translate-y-[3px] bg-white will-change-transform"
+          ></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<MobileMenu navLinks={navLinks} alternateUrl={alternateUrl} lang={lang} activeHref={activeHref} />
+
+<script>
+  import { initHeaderAnimation } from './animation';
+
+  const boot = () => initHeaderAnimation();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  document.addEventListener('astro:page-load', boot);
+</script>

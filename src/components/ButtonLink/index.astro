@@ -1,5 +1,5 @@
 ---
-import UpRightArrowIcon from '../icons/UpRightArrowIcon.astro';
+import UpRightArrowIcon from '../../icons/UpRightArrowIcon.astro';
 
 type ButtonDevice = 'desktop' | 'mobile';
 type ButtonKind = 'primary' | 'primary-inverse' | 'secondary';
@@ -27,10 +27,10 @@ const isPrimary = kind === 'primary';
 const isInverse = kind === 'primary-inverse';
 const isMobile = device === 'mobile';
 
-/** Outer: scroll/intro tweens pueden animar transform en el <a>; el magnético vive en el span interno. */
+/** Outer: scroll/intro tweens pueden animar transform en el <a>; el magnetico vive en el span interno. */
 const outerClass = 'button-link-root group inline-flex shrink-0 items-center transition-opacity ';
 const innerClass = 'button-link will-change-[transform] inline-flex shrink-0 items-center';
-// Border color matches the text color of each variant: primary→white, inverse/secondary→main
+// Border color matches the text color of each variant: primary->white, inverse/secondary->main
 const borderClass = bordered ? 'border border-white' : '';
 
 const variantClass = isInverse

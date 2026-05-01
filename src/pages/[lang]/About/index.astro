@@ -10,8 +10,8 @@ import OrganizationSection from '../../About/_components/OrganizationSection/ind
 import ValuesSection from '../../About/_components/ValuesSection/index.astro';
 import FocusSection from '../../About/_components/FocusSection/index.astro';
 import TeamSection from '../../About/_components/TeamSection/index.astro';
-import CTA from '../../../components/CTA.astro';
-import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA/index.astro';
+import Footer from '../../../components/Footer/index.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));

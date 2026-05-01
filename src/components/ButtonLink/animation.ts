@@ -3,7 +3,7 @@ import gsap from 'gsap';
 const SEL_ROOT = '[data-button-link-root]';
 const STRENGTH = 0.32;
 const MAX_SHIFT_PX = 16;
-/** Seguimiento suave: evita “teletransporte” al entrar o al cruzar el botón. */
+/** Seguimiento suave: evita "teletransporte" al entrar o al cruzar el boton. */
 const FOLLOW_SMOOTH = 0.16;
 
 function clamp(n: number, max: number) {
@@ -16,7 +16,7 @@ function bindMagneticLayer(anchor: HTMLAnchorElement, target: HTMLElement) {
   /** Objetivo desde el cursor (ideal). */
   let targetX = 0;
   let targetY = 0;
-  /** Posición mostrada (interpola hacia el objetivo). */
+  /** Posicion mostrada (interpola hacia el objetivo). */
   let displayX = 0;
   let displayY = 0;
 
@@ -100,7 +100,7 @@ function bindMagneticLayer(anchor: HTMLAnchorElement, target: HTMLElement) {
   anchor.addEventListener('mouseleave', onLeave);
 }
 
-/** Inicializa enlaces con `data-button-link-root` (ver ButtonLink.astro). Idempotente por ancla. */
+/** Inicializa enlaces con `data-button-link-root` (ver ButtonLink/index.astro). Idempotente por ancla. */
 export function initButtonLinkMagnetic() {
   if (typeof document === 'undefined') return;
 

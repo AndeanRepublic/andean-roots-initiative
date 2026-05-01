@@ -10,8 +10,8 @@ import ContactFormSection from '../../contact/_components/ContactFormSection/ind
 import ContactChannelsSection from '../../contact/_components/ContactChannelsSection/index.astro';
 import ContactFaqSection from '../../contact/_components/ContactFaqSection/index.astro';
 import ContactQuoteSection from '../../contact/_components/ContactQuoteSection/index.astro';
-import Footer from '../../../components/Footer.astro';
-import FloatingActions from '../../../components/FloatingActions.astro';
+import Footer from '../../../components/Footer/index.astro';
+import FloatingActions from '../../../components/FloatingActions/index.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));

@@ -1,9 +1,9 @@
 ---
-import MailIcon from '../icons/MailIcon.astro';
-import PhoneIcon from '../icons/PhoneIcon.astro';
-import type { Locale } from '../i18n/locales';
-import { DEFAULT_LOCALE } from '../i18n/locales';
-import { useTranslations, getLocalizedPath } from '../i18n/utils';
+import MailIcon from '../../icons/MailIcon.astro';
+import PhoneIcon from '../../icons/PhoneIcon.astro';
+import type { Locale } from '../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../i18n/locales';
+import { useTranslations, getLocalizedPath } from '../../i18n/utils';
 
 interface Props {
   lang?: Locale;
@@ -15,12 +15,12 @@ const f = t.footer;
 
 const quickLinks = f.quickLinks.map((link) => ({
   label: link.label,
-  href: getLocalizedPath(lang, link.slug),
+  href: link.slug ? getLocalizedPath(lang, link.slug) : '#',
 }));
 
 const supportLinks = f.supportLinks.map((link) => ({
   label: link.label,
-  href: 'slug' in link ? getLocalizedPath(lang, link.slug) : link.href,
+  href: 'slug' in link && link.slug ? getLocalizedPath(lang, link.slug) : link.href,
 }));
 ---
 

@@ -11,8 +11,8 @@ import ActionSection from '../../Home/_components/ActionSection/index.astro';
 import NumbersSection from '../../Home/_components/NumbersSection/index.astro';
 import StrategicProgramsSection from '../../Home/_components/StrategicProgramsSection/index.astro';
 import PartnershipSection from '../../Home/_components/PartnershipSection/index.astro';
-import CTA from '../../../components/CTA.astro';
-import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA/index.astro';
+import Footer from '../../../components/Footer/index.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));

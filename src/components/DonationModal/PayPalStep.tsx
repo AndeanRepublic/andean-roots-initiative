@@ -30,9 +30,9 @@ export function PayPalStep({ amount, onBack, onSuccess, onError }: PayPalStepPro
         Cambiar monto
       </button>
 
-      <div className="flex items-center justify-between rounded-xl bg-light px-5 py-4">
-        <span className="text-sm text-gray">Total a donar</span>
-        <span className="font-skrawk-serif text-2xl text-main">${amount.toFixed(2)}</span>
+      <div className="bg-light flex items-center justify-between rounded-xl px-5 py-4">
+        <span className="text-gray text-sm">Total a donar</span>
+        <span className="font-Manrope text-main text-2xl">${amount.toFixed(2)}</span>
       </div>
 
       {isPending ? (

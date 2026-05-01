@@ -32,7 +32,10 @@ export function DonationForm({ onClose }: DonationFormProps) {
   const navigateTo = useCallback((nextStep: Step, direction: Direction = 'forward') => {
     const el = stepContentRef.current;
     directionRef.current = direction;
-    if (!el) { setStep(nextStep); return; }
+    if (!el) {
+      setStep(nextStep);
+      return;
+    }
     animateStepOut(el, direction, () => setStep(nextStep));
   }, []);
 
@@ -110,7 +113,7 @@ export function DonationForm({ onClose }: DonationFormProps) {
 
       <div
         ref={cardRef}
-        className="relative z-10 flex h-[60%] w-full max-w-[60%] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity]"
+        className="relative z-10 flex h-auto max-h-[92dvh] min-h-[60dvh] w-full max-w-[96vw] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity] sm:h-[60%] sm:max-h-none sm:max-w-[90%]"
       >
         {/* Close button — absolute at the top-right corner of the whole card */}
         <button
@@ -128,15 +131,17 @@ export function DonationForm({ onClose }: DonationFormProps) {
           </svg>
         </button>
 
-        <div className="flex w-full flex-col gap-10 p-8 sm:w-[55%]">
+        <div className="flex min-h-0 w-full flex-col gap-8 p-6 sm:w-[55%] sm:gap-10 sm:p-8">
           <ModalHeader />
 
           {/* Step content — this element slides in/out on step transitions */}
           <div
             ref={stepContentRef}
-            className="flex flex-1 flex-col gap-6 will-change-[transform,opacity]"
+            className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto pr-1 will-change-[transform,opacity]"
           >
-            {step === 'success' && <SuccessStep amount={effectiveAmount ?? 0} onClose={handleClose} />}
+            {step === 'success' && (
+              <SuccessStep amount={effectiveAmount ?? 0} onClose={handleClose} />
+            )}
 
             {step === 'paypal' && (
               <PayPalStep

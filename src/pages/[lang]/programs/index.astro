@@ -7,7 +7,7 @@ import Header from '../../../components/Header/index.astro';
 import ProgramsHeroSection from '../../programs/_components/ProgramsHeroSection/index.astro';
 import ProgramsIntroSection from '../../programs/_components/ProgramsIntroSection/index.astro';
 import ProgramsCatalogSection from '../../programs/_components/ProgramsCatalogSection/index.astro';
-import ProgramsCtaSection from '../../programs/_components/ProgramsCtaSection/index.astro';
+import CTA from '../../../components/CTA/index.astro';
 import Footer from '../../../components/Footer/index.astro';
 
 export function getStaticPaths() {
@@ -26,6 +26,6 @@ if (lang === DEFAULT_LOCALE) {
   <ProgramsHeroSection lang={lang} />
   <ProgramsIntroSection lang={lang} />
   <ProgramsCatalogSection lang={lang} />
-  <ProgramsCtaSection lang={lang} />
+  <CTA lang={lang} />
   <Footer lang={lang} />
 </Layout>

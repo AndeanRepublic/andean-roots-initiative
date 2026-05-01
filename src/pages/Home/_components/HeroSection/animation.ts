@@ -106,6 +106,7 @@ export function initHomeHeroRevealAnimation() {
   heroIntroTl?.kill();
   heroIntroTl = null;
   releaseHeroScrollLock?.();
+  const isMobile = window.innerWidth <= 1000;
 
   gsap.killTweensOf([
     preloader,
@@ -128,10 +129,11 @@ export function initHomeHeroRevealAnimation() {
     introRoot.style.visibility = 'hidden';
     introRoot.style.pointerEvents = 'none';
     gsap.set([preloader, splitOverlay], { opacity: 0, pointerEvents: 'none' });
-    gsap.set(container, {
-      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-    });
-    gsap.set(heroImg, { scale: 1 });
+    const clipStart = isMobile
+      ? 'polygon(0% 49.5%, 0% 49.5%, 0% 50.5%, 0% 50.5%)'
+      : 'polygon(0% 49%, 0% 49%, 0% 51%, 0% 51%)';
+    gsap.set(container, { clipPath: clipStart });
+    gsap.set(heroImg, { scale: 1.12 });
 
     if (heroTitleRevealRoot) {
       resetTextRevealTargets(heroTitleRevealRoot, '[data-hero-text-line]');
@@ -145,21 +147,39 @@ export function initHomeHeroRevealAnimation() {
       : { chars: [], words: [] };
 
     if (titleRevealSkip.chars.length > 0) {
-      gsap.set(titleRevealSkip.chars, { opacity: 1 });
+      gsap.set(titleRevealSkip.chars, { opacity: 0 });
     } else if (titleLineEls.length > 0) {
-      gsap.set(titleLineEls, { opacity: 1, y: 0 });
+      gsap.set(titleLineEls, { opacity: 0, y: 14 });
     }
-    if (subEl) gsap.set(subEl, { opacity: 1, y: 0 });
-    if (ctaEl) gsap.set(ctaEl, { opacity: 1, y: 0 });
-    if (scrollEl) gsap.set(scrollEl, { opacity: 1, y: 0 });
-    if (siteHeader) gsap.set(siteHeader, { opacity: 1, y: 0 });
+    if (subEl) gsap.set(subEl, { opacity: 0, y: 18 });
+    if (ctaEl) gsap.set(ctaEl, { opacity: 0, y: 18 });
+    if (scrollEl) gsap.set(scrollEl, { opacity: 0, y: 18 });
+    if (siteHeader) gsap.set(siteHeader, { opacity: 0, y: -20 });
+
+    const entranceTl = gsap.timeline({ defaults: { ease: 'hop' } });
+    entranceTl.to(container, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 0.8 }, 0);
+    entranceTl.to(heroImg, { scale: 1, duration: 0.9 }, 0);
+
+    const postStart = 0.35;
+    if (titleRevealSkip.words.length > 0) {
+      addRandomWordFlipReveal(entranceTl, titleRevealSkip.words, titleLineEls, { position: postStart });
+    } else if (titleLineEls.length > 0) {
+      entranceTl.to(
+        titleLineEls,
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'power2.out' },
+        postStart,
+      );
+    }
+    const afterTitle = titleRevealSkip.words.length > 0 || titleLineEls.length > 0 ? '>' : postStart;
+    const restGroup = [subEl, ctaEl, scrollEl, siteHeader].filter(Boolean) as HTMLElement[];
+    if (restGroup.length > 0) {
+      entranceTl.to(restGroup, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, afterTitle);
+    }
     return;
   }
 
   introRoot.style.visibility = 'visible';
   introRoot.style.pointerEvents = 'auto';
-
-  const isMobile = window.innerWidth <= 1000;
 
   gsap.set([preloader, splitOverlay], { clearProps: 'all' });
   gsap.set(container, { clearProps: 'clipPath' });

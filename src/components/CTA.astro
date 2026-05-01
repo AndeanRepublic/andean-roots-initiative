@@ -38,8 +38,8 @@ const c = t.cta;
         <p class="body-md-l text-light max-w-150">
           {c.description}
         </p>
-        <div class="tablet:gap-6 flex w-full flex-row items-center justify-center gap-4">
-          <span id="donation-trigger">
+        <div class="tablet:gap-6 hidden w-full flex-row items-center justify-center gap-4 desktop:flex">
+          <span data-donation-trigger>
             <ButtonLink
               class="inline-flex"
               href="#"
@@ -47,15 +47,33 @@ const c = t.cta;
               device="desktop"
               kind="primary-inverse"
               bordered
-            >
-              />
-            </ButtonLink>
+            />
           </span>
           <ButtonLink
             class="inline-flex"
             href={getLocalizedPath(lang, c.ctaSlug)}
             text={c.ctaText}
             device="desktop"
+            kind="primary"
+            bordered
+          />
+        </div>
+        <div class="tablet:gap-6 flex w-full flex-row items-center justify-center gap-4 desktop:hidden">
+          <span data-donation-trigger>
+            <ButtonLink
+              class="inline-flex"
+              href="#"
+              text={c.donateText}
+              device="mobile"
+              kind="primary-inverse"
+              bordered
+            />
+          </span>
+          <ButtonLink
+            class="inline-flex"
+            href={getLocalizedPath(lang, c.ctaSlug)}
+            text={c.ctaText}
+            device="mobile"
             kind="primary"
             bordered
           />
@@ -69,9 +87,13 @@ const c = t.cta;
 
   <script>
     function initDonationTrigger() {
-      document.getElementById('donation-trigger')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.dispatchEvent(new CustomEvent('open-donation-modal'));
+      document.querySelectorAll('[data-donation-trigger]').forEach((trigger) => {
+        if (trigger instanceof HTMLElement && trigger.dataset.donationBound === '1') return;
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.dispatchEvent(new CustomEvent('open-donation-modal'));
+        });
+        if (trigger instanceof HTMLElement) trigger.dataset.donationBound = '1';
       });
     }
 

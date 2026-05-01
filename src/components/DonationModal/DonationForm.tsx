@@ -113,7 +113,7 @@ export function DonationForm({ onClose }: DonationFormProps) {
 
       <div
         ref={cardRef}
-        className="relative z-10 flex h-auto max-h-[92dvh] min-h-[60dvh] w-full max-w-[96vw] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity] sm:h-[60%] sm:max-h-none sm:max-w-[90%]"
+        className="desktop:max-w-[60%] relative z-10 flex h-auto max-h-[92dvh] min-h-[60dvh] w-full max-w-[90%] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity] sm:h-[60%] sm:max-h-none"
       >
         {/* Close button — absolute at the top-right corner of the whole card */}
         <button

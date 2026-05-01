@@ -45,7 +45,7 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
 >
   <nav
     data-site-header-nav
-    class="py-lg mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-md:gap-4 max-md:px-4 max-md:py-3"
+    class="py-lg px-2xl mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-md:gap-4 max-md:px-4 max-md:py-3"
   >
     <a
       href={getLocalizedPath(lang, 'Home')}
@@ -75,8 +75,12 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
             <a
               href={link.href}
               data-nav-slug={link.slug}
-              data-nav-label-es={tEs.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
-              data-nav-label-en={tEn.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
+              data-nav-label-es={
+                tEs.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label
+              }
+              data-nav-label-en={
+                tEn.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label
+              }
               class={`body-md-sb px-xl py-sm rounded-full text-white transition-colors ${
                 isActiveHref(link.href) ? 'text-main' : ''
               }`}
@@ -144,13 +148,15 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
     const pathname = window.location.pathname;
     const currentLang = getCurrentLang(pathname);
 
-    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link][data-nav-slug]').forEach((link) => {
-      const slug = link.dataset.navSlug;
-      if (!slug) return;
-      link.href = getLocalizedPath(currentLang, slug);
-      const nextLabel = currentLang === 'es' ? link.dataset.navLabelEs : link.dataset.navLabelEn;
-      if (nextLabel) link.textContent = nextLabel;
-    });
+    document
+      .querySelectorAll<HTMLAnchorElement>('[data-nav-link][data-nav-slug]')
+      .forEach((link) => {
+        const slug = link.dataset.navSlug;
+        if (!slug) return;
+        link.href = getLocalizedPath(currentLang, slug);
+        const nextLabel = currentLang === 'es' ? link.dataset.navLabelEs : link.dataset.navLabelEn;
+        if (nextLabel) link.textContent = nextLabel;
+      });
 
     document
       .querySelectorAll<HTMLAnchorElement>('[data-mobile-menu-line][data-nav-link]')

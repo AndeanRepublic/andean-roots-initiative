@@ -34,13 +34,19 @@ const ci = t.contactPage.impact;
           <span class="relative isolate inline-block align-baseline">
             <span class="relative z-10">{ci.headlineHighlight}</span>
             <span
-              class="bg-main pointer-events-none absolute inset-x-0 bottom-2 z-0 h-6"
+              class="bg-main desktop:h-6 desktop:bottom-2 pointer-events-none absolute inset-x-0 bottom-1 z-0 h-3"
               aria-hidden="true"></span>
           </span>.
         </h2>
 
         <div class="text-gray flex max-w-200 flex-col gap-4">
-          {ci.paragraphs.map((p) => <p class="body-md-l" data-anim="impact-p">{p}</p>)}
+          {
+            ci.paragraphs.map((p) => (
+              <p class="body-md-l" data-anim="impact-p">
+                {p}
+              </p>
+            ))
+          }
         </div>
       </div>
     </div>

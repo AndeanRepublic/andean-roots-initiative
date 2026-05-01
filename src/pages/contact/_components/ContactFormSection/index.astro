@@ -127,7 +127,7 @@ const cf = t.contactPage.form;
         <div class="mt-7">
           <button
             type="submit"
-            class="body-sm-l hover:bg-main inline-flex items-center justify-center rounded-sm border border-white bg-white px-5 py-1.5 tracking-widest text-black uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+            class="body-md-l hover:bg-light text-main inline-flex cursor-pointer items-center justify-center rounded-[100px] border border-white bg-white px-5 py-1.5 tracking-widest uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
             data-contact-form-submit
           >
             {cf.submitLabel}
@@ -153,7 +153,8 @@ const cf = t.contactPage.form;
     data-missing-config={cf.missingConfigMessage}
     data-select-topic-error={cf.selectTopicError}
     data-inquiry-placeholder={cf.inquiryTypePlaceholder}
-  ></div>
+  >
+  </div>
 </section>
 
 <script>

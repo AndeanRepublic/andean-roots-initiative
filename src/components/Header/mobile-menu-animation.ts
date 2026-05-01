@@ -59,6 +59,7 @@ const initMobileMenu = () => {
     const currentPath = window.location.pathname;
     copyLines.forEach((line) => {
       if (!(line instanceof HTMLAnchorElement)) return;
+      if (line.hasAttribute('data-lang-switch')) return;
       const href = line.getAttribute('href') ?? '';
       if (!href || href.startsWith('#')) return;
       const isActive = navPathMatchesLink(currentPath, href);

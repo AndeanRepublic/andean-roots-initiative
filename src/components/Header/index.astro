@@ -14,6 +14,8 @@ interface Props {
 
 const { heroEntrance = false, lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
+const tEs = useTranslations('es');
+const tEn = useTranslations('en');
 
 const pathname = Astro.url.pathname;
 
@@ -72,6 +74,9 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
           <li role="none" class="relative z-10">
             <a
               href={link.href}
+              data-nav-slug={link.slug}
+              data-nav-label-es={tEs.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
+              data-nav-label-en={tEn.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
               class={`body-md-sb px-xl py-sm rounded-full text-white transition-colors ${
                 isActiveHref(link.href) ? 'text-main' : ''
               }`}
@@ -88,10 +93,11 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
     <div class="flex items-center gap-3 max-md:gap-2">
       <a
         href={alternateUrl}
+        data-lang-switch
         class="body-md-sb flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 max-md:hidden"
         aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
       >
-        {lang === 'es' ? 'EN' : 'ES'}
+        <span data-lang-switch-label>{lang === 'es' ? 'EN' : 'ES'}</span>
       </a>
 
       <button
@@ -129,8 +135,57 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
 
 <script>
   import { initHeaderAnimation } from './animation';
+  import { getAlternateUrl, getLocalizedPath } from '../../i18n/utils';
+  import { navPathMatchesLink } from '../../i18n/nav-active';
 
-  const boot = () => initHeaderAnimation();
+  const getCurrentLang = (path: string) => (path.startsWith('/en') ? 'en' : 'es');
+
+  const syncLocalizedNavLinks = () => {
+    const pathname = window.location.pathname;
+    const currentLang = getCurrentLang(pathname);
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link][data-nav-slug]').forEach((link) => {
+      const slug = link.dataset.navSlug;
+      if (!slug) return;
+      link.href = getLocalizedPath(currentLang, slug);
+      const nextLabel = currentLang === 'es' ? link.dataset.navLabelEs : link.dataset.navLabelEn;
+      if (nextLabel) link.textContent = nextLabel;
+    });
+
+    document
+      .querySelectorAll<HTMLAnchorElement>('[data-mobile-menu-line][data-nav-link]')
+      .forEach((line) => {
+        if (line.hasAttribute('data-lang-switch')) return;
+        const href = line.getAttribute('href') ?? '';
+        if (!href || href.startsWith('#')) return;
+        const isActive = navPathMatchesLink(pathname, href);
+        line.classList.toggle('text-white', isActive);
+        line.classList.toggle('text-white/40', !isActive);
+      });
+  };
+
+  const syncLanguageSwitchLinks = () => {
+    const pathname = window.location.pathname;
+    const currentLang = getCurrentLang(pathname);
+    const nextLang = currentLang === 'es' ? 'en' : 'es';
+    const nextHref = getAlternateUrl(pathname, nextLang);
+    const nextLabel = currentLang === 'es' ? 'EN' : 'ES';
+    const nextAria = currentLang === 'es' ? 'Switch to English' : 'Cambiar a Español';
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+      link.href = nextHref;
+      link.setAttribute('aria-label', nextAria);
+      const label = link.querySelector<HTMLElement>('[data-lang-switch-label]');
+      if (label) label.textContent = nextLabel;
+      else link.textContent = nextLabel;
+    });
+  };
+
+  const boot = () => {
+    syncLocalizedNavLinks();
+    syncLanguageSwitchLinks();
+    initHeaderAnimation();
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot, { once: true });

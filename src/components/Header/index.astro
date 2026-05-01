@@ -33,6 +33,7 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
 ---
 
 <header
+  transition:persist="site-header"
   data-site-header
   data-hero-header={heroEntrance ? true : undefined}
   class={cn(

@@ -11,6 +11,9 @@ interface Props {
 
 const { navLinks, alternateUrl, lang, activeHref } = Astro.props;
 const hrefForSlug = (slug: string) => navLinks.find((link) => link.slug === slug)?.href ?? '#';
+/* Closed overlay clip — must match mobile-menu-animation.ts CLIP_CLOSED */
+const overlayClipClosed = '[clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]';
+
 const secondaryLinks = [
   { label: lang === 'es' ? 'Nuestra historia' : 'Our story', href: hrefForSlug('About') },
   {
@@ -22,13 +25,17 @@ const secondaryLinks = [
 ---
 
 <div
+  transition:persist="mobile-menu-root"
   data-mobile-menu-root
   class="pointer-events-none fixed inset-0 z-40 hidden overflow-hidden text-white max-md:block"
 >
   <div
     data-mobile-menu-overlay
     aria-hidden="true"
-    class="bg-main absolute inset-0 overflow-hidden will-change-[clip-path]"
+    class:list={[
+      'bg-main absolute inset-0 overflow-hidden will-change-[clip-path]',
+      overlayClipClosed,
+    ]}
   >
     <div
       data-mobile-menu-content
@@ -45,7 +52,7 @@ const secondaryLinks = [
                       href={link.href}
                       data-mobile-menu-line
                       class={cn(
-                        'font-nunito-sans block text-[2.8rem] leading-none font-semibold tracking-tight',
+                        'font-nunito-sans block translate-y-[-110%] text-[2.8rem] leading-none font-semibold tracking-tight',
                         'will-change-transform',
                         link.href === activeHref ? 'text-white' : 'text-white/40',
                       )}
@@ -81,8 +88,10 @@ const secondaryLinks = [
         class="px-4xl grid grid-cols-[1fr_auto] items-end gap-6 border-t border-white/10 pt-5 text-sm font-medium text-white/40 will-change-transform"
       >
         <div data-mobile-menu-col class="flex flex-col gap-1 overflow-hidden">
-          <p data-mobile-menu-line class="will-change-transform">Andean Roots Initiative</p>
-          <p data-mobile-menu-line class="will-change-transform">
+          <p data-mobile-menu-line class="translate-y-[-110%] will-change-transform">
+            Andean Roots Initiative
+          </p>
+          <p data-mobile-menu-line class="translate-y-[-110%] will-change-transform">
             {lang === 'es' ? 'Raíces andinas, futuro global' : 'Andean roots, global future'}
           </p>
         </div>
@@ -91,7 +100,7 @@ const secondaryLinks = [
           <a
             href={alternateUrl}
             data-mobile-menu-line
-            class="block rounded-full border border-white/60 px-4 py-2 text-[1.2rem] text-white transition-colors will-change-transform hover:border-white/40 hover:text-white"
+            class="block translate-y-[-110%] rounded-full border border-white/60 px-4 py-2 text-[1.2rem] text-white transition-colors will-change-transform hover:border-white/40 hover:text-white"
           >
             {lang === 'es' ? 'EN' : 'ES'}
           </a>
@@ -100,6 +109,22 @@ const secondaryLinks = [
     </div>
   </div>
 </div>
+
+<style is:global>
+  /* First-paint "menu still open" after in-app nav (see Layout head script). */
+  html.mobile-menu--pending-close [data-mobile-menu-root] {
+    pointer-events: auto;
+  }
+  html.mobile-menu--pending-close [data-mobile-menu-overlay] {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  html.mobile-menu--pending-close [data-mobile-menu-content] {
+    transform: translate3d(0, 0, 0);
+  }
+  html.mobile-menu--pending-close [data-mobile-menu-line] {
+    transform: translate3d(0, 0, 0);
+  }
+</style>
 
 <script>
   import { initMobileMenuAnimation } from './mobile-menu-animation';

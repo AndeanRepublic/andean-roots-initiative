@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
+import { navPathMatchesLink } from '../../i18n/nav-active';
 
 gsap.registerPlugin(CustomEase);
 
@@ -45,16 +46,27 @@ const initMobileMenu = () => {
   if (!root || !toggle || !overlay || !content) return () => {};
 
   const pushTargets = getPushTargets();
+  const closeAfterNav = sessionStorage.getItem(CLOSE_AFTER_NAV_FLAG) === '1';
 
-  gsap.set(root, { pointerEvents: 'none' });
-  gsap.set(overlay, { clipPath: CLIP_CLOSED });
-  gsap.set(content, { yPercent: -50 });
-  gsap.set(copyLines, { y: '-110%' });
-  gsap.set(copyContainers, { opacity: 1 });
-  if (media) gsap.set(media, { opacity: 0 });
+  if (!closeAfterNav) {
+    document.documentElement.classList.remove('mobile-menu--pending-close');
+  }
 
   let isOpen = false;
   let isAnimating = false;
+
+  const syncActiveMobileLink = () => {
+    const currentPath = window.location.pathname;
+    copyLines.forEach((line) => {
+      if (!(line instanceof HTMLAnchorElement)) return;
+      const href = line.getAttribute('href') ?? '';
+      if (!href || href.startsWith('#')) return;
+      const isActive = navPathMatchesLink(currentPath, href);
+      line.classList.toggle('text-white', isActive);
+      line.classList.toggle('text-white/40', !isActive);
+    });
+  };
+  syncActiveMobileLink();
 
   const setHeaderNavTransparent = (transparent: boolean) => {
     if (!headerNav) return;
@@ -185,6 +197,20 @@ const initMobileMenu = () => {
     isAnimating = false;
   };
 
+  if (!closeAfterNav) {
+    gsap.set(root, { pointerEvents: 'none' });
+    gsap.set(overlay, { clipPath: CLIP_CLOSED });
+    gsap.set(content, { yPercent: -50 });
+    gsap.set(copyLines, { y: '-110%' });
+    gsap.set(copyContainers, { opacity: 1 });
+    if (media) gsap.set(media, { opacity: 0 });
+  } else {
+    sessionStorage.removeItem(CLOSE_AFTER_NAV_FLAG);
+    document.documentElement.classList.remove('mobile-menu--pending-close');
+    setFullyOpenState();
+    requestAnimationFrame(() => closeMenu());
+  }
+
   const ac = new AbortController();
   const { signal } = ac;
 
@@ -231,14 +257,6 @@ const initMobileMenu = () => {
     },
     { signal },
   );
-
-  // If we navigated from an opened menu, start this page with menu open and
-  // then run the close timeline for a smooth "close-after-navigation" effect.
-  if (sessionStorage.getItem(CLOSE_AFTER_NAV_FLAG) === '1') {
-    sessionStorage.removeItem(CLOSE_AFTER_NAV_FLAG);
-    setFullyOpenState();
-    requestAnimationFrame(() => closeMenu());
-  }
 
   return () => {
     ac.abort();

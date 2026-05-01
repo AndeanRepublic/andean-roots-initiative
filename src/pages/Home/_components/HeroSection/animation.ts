@@ -5,6 +5,10 @@ import {
   resetTextRevealTargets,
   splitTextRevealWords,
 } from '../../../../components/TextReveal/text-reveal';
+import {
+  consumePathBeforeHomeNavigation,
+  isHomePathname,
+} from '../../../../utils/home-hero-nav-context';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('hop', '.8, 0, .3, 1');
@@ -75,6 +79,12 @@ function resetIntroSplit() {
  * Init solo desde `astro:page-load`.
  */
 export function initHomeHeroRevealAnimation() {
+  const pathLeft = consumePathBeforeHomeNavigation();
+  const skipIntro =
+    pathLeft != null &&
+    !isHomePathname(pathLeft) &&
+    isHomePathname(window.location.pathname);
+
   const container = document.querySelector<HTMLElement>(CONT);
   const preloader = document.querySelector<HTMLElement>(PRE);
   const splitOverlay = document.querySelector<HTMLElement>(SPLIT);
@@ -96,15 +106,6 @@ export function initHomeHeroRevealAnimation() {
   heroIntroTl?.kill();
   heroIntroTl = null;
   releaseHeroScrollLock?.();
-  introRoot.style.visibility = 'visible';
-  introRoot.style.pointerEvents = 'auto';
-
-  const isMobile = window.innerWidth <= 1000;
-
-  resetIntroSplit();
-  if (heroTitleRevealRoot) {
-    resetTextRevealTargets(heroTitleRevealRoot, '[data-hero-text-line]');
-  }
 
   gsap.killTweensOf([
     preloader,
@@ -122,6 +123,44 @@ export function initHomeHeroRevealAnimation() {
     ...gsap.utils.toArray<HTMLElement>(`${PRE} .char span, ${SPLIT} .char span`),
   ]);
 
+  if (skipIntro) {
+    resetIntroSplit();
+    introRoot.style.visibility = 'hidden';
+    introRoot.style.pointerEvents = 'none';
+    gsap.set([preloader, splitOverlay], { opacity: 0, pointerEvents: 'none' });
+    gsap.set(container, {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+    });
+    gsap.set(heroImg, { scale: 1 });
+
+    if (heroTitleRevealRoot) {
+      resetTextRevealTargets(heroTitleRevealRoot, '[data-hero-text-line]');
+    }
+    const titleRevealSkip = heroTitleRevealRoot
+      ? splitTextRevealWords(heroTitleRevealRoot, {
+          targetSelector: '[data-hero-text-line]',
+          charClassName: 'hero-title-char',
+          trim: true,
+        })
+      : { chars: [], words: [] };
+
+    if (titleRevealSkip.chars.length > 0) {
+      gsap.set(titleRevealSkip.chars, { opacity: 1 });
+    } else if (titleLineEls.length > 0) {
+      gsap.set(titleLineEls, { opacity: 1, y: 0 });
+    }
+    if (subEl) gsap.set(subEl, { opacity: 1, y: 0 });
+    if (ctaEl) gsap.set(ctaEl, { opacity: 1, y: 0 });
+    if (scrollEl) gsap.set(scrollEl, { opacity: 1, y: 0 });
+    if (siteHeader) gsap.set(siteHeader, { opacity: 1, y: 0 });
+    return;
+  }
+
+  introRoot.style.visibility = 'visible';
+  introRoot.style.pointerEvents = 'auto';
+
+  const isMobile = window.innerWidth <= 1000;
+
   gsap.set([preloader, splitOverlay], { clearProps: 'all' });
   gsap.set(container, { clearProps: 'clipPath' });
   gsap.set(heroImg, { clearProps: 'transform' });
@@ -131,6 +170,8 @@ export function initHomeHeroRevealAnimation() {
   if (ctaEl) gsap.set(ctaEl, { clearProps: 'all' });
   if (scrollEl) gsap.set(scrollEl, { clearProps: 'all' });
   titleLineEls.forEach((el) => gsap.set(el, { clearProps: 'opacity,transform' }));
+
+  resetIntroSplit();
 
   splitIntroHeadings();
   const titleReveal = heroTitleRevealRoot

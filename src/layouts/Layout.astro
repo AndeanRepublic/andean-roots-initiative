@@ -41,7 +41,9 @@ const {
     <slot />
     <script>
       import { initButtonLinkMagnetic } from '../components/button-link-magnetic';
+      import { registerHomeHeroNavContext } from '../utils/home-hero-nav-context';
 
+      registerHomeHeroNavContext();
       initButtonLinkMagnetic();
       document.addEventListener('astro:page-load', initButtonLinkMagnetic);
     </script>

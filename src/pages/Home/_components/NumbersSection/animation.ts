@@ -58,8 +58,6 @@ function clearNumbersSectionStyles(root: HTMLElement) {
 
 export const initNumbersSectionAnimation = createScrollSectionController({
   rootId: 'impact',
-  triggerIds: [ST_ID],
-  clearStyles: clearNumbersSectionStyles,
   setup: ({ root, mm }) => {
     const meta = root.querySelector<HTMLElement>('[data-anim="meta"]');
     const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="stat-card"]'));
@@ -181,13 +179,34 @@ export const initNumbersSectionAnimation = createScrollSectionController({
         start: 'top 82%',
         end: 'bottom top',
         onEnter: () => {
-          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', overwrite: true });
+          if (meta)
+            gsap.to(meta, {
+              opacity: 1,
+              x: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+              overwrite: true,
+            });
         },
         onEnterBack: () => {
-          if (meta) gsap.to(meta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', overwrite: true });
+          if (meta)
+            gsap.to(meta, {
+              opacity: 1,
+              x: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+              overwrite: true,
+            });
         },
         onLeaveBack: () => {
-          if (meta) gsap.to(meta, { opacity: 0, x: -24, duration: 0.3, ease: 'power2.in', overwrite: true });
+          if (meta)
+            gsap.to(meta, {
+              opacity: 0,
+              x: -24,
+              duration: 0.3,
+              ease: 'power2.in',
+              overwrite: true,
+            });
         },
       });
 

@@ -159,6 +159,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
 
   return () => {
     st.kill();
+
     clearHistorySectionStyles(root);
   };
 }
@@ -286,14 +287,13 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
       tween.scrollTrigger?.kill();
       tween.kill();
     });
+
     clearHistorySectionStyles(root);
   };
 }
 
 export const initHistorySectionAnimation = createScrollSectionController({
   rootId: 'about-history',
-  triggerIds: [ST_DESKTOP_ID, ST_MOBILE_TITLE_ID],
-  clearStyles: clearHistorySectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => setupMobileHistoryPerCardReveal(root));
     mm.add('(min-width: 1200px)', () => setupDesktopHistoryReveal(root));

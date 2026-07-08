@@ -35,13 +35,17 @@ function setupDesktopTeamReveal(root: HTMLElement) {
   const captions = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="member-caption"]'));
   const controls = root.querySelector<HTMLElement>('[data-anim="controls"]');
   const counter = root.querySelector<HTMLElement>('[data-anim="counter"]');
-  const controlButtons = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="control-button"]'));
+  const controlButtons = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-anim="control-button"]'),
+  );
   const descriptionWords = buildTextNodes(root);
 
   if (label) gsap.set(label, { opacity: 0, x: -20 });
-  if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
+  if (descriptionWords.length)
+    gsap.set(descriptionWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
   if (bgWord) gsap.set(bgWord, { opacity: 0, xPercent: 12, scale: 1.08 });
-  if (cards.length) gsap.set(cards, { opacity: 0, y: 46, rotateZ: (i: number) => (i % 2 === 0 ? -2 : 2) });
+  if (cards.length)
+    gsap.set(cards, { opacity: 0, y: 46, rotateZ: (i: number) => (i % 2 === 0 ? -2 : 2) });
   if (images.length) gsap.set(images, { scale: 1.08, filter: 'saturate(0.82)' });
   if (captions.length) gsap.set(captions, { opacity: 0, y: 16 });
   if (controls) gsap.set(controls, { opacity: 0, y: 18 });
@@ -57,7 +61,8 @@ function setupDesktopTeamReveal(root: HTMLElement) {
     const d = immediate ? 0 : 0.56;
 
     if (p >= T_INTRO && !introIn) {
-      if (label) gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 1, x: 0, duration: d, ease: 'power2.out', overwrite: true });
       if (descriptionWords.length) {
         gsap.to(descriptionWords, {
           opacity: 1,
@@ -81,7 +86,8 @@ function setupDesktopTeamReveal(root: HTMLElement) {
       }
       introIn = true;
     } else if (p < T_INTRO && introIn) {
-      if (label) gsap.to(label, { opacity: 0, x: -20, duration: d, ease: 'power2.in', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 0, x: -20, duration: d, ease: 'power2.in', overwrite: true });
       if (descriptionWords.length) {
         gsap.to(descriptionWords, {
           opacity: 0.15,
@@ -155,8 +161,10 @@ function setupDesktopTeamReveal(root: HTMLElement) {
     }
 
     if (p >= T_CONTROLS && !controlsIn) {
-      if (controls) gsap.to(controls, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
-      if (counter) gsap.to(counter, { opacity: 1, duration: d, ease: 'power2.out', overwrite: true });
+      if (controls)
+        gsap.to(controls, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
+      if (counter)
+        gsap.to(counter, { opacity: 1, duration: d, ease: 'power2.out', overwrite: true });
       if (controlButtons.length) {
         gsap.to(controlButtons, {
           scale: 1,
@@ -168,8 +176,10 @@ function setupDesktopTeamReveal(root: HTMLElement) {
       }
       controlsIn = true;
     } else if (p < T_CONTROLS && controlsIn) {
-      if (controls) gsap.to(controls, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
-      if (counter) gsap.to(counter, { opacity: 0.2, duration: d, ease: 'power2.in', overwrite: true });
+      if (controls)
+        gsap.to(controls, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
+      if (counter)
+        gsap.to(counter, { opacity: 0.2, duration: d, ease: 'power2.in', overwrite: true });
       if (controlButtons.length) {
         gsap.to(controlButtons, {
           scale: 0.92,
@@ -206,6 +216,7 @@ function setupDesktopTeamReveal(root: HTMLElement) {
   return () => {
     st.kill();
     cleanupControlsHover();
+
     clearTeamSectionStyles(root);
   };
 }
@@ -218,13 +229,17 @@ function setupMobileTeamReveal(root: HTMLElement) {
   const captions = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="member-caption"]'));
   const controls = root.querySelector<HTMLElement>('[data-anim="controls"]');
   const counter = root.querySelector<HTMLElement>('[data-anim="counter"]');
-  const controlButtons = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="control-button"]'));
+  const controlButtons = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-anim="control-button"]'),
+  );
   const descriptionWords = buildTextNodes(root);
 
   if (label) gsap.set(label, { opacity: 0, x: -20 });
-  if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
+  if (descriptionWords.length)
+    gsap.set(descriptionWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
   if (bgWord) gsap.set(bgWord, { opacity: 0, xPercent: 12, scale: 1.08 });
-  if (cards.length) gsap.set(cards, { opacity: 0, y: 46, rotateZ: (i: number) => (i % 2 === 0 ? -2 : 2) });
+  if (cards.length)
+    gsap.set(cards, { opacity: 0, y: 46, rotateZ: (i: number) => (i % 2 === 0 ? -2 : 2) });
   if (images.length) gsap.set(images, { scale: 1.08, filter: 'saturate(0.82)' });
   if (captions.length) gsap.set(captions, { opacity: 0, y: 16 });
   if (controls) gsap.set(controls, { opacity: 0, y: 18 });
@@ -393,14 +408,13 @@ function setupMobileTeamReveal(root: HTMLElement) {
       tween.scrollTrigger?.kill();
       tween.kill();
     });
+
     clearTeamSectionStyles(root);
   };
 }
 
 export const initTeamSectionAnimation = createScrollSectionController({
   rootId: 'about-team',
-  triggerIds: [ST_DESKTOP_ID, ST_MOBILE_INTRO_ID],
-  clearStyles: clearTeamSectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => setupMobileTeamReveal(root));
     mm.add('(min-width: 1200px)', () => setupDesktopTeamReveal(root));

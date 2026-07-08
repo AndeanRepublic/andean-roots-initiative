@@ -76,7 +76,8 @@ function setupDesktopFocusReveal(root: HTMLElement) {
     const d = immediate ? 0 : 0.56;
 
     if (p >= T_CONTENT && !contentIn) {
-      if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
       if (titleChars.length) {
         gsap.to(titleChars, {
           opacity: 1,
@@ -89,7 +90,8 @@ function setupDesktopFocusReveal(root: HTMLElement) {
       }
       contentIn = true;
     } else if (p < T_CONTENT && contentIn) {
-      if (label) gsap.to(label, { opacity: 0, y: 20, duration: d, ease: 'power2.in', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 0, y: 20, duration: d, ease: 'power2.in', overwrite: true });
       if (titleChars.length) {
         gsap.to(titleChars, {
           opacity: 0,
@@ -192,8 +194,10 @@ function setupDesktopFocusReveal(root: HTMLElement) {
           overwrite: true,
         });
       }
-      if (leftImage) gsap.to(leftImage, { scale: 1, duration: d, ease: 'power2.out', overwrite: true });
-      if (rightImage) gsap.to(rightImage, { scale: 1, duration: d, ease: 'power2.out', overwrite: true });
+      if (leftImage)
+        gsap.to(leftImage, { scale: 1, duration: d, ease: 'power2.out', overwrite: true });
+      if (rightImage)
+        gsap.to(rightImage, { scale: 1, duration: d, ease: 'power2.out', overwrite: true });
       mediaIn = true;
     } else if ((leftMedia || rightMedia) && p < T_CONTENT && mediaIn) {
       if (leftMedia) {
@@ -214,8 +218,10 @@ function setupDesktopFocusReveal(root: HTMLElement) {
           overwrite: true,
         });
       }
-      if (leftImage) gsap.to(leftImage, { scale: 1.1, duration: d, ease: 'power2.in', overwrite: true });
-      if (rightImage) gsap.to(rightImage, { scale: 1.1, duration: d, ease: 'power2.in', overwrite: true });
+      if (leftImage)
+        gsap.to(leftImage, { scale: 1.1, duration: d, ease: 'power2.in', overwrite: true });
+      if (rightImage)
+        gsap.to(rightImage, { scale: 1.1, duration: d, ease: 'power2.in', overwrite: true });
       mediaIn = false;
     }
   };
@@ -232,6 +238,7 @@ function setupDesktopFocusReveal(root: HTMLElement) {
 
   return () => {
     st.kill();
+
     clearFocusSectionStyles(root);
   };
 }
@@ -458,14 +465,13 @@ function setupMobileFocusReveal(root: HTMLElement) {
       tween.scrollTrigger?.kill();
       tween.kill();
     });
+
     clearFocusSectionStyles(root);
   };
 }
 
 export const initFocusSectionAnimation = createScrollSectionController({
   rootId: 'about-focus',
-  triggerIds: [ST_DESKTOP_ID, ST_MOBILE_CONTENT_ID],
-  clearStyles: clearFocusSectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => setupMobileFocusReveal(root));
     mm.add('(min-width: 1200px)', () => setupDesktopFocusReveal(root));

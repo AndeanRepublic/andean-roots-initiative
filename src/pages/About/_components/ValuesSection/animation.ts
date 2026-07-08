@@ -38,7 +38,8 @@ function setupDesktopValuesReveal(root: HTMLElement) {
 
   if (label) gsap.set(label, { opacity: 0, y: 18 });
   if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 42 });
-  if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.18, y: 16, filter: 'blur(2px)' });
+  if (descriptionWords.length)
+    gsap.set(descriptionWords, { opacity: 0.18, y: 16, filter: 'blur(2px)' });
   if (cards.length) {
     gsap.set(cards, {
       opacity: 0,
@@ -56,7 +57,8 @@ function setupDesktopValuesReveal(root: HTMLElement) {
     const d = immediate ? 0 : 0.55;
 
     if (p >= T_HEADER && !headerIn) {
-      if (label) gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
       if (titleChars.length) {
         gsap.to(titleChars, {
           opacity: 1,
@@ -69,7 +71,8 @@ function setupDesktopValuesReveal(root: HTMLElement) {
       }
       headerIn = true;
     } else if (p < T_HEADER && headerIn) {
-      if (label) gsap.to(label, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
+      if (label)
+        gsap.to(label, { opacity: 0, y: 18, duration: d, ease: 'power2.in', overwrite: true });
       if (titleChars.length) {
         gsap.to(titleChars, {
           opacity: 0,
@@ -152,6 +155,7 @@ function setupDesktopValuesReveal(root: HTMLElement) {
   return () => {
     st.kill();
     cleanupCardHover();
+
     clearValuesSectionStyles(root);
   };
 }
@@ -170,7 +174,8 @@ function setupMobileValuesReveal(root: HTMLElement) {
 
   if (label) gsap.set(label, { opacity: 0, y: 18 });
   if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 42 });
-  if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.18, y: 16, filter: 'blur(2px)' });
+  if (descriptionWords.length)
+    gsap.set(descriptionWords, { opacity: 0.18, y: 16, filter: 'blur(2px)' });
   if (cards.length) {
     gsap.set(cards, {
       opacity: 0,
@@ -310,14 +315,13 @@ function setupMobileValuesReveal(root: HTMLElement) {
       tween.scrollTrigger?.kill();
       tween.kill();
     });
+
     clearValuesSectionStyles(root);
   };
 }
 
 export const initValuesSectionAnimation = createScrollSectionController({
   rootId: 'about-values',
-  triggerIds: [ST_DESKTOP_ID, ST_MOBILE_HEADER_ID],
-  clearStyles: clearValuesSectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => setupMobileValuesReveal(root));
     mm.add('(min-width: 1200px)', () => setupDesktopValuesReveal(root));

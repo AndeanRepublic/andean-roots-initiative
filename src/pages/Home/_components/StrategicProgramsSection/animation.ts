@@ -31,8 +31,6 @@ function clearStrategicProgramsStyles(root: HTMLElement) {
 
 export const initStrategicProgramsSectionAnimation = createScrollSectionController({
   rootId: 'programs',
-  triggerIds: [ST_ID],
-  clearStyles: clearStrategicProgramsStyles,
   setup: ({ root, mm }) => {
     const labelDesktop = root.querySelector<HTMLElement>('[data-anim="label-desktop"]');
     const labelMobile = root.querySelector<HTMLElement>('[data-anim="label-mobile"]');
@@ -283,6 +281,7 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       return () => {
         st.kill();
         cardTriggers.forEach((trigger) => trigger.kill());
+
         clearStrategicProgramsStyles(root);
       };
     });
@@ -316,7 +315,8 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
               overwrite: true,
             });
           }
-          if (cta) gsap.to(cta, { opacity: 1, x: 0, duration: 0.42, ease: 'power2.out', overwrite: true });
+          if (cta)
+            gsap.to(cta, { opacity: 1, x: 0, duration: 0.42, ease: 'power2.out', overwrite: true });
         },
         onEnterBack: () => {
           if (labelTargets.length) {
@@ -339,11 +339,18 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
               overwrite: true,
             });
           }
-          if (cta) gsap.to(cta, { opacity: 1, x: 0, duration: 0.32, ease: 'power2.out', overwrite: true });
+          if (cta)
+            gsap.to(cta, { opacity: 1, x: 0, duration: 0.32, ease: 'power2.out', overwrite: true });
         },
         onLeaveBack: () => {
           if (labelTargets.length) {
-            gsap.to(labelTargets, { opacity: 0, y: 18, duration: 0.28, ease: 'power2.in', overwrite: true });
+            gsap.to(labelTargets, {
+              opacity: 0,
+              y: 18,
+              duration: 0.28,
+              ease: 'power2.in',
+              overwrite: true,
+            });
           }
           if (titleChars.length) {
             gsap.to(titleChars, {
@@ -355,7 +362,8 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
               overwrite: true,
             });
           }
-          if (cta) gsap.to(cta, { opacity: 0, x: 20, duration: 0.25, ease: 'power2.in', overwrite: true });
+          if (cta)
+            gsap.to(cta, { opacity: 0, x: 20, duration: 0.25, ease: 'power2.in', overwrite: true });
         },
       });
 
@@ -364,6 +372,7 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       return () => {
         sectionTrigger.kill();
         cardTriggers.forEach((trigger) => trigger.kill());
+
         clearStrategicProgramsStyles(root);
       };
     });

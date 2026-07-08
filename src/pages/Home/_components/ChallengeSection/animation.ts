@@ -75,8 +75,6 @@ function clearVisionCardStyles(root: HTMLElement) {
 
 export const initChallengeSectionCards = createScrollSectionController({
   rootId: 'challenge',
-  triggerIds: [ST_ID, ST_TEXT_ID],
-  clearStyles: clearVisionCardStyles,
   setup: ({ root, mm }) => {
     mm.add('(max-width: 1199px)', () => {
       const clearTextAnimation = setupIntroTextReveal(root);
@@ -138,6 +136,7 @@ export const initChallengeSectionCards = createScrollSectionController({
       return () => {
         cardTriggers.forEach((trigger) => trigger.kill());
         clearTextAnimation();
+
         clearVisionCardStyles(root);
       };
     });
@@ -246,6 +245,7 @@ export const initChallengeSectionCards = createScrollSectionController({
         isGapAnimationCompleted = false;
         isFlipAnimationCompleted = false;
         clearTextAnimation();
+
         clearVisionCardStyles(root);
       };
     });

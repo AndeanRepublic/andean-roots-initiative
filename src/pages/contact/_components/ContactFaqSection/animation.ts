@@ -19,8 +19,6 @@ function clearContactFaqStyles(root: HTMLElement) {
 
 export const initContactFaqSectionAnimation = createScrollSectionController({
   rootId: 'contact-faq',
-  triggerIds: [ST_ID],
-  clearStyles: clearContactFaqStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const intro = root.querySelector<HTMLElement>('[data-anim="faq-intro"]');
@@ -136,6 +134,7 @@ export const initContactFaqSectionAnimation = createScrollSectionController({
 
       return () => {
         st.kill();
+
         clearContactFaqStyles(root);
       };
     });

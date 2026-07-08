@@ -17,8 +17,6 @@ function clearContactImpactStyles(root: HTMLElement) {
 
 export const initContactImpactSectionAnimation = createScrollSectionController({
   rootId: 'contact-impact',
-  triggerIds: [ST_ID],
-  clearStyles: clearContactImpactStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const headline = root.querySelector<HTMLElement>('[data-anim="headline"]');
@@ -94,6 +92,7 @@ export const initContactImpactSectionAnimation = createScrollSectionController({
 
       return () => {
         st.kill();
+
         clearContactImpactStyles(root);
       };
     });

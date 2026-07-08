@@ -33,8 +33,6 @@ function clearOrganizationSectionStyles(root: HTMLElement) {
 
 export const initOrganizationSectionAnimation = createScrollSectionController({
   rootId: 'about-organization',
-  triggerIds: [ST_HEADER_ID, ST_COVER_ID, ST_COVER_PARALLAX_ID],
-  clearStyles: clearOrganizationSectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
@@ -221,6 +219,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
           tween.scrollTrigger?.kill();
           tween.kill();
         });
+
         clearOrganizationSectionStyles(root);
       };
     });

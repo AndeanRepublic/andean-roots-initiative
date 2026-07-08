@@ -16,8 +16,6 @@ function clearContactChannelsStyles(root: HTMLElement) {
 
 export const initContactChannelsSectionAnimation = createScrollSectionController({
   rootId: 'canales',
-  triggerIds: [ST_ID],
-  clearStyles: clearContactChannelsStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="channel-card"]'));
@@ -77,6 +75,7 @@ export const initContactChannelsSectionAnimation = createScrollSectionController
 
       return () => {
         st.kill();
+
         clearContactChannelsStyles(root);
       };
     });

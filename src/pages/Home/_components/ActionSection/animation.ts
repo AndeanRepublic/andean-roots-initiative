@@ -36,8 +36,6 @@ function clearActionSectionStyles(root: HTMLElement) {
 
 export const initActionSectionAnimation = createScrollSectionController({
   rootId: 'actions',
-  triggerIds: [ST_ID],
-  clearStyles: clearActionSectionStyles,
   setup: ({ root, mm }) => {
     const label = root.querySelector<HTMLElement>('[data-anim="label"]');
     const title = root.querySelector<HTMLElement>('[data-anim="title"]');
@@ -112,7 +110,14 @@ export const initActionSectionAnimation = createScrollSectionController({
 
         if (label) {
           if (p >= T_LABEL && !labelIn) {
-            gsap.to(label, { opacity: 1, y: 0, rotateZ: 0, duration: d, ease: 'power2.out', overwrite: true });
+            gsap.to(label, {
+              opacity: 1,
+              y: 0,
+              rotateZ: 0,
+              duration: d,
+              ease: 'power2.out',
+              overwrite: true,
+            });
             labelIn = true;
           } else if (p < T_LABEL && labelIn) {
             gsap.to(label, {
@@ -277,6 +282,7 @@ export const initActionSectionAnimation = createScrollSectionController({
 
       return () => {
         sectionTrigger.kill();
+
         clearActionSectionStyles(root);
       };
     });
@@ -289,6 +295,7 @@ export const initActionSectionAnimation = createScrollSectionController({
       return () => {
         sectionTrigger.kill();
         cardTriggers.forEach((trigger) => trigger.kill());
+
         clearActionSectionStyles(root);
       };
     });

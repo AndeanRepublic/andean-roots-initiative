@@ -81,9 +81,7 @@ function resetIntroSplit() {
 export function initHomeHeroRevealAnimation() {
   const pathLeft = consumePathBeforeHomeNavigation();
   const skipIntro =
-    pathLeft != null &&
-    !isHomePathname(pathLeft) &&
-    isHomePathname(window.location.pathname);
+    pathLeft != null && !isHomePathname(pathLeft) && isHomePathname(window.location.pathname);
 
   const container = document.querySelector<HTMLElement>(CONT);
   const preloader = document.querySelector<HTMLElement>(PRE);
@@ -157,12 +155,18 @@ export function initHomeHeroRevealAnimation() {
     if (siteHeader) gsap.set(siteHeader, { opacity: 0, y: -20 });
 
     const entranceTl = gsap.timeline({ defaults: { ease: 'hop' } });
-    entranceTl.to(container, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 0.8 }, 0);
+    entranceTl.to(
+      container,
+      { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 0.8 },
+      0,
+    );
     entranceTl.to(heroImg, { scale: 1, duration: 0.9 }, 0);
 
     const postStart = 0.35;
     if (titleRevealSkip.words.length > 0) {
-      addRandomWordFlipReveal(entranceTl, titleRevealSkip.words, titleLineEls, { position: postStart });
+      addRandomWordFlipReveal(entranceTl, titleRevealSkip.words, titleLineEls, {
+        position: postStart,
+      });
     } else if (titleLineEls.length > 0) {
       entranceTl.to(
         titleLineEls,
@@ -170,10 +174,15 @@ export function initHomeHeroRevealAnimation() {
         postStart,
       );
     }
-    const afterTitle = titleRevealSkip.words.length > 0 || titleLineEls.length > 0 ? '>' : postStart;
+    const afterTitle =
+      titleRevealSkip.words.length > 0 || titleLineEls.length > 0 ? '>' : postStart;
     const restGroup = [subEl, ctaEl, scrollEl, siteHeader].filter(Boolean) as HTMLElement[];
     if (restGroup.length > 0) {
-      entranceTl.to(restGroup, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, afterTitle);
+      entranceTl.to(
+        restGroup,
+        { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
+        afterTitle,
+      );
     }
     return;
   }

@@ -17,8 +17,6 @@ function clearContactFormSectionStyles(root: HTMLElement) {
 
 export const initContactFormSectionAnimation = createScrollSectionController({
   rootId: 'contacto-form',
-  triggerIds: [ST_ID],
-  clearStyles: clearContactFormSectionStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const aside = root.querySelector<HTMLElement>('[data-anim="form-aside"]');
@@ -92,6 +90,7 @@ export const initContactFormSectionAnimation = createScrollSectionController({
 
       return () => {
         st.kill();
+
         clearContactFormSectionStyles(root);
       };
     });

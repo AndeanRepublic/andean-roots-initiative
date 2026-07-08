@@ -12,7 +12,9 @@ const T_STATS = 0.35;
 
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-programs-intro-text-line]');
-  const titleParts = Array.from(root.querySelectorAll<HTMLElement>('[data-programs-intro-text-line]'));
+  const titleParts = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-programs-intro-text-line]'),
+  );
   return titleParts.flatMap((item) => splitChars(item, 'programs-intro-title-char'));
 }
 
@@ -26,8 +28,6 @@ function clearProgramsIntroStyles(root: HTMLElement) {
 
 export const initProgramsIntroSectionAnimation = createScrollSectionController({
   rootId: 'programs-intro',
-  triggerIds: [ST_ID],
-  clearStyles: clearProgramsIntroStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const titleChars = buildTextNodes(root);
@@ -138,6 +138,7 @@ export const initProgramsIntroSectionAnimation = createScrollSectionController({
 
       return () => {
         st.kill();
+
         clearProgramsIntroStyles(root);
       };
     });

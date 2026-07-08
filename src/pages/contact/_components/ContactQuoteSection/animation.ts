@@ -18,8 +18,6 @@ function clearContactQuoteStyles(root: HTMLElement) {
 
 export const initContactQuoteSectionAnimation = createScrollSectionController({
   rootId: 'contact-quote',
-  triggerIds: [ST_ID],
-  clearStyles: clearContactQuoteStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const mark = root.querySelector<HTMLElement>('[data-anim="quote-mark"]');
@@ -120,6 +118,7 @@ export const initContactQuoteSectionAnimation = createScrollSectionController({
 
       return () => {
         st.kill();
+
         clearContactQuoteStyles(root);
       };
     });

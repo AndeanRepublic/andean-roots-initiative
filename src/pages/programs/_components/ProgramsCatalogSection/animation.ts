@@ -11,7 +11,9 @@ const CARD_HIDE_STAGGER = 0.06;
 
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-programs-card-text-words]');
-  const descriptions = Array.from(root.querySelectorAll<HTMLElement>('[data-programs-card-text-words]'));
+  const descriptions = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-programs-card-text-words]'),
+  );
   return descriptions.flatMap((el) => splitWords(el, 'programs-card-word'));
 }
 
@@ -62,8 +64,6 @@ function createBatchedCardRunner(
 
 export const initProgramsCatalogSectionAnimation = createScrollSectionController({
   rootId: 'programs-catalog',
-  triggerIds: [ST_ID],
-  clearStyles: clearProgramsCatalogStyles,
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="program-card"]'));
@@ -84,7 +84,9 @@ export const initProgramsCatalogSectionAnimation = createScrollSectionController
       const revealCard = (card: HTMLElement, immediate = false) => {
         const d = immediate ? 0 : 0.48;
         const body = card.querySelector<HTMLElement>('[data-programs-card-text-words]');
-        const words = body ? Array.from(body.querySelectorAll<HTMLElement>('.programs-card-word')) : [];
+        const words = body
+          ? Array.from(body.querySelectorAll<HTMLElement>('.programs-card-word'))
+          : [];
         const image = card.querySelector<HTMLElement>('[data-anim="program-image"]');
 
         gsap.to(card, {
@@ -131,7 +133,9 @@ export const initProgramsCatalogSectionAnimation = createScrollSectionController
       const hideCard = (card: HTMLElement, immediate = false) => {
         const d = immediate ? 0 : 0.34;
         const body = card.querySelector<HTMLElement>('[data-programs-card-text-words]');
-        const words = body ? Array.from(body.querySelectorAll<HTMLElement>('.programs-card-word')) : [];
+        const words = body
+          ? Array.from(body.querySelectorAll<HTMLElement>('.programs-card-word'))
+          : [];
         const image = card.querySelector<HTMLElement>('[data-anim="program-image"]');
 
         gsap.to(card, {
@@ -194,6 +198,7 @@ export const initProgramsCatalogSectionAnimation = createScrollSectionController
         revealBatch.cancel();
         hideBatch.cancel();
         triggers.forEach((trigger) => trigger.kill());
+
         clearProgramsCatalogStyles(root);
       };
     });

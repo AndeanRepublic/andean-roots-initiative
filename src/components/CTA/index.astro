@@ -38,7 +38,9 @@ const c = t.cta;
         <p class="body-md-l text-light max-w-150">
           {c.description}
         </p>
-        <div class="tablet:gap-6 hidden w-full flex-row items-center justify-center gap-4 desktop:flex">
+        <div
+          class="tablet:gap-6 desktop:flex hidden w-full flex-row items-center justify-center gap-4"
+        >
           <span data-donation-trigger>
             <ButtonLink
               class="inline-flex"
@@ -58,7 +60,9 @@ const c = t.cta;
             bordered
           />
         </div>
-        <div class="tablet:gap-6 flex w-full flex-row items-center justify-center gap-4 desktop:hidden">
+        <div
+          class="tablet:gap-6 desktop:hidden flex w-full flex-row items-center justify-center gap-4"
+        >
           <span data-donation-trigger>
             <ButtonLink
               class="inline-flex"
@@ -97,7 +101,6 @@ const c = t.cta;
       });
     }
 
-    initDonationTrigger();
     document.addEventListener('astro:page-load', initDonationTrigger);
   </script>
 </section>

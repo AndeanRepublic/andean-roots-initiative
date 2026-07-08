@@ -193,11 +193,5 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
     initHeaderAnimation();
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
-  } else {
-    boot();
-  }
-
   document.addEventListener('astro:page-load', boot);
 </script>

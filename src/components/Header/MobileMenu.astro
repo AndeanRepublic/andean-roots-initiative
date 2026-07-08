@@ -55,8 +55,14 @@ const secondaryLinks = [
                       href={link.href}
                       data-nav-link
                       data-nav-slug={link.slug}
-                      data-nav-label-es={tEs.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
-                      data-nav-label-en={tEn.header.navLinks.find((item) => item.slug === link.slug)?.label ?? link.label}
+                      data-nav-label-es={
+                        tEs.header.navLinks.find((item) => item.slug === link.slug)?.label ??
+                        link.label
+                      }
+                      data-nav-label-en={
+                        tEn.header.navLinks.find((item) => item.slug === link.slug)?.label ??
+                        link.label
+                      }
                       data-mobile-menu-line
                       class={cn(
                         'font-nunito-sans block translate-y-[-110%] text-[2.8rem] leading-none font-semibold tracking-tight',
@@ -138,12 +144,6 @@ const secondaryLinks = [
   import { initMobileMenuAnimation } from './mobile-menu-animation';
 
   const boot = () => initMobileMenuAnimation();
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
-  } else {
-    boot();
-  }
 
   document.addEventListener('astro:page-load', boot);
 </script>

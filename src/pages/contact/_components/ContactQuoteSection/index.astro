@@ -18,44 +18,54 @@ const q = t.contactPage.quote;
   aria-labelledby="contact-quote-text"
 >
   <div class="mx-auto w-full max-w-328">
-    <div class="relative overflow-hidden rounded-2xl border border-black/5 bg-white px-6 py-12 text-center tablet:px-8 desktop:px-12">
-      <div class="bg-main/10 absolute -top-14 right-12 size-40 rounded-full blur-3xl" aria-hidden="true"></div>
-      <div class="bg-main/10 absolute -bottom-20 left-12 size-56 rounded-full blur-3xl" aria-hidden="true"></div>
-      <div class="relative z-1 mx-auto flex w-full max-w-200 flex-col items-center gap-8">
-    <p
-      class="text-main font-nunito-sans text-[4rem] leading-none font-semibold opacity-90"
-      aria-hidden="true"
-      data-anim="quote-mark"
+    <div
+      class="tablet:px-8 desktop:px-12 relative overflow-hidden rounded-2xl border border-black/5 bg-white px-6 py-12 text-center"
     >
-      &ldquo;
-    </p>
-
-    <blockquote class="flex flex-col gap-8">
-      <p
-        id="contact-quote-text"
-        class="heading-md-sb text-black max-w-160 text-pretty italic tablet:max-w-none"
-        data-anim="quote-text"
+      <div
+        class="bg-main/10 absolute -top-14 right-12 size-40 rounded-full blur-3xl"
+        aria-hidden="true"
       >
-        {q.quote}
-      </p>
+      </div>
+      <div
+        class="bg-main/10 absolute -bottom-20 left-12 size-56 rounded-full blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative z-1 mx-auto flex w-full max-w-200 flex-col items-center gap-8">
+        <p
+          class="text-main font-nunito-sans text-[4rem] leading-none font-semibold opacity-90"
+          aria-hidden="true"
+          data-anim="quote-mark"
+        >
+          &ldquo;
+        </p>
 
-      <footer class="flex flex-col items-center gap-3" data-anim="quote-footer">
-        <img
-          src={q.portraitSrc}
-          alt={q.portraitAlt}
-          class="size-16 rounded-full object-cover ring-2 ring-main/30"
-          width="64"
-          height="64"
-          loading="lazy"
-        />
-        <div class="flex flex-col gap-1">
-          <cite class="heading-xs-sb text-main not-italic">
-            {q.attributionName}
-          </cite>
-          <span class="body-sm-l text-gray">{q.attributionRole}</span>
-        </div>
-      </footer>
-    </blockquote>
+        <blockquote class="flex flex-col gap-8">
+          <p
+            id="contact-quote-text"
+            class="heading-md-sb tablet:max-w-none max-w-160 text-pretty text-black italic"
+            data-anim="quote-text"
+          >
+            {q.quote}
+          </p>
+
+          <footer class="flex flex-col items-center gap-3" data-anim="quote-footer">
+            <img
+              src={q.portraitSrc}
+              alt={q.portraitAlt}
+              class="ring-main/30 size-16 rounded-full object-cover ring-2"
+              width="64"
+              height="64"
+              loading="lazy"
+            />
+            <div class="flex flex-col gap-1">
+              <cite class="heading-xs-sb text-main not-italic">
+                {q.attributionName}
+              </cite>
+              <span class="body-sm-l text-gray">{q.attributionRole}</span>
+            </div>
+          </footer>
+        </blockquote>
       </div>
     </div>
   </div>
@@ -65,6 +75,6 @@ const q = t.contactPage.quote;
   import { initContactQuoteSectionAnimation } from './animation';
 
   const init = () => initContactQuoteSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

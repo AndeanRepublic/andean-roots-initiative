@@ -45,11 +45,7 @@ const n = t.numbers;
         </div>
 
         <div data-anim="stats" class="tablet:grid-cols-3 grid flex-1 gap-8">
-          {
-            n.stats.map((stat) => (
-              <NumbersStatCard value={stat.value} label={stat.label} />
-            ))
-          }
+          {n.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
         </div>
       </div>
     </div>
@@ -60,9 +56,6 @@ const n = t.numbers;
   import { initNumbersSectionAnimation } from './animation';
 
   const boot = () => initNumbersSectionAnimation();
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
 
   document.addEventListener('astro:page-load', boot);
 </script>

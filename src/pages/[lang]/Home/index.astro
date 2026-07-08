@@ -42,11 +42,5 @@ const { lang } = Astro.params as { lang: Locale };
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', resetHomeScrollToTop, { once: true });
-  } else {
-    resetHomeScrollToTop();
-  }
-
   document.addEventListener('astro:page-load', resetHomeScrollToTop);
 </script>

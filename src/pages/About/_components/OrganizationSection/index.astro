@@ -12,10 +12,7 @@ const t = useTranslations(lang);
 const o = t.aboutPage.organization;
 ---
 
-<section
-  id="about-organization"
-  class="px-2xl desktop:py-6xl bg-white py-12"
->
+<section id="about-organization" class="px-2xl desktop:py-6xl bg-white py-12">
   <div class="desktop:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="flex flex-col gap-4" data-anim="header">
       <div class="gap-sm flex items-center" data-anim="label">
@@ -81,6 +78,6 @@ const o = t.aboutPage.organization;
   import { initOrganizationSectionAnimation } from './animation';
 
   const init = () => initOrganizationSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

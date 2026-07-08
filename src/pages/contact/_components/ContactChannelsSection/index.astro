@@ -15,16 +15,15 @@ const t = useTranslations(lang);
 const cc = t.contactPage.channels;
 ---
 
-<section
-  id={cc.sectionId}
-  class="px-2xl bg-white py-4"
-  aria-labelledby="contact-channels-heading"
->
+<section id={cc.sectionId} class="px-2xl bg-white py-4" aria-labelledby="contact-channels-heading">
   <div class="desktop:gap-12 mx-auto flex w-full max-w-328 flex-col gap-10">
     <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-6">
       {
         cc.columns.map((col) => (
-          <article class="group flex h-full flex-col items-center gap-6 p-8" data-anim="channel-card">
+          <article
+            class="group flex h-full flex-col items-center gap-6 p-8"
+            data-anim="channel-card"
+          >
             <div class="text-main flex size-12 items-center justify-center rounded-full bg-white ring-1 ring-black/5">
               {col.kind === 'phone' && <PhoneIcon class="size-8" />}
               {col.kind === 'hours' && <ClockIcon class="size-8" />}
@@ -57,6 +56,6 @@ const cc = t.contactPage.channels;
   import { initContactChannelsSectionAnimation } from './animation';
 
   const init = () => initContactChannelsSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

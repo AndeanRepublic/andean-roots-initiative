@@ -30,18 +30,20 @@ const props = Astro.props as Props;
       fetchpriority="high"
       data-anim="media"
     />
-    {props.overlayImageSrc ? (
-      <img
-        src={props.overlayImageSrc}
-        alt=""
-        class="absolute inset-0 size-full object-cover object-center opacity-60"
-        loading="eager"
-        decoding="async"
-        aria-hidden="true"
-        data-anim="media-overlay"
-      />
-    ) : null}
-    <div class="absolute inset-0 bg-black/90" data-anim="overlay" />
+    {
+      props.overlayImageSrc ? (
+        <img
+          src={props.overlayImageSrc}
+          alt=""
+          class="absolute inset-0 size-full object-cover object-center opacity-60"
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+          data-anim="media-overlay"
+        />
+      ) : null
+    }
+    <div class="absolute inset-0 bg-black/90" data-anim="overlay"></div>
   </div>
 
   <div
@@ -56,30 +58,32 @@ const props = Astro.props as Props;
       class="mt-2 flex items-center gap-3.5 text-white"
       data-anim="breadcrumb"
     >
-      {props.breadcrumb.map((item, index) => (
-        <>
-          {index > 0 ? (
-            <span
-              class="size-1.25 rounded-full bg-white/80"
-              aria-hidden="true"
-              data-anim="crumb-dot"
-            />
-          ) : null}
-          {item.current ? (
-            <span class="heading-sm-sb text-white" data-anim="crumb-item">
-              {item.label}
-            </span>
-          ) : (
-            <a
-              href={item.href}
-              class="heading-sm-sb text-white transition-opacity hover:opacity-80"
-              data-anim="crumb-item"
-            >
-              {item.label}
-            </a>
-          )}
-        </>
-      ))}
+      {
+        props.breadcrumb.map((item, index) => (
+          <>
+            {index > 0 ? (
+              <span
+                class="size-1.25 rounded-full bg-white/80"
+                aria-hidden="true"
+                data-anim="crumb-dot"
+              />
+            ) : null}
+            {item.current ? (
+              <span class="heading-sm-sb text-white" data-anim="crumb-item">
+                {item.label}
+              </span>
+            ) : (
+              <a
+                href={item.href}
+                class="heading-sm-sb text-white transition-opacity hover:opacity-80"
+                data-anim="crumb-item"
+              >
+                {item.label}
+              </a>
+            )}
+          </>
+        ))
+      }
     </nav>
   </div>
 </section>
@@ -88,9 +92,6 @@ const props = Astro.props as Props;
   import { initPageSiteHero } from './animation';
 
   const boot = () => initPageSiteHero();
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
 
   document.addEventListener('astro:page-load', boot);
 </script>

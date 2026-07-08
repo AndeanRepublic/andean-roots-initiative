@@ -12,12 +12,9 @@ const t = useTranslations(lang);
 const tm = t.aboutPage.team;
 ---
 
-<section
-  id="about-team"
-  class="px-2xl desktop:py-6xl relative overflow-hidden bg-white py-12"
->
+<section id="about-team" class="px-2xl desktop:py-6xl relative overflow-hidden bg-white py-12">
   <p
-    class="pointer-events-none absolute z-0 block text-light leading-[0.8] font-semibold tracking-[-0.35rem] top-10 -right-2 text-[7rem] tablet:top-12 tablet:right-4 tablet:text-[14rem] tablet:tracking-[-0.65rem] desktop:top-14 desktop:right-16 desktop:text-[20rem] desktop:tracking-[-0.8rem]"
+    class="text-light tablet:top-12 tablet:right-4 tablet:text-[14rem] tablet:tracking-[-0.65rem] desktop:top-14 desktop:right-16 desktop:text-[20rem] desktop:tracking-[-0.8rem] pointer-events-none absolute top-10 -right-2 z-0 block text-[7rem] leading-[0.8] font-semibold tracking-[-0.35rem]"
     aria-hidden="true"
     data-anim="bg-word"
   >
@@ -36,18 +33,18 @@ const tm = t.aboutPage.team;
     </div>
 
     <div
-      class="flex flex-col gap-6 tablet:grid tablet:grid-cols-2 desktop:grid-cols-4 desktop:items-end desktop:gap-6"
+      class="tablet:grid tablet:grid-cols-2 desktop:grid-cols-4 desktop:items-end desktop:gap-6 flex flex-col gap-6"
       data-anim="cards"
     >
       {
         tm.members.map((member, index) => (
           <article
             class:list={[
-              'relative w-3/4 tablet:w-full',
+              'tablet:w-full relative w-3/4',
               member.offsetClass ?? '',
               {
-                'mr-auto tablet:mx-0': index % 2 === 0,
-                'ml-auto tablet:mx-0': index % 2 !== 0,
+                'tablet:mx-0 mr-auto': index % 2 === 0,
+                'tablet:mx-0 ml-auto': index % 2 !== 0,
               },
             ]}
             data-anim="member-card"
@@ -112,6 +109,6 @@ const tm = t.aboutPage.team;
   import { initTeamSectionAnimation } from './animation';
 
   const init = () => initTeamSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

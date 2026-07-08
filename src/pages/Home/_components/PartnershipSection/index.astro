@@ -29,10 +29,7 @@ const p = t.partners;
         <p class="body-md-sb text-main">{p.label}</p>
       </div>
       <p class="heading-lg-sb text-main tablet:hidden pb-4 text-center" data-anim="label-mobile">
-        {
-          p.label.charAt(0).toUpperCase() +
-            p.label.slice(1).toLowerCase()
-        }
+        {p.label.charAt(0).toUpperCase() + p.label.slice(1).toLowerCase()}
       </p>
       <p class="body-md-l text-gray max-w-[400px]" data-anim="description" data-partners-text-words>
         {p.description}
@@ -71,6 +68,6 @@ const p = t.partners;
   import { initPartnershipSectionAnimation } from './animation';
 
   const init = () => initPartnershipSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

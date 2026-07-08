@@ -32,10 +32,7 @@ const sp = t.strategicPrograms;
         <p class="body-md-sb text-main">{sp.label}</p>
       </div>
       <p class="heading-md-sb text-main tablet:hidden text-center" data-anim="label-mobile">
-        {
-          sp.label.charAt(0).toUpperCase() +
-            sp.label.slice(1).toLowerCase()
-        }
+        {sp.label.charAt(0).toUpperCase() + sp.label.slice(1).toLowerCase()}
       </p>
 
       <div
@@ -86,6 +83,6 @@ const sp = t.strategicPrograms;
   import { initStrategicProgramsSectionAnimation } from './animation';
 
   const init = () => initStrategicProgramsSectionAnimation();
-  document.addEventListener('DOMContentLoaded', init, { once: true });
+
   document.addEventListener('astro:page-load', init);
 </script>

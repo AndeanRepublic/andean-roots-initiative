@@ -5,8 +5,6 @@ import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_DESKTOP_ID = 'about-focus-reveal';
-const ST_MOBILE_CONTENT_ID = 'about-focus-content-reveal';
 const T_CONTENT = 0.14;
 const T_DESCRIPTION = 0.26;
 const T_CARDS = 0.46;
@@ -227,7 +225,6 @@ function setupDesktopFocusReveal(root: HTMLElement) {
   };
 
   const st = ScrollTrigger.create({
-    id: ST_DESKTOP_ID,
     trigger: root,
     start: 'top 66%',
     end: 'bottom 20%',
@@ -293,7 +290,6 @@ function setupMobileFocusReveal(root: HTMLElement) {
   if (label || titleChars.length || introWords.length) {
     const contentTl = gsap.timeline({
       scrollTrigger: {
-        id: ST_MOBILE_CONTENT_ID,
         trigger: root,
         start: 'top 74%',
         toggleActions: 'play none none reverse',

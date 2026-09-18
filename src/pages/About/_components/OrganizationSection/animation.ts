@@ -5,11 +5,6 @@ import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_BASE_ID = 'about-organization-reveal';
-const ST_HEADER_ID = `${ST_BASE_ID}-header`;
-const ST_COVER_ID = `${ST_BASE_ID}-cover`;
-const ST_COVER_PARALLAX_ID = `${ST_BASE_ID}-cover-parallax`;
-
 /** Construye targets de texto para header y puntos de organización. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-organization-text-line], [data-organization-text-words]');
@@ -64,7 +59,6 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
       if (label || titleChars.length) {
         const headerTl = gsap.timeline({
           scrollTrigger: {
-            id: ST_HEADER_ID,
             trigger: root,
             start: 'top 72%',
             toggleActions: 'play none none reverse',
@@ -102,7 +96,6 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
       if (coverWrap && coverImage) {
         const coverRevealTl = gsap.timeline({
           scrollTrigger: {
-            id: ST_COVER_ID,
             trigger: coverWrap,
             start: 'top 70%',
             toggleActions: 'play none none reverse',
@@ -129,7 +122,6 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
         timelines.push(coverRevealTl);
 
         const coverParallaxTrigger = ScrollTrigger.create({
-          id: ST_COVER_PARALLAX_ID,
           trigger: coverWrap,
           start: 'top 85%',
           end: 'bottom 15%',

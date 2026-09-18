@@ -4,8 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'numbers-section-reveal';
-
 type CounterParts = {
   prefix: string;
   suffix: string;
@@ -154,7 +152,6 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 82%',
         end: 'bottom top',
@@ -174,7 +171,6 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       setInitialState();
 
       const metaTrigger = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 82%',
         end: 'bottom top',

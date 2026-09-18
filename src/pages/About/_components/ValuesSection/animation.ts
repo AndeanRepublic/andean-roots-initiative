@@ -6,8 +6,6 @@ import { setupValuesCardHover } from './card-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_DESKTOP_ID = 'about-values-reveal';
-const ST_MOBILE_HEADER_ID = 'about-values-header-reveal';
 const T_HEADER = 0.1;
 const T_DESCRIPTION = 0.24;
 const T_CARDS = 0.34;
@@ -142,7 +140,6 @@ function setupDesktopValuesReveal(root: HTMLElement) {
   };
 
   const st = ScrollTrigger.create({
-    id: ST_DESKTOP_ID,
     trigger: root,
     start: 'top 66%',
     end: 'bottom 20%',
@@ -192,7 +189,6 @@ function setupMobileValuesReveal(root: HTMLElement) {
   if (label || titleChars.length || headerWords.length) {
     const headerTl = gsap.timeline({
       scrollTrigger: {
-        id: ST_MOBILE_HEADER_ID,
         trigger: root,
         start: 'top 74%',
         toggleActions: 'play none none reverse',

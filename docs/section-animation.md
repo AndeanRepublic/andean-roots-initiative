@@ -16,10 +16,10 @@ SectionName/
 └── card-hover.ts        # Interacción acotada (opcional)
 ```
 
-| Archivo | Responsabilidad |
-|---------|-----------------|
-| `index.astro` | HTML, clases Tailwind, `data-anim`, `<script>` mínimo |
-| `animation.ts` | Toda la lógica GSAP de la sección |
+| Archivo                          | Responsabilidad                                                         |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `index.astro`                    | HTML, clases Tailwind, `data-anim`, `<script>` mínimo                   |
+| `animation.ts`                   | Toda la lógica GSAP de la sección                                       |
 | `*-hover.ts`, `counter.ts`, etc. | Comportamiento puntual (hover, contador) importado desde `animation.ts` |
 
 **Regla:** el `<script>` de `index.astro` solo arranca la animación. No pongas tweens ni ScrollTriggers ahí.
@@ -53,7 +53,7 @@ El layout usa `<ClientRouter />`, así que el boot va solo en `astro:page-load`:
 Debe coincidir con `rootId` en `animation.ts`:
 
 ```astro
-<section id="partners" class="...">
+<section id="partners" class="..."></section>
 ```
 
 ### 2. `data-anim` en nodos animados
@@ -94,10 +94,10 @@ Encapsula el ciclo de vida que toda sección con scroll necesita:
 
 ### Opciones
 
-| Opción | Descripción |
-|--------|-------------|
-| `rootId` | `id` del `<section>` en el HTML |
-| `setup` | Donde vive la animación. Puede **retornar** una función de cleanup |
+| Opción   | Descripción                                                        |
+| -------- | ------------------------------------------------------------------ |
+| `rootId` | `id` del `<section>` en el HTML                                    |
+| `setup`  | Donde vive la animación. Puede **retornar** una función de cleanup |
 
 ### Quién hace el cleanup
 
@@ -112,14 +112,13 @@ return () => {
 };
 ```
 
-El controller solo orquesta: ejecuta el cleanup anterior y monta de nuevo. No conoce `clearStyles`.
+El controller solo orquesta: ejecuta el cleanup anterior y monta de nuevo.
 
-### Dos IDs distintos (no confundir)
+### `rootId` del HTML
 
-| Nombre | Dónde | Ejemplo |
-|--------|-------|---------|
-| `rootId` | Atributo `id` del HTML | `'partners'` → `<section id="partners">` |
-| `ST_ID` (opcional) | `id` del ScrollTrigger en GSAP | `'partnership-section-reveal'` (solo en JS, para debug) |
+| Nombre   | Dónde                                          | Ejemplo                                  |
+| -------- | ---------------------------------------------- | ---------------------------------------- |
+| `rootId` | Opción del controller + atributo `id` del HTML | `'partners'` → `<section id="partners">` |
 
 ---
 
@@ -130,7 +129,7 @@ Orden recomendado (de arriba a abajo):
 ```
 1. Imports
 2. gsap.registerPlugin(...)
-3. Constantes (ST_ID, umbrales T_*)
+3. Constantes (umbrales T_*, selectores locales)
 4. Helpers puros (split text, parseo, formato)
 5. clearXStyles(root) — reset de la sección
 6. export const initX = createScrollSectionController({ ... })
@@ -142,7 +141,7 @@ Dentro de `setup`:
 1. querySelector / querySelectorAll
 2. setInitialState (gsap.set una vez)
 3. Funciones reveal / hide / handleThresholds
-4. ScrollTrigger.create({ id: ST_ID, ... })
+4. ScrollTrigger.create({ trigger: root, ... })
 5. Módulos colocados (hover, etc.)
 6. return () => { ... }  — cleanup local
 ```
@@ -157,7 +156,7 @@ Cuando el comportamiento es el mismo en todos los tamaños de pantalla, **no use
 
 ```ts
 setup: ({ root }) => {
-  const st = ScrollTrigger.create({ id: ST_ID, trigger: root, /* ... */ });
+  const st = ScrollTrigger.create({ trigger: root, /* ... */ });
   const cleanupHover = setupCardHover(root);
 
   return () => {
@@ -177,7 +176,7 @@ Usa `mm.add` por breakpoint. Cada bloque retorna su cleanup; `mm.revert()` los e
 setup: ({ root, mm }) => {
   mm.add('(min-width: 1200px)', () => {
     // lógica desktop
-    const st = ScrollTrigger.create({ id: ST_ID, /* ... */ });
+    const st = ScrollTrigger.create({ /* ... */ });
     return () => {
       st.kill();
       clearMySectionStyles(root);
@@ -186,7 +185,7 @@ setup: ({ root, mm }) => {
 
   mm.add('(max-width: 1199px)', () => {
     // lógica mobile/tablet
-    const st = ScrollTrigger.create({ id: ST_ID, /* ... */ });
+    const st = ScrollTrigger.create({ /* ... */ });
     return () => {
       st.kill();
       clearMySectionStyles(root);
@@ -235,8 +234,12 @@ export function setupTagPillsHover(root: HTMLElement) {
   const cleanups: Array<() => void> = [];
 
   pills.forEach((pill) => {
-    const onEnter = () => { /* gsap.to(...) */ };
-    const onLeave = () => { /* gsap.to(...) */ };
+    const onEnter = () => {
+      /* gsap.to(...) */
+    };
+    const onLeave = () => {
+      /* gsap.to(...) */
+    };
     pill.addEventListener('mouseenter', onEnter);
     pill.addEventListener('mouseleave', onLeave);
     cleanups.push(() => {
@@ -292,8 +295,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'my-section-reveal';
-
 function clearMySectionStyles(root: HTMLElement) {
   root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
@@ -318,7 +319,6 @@ export const initMySectionAnimation = createScrollSectionController({
     };
 
     const st = ScrollTrigger.create({
-      id: ST_ID,
       trigger: root,
       start: 'top 80%',
       onEnter: reveal,
@@ -345,7 +345,6 @@ export const initMySectionAnimation = createScrollSectionController({
       gsap.set(cards, { opacity: 0, y: 30 });
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 75%',
         onEnter: () => {
@@ -386,12 +385,12 @@ export const initMySectionAnimation = createScrollSectionController({
 
 Algunas piezas no encajan en el patrón de sección con scroll:
 
-| Caso | Dónde | Ejemplo en el proyecto |
-|------|-------|------------------------|
-| Hero con intro de página | `HeroSection/animation.ts` | Timeline de entrada, sin scroll section |
-| Header / menú persistente | `Header/animation.ts` | `transition:persist` |
-| Efecto global en layout | `Layout.astro` | `initButtonLinkMagnetic` |
-| Text reveal reutilizable | `src/components/TextReveal/` | Importado por secciones que lo necesiten |
+| Caso                      | Dónde                        | Ejemplo en el proyecto                   |
+| ------------------------- | ---------------------------- | ---------------------------------------- |
+| Hero con intro de página  | `HeroSection/animation.ts`   | Timeline de entrada, sin scroll section  |
+| Header / menú persistente | `Header/animation.ts`        | `transition:persist`                     |
+| Efecto global en layout   | `Layout.astro`               | `initButtonLinkMagnetic`                 |
+| Text reveal reutilizable  | `src/components/TextReveal/` | Importado por secciones que lo necesiten |
 
 Para esos casos: exporta `initX()`, escucha `astro:page-load` y implementa tu propio cleanup idempotente.
 
@@ -412,11 +411,11 @@ Para esos casos: exporta `initX()`, escucha `astro:page-load` y implementa tu pr
 
 ## Referencias en el repo
 
-| Ejemplo | Patrón |
-|---------|--------|
-| `Home/_components/PartnershipSection/` | Scroll simple + hover colocado + split words |
-| `Home/_components/NumbersSection/` | Breakpoints + counters |
-| `Home/_components/ActionSection/` | Umbrales de progreso + split text |
-| `Home/_components/HeroSection/` | Intro de página (sin controller) |
-| `src/utils/create-scroll-section-controller.ts` | Lifecycle compartido |
-| `src/utils/split-text.ts` | Split / reset de texto |
+| Ejemplo                                         | Patrón                                       |
+| ----------------------------------------------- | -------------------------------------------- |
+| `Home/_components/PartnershipSection/`          | Scroll simple + hover colocado + split words |
+| `Home/_components/NumbersSection/`              | Breakpoints + counters                       |
+| `Home/_components/ActionSection/`               | Umbrales de progreso + split text            |
+| `Home/_components/HeroSection/`                 | Intro de página (sin controller)             |
+| `src/utils/create-scroll-section-controller.ts` | Lifecycle compartido                         |
+| `src/utils/split-text.ts`                       | Split / reset de texto                       |

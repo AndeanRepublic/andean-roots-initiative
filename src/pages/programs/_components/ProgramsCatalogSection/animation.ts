@@ -5,7 +5,6 @@ import { resetSplitText, splitWords } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'programs-catalog-reveal';
 const CARD_REVEAL_STAGGER = 0.11;
 const CARD_HIDE_STAGGER = 0.06;
 
@@ -184,7 +183,6 @@ export const initProgramsCatalogSectionAnimation = createScrollSectionController
 
       const triggers = cards.map((card) =>
         ScrollTrigger.create({
-          id: ST_ID,
           trigger: card,
           start: 'top 76%',
           end: 'bottom 18%',

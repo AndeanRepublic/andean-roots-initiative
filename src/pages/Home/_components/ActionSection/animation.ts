@@ -5,8 +5,6 @@ import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'action-section-reveal';
-
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
 const T_TITLE = 0.18;
@@ -216,7 +214,6 @@ export const initActionSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 70%',
         end: 'top top',

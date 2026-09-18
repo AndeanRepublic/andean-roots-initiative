@@ -4,7 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'contact-form-reveal';
 const T_ASIDE = 0.1;
 const T_PANEL = 0.26;
 
@@ -79,7 +78,6 @@ export const initContactFormSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 78%',
         end: 'bottom top',

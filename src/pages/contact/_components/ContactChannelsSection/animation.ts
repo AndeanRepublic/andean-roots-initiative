@@ -4,7 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'contact-channels-reveal';
 const T_CARDS = 0.18;
 
 function clearContactChannelsStyles(root: HTMLElement) {
@@ -64,7 +63,6 @@ export const initContactChannelsSectionAnimation = createScrollSectionController
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 80%',
         end: 'bottom top',

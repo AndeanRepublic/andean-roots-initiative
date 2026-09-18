@@ -7,8 +7,6 @@ import { setupAboutTagPillsHover } from './tag-pills-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'about-section-reveal';
-
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
 const T_TITLE = 0.18;
@@ -311,7 +309,6 @@ export const initAboutSectionAnimation = createScrollSectionController({
 
       // -- ScrollTrigger
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 70%',
         end: 'top top',

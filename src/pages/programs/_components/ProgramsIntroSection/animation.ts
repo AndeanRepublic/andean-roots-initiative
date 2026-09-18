@@ -5,7 +5,6 @@ import { resetSplitText, splitChars } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'programs-intro-reveal';
 const T_TITLE = 0.14;
 const T_DESCRIPTION = 0.25;
 const T_STATS = 0.35;
@@ -127,7 +126,6 @@ export const initProgramsIntroSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 76%',
         end: 'bottom top',

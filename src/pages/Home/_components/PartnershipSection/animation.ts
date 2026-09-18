@@ -6,7 +6,6 @@ import { setupPartnerLogosHover } from './logo-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'partnership-section-reveal';
 const T_LABEL = 0.14;
 const T_DESCRIPTION = 0.2;
 const T_LOGOS = 0.3;
@@ -151,7 +150,6 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
     };
 
     const st = ScrollTrigger.create({
-      id: ST_ID,
       trigger: root,
       start: 'top 80%',
       end: 'bottom 18%',

@@ -5,7 +5,6 @@ import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'strategic-programs-reveal';
 const T_LABEL = 0.1;
 const T_TITLE = 0.15;
 const T_CTA = 0.18;
@@ -268,7 +267,6 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 80%',
         end: 'bottom 18%',
@@ -290,7 +288,6 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       setInitialState();
 
       const sectionTrigger = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 78%',
         end: 'bottom top',

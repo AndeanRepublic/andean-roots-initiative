@@ -4,8 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'challenge-section-cards-flip';
-const ST_TEXT_ID = 'challenge-section-intro-text-reveal';
 const MOBILE_CARD_SELECTOR = '[data-anim="mobile-card"]';
 
 /** Divide el intro en caracteres preservando segmentos para animación progresiva por scroll. */
@@ -44,7 +42,6 @@ function setupIntroTextReveal(root: HTMLElement) {
     ease: 'none',
     overwrite: true,
     scrollTrigger: {
-      id: ST_TEXT_ID,
       trigger: root,
       start: 'top 50%',
       end: 'top 15%',
@@ -157,7 +154,6 @@ export const initChallengeSectionCards = createScrollSectionController({
 
       // Timeline pinneado de desktop: primero apertura/espaciado, luego flip de cards.
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: challengeSection,
         start: 'top top',
         end: () => `+=${window.innerHeight * 4}px`,

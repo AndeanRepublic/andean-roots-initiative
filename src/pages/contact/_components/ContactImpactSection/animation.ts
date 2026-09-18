@@ -4,7 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'contact-impact-reveal';
 const T_HEADLINE = 0.12;
 const T_BODY = 0.28;
 
@@ -81,7 +80,6 @@ export const initContactImpactSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 78%',
         end: 'bottom top',

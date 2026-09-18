@@ -6,8 +6,6 @@ import { setupTeamControlsHover } from './controls-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_DESKTOP_ID = 'about-team-reveal';
-const ST_MOBILE_INTRO_ID = 'about-team-intro-reveal';
 const T_INTRO = 0.1;
 const T_CARDS = 0.34;
 const T_CONTROLS = 0.6;
@@ -203,7 +201,6 @@ function setupDesktopTeamReveal(root: HTMLElement) {
   };
 
   const st = ScrollTrigger.create({
-    id: ST_DESKTOP_ID,
     trigger: root,
     start: 'top 66%',
     end: 'bottom 20%',
@@ -251,7 +248,6 @@ function setupMobileTeamReveal(root: HTMLElement) {
 
   const introTl = gsap.timeline({
     scrollTrigger: {
-      id: ST_MOBILE_INTRO_ID,
       trigger: root,
       start: 'top 74%',
       toggleActions: 'play none none reverse',

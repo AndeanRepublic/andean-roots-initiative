@@ -5,9 +5,6 @@ import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_DESKTOP_ID = 'about-history-reveal';
-const ST_MOBILE_TITLE_ID = 'about-history-title-reveal';
-
 const T_TITLE = 0.14;
 const T_CARDS = 0.33;
 const T_BODY = 0.44;
@@ -148,7 +145,6 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
   };
 
   const st = ScrollTrigger.create({
-    id: ST_DESKTOP_ID,
     trigger: root,
     start: 'top 68%',
     end: 'bottom 15%',
@@ -206,7 +202,6 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           ease: 'power2.out',
           overwrite: true,
           scrollTrigger: {
-            id: ST_MOBILE_TITLE_ID,
             trigger: root,
             start: 'top 70%',
             toggleActions: 'play none none reverse',

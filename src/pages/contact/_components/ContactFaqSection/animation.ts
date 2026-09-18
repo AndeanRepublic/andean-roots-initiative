@@ -4,7 +4,6 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ST_ID = 'contact-faq-reveal';
 const T_INTRO = 0.1;
 const T_VISUAL = 0.22;
 const T_CTA = 0.32;
@@ -123,7 +122,6 @@ export const initContactFaqSectionAnimation = createScrollSectionController({
       };
 
       const st = ScrollTrigger.create({
-        id: ST_ID,
         trigger: root,
         start: 'top 76%',
         end: 'bottom top',

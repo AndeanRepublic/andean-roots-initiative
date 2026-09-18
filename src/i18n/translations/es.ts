@@ -3,10 +3,26 @@ import type { AboutTagIconKey, ContactSocialPlatform } from '../types';
 const es = {
   common: {
     socialLinks: [
-      { platform: 'twitter' as ContactSocialPlatform, ariaLabel: 'X (Twitter)', href: 'https://twitter.com' },
-      { platform: 'facebook' as ContactSocialPlatform, ariaLabel: 'Facebook', href: 'https://facebook.com' },
-      { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
-      { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
+      {
+        platform: 'twitter' as ContactSocialPlatform,
+        ariaLabel: 'X (Twitter)',
+        href: 'https://twitter.com',
+      },
+      {
+        platform: 'facebook' as ContactSocialPlatform,
+        ariaLabel: 'Facebook',
+        href: 'https://facebook.com',
+      },
+      {
+        platform: 'instagram' as ContactSocialPlatform,
+        ariaLabel: 'Instagram',
+        href: 'https://instagram.com',
+      },
+      {
+        platform: 'linkedin' as ContactSocialPlatform,
+        ariaLabel: 'LinkedIn',
+        href: 'https://linkedin.com',
+      },
     ],
     whatsappHref: 'https://wa.me/51984000000',
     floatingDonateLabel: 'Donar ahora',
@@ -41,7 +57,8 @@ const es = {
     thirdCardCoverSrc: '/home-assets/Problem/card_cover_3.png',
     introStart:
       'Muchas comunidades andinas enfrentan barreras para acceder a educación de calidad, herramientas tecnológicas y oportunidades económicas.',
-    introMutedStart: ' A pesar del enorme potencial cultural y productivo de los Andes, existe una ',
+    introMutedStart:
+      ' A pesar del enorme potencial cultural y productivo de los Andes, existe una ',
     introHighlight: 'brecha significativa',
     introEnd: ' que limita el desarrollo sostenible.',
     firstCardTitle: 'ACCESO LIMITADO A LA EDUCACIÓN DEL FUTURO',
@@ -53,7 +70,8 @@ const es = {
       'Los productores poseen un enorme potencial productivo y cultural, pero carecen de acceso a herramientas de calidad y mercados sostenibles.',
     thirdCardTag: 'Tradición, estancamiento, riesgo',
     thirdCardTitle: 'El trabajo que no genera riqueza',
-    thirdCardDescription: 'Sin acceso a mercados digitales, los mejores productos del mundo son invisibles.',
+    thirdCardDescription:
+      'Sin acceso a mercados digitales, los mejores productos del mundo son invisibles.',
     secondCardImageAlt: 'Comunidad andina en un espacio rural',
     thirdCardImageAlt: 'Manos de artesano andino',
   },
@@ -75,8 +93,8 @@ const es = {
     originTitle: 'EL ORIGEN DEL CAMBIO',
     originDescription:
       'Descubre la historia y los valores que impulsan nuestra misión de transformar los Andes a través de la innovación social.',
-    originCtaText: 'CONOCE NUESTRA HISTORIA',
-    originCtaHref: '/About',
+    originCtaText: 'CONOCE MÁS SOBRE NOSOTROS',
+    originCtaHref: 'About',
     bannerImageAlt: 'Miembros de la iniciativa en comunidad andina',
   },
 
@@ -323,19 +341,27 @@ const es = {
       description:
         'Creemos que el desarrollo sostenible en los Andes no depende únicamente de recursos externos, sino de potenciar el talento, la identidad y las capacidades que ya existen en las comunidades, conectándolas con oportunidades reales.',
       sideImages: [
-        { src: '/about-assets/enfoque/enfoque-1.png', alt: 'Equipo local en actividad comunitaria' },
-        { src: '/about-assets/enfoque/enfoque-2.png', alt: 'Comunidad andina en paisaje montañoso' },
+        {
+          src: '/about-assets/enfoque/enfoque-1.png',
+          alt: 'Equipo local en actividad comunitaria',
+        },
+        {
+          src: '/about-assets/enfoque/enfoque-2.png',
+          alt: 'Comunidad andina en paisaje montañoso',
+        },
       ],
       cards: [
         {
           title: 'Desarrollo desde lo local',
-          description: 'Trabajamos desde el conocimiento, la cultura y las capacidades propias de cada comunidad.',
+          description:
+            'Trabajamos desde el conocimiento, la cultura y las capacidades propias de cada comunidad.',
           icon: 'group' as const,
           offsetClass: 'desktop:self-start',
         },
         {
           title: 'Innovación con propósito',
-          description: 'Integramos tecnología, educación e innovación para generar soluciones relevantes y sostenibles.',
+          description:
+            'Integramos tecnología, educación e innovación para generar soluciones relevantes y sostenibles.',
           icon: 'bulb' as const,
           offsetClass: 'desktop:self-end',
         },
@@ -347,7 +373,8 @@ const es = {
         },
         {
           title: 'Sostenibilidad a largo plazo',
-          description: 'Buscamos generar capacidades que permanezcan en el tiempo y no dependan de intervenciones externas.',
+          description:
+            'Buscamos generar capacidades que permanezcan en el tiempo y no dependan de intervenciones externas.',
           icon: 'sustainability' as const,
           offsetClass: 'desktop:self-start',
         },
@@ -510,10 +537,7 @@ const es = {
         {
           kind: 'hours' as const,
           title: 'Horario de atención',
-          lines: [
-            { text: 'De lunes a viernes: 9:00 – 18:00' },
-            { text: 'Sábados: 9:00 – 13:00' },
-          ],
+          lines: [{ text: 'De lunes a viernes: 9:00 – 18:00' }, { text: 'Sábados: 9:00 – 13:00' }],
         },
         {
           kind: 'email' as const,
@@ -528,11 +552,13 @@ const es = {
     form: {
       sectionId: 'contacto-form',
       title: 'Contáctanos y construyamos impacto juntos.',
-      subtitle: 'Completa los campos y te responderemos con una propuesta clara para avanzar juntos.',
+      subtitle:
+        'Completa los campos y te responderemos con una propuesta clara para avanzar juntos.',
       socialPrompt: 'Encuéntranos en',
       submitLabel: 'Enviar',
       sendingLabel: 'Enviando…',
-      successMessage: '¡Gracias por contactarnos! Tu mensaje ha sido enviado. Te responderemos pronto.',
+      successMessage:
+        '¡Gracias por contactarnos! Tu mensaje ha sido enviado. Te responderemos pronto.',
       errorMessage:
         'No pudimos enviar el mensaje. Intenta de nuevo o usa el correo o el teléfono directamente.',
       missingConfigMessage:
@@ -553,7 +579,8 @@ const es = {
     faq: {
       label: 'FAQ',
       title: 'Preguntas frecuentes',
-      subtitle: 'Estas son las preguntas más frecuentes sobre Andean Roots. Si tienes alguna pregunta adicional, no dudes en contactarnos.',
+      subtitle:
+        'Estas son las preguntas más frecuentes sobre Andean Roots. Si tienes alguna pregunta adicional, no dudes en contactarnos.',
       ctaText: 'Ver más FAQs',
       sideImageSrc: '/about-assets/enfoque/enfoque-1.png',
       sideImageAlt: 'Equipo local en actividad comunitaria',

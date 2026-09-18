@@ -15,26 +15,36 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section
-  id="about"
-  class={cn('bg-white px-2xl', 'pt-6xl', 'pb-[80px] tablet:pb-[48px] desktop:pb-[64px]')}
->
-  <div class="gap-4xl mx-auto flex w-full max-w-[1312px] flex-col">
-    <div class="gap-4xl tablet:gap-2xl flex flex-col">
+<section id="about" class="bg-white px-6xl py-6xl">
+  <div class="mx-auto flex w-full max-w-[1312px] flex-col gap-5xl">
+    <div class="relative flex flex-col gap-4xl">
+      <img
+        src="/home-assets/About/about-watermark.svg"
+        alt=""
+        width="520"
+        height="407"
+        class="pointer-events-none absolute top-0 left-0 max-w-[40%] select-none"
+        aria-hidden="true"
+      />
       <AboutSectionHeading lang={lang} />
       <AboutSectionMeta lang={lang} />
     </div>
 
-    <div class="relative overflow-visible">
-      <div class="overflow-hidden rounded-lg">
-        <img
-          src="/home-assets/About/banner-about.png"
-          alt={t.about.bannerImageAlt}
-          class="tablet:h-125 h-90 w-full object-cover object-center"
-          loading="lazy"
-          data-anim="image"
-        />
-      </div>
+    <div
+      class={cn(
+        'rounded-lg relative overflow-hidden',
+        'flex flex-col items-start justify-end',
+        'p-24px tablet:p-32px desktop:p-40px',
+        'h-[22.5rem] tablet:h-[28rem] desktop:h-[35.3125rem]',
+      )}
+    >
+      <img
+        src="/home-assets/About/banner-about.png"
+        alt={t.about.bannerImageAlt}
+        class="absolute inset-0 h-full w-full rounded-lg object-cover object-center"
+        loading="lazy"
+        data-anim="image"
+      />
       <AboutOriginCard lang={lang} />
     </div>
   </div>

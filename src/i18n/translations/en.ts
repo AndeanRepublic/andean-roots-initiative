@@ -4,10 +4,26 @@ import type { ContactSocialPlatform } from '../types';
 const en: Translations = {
   common: {
     socialLinks: [
-      { platform: 'twitter' as ContactSocialPlatform, ariaLabel: 'X (Twitter)', href: 'https://twitter.com' },
-      { platform: 'facebook' as ContactSocialPlatform, ariaLabel: 'Facebook', href: 'https://facebook.com' },
-      { platform: 'instagram' as ContactSocialPlatform, ariaLabel: 'Instagram', href: 'https://instagram.com' },
-      { platform: 'linkedin' as ContactSocialPlatform, ariaLabel: 'LinkedIn', href: 'https://linkedin.com' },
+      {
+        platform: 'twitter' as ContactSocialPlatform,
+        ariaLabel: 'X (Twitter)',
+        href: 'https://twitter.com',
+      },
+      {
+        platform: 'facebook' as ContactSocialPlatform,
+        ariaLabel: 'Facebook',
+        href: 'https://facebook.com',
+      },
+      {
+        platform: 'instagram' as ContactSocialPlatform,
+        ariaLabel: 'Instagram',
+        href: 'https://instagram.com',
+      },
+      {
+        platform: 'linkedin' as ContactSocialPlatform,
+        ariaLabel: 'LinkedIn',
+        href: 'https://linkedin.com',
+      },
     ],
     whatsappHref: 'https://wa.me/51984000000',
     floatingDonateLabel: 'Donate now',
@@ -55,7 +71,8 @@ const en: Translations = {
       'Producers have enormous productive and cultural potential, but lack access to quality tools and sustainable markets.',
     thirdCardTag: 'Tradition, stagnation, risk',
     thirdCardTitle: 'Work that generates no wealth',
-    thirdCardDescription: "Without access to digital markets, the world's best products are invisible.",
+    thirdCardDescription:
+      "Without access to digital markets, the world's best products are invisible.",
     secondCardImageAlt: 'Andean community in a rural setting',
     thirdCardImageAlt: 'Andean artisan hands',
   },
@@ -77,8 +94,8 @@ const en: Translations = {
     originTitle: 'THE ORIGIN OF CHANGE',
     originDescription:
       'Discover the history and values that drive our mission to transform the Andes through social innovation.',
-    originCtaText: 'KNOW OUR HISTORY',
-    originCtaHref: '/About',
+    originCtaText: 'LEARN MORE ABOUT US',
+    originCtaHref: 'About',
     bannerImageAlt: 'Initiative members in an Andean community',
   },
 
@@ -184,7 +201,7 @@ const en: Translations = {
   partners: {
     label: 'OUR COLLABORATORS',
     description:
-      "We join efforts with institutions that share our vision of a world where Andean talent has no borders or technological gaps.",
+      'We join efforts with institutions that share our vision of a world where Andean talent has no borders or technological gaps.',
     logos: [
       { src: '/home-assets/Partners/Logo 1.png', alt: 'Collaborating institution logo' },
       { src: '/home-assets/Partners/Logo 2.png', alt: 'Collaborating institution logo' },
@@ -296,7 +313,8 @@ const en: Translations = {
     values: {
       label: 'OUR VALUES',
       title: 'What moves us',
-      description: 'Our values guide every action, decision and collaboration we drive in Andean communities.',
+      description:
+        'Our values guide every action, decision and collaboration we drive in Andean communities.',
       items: [
         {
           title: 'Commitment',
@@ -325,7 +343,10 @@ const en: Translations = {
         'We believe that sustainable development in the Andes does not depend solely on external resources, but on enhancing the talent, identity and capabilities that already exist in communities, connecting them to real opportunities.',
       sideImages: [
         { src: '/about-assets/enfoque/enfoque-1.png', alt: 'Local team in community activity' },
-        { src: '/about-assets/enfoque/enfoque-2.png', alt: 'Andean community in mountain landscape' },
+        {
+          src: '/about-assets/enfoque/enfoque-2.png',
+          alt: 'Andean community in mountain landscape',
+        },
       ],
       cards: [
         {
@@ -359,7 +380,8 @@ const en: Translations = {
     team: {
       backgroundWord: 'TEAM',
       label: 'THE TEAM BEHIND THE INITIATIVE',
-      description: 'A team that believes in the talent of the Andes and works to turn it into real opportunities.',
+      description:
+        'A team that believes in the talent of the Andes and works to turn it into real opportunities.',
       members: [
         {
           name: 'Daniel Yupanqui',
@@ -512,10 +534,7 @@ const en: Translations = {
         {
           kind: 'hours' as const,
           title: 'Business hours',
-          lines: [
-            { text: 'Monday to Friday: 9:00 – 18:00' },
-            { text: 'Saturday: 9:00 – 13:00' },
-          ],
+          lines: [{ text: 'Monday to Friday: 9:00 – 18:00' }, { text: 'Saturday: 9:00 – 13:00' }],
         },
         {
           kind: 'email' as const,
@@ -530,14 +549,15 @@ const en: Translations = {
     form: {
       sectionId: 'contacto-form',
       title: "Contact us and let's build impact together.",
-      subtitle: 'Fill in the fields and we will respond with a clear proposal to move forward together.',
+      subtitle:
+        'Fill in the fields and we will respond with a clear proposal to move forward together.',
       socialPrompt: 'Find us on',
       submitLabel: 'Send',
       sendingLabel: 'Sending…',
-      successMessage: 'Thank you for reaching out! Your message has been sent. We will get back to you soon.',
+      successMessage:
+        'Thank you for reaching out! Your message has been sent. We will get back to you soon.',
       errorMessage: 'We could not send the message. Try again or use email or phone directly.',
-      missingConfigMessage:
-        'Set PUBLIC_CONTACT_FORMSUBMIT_EMAIL to enable sending (FormSubmit).',
+      missingConfigMessage: 'Set PUBLIC_CONTACT_FORMSUBMIT_EMAIL to enable sending (FormSubmit).',
       selectTopicError: 'Please select an inquiry type before submitting.',
       inquiryTypePlaceholder: 'Inquiry type',
       fullNameLabel: 'Full name',
@@ -629,10 +649,10 @@ const en: Translations = {
           number: '02',
           title: 'Purpose of the Website',
           paragraphs: [
-            'The website aims to provide information about the organization\'s programs, projects, and initiatives; facilitate contact between the community and Andean Roots Initiative; enable voluntary donations to fund programs; and share the impact and results of our work.',
+            "The website aims to provide information about the organization's programs, projects, and initiatives; facilitate contact between the community and Andean Roots Initiative; enable voluntary donations to fund programs; and share the impact and results of our work.",
           ],
           items: [
-            'Provide information about the organization\'s programs, projects, and initiatives.',
+            "Provide information about the organization's programs, projects, and initiatives.",
             'Facilitate contact between the community and Andean Roots Initiative.',
             'Enable voluntary donations to fund programs.',
             'Share the impact and results of our work.',
@@ -664,7 +684,7 @@ const en: Translations = {
           title: 'Donations',
           paragraphs: [
             'Donations made through the site are voluntary and, as a general rule, non-refundable, except in cases of verified technical errors or duplicate charges. They are processed securely through PayPal; Andean Roots Initiative does not store donor financial data.',
-            'Funds received are exclusively allocated to financing the organization\'s programs and operations. Andean Roots Initiative will send an acknowledgment to the email address registered during the donation process. For inquiries, contact us at contacto@andeanroots.org.',
+            "Funds received are exclusively allocated to financing the organization's programs and operations. Andean Roots Initiative will send an acknowledgment to the email address registered during the donation process. For inquiries, contact us at contacto@andeanroots.org.",
           ],
         },
         {

@@ -1,9 +1,8 @@
 ---
-import ButtonLink from '../../../../components/ButtonLink/index.astro';
-import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
-import { useTranslations } from '../../../../i18n/utils';
+import { getLocalizedPath, useTranslations } from '../../../../i18n/utils';
+import UpRightArrowIcon from '../../../../icons/UpRightArrowIcon.astro';
 
 interface Props {
   lang?: Locale;
@@ -14,35 +13,24 @@ const t = useTranslations(lang);
 const a = t.about;
 ---
 
-<article
-  class={cn(
-    'z-20 mt-3',
-    'w-[90%] tablet:w-101.25',
-    'absolute left-1/2 -translate-x-1/2 -bottom-20 tablet:bottom-10 tablet:left-10 tablet:mt-20 tablet:translate-x-0 tablet:translate-y-0',
-  )}
-  data-anim="origin-card"
->
+<article class="relative z-10 w-full max-w-[28.8125rem]" data-anim="origin-card">
   <div
-    class={cn(
-      'flex flex-col gap-5 rounded-lg bg-white shadow-md p-5',
-      'tablet:gap-3xl tablet:p-2xl',
-    )}
+    class="rounded-lg bg-white overflow-hidden flex flex-col gap-2xl px-xl py-lg"
     data-anim="origin-card-inner"
   >
-    <div class="gap-lg flex flex-col">
-      <h3
-        class="font-manrope tablet:text-[1.5rem] text-[0.875rem] leading-[1.4] font-semibold text-black"
-      >
+    <div class="flex flex-col gap-lg">
+      <h3 class="font-manrope text-[length:var(--text-24)] leading-[1.4] font-semibold text-black">
         {a.originTitle}
       </h3>
       <p class="body-sm-l text-gray">{a.originDescription}</p>
     </div>
 
-    <ButtonLink
-      href={`/${lang}${a.originCtaHref}`}
-      text={a.originCtaText}
-      device="desktop"
-      kind="secondary"
-    />
+    <a
+      href={getLocalizedPath(lang, a.originCtaHref)}
+      class="body-md-sb text-main inline-flex items-center gap-sm"
+    >
+      {a.originCtaText}
+      <UpRightArrowIcon class="text-main size-4" />
+    </a>
   </div>
 </article>

@@ -1,11 +1,12 @@
 ---
+import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { getLocalizedPath, useTranslations } from '../../../../i18n/utils';
+import HeroIntroCopy from './HeroIntroCopy.astro';
 import HeroPreloader from './HeroPreloader.astro';
 import LandingBackground from './LandingBackground.astro';
 import LandingContent from './LandingContent.astro';
-import LandingScrollHint from './LandingScrollHint.astro';
 
 interface Props {
   lang?: Locale;
@@ -21,22 +22,32 @@ const heroCtaHref = getLocalizedPath(lang, 'contact');
 
 <section
   data-anim="hero-container"
-  class="hero bg-main z-20 px-2xl tablet:pt-3xl tablet:pb-6xl relative flex h-dvh min-h-dvh w-full flex-col justify-end overflow-hidden pt-6 pb-8"
+  class={cn(
+    'hero bg-main',
+    'relative z-20 overflow-hidden',
+    'flex flex-col justify-between',
+    'px-6xl pb-6xl',
+    'h-dvh min-h-dvh w-full',
+  )}
 >
   <LandingBackground imageSrc="/home-assets/Hero/Hero.png" />
 
   <div
-    class="hero__body desktop:flex-row desktop:items-end desktop:justify-between desktop:gap-0 relative z-10 flex w-full max-w-[1312px] flex-col items-start gap-8 self-center"
+    class={cn(
+      'relative z-10',
+      'flex w-full max-w-[1312px] justify-end',
+      'mx-auto mt-120px tablet:mt-140px desktop:mt-180px',
+    )}
   >
-    <LandingContent
-      titleTop={heroContent.titleTop}
-      titleBottom={heroContent.titleBottom}
+    <HeroIntroCopy
       subheading={heroContent.subheading}
       ctaText={heroContent.ctaText}
       ctaHref={heroCtaHref}
     />
+  </div>
 
-    <LandingScrollHint ariaLabel={heroContent.scrollAriaLabel} label={heroContent.scrollLabel} />
+  <div class="hero__body relative z-10 mx-auto w-full max-w-[1312px]">
+    <LandingContent titleTop={heroContent.titleTop} titleBottom={heroContent.titleBottom} />
   </div>
 </section>
 

@@ -13,12 +13,18 @@ const t = useTranslations(lang);
 const a = t.about;
 ---
 
-<div class="gap-xl tablet:gap-xl grid items-end lg:grid-cols-2">
-  <div class="gap-md flex flex-wrap" data-anim="tags">
-    {a.tags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+<div class="relative z-10 flex w-full flex-col items-start gap-6xl">
+  <div class="flex w-full justify-end">
+    <p
+      class="body-md-l w-full max-w-[37.5rem] text-gray"
+      data-anim="description"
+      data-about-text-words
+    >
+      {a.description}
+    </p>
   </div>
 
-  <p class="body-md-l text-gray" data-anim="description" data-about-text-words>
-    {a.description}
-  </p>
+  <div class="flex w-full flex-wrap gap-lg" data-anim="tags">
+    {a.tags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+  </div>
 </div>

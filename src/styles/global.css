@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@900&display=swap');
-@import "tailwindcss";
-@import "./figma_var.css";
+@import 'tailwindcss';
+@import './figma_var.css';
 
 @font-face {
   font-family: 'Skrawk Serif';
@@ -12,6 +12,10 @@
 
 .font-skrawk-serif {
   font-family: 'Skrawk Serif', serif;
+}
+
+.font-fredericka {
+  font-family: var(--font-fredericka), serif;
 }
 
 .font-bebas-neue {

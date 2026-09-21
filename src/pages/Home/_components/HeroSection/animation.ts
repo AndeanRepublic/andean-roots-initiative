@@ -9,6 +9,7 @@ import {
   consumePathBeforeHomeNavigation,
   isHomePathname,
 } from '../../../../utils/home-hero-nav-context';
+import { BREAKPOINT_QUERIES } from '../../../../utils/breakpoints';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('hop', '.8, 0, .3, 1');
@@ -63,6 +64,14 @@ function splitIntroHeadings() {
   });
 }
 
+/** Desktop and compact trees both live in the DOM; only the visible one should be tweened. */
+function getActiveHeroLayout(container: HTMLElement): HTMLElement | null {
+  const isDk = window.matchMedia(BREAKPOINT_QUERIES.dk).matches;
+  return container.querySelector<HTMLElement>(
+    isDk ? '[data-hero-layout="desktop"]' : '[data-hero-layout="compact"]',
+  );
+}
+
 function resetIntroSplit() {
   document.querySelectorAll<HTMLElement>(`${PRE} h2, ${SPLIT} h2`).forEach((h2) => {
     h2.style.visibility = 'hidden';
@@ -90,14 +99,15 @@ export function initHomeHeroRevealAnimation() {
   if (!container || !preloader || !splitOverlay || !introRoot) return;
 
   const heroImg = container.querySelector<HTMLElement>('.hero-img');
-  if (!heroImg) return;
+  const layout = getActiveHeroLayout(container);
+  if (!heroImg || !layout) return;
 
   const siteHeader = document.querySelector<HTMLElement>('[data-hero-header]');
-  const subEl = container.querySelector<HTMLElement>('[data-hero-sub]');
-  const ctaEl = container.querySelector<HTMLElement>('[data-hero-cta]');
+  const subEl = layout.querySelector<HTMLElement>('[data-hero-sub]');
+  const ctaEl = layout.querySelector<HTMLElement>('[data-hero-cta]');
   const scrollEl = container.querySelector<HTMLElement>('[data-hero-scroll]');
-  const titleLineEls = Array.from(container.querySelectorAll<HTMLElement>('[data-hero-text-line]'));
-  const heroTitleRevealRoot = container.querySelector<HTMLElement>(
+  const titleLineEls = Array.from(layout.querySelectorAll<HTMLElement>('[data-hero-text-line]'));
+  const heroTitleRevealRoot = layout.querySelector<HTMLElement>(
     '[data-text-reveal-root="hero-title"]',
   );
 
@@ -194,6 +204,13 @@ export function initHomeHeroRevealAnimation() {
   gsap.set(container, { clearProps: 'clipPath' });
   gsap.set(heroImg, { clearProps: 'transform' });
   gsap.set(`${INTRO} .andean, ${INTRO} .roots, ${INTRO} .initiative`, { clearProps: 'all' });
+  // Keep CSS translate(-50%, -50%) in GSAP's cache so later x/y do not drop the words.
+  gsap.set(`${INTRO} .andean, ${INTRO} .roots, ${INTRO} .initiative`, {
+    xPercent: -50,
+    yPercent: -50,
+    x: 0,
+    y: 0,
+  });
   if (siteHeader) gsap.set(siteHeader, { clearProps: 'opacity,transform' });
   if (subEl) gsap.set(subEl, { clearProps: 'all' });
   if (ctaEl) gsap.set(ctaEl, { clearProps: 'all' });
@@ -288,10 +305,14 @@ export function initHomeHeroRevealAnimation() {
         onUpdate: () => {
           const t = arcProxy.t;
           gsap.set(`${INTRO} .andean`, {
+            xPercent: -50,
+            yPercent: -50,
             x: bezier(t, 0, 1, 12, 19) + 'rem',
             y: bezier(t, 0, -5, -4, -3.7) + 'rem',
           });
           gsap.set(`${INTRO} .initiative`, {
+            xPercent: -50,
+            yPercent: -50,
             x: bezier(t, 0, -1, -13, -21) + 'rem',
             y: bezier(t, 0, 5, 4, 3.7) + 'rem',
           });

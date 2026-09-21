@@ -3,30 +3,37 @@ import ButtonLink from '../../../../components/ButtonLink/index.astro';
 import { cn } from '../../../../cn';
 
 interface Props {
-  subheading: string;
-  ctaText: string;
-  ctaHref: string;
+	subheading: string;
+	ctaText: string;
+	ctaHref: string;
+	layout?: 'desktop' | 'compact';
 }
 
-const { subheading, ctaText, ctaHref } = Astro.props as Props;
+const { subheading, ctaText, ctaHref, layout = 'desktop' } = Astro.props as Props;
+const isCompact = layout === 'compact';
 ---
 
 <div
-  class={cn(
-    'flex flex-col items-end dk:shrink-0',
-    'gap-3xl w-full max-w-none dk:w-[21.5625rem]',
-  )}
+	class={cn(
+		'flex flex-col items-end',
+		isCompact
+			? 'w-full gap-3xl tb:flex-row tb:justify-between'
+			: 'gap-3xl w-full max-w-none dk:w-[21.5625rem] dk:shrink-0',
+	)}
 >
-  <p data-hero-sub class="hero__subtitle body-md-sb w-full text-right wrap-break-word text-white">
-    {subheading}
-  </p>
-  <div data-hero-cta class="shrink-0">
-    <ButtonLink
-      href={ctaHref}
-      text={ctaText}
-      device="desktop"
-      kind="primary-inverse"
-      class="hero__cta"
-    />
-  </div>
+	<p
+		data-hero-sub
+		class="hero__subtitle body-md-sb dk:text-right tb:max-w-[21.5625rem] w-full text-left wrap-break-word text-white"
+	>
+		{subheading}
+	</p>
+	<div data-hero-cta class="shrink-0">
+		<ButtonLink
+			href={ctaHref}
+			text={ctaText}
+			device={isCompact ? 'mobile' : 'desktop'}
+			kind="primary-inverse"
+			class="hero__cta"
+		/>
+	</div>
 </div>

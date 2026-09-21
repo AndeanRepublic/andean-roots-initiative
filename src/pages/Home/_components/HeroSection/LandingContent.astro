@@ -3,42 +3,38 @@ import { cn } from '../../../../cn';
 import TextReveal from '../../../../components/TextReveal/TextReveal.astro';
 
 interface Props {
-  titleTop: string;
-  titleBottom: string;
+	titleTop: string;
+	titleBottom: string;
 }
 
 const { titleTop, titleBottom } = Astro.props as Props;
 ---
 
 <div class="hero__content flex w-full min-w-0 flex-col items-start">
-  <TextReveal scope="hero-title">
-    <h1 class="hero__title flex w-full min-w-0 flex-col text-white">
-      <span
-        data-hero-text-line
-        class={cn(
-          'hero__title-line font-fredericka font-normal uppercase wrap-break-word',
-          'w-full max-w-full dk:-mb-5',
-          'text-[3rem] leading-[1.2] tb:text-[4.25rem] dk:text-[7.5rem]',
-        )}
-      >
-        {titleTop}
-      </span>
-      <span
-        class={cn(
-          'flex w-full items-center tb:justify-center',
-          'tb:pl-48px dk:pl-180px',
-        )}
-      >
-        <span
-          data-hero-text-line
-          class={cn(
-            'hero__title-line font-fredericka font-normal wrap-break-word dk:whitespace-nowrap',
-            'max-w-full text-[length:var(--text-86)] leading-[1.2]',
-          )}
-        >
-          {titleBottom}
-        </span>
-      </span>
-    </h1>
-  </TextReveal>
+	<TextReveal scope="hero-title">
+		<h1 class="hero__title flex w-full min-w-0 flex-col text-white">
+			<span
+				data-hero-text-line
+				class={cn(
+					'hero__title-line font-fredericka font-normal uppercase wrap-break-word',
+					'w-full max-w-full dk:-mb-5',
+					'text-[4rem]  tb:text-[5rem] dk:text-[7.5rem]',
+					'leading-none tb:leading-[0.9] dk:leading-[1.2]',
+				)}
+			>
+				{titleTop}
+			</span>
+			<span class={cn('flex w-full items-center  dk:pl-180px')}>
+				<span
+					data-hero-text-line
+					class={cn(
+						'hero__title-line font-fredericka font-normal wrap-break-word dk:whitespace-nowrap',
+						'max-w-full text-[length:var(--text-86)] leading-[1.1] dk:leading-[1.2]',
+					)}
+				>
+					{titleBottom}
+				</span>
+			</span>
+		</h1>
+	</TextReveal>
 </div>

@@ -43,9 +43,33 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
     heroEntrance && 'opacity-0 -translate-y-4',
   )}
 >
+  <div class="relative mx-auto w-full max-w-328">
+    <button
+      type="button"
+      data-desktop-menu-toggle
+      aria-controls="site-desktop-nav"
+      aria-expanded="false"
+      aria-label={t.header.mobileMenuAriaLabel}
+      class={cn(
+        'absolute top-0 right-0 z-10 overflow-hidden rounded-full bg-black/20 backdrop-blur-md',
+        'hidden items-center justify-end gap-2.5 px-2xl py-lg text-white dk:flex',
+        'pointer-events-none -translate-y-[140%] opacity-0 will-change-[transform,opacity]',
+      )}
+    >
+      <span class="body-md-l whitespace-nowrap">MENU</span>
+      <span
+        class="relative flex size-9.25 items-center justify-center rounded-full border border-white/30 bg-white/10"
+        aria-hidden="true"
+      >
+        <span class="absolute h-[0.078125rem] w-3.75 -translate-y-0.75 bg-white"></span>
+        <span class="absolute h-[0.078125rem] w-3.75 translate-y-0.75 bg-white"></span>
+      </span>
+    </button>
+
   <nav
+    id="site-desktop-nav"
     data-site-header-nav
-    class="py-lg px-2xl mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-tb:gap-4 max-tb:px-4 max-tb:py-3"
+    class="py-lg px-2xl flex w-full items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 will-change-[transform,opacity] max-tb:gap-4 max-tb:px-4 max-tb:py-3"
   >
     <a
       href={getLocalizedPath(lang, 'Home')}
@@ -104,6 +128,28 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
         <span data-lang-switch-label>{lang === 'es' ? 'EN' : 'ES'}</span>
       </a>
 
+      <div
+        data-desktop-menu-close-shell
+        class="hidden w-0 overflow-hidden opacity-0 dk:block"
+      >
+        <button
+          type="button"
+          data-desktop-menu-close
+          aria-label={lang === 'es' ? 'Cerrar navegación' : 'Close navigation'}
+          tabindex="-1"
+          class="relative flex size-9.25 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white"
+        >
+          <span
+            class="absolute h-[0.078125rem] w-2.5 rotate-45 bg-white"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="absolute h-[0.078125rem] w-2.5 -rotate-45 bg-white"
+            aria-hidden="true"
+          ></span>
+        </button>
+      </div>
+
       <button
         type="button"
         data-mobile-menu-toggle
@@ -123,16 +169,17 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
         >
           <span
             data-mobile-menu-icon-top
-            class="absolute h-[1.25px] w-[15px] translate-y-[-3px] bg-white will-change-transform"
+            class="absolute h-[1.25px] w-3.75 -translate-y-0.75 bg-white will-change-transform"
           ></span>
           <span
             data-mobile-menu-icon-bottom
-            class="absolute h-[1.25px] w-[15px] translate-y-[3px] bg-white will-change-transform"
+            class="absolute h-[1.25px] w-3.75 translate-y-0.75 bg-white will-change-transform"
           ></span>
         </span>
       </button>
     </div>
   </nav>
+  </div>
 </header>
 
 <MobileMenu navLinks={navLinks} alternateUrl={alternateUrl} lang={lang} activeHref={activeHref} />

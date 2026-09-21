@@ -1,4 +1,5 @@
 import { navPathMatchesLink } from '../../i18n/nav-active';
+import { setupDesktopMenuAnimation } from './desktop-menu-animation';
 
 const getActiveLinkFromLocation = (links: HTMLAnchorElement[]) => {
   const pathname = window.location.pathname;
@@ -81,9 +82,12 @@ const initDesktopNavIndicator = () => {
 };
 
 let cleanupDesktopNavIndicator: (() => void) | undefined;
+let cleanupDesktopMenu: (() => void) | undefined;
 
 export const initHeaderAnimation = () => {
   cleanupDesktopNavIndicator?.();
+  cleanupDesktopMenu?.();
   cleanupDesktopNavIndicator = initDesktopNavIndicator();
+  cleanupDesktopMenu = setupDesktopMenuAnimation();
 };
 

@@ -5,6 +5,9 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 gsap.registerPlugin(ScrollTrigger);
 
 const MOBILE_CARD_SELECTOR = '[data-anim="mobile-card"]';
+const INTRO_TITLE_SELECTOR = '[data-anim="intro-title"]';
+const DESKTOP_CARD_CONTAINER_SELECTOR = '.challenge-flip-stage .card-container';
+const CENTERED_TITLE_CARD_GAP_REM = 1.5;
 
 /** Divide el intro en caracteres preservando segmentos para animación progresiva por scroll. */
 function buildIntroChars(root: HTMLElement) {
@@ -56,10 +59,51 @@ function setupIntroTextReveal(root: HTMLElement) {
   };
 }
 
+/** Groups inline character spans by their rendered row, from top to bottom. */
+function groupCharsByVisualLine(chars: HTMLElement[]) {
+  const lines = new Map<number, HTMLElement[]>();
+
+  chars.forEach((char) => {
+    const top = Math.round(char.getBoundingClientRect().top);
+    const line = lines.get(top) ?? [];
+    line.push(char);
+    lines.set(top, line);
+  });
+
+  return Array.from(lines.entries())
+    .sort(([topA], [topB]) => topA - topB)
+    .map(([, line]) => line);
+}
+
+/** Returns absolute GSAP y values that center the title + unsplit card image as one group. */
+function getCenteredIntroOffsets(
+  root: HTMLElement,
+  title: HTMLElement,
+  cardContainer: HTMLElement,
+) {
+  const rootTop = root.getBoundingClientRect().top;
+  const titleY = Number.parseFloat(String(gsap.getProperty(title, 'y'))) || 0;
+  const cardY = Number.parseFloat(String(gsap.getProperty(cardContainer, 'y'))) || 0;
+  const titleRect = title.getBoundingClientRect();
+  const cardRect = cardContainer.getBoundingClientRect();
+  const naturalTitleTop = titleRect.top - rootTop - titleY;
+  const naturalCardTop = cardRect.top - rootTop - cardY;
+  const gap = CENTERED_TITLE_CARD_GAP_REM * 16;
+  const groupHeight = titleRect.height + gap + cardRect.height;
+  const targetTitleTop = Math.max(0, (window.innerHeight - groupHeight) / 2);
+  const targetCardTop = targetTitleTop + titleRect.height + gap;
+
+  return {
+    titleY: targetTitleTop - naturalTitleTop,
+    cardY: targetCardTop - naturalCardTop,
+  };
+}
+
 function clearVisionCardStyles(root: HTMLElement) {
   const animatedSelectors = [
     '.challenge-flip-stage .card',
-    '.challenge-flip-stage .card-container',
+    DESKTOP_CARD_CONTAINER_SELECTOR,
+    INTRO_TITLE_SELECTOR,
     MOBILE_CARD_SELECTOR,
     '.sticky-section',
   ];
@@ -140,106 +184,90 @@ export const initChallengeSectionCards = createScrollSectionController({
 
     mm.add('(min-width: 1200px)', () => {
       const clearTextAnimation = setupIntroTextReveal(root);
-      const challengeSection = root;
-      const cardContainer = root.querySelector<HTMLElement>(
-        '.challenge-flip-stage .card-container',
+      const title = root.querySelector<HTMLElement>(INTRO_TITLE_SELECTOR);
+      const introChars = Array.from(
+        root.querySelectorAll<HTMLElement>('.challenge-intro-char'),
       );
-      const card1 = root.querySelector('#card-1');
-      const card2 = root.querySelector('#card-2');
-      const card3 = root.querySelector('#card-3');
-      const cards = root.querySelectorAll<HTMLElement>('.challenge-flip-stage .card');
+      const introLines = groupCharsByVisualLine(introChars);
+      const cardContainer = root.querySelector<HTMLElement>(DESKTOP_CARD_CONTAINER_SELECTOR);
+      const cards = Array.from(
+        root.querySelectorAll<HTMLElement>('.challenge-flip-stage .card'),
+      );
 
-      let isGapAnimationCompleted = false;
-      let isFlipAnimationCompleted = false;
+      if (!title || !cardContainer || !cards.length) {
+        return clearTextAnimation;
+      }
 
-      // Timeline pinneado de dk: primero apertura/espaciado, luego flip de cards.
-      const st = ScrollTrigger.create({
-        trigger: challengeSection,
-        start: 'top top',
-        end: () => `+=${window.innerHeight * 4}px`,
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-
-          if (progress <= 0.25) {
-            const widthPercentage = gsap.utils.mapRange(0, 0.25, 75, 68, progress);
-            gsap.set(cardContainer, { width: `${widthPercentage}%` });
-          } else {
-            gsap.set(cardContainer, { width: '68%' });
-          }
-
-          if (progress >= 0.35 && !isGapAnimationCompleted) {
-            gsap.to(cardContainer, {
-              gap: '20px',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            gsap.to([card1, card2, card3], {
-              borderRadius: '20px',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            isGapAnimationCompleted = true;
-          } else if (progress < 0.35 && isGapAnimationCompleted) {
-            gsap.to(cardContainer, {
-              gap: '0px',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            gsap.to(card1, {
-              borderRadius: '20px 0 0 20px',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            gsap.to(card2, {
-              borderRadius: '0px',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            gsap.to(card3, {
-              borderRadius: '0 20px 20px 0',
-              duration: 0.5,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            });
-            isGapAnimationCompleted = false;
-          }
-
-          if (progress >= 0.7 && !isFlipAnimationCompleted) {
-            gsap.to(cards, {
-              rotationY: 180,
-              duration: 0.75,
-              ease: 'power3.inOut',
-              stagger: 0.1,
-              overwrite: 'auto',
-            });
-
-            isFlipAnimationCompleted = true;
-          } else if (progress < 0.7 && isFlipAnimationCompleted) {
-            gsap.to(cards, {
-              rotationY: 0,
-              duration: 0.75,
-              ease: 'power3.inOut',
-              stagger: -0.1,
-              overwrite: 'auto',
-            });
-
-            isFlipAnimationCompleted = false;
-          }
+      const hold = { progress: 0 };
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: () => `+=${window.innerHeight * 4.5}px`,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
         },
       });
 
+      /*
+       * Once the reading reveal is complete, remove the copy in reading order
+       * while the title and still-joined image settle as one centered lockup.
+       */
+      timeline.addLabel('compose');
+      introLines.forEach((line, index) => {
+        timeline.to(
+          line,
+          { opacity: 0, duration: 0.3, ease: 'power1.in' },
+          `compose+=${index * 0.16}`,
+        );
+      });
+      timeline.to(
+        title,
+        {
+          y: () => getCenteredIntroOffsets(root, title, cardContainer).titleY,
+          duration: 1.1,
+          ease: 'power2.inOut',
+        },
+        'compose',
+      );
+      timeline.to(
+        cardContainer,
+        {
+          y: () => getCenteredIntroOffsets(root, title, cardContainer).cardY,
+          duration: 1.1,
+          ease: 'power2.inOut',
+        },
+        'compose',
+      );
+
+      // Briefly hold the centered composition before the image starts separating.
+      timeline.to(hold, { progress: 1, duration: 0.35, ease: 'none' });
+      timeline.addLabel('split');
+      timeline.to(cardContainer, { width: '68%', duration: 0.8, ease: 'power2.inOut' });
+      timeline.addLabel('separate');
+      timeline.to(
+        cardContainer,
+        { gap: '1.25rem', duration: 0.55, ease: 'power3.out' },
+        'separate',
+      );
+      timeline.to(
+        cards,
+        { borderRadius: '1.25rem', duration: 0.55, ease: 'power3.out' },
+        'separate',
+      );
+      timeline.addLabel('flip');
+      timeline.to(cards, {
+        rotationY: 180,
+        duration: 0.9,
+        ease: 'power3.inOut',
+        stagger: 0.1,
+      });
+
       return () => {
-        st.kill();
-        isGapAnimationCompleted = false;
-        isFlipAnimationCompleted = false;
+        timeline.scrollTrigger?.kill();
+        timeline.kill();
         clearTextAnimation();
 
         clearVisionCardStyles(root);

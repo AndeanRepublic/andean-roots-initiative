@@ -7,7 +7,7 @@ import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -16,90 +16,113 @@ const c = t.challenge;
 ---
 
 <div
-  class={cn(
-    'challenge-cards-mobile grid w-full max-w-[948px] gap-xl tb:grid-cols-3',
-    'dk:hidden',
-  )}
+	class={cn(
+		'challenge-cards-mobile grid w-full max-w-[59.25rem] gap-xl tb:grid-cols-3',
+		'dk:hidden',
+	)}
 >
-  <article
-    class={cn(
-      'flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
-      'dk:h-[350px] h-[250px]',
-    )}
-    data-anim="mobile-card"
-  >
-    <h3 class="font-manrope text-main text-[24px] leading-[1.4] font-semibold">
-      {c.firstCardTitle}
-    </h3>
+	<article
+		class={cn(
+			'flex flex-col justify-between rounded-lg bg-light p-xl',
+			'min-h-[16.5rem] tb:h-[21.875rem]',
+		)}
+		data-anim="mobile-card"
+	>
+		<h3
+			class={cn(
+				'w-full text-main',
+				'font-montserrat font-extrabold',
+				'text-[1.5rem] tb:text-[1.4rem] leading-[1.2]',
+			)}
+		>
+			{c.firstCardTitle}
+		</h3>
 
-    <div class="gap-sm flex flex-col">
-      <p
-        class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-tb:text-[40px]"
-      >
-        {c.firstCardHeadline}
-      </p>
-      <p class="body-sm-l text-black">{c.firstCardDescription}</p>
-    </div>
-  </article>
+		<div class="gap-sm flex flex-col">
+			<p
+				class={cn(
+					'w-full text-black',
+					'font-fredericka font-normal tracking-[-0.125rem]',
+					'text-[2.8rem] tb:text-[2.5rem] leading-[1.2]',
+				)}
+			>
+				{c.firstCardHeadline}
+			</p>
+			<p class="body-sm-l text-black">{c.firstCardDescription}</p>
+		</div>
+	</article>
 
-  <article
-    class="p-xl tb:h-[400px] relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg text-white"
-    data-anim="mobile-card"
-  >
-    <img
-      src="/home-assets/Problem/2.png"
-      alt={c.secondCardImageAlt}
-      class="absolute inset-0 size-full object-cover"
-      loading="lazy"
-    />
-    <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/60"></div>
+	<article
+		class={cn(
+			'relative flex flex-col justify-between overflow-hidden rounded-lg p-xl text-white',
+			'min-h-[21.875rem] tb:h-[21.875rem]',
+		)}
+		data-anim="mobile-card"
+	>
+		<img
+			src="/home-assets/Problem/2.png"
+			alt={c.secondCardImageAlt}
+			class="absolute inset-0 size-full object-cover"
+			loading="lazy"
+		/>
+		<div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/50"></div>
 
-    <div class="relative z-10 flex">
-      <span
-        class="bg-main/25 flex size-12 items-center justify-center rounded-full border border-white/30 backdrop-blur-sm"
-      >
-        <TargetIcon class="size-6 text-white" />
-      </span>
-    </div>
+		<div class="relative z-10 flex">
+			<span class="p-sm flex items-center justify-center rounded-full backdrop-blur-sm">
+				<TargetIcon class="size-8 text-white" />
+			</span>
+		</div>
 
-    <div class="gap-sm relative z-10 flex flex-col">
-      <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-tb:text-[44px]">
-        {c.secondCardTitle}
-      </h3>
-      <p class="body-sm-l text-white">{c.secondCardDescription}</p>
-    </div>
-  </article>
+		<div class="gap-sm relative z-10 flex flex-col">
+			<h3
+				class={cn(
+					'w-full text-white',
+					'font-fredericka font-normal',
+					'text-[2.8rem] tb:text-[2.5rem] leading-[1.4]',
+				)}
+			>
+				{c.secondCardTitle}
+			</h3>
+			<p class="body-sm-l text-white">{c.secondCardDescription}</p>
+		</div>
+	</article>
 
-  <article
-    class={cn(
-      'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
-      'dk:h-[350px] h-[280px]',
-    )}
-    data-anim="mobile-card"
-  >
-    <div class="gap-lg flex flex-col">
-      <p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
-      <h3
-        class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-tb:text-[44px]"
-      >
-        {c.thirdCardTitle}
-      </h3>
-    </div>
+	<article
+		class={cn(
+			'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
+			'min-h-[18.5rem] tb:h-[21.875rem]',
+		)}
+		data-anim="mobile-card"
+	>
+		<div class="gap-lg flex flex-col">
+			<p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
+			<h3
+				class={cn(
+					'w-full text-center text-white',
+					'font-fredericka font-normal',
+					'text-[2.5rem] tb:text-[2rem] leading-[0.8]',
+				)}
+			>
+				{c.thirdCardTitle}
+			</h3>
+		</div>
 
-    <div class="gap-md flex flex-col">
-      <div class="z-0 flex items-center gap-[-1rem]">
-        <img
-          src="/home-assets/Problem/hands image.png"
-          alt={c.thirdCardImageAlt}
-          class="z-0 size-[70px] rounded-full object-cover"
-          loading="lazy"
-        />
-        <span class="bg-light z-10 -ml-4 flex size-[70px] items-center justify-center rounded-full">
-          <BreakChainIcon class="size-10 text-black" />
-        </span>
-      </div>
+		<div class="gap-md flex flex-col">
+			<div class="z-0 flex items-center gap-[-1rem]">
+				<img
+					src="/home-assets/Problem/hands image.png"
+					alt={c.thirdCardImageAlt}
+					class="z-0 size-[4.375rem] rounded-full object-cover"
+					loading="lazy"
+				/>
+				<span
+					class="bg-light z-10 -ml-4 flex size-[4.375rem] items-center justify-center rounded-full"
+				>
+					<BreakChainIcon class="size-10 text-black" />
+				</span>
+			</div>
 
-      <p class="body-sm-l text-light">{c.thirdCardDescription}</p>
-    </div>
-  </article>
+			<p class="body-sm-l text-light">{c.thirdCardDescription}</p>
+		</div>
+	</article>
 </div>

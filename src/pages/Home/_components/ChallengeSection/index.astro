@@ -7,27 +7,29 @@ import ChallengeFlipCardsDesktop from './ChallengeFlipCardsDesktop.astro';
 import ChallengeCardsMobile from './ChallengeCardsMobile.astro';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
-<section
-  id="challenge"
-  class={cn('sticky-section', 'bg-white px-2xl py-6xl', 'tb:px-6 tb:py-12')}
->
-  <div class="gap-md mx-auto flex w-full max-w-[1312px] flex-col items-center">
-    <ChallengeSectionIntro lang={lang} />
-    <ChallengeFlipCardsDesktop lang={lang} />
-    <ChallengeCardsMobile lang={lang} />
-  </div>
+<section id="challenge" class="sticky-section px-6xl py-6xl bg-white">
+	<div
+		class={cn(
+			'mx-auto flex w-full max-w-328 flex-col items-center',
+			'gap-[32px] tb:gap-[32px] dk:gap-[24px]',
+		)}
+	>
+		<ChallengeSectionIntro lang={lang} />
+		<ChallengeFlipCardsDesktop lang={lang} />
+		<ChallengeCardsMobile lang={lang} />
+	</div>
 </section>
 
 <script>
-  import { initChallengeSectionCards } from './animation';
+	import { initChallengeSectionCards } from './animation';
 
-  const boot = () => initChallengeSectionCards();
+	const boot = () => initChallengeSectionCards();
 
-  document.addEventListener('astro:page-load', boot);
+	document.addEventListener('astro:page-load', boot);
 </script>

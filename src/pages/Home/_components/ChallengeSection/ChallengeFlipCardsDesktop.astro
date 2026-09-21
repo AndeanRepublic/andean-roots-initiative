@@ -7,7 +7,7 @@ import { useTranslations } from '../../../../i18n/utils';
 import { cn } from '../../../../cn';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -16,178 +16,182 @@ const c = t.challenge;
 ---
 
 <div class="dk:block hidden w-full">
-  <section class={cn('challenge-flip-stage', 'relative flex w-full items-center justify-center')}>
-    <div
-      class={cn(
-        'card-container',
-        'relative flex w-[75%] max-w-[948px] translate-y-10 will-change-[width]',
-        'perspective-[1000px]',
-      )}
-    >
-      <!-- Card 1 -->
-      <div
-        class={cn(
-          'card',
-          'relative flex-1 aspect-5/7 transform-3d origin-[top_center]',
-          'rounded-[20px_0_0_20px]',
-        )}
-        id="card-1"
-      >
-        <div
-          class={cn(
-            'card-front',
-            'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
-          )}
-        >
-          <img
-            class="size-full object-cover"
-            src={c.firstCardCoverSrc}
-            alt=""
-            loading="lazy"
-          />
-        </div>
+	<section class={cn('challenge-flip-stage', 'relative flex w-full items-center justify-center')}>
+		<div
+			class={cn(
+				'card-container',
+				'relative flex w-[75%] max-w-[948px] translate-y-10 will-change-[width]',
+				'perspective-[1000px]',
+			)}
+		>
+			<!-- Card 1 -->
+			<div
+				class={cn(
+					'card',
+					'relative flex-1 aspect-5/7 transform-3d origin-[top_center]',
+					'rounded-[20px_0_0_20px]',
+				)}
+				id="card-1"
+			>
+				<div
+					class={cn(
+						'card-front',
+						'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
+					)}
+				>
+					<img class="size-full object-cover" src={c.firstCardCoverSrc} alt="" loading="lazy" />
+				</div>
 
-        <div
-          class={cn(
-            'card-back',
-            'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
-            'transform-[rotateY(180deg)]',
-          )}
-        >
-          <div
-            class={cn(
-              'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-stone-200 p-xl text-left',
-              'tb:min-h-[350px] min-h-[250px]',
-            )}
-          >
-            <h3 class="font-manrope text-main text-[24px] leading-[1.4] font-semibold">
-              {c.firstCardTitle}
-            </h3>
-            <div class="gap-sm flex flex-col">
-              <p
-                class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-tb:text-[40px]"
-              >
-                {c.firstCardHeadline}
-              </p>
-              <p class="body-sm-l text-black">{c.firstCardDescription}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+				<div
+					class={cn(
+						'card-back',
+						'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
+						'transform-[rotateY(180deg)]',
+					)}
+				>
+					<div
+						class={cn(
+							'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-light p-xl text-left',
+						)}
+					>
+						<h3
+							class={cn(
+								'w-full text-main',
+								'font-montserrat font-extrabold',
+								'text-[1.5rem] leading-[1.2]',
+							)}
+						>
+							{c.firstCardTitle}
+						</h3>
+						<div class="gap-sm flex flex-col">
+							<p
+								class={cn(
+									'w-full text-black',
+									'font-fredericka font-normal tracking-[-0.125rem]',
+									'text-[2.5rem] leading-[1.2]',
+								)}
+							>
+								{c.firstCardHeadline}
+							</p>
+							<p class="body-sm-l text-black">{c.firstCardDescription}</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <!-- Card 2 -->
-      <div class={cn('card', 'relative flex-1 aspect-5/7 transform-3d origin-[top_center]')} id="card-2">
-        <div
-          class={cn(
-            'card-front',
-            'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
-          )}
-        >
-          <img
-            class="size-full object-cover"
-            src={c.secondCardCoverSrc}
-            alt=""
-            loading="lazy"
-          />
-        </div>
+			<!-- Card 2 -->
+			<div
+				class={cn('card', 'relative flex-1 aspect-5/7 transform-3d origin-[top_center]')}
+				id="card-2"
+			>
+				<div
+					class={cn(
+						'card-front',
+						'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
+					)}
+				>
+					<img class="size-full object-cover" src={c.secondCardCoverSrc} alt="" loading="lazy" />
+				</div>
 
-        <div
-          class={cn(
-            'card-back',
-            'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
-            'transform-[rotateY(180deg)]',
-          )}
-        >
-          <div
-            class="p-xl relative flex h-full min-h-0 w-full flex-col justify-between overflow-hidden rounded-[inherit] text-white"
-          >
-            <img
-              src="/home-assets/Problem/2.png"
-              alt={c.secondCardImageAlt}
-              class="absolute inset-0 size-full object-cover"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/60"></div>
-            <div class="relative z-10 flex">
-              <span
-                class="bg-main/25 flex size-12 items-center justify-center rounded-full border border-white/30 backdrop-blur-sm"
-              >
-                <TargetIcon class="size-6 text-white" />
-              </span>
-            </div>
-            <div class="gap-sm relative z-10 flex flex-col">
-              <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-tb:text-[44px]">
-                {c.secondCardTitle}
-              </h3>
-              <p class="body-sm-l text-white">{c.secondCardDescription}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+				<div
+					class={cn(
+						'card-back',
+						'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
+						'transform-[rotateY(180deg)]',
+					)}
+				>
+					<div
+						class="p-xl relative flex h-full min-h-0 w-full flex-col justify-between overflow-hidden rounded-[inherit] text-white"
+					>
+						<img
+							src="/home-assets/Problem/2.png"
+							alt={c.secondCardImageAlt}
+							class="absolute inset-0 size-full object-cover"
+							loading="lazy"
+						/>
+						<div class="absolute inset-0 bg-linear-to-b from-black/0 to-black/50"></div>
+						<div class="relative z-10 flex">
+							<span class="p-sm flex items-center justify-center rounded-full backdrop-blur-sm">
+								<TargetIcon class="size-8 text-white" />
+							</span>
+						</div>
+						<div class="gap-sm relative z-10 flex flex-col">
+							<h3
+								class={cn(
+									'w-full text-white',
+									'font-fredericka font-normal',
+									'text-[2.5rem] leading-[1.4]',
+								)}
+							>
+								{c.secondCardTitle}
+							</h3>
+							<p class="body-sm-l text-white">{c.secondCardDescription}</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <!-- Card 3 -->
-      <div
-        class={cn(
-          'card',
-          'relative flex-1 aspect-5/7 transform-3d origin-[top_center]',
-          'rounded-[0_20px_20px_0]',
-        )}
-        id="card-3"
-      >
-        <div
-          class={cn(
-            'card-front',
-            'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
-          )}
-        >
-          <img
-            class="size-full object-cover"
-            src={c.thirdCardCoverSrc}
-            alt=""
-            loading="lazy"
-          />
-        </div>
+			<!-- Card 3 -->
+			<div
+				class={cn(
+					'card',
+					'relative flex-1 aspect-5/7 transform-3d origin-[top_center]',
+					'rounded-[0_20px_20px_0]',
+				)}
+				id="card-3"
+			>
+				<div
+					class={cn(
+						'card-front',
+						'absolute inset-0 size-full overflow-hidden rounded-[inherit] backface-hidden',
+					)}
+				>
+					<img class="size-full object-cover" src={c.thirdCardCoverSrc} alt="" loading="lazy" />
+				</div>
 
-        <div
-          class={cn(
-            'card-back',
-            'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
-            'transform-[rotateY(180deg)]',
-          )}
-        >
-          <div
-            class={cn(
-              'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-main p-xl text-white',
-              'tb:min-h-[350px] min-h-[280px]',
-            )}
-          >
-            <div class="gap-lg flex flex-col">
-              <p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
-              <h3
-                class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-tb:text-[44px]"
-              >
-                {c.thirdCardTitle}
-              </h3>
-            </div>
-            <div class="gap-md flex flex-col">
-              <div class="z-0 flex items-center gap-[-1rem]">
-                <img
-                  src="/home-assets/Problem/hands image.png"
-                  alt={c.thirdCardImageAlt}
-                  class="z-0 size-[70px] rounded-full object-cover"
-                  loading="lazy"
-                />
-                <span
-                  class="bg-light z-10 -ml-4 flex size-[70px] items-center justify-center rounded-full"
-                >
-                  <BreakChainIcon class="size-10 text-black" />
-                </span>
-              </div>
-              <p class="body-sm-l text-light">{c.thirdCardDescription}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+				<div
+					class={cn(
+						'card-back',
+						'absolute inset-0 flex size-full flex-col items-stretch justify-stretch overflow-hidden rounded-[inherit] p-0 text-left backface-hidden',
+						'transform-[rotateY(180deg)]',
+					)}
+				>
+					<div
+						class={cn(
+							'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-main p-xl text-white',
+						)}
+					>
+						<div class="gap-lg flex flex-col">
+							<p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
+							<h3
+								class={cn(
+									'w-full text-center text-white',
+									'font-fredericka font-normal',
+									'text-[2.25rem] leading-[0.8]',
+								)}
+							>
+								{c.thirdCardTitle}
+							</h3>
+						</div>
+						<div class="gap-md flex flex-col">
+							<div class="z-0 flex items-center gap-[-1rem]">
+								<img
+									src="/home-assets/Problem/hands image.png"
+									alt={c.thirdCardImageAlt}
+									class="z-0 size-[4.375rem] rounded-full object-cover"
+									loading="lazy"
+								/>
+								<span
+									class="bg-light z-10 -ml-4 flex size-[4.375rem] items-center justify-center rounded-full"
+								>
+									<BreakChainIcon class="size-10 text-black" />
+								</span>
+							</div>
+							<p class="body-sm-l text-light">{c.thirdCardDescription}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>

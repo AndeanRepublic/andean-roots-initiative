@@ -39,17 +39,17 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
   data-site-header
   data-hero-header={heroEntrance ? true : undefined}
   class={cn(
-    'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-md:px-4 max-md:pt-4',
+    'fixed top-0 left-0 right-0 z-50 px-2xl pt-3xl max-tb:px-4 max-tb:pt-4',
     heroEntrance && 'opacity-0 -translate-y-4',
   )}
 >
   <nav
     data-site-header-nav
-    class="py-lg px-2xl mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-md:gap-4 max-md:px-4 max-md:py-3"
+    class="py-lg px-2xl mx-auto flex w-full max-w-[1312px] items-center justify-between rounded-full bg-black/20 backdrop-blur-md transition-colors duration-300 max-tb:gap-4 max-tb:px-4 max-tb:py-3"
   >
     <a
       href={getLocalizedPath(lang, 'Home')}
-      class="px-lg flex items-center max-md:px-0"
+      class="px-lg flex items-center max-tb:px-0"
       aria-label={t.header.brandAriaLabel}
     >
       <img
@@ -61,7 +61,7 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
       />
     </a>
 
-    <ul class="gap-sm relative flex items-center max-md:hidden" role="menubar" data-nav-list>
+    <ul class="gap-sm relative flex items-center max-tb:hidden" role="menubar" data-nav-list>
       <li
         class="pointer-events-none absolute top-0 left-0 z-0 rounded-full bg-white opacity-0 transition-[transform,width,height,opacity] duration-300 ease-out"
         data-nav-indicator
@@ -94,11 +94,11 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
       }
     </ul>
 
-    <div class="flex items-center gap-3 max-md:gap-2">
+    <div class="flex items-center gap-3 max-tb:gap-2">
       <a
         href={alternateUrl}
         data-lang-switch
-        class="body-md-sb flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 max-md:hidden"
+        class="body-md-sb flex items-center gap-1 rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20 max-tb:hidden"
         aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
       >
         <span data-lang-switch-label>{lang === 'es' ? 'EN' : 'ES'}</span>
@@ -109,7 +109,7 @@ const alternateUrl = getAlternateUrl(pathname, alternateLang);
         data-mobile-menu-toggle
         aria-label={t.header.mobileMenuAriaLabel}
         aria-expanded="false"
-        class="hidden items-center gap-3 text-white max-md:flex"
+        class="hidden items-center gap-3 text-white max-tb:flex"
       >
         <span class="overflow-hidden">
           <span data-mobile-menu-toggle-label class="body-md-sb block will-change-transform">

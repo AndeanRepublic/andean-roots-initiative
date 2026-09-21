@@ -12,16 +12,16 @@ const t = useTranslations(lang);
 const tm = t.aboutPage.team;
 ---
 
-<section id="about-team" class="px-2xl desktop:py-6xl relative overflow-hidden bg-white py-12">
+<section id="about-team" class="px-2xl dk:py-6xl relative overflow-hidden bg-white py-12">
   <p
-    class="text-light tablet:top-12 tablet:right-4 tablet:text-[14rem] tablet:tracking-[-0.65rem] desktop:top-14 desktop:right-16 desktop:text-[20rem] desktop:tracking-[-0.8rem] pointer-events-none absolute top-10 -right-2 z-0 block text-[7rem] leading-[0.8] font-semibold tracking-[-0.35rem]"
+    class="text-light tb:top-12 tb:right-4 tb:text-[14rem] tb:tracking-[-0.65rem] dk:top-14 dk:right-16 dk:text-[20rem] dk:tracking-[-0.8rem] pointer-events-none absolute top-10 -right-2 z-0 block text-[7rem] leading-[0.8] font-semibold tracking-[-0.35rem]"
     aria-hidden="true"
     data-anim="bg-word"
   >
     {tm.backgroundWord}
   </p>
 
-  <div class="desktop:gap-16 relative mx-auto flex w-full max-w-328 flex-col gap-8">
+  <div class="dk:gap-16 relative mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="max-w-100 pt-4" data-anim="intro">
       <div class="gap-sm flex items-center" data-anim="label">
         <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
@@ -33,18 +33,18 @@ const tm = t.aboutPage.team;
     </div>
 
     <div
-      class="tablet:grid tablet:grid-cols-2 desktop:grid-cols-4 desktop:items-end desktop:gap-6 flex flex-col gap-6"
+      class="tb:grid tb:grid-cols-2 dk:grid-cols-4 dk:items-end dk:gap-6 flex flex-col gap-6"
       data-anim="cards"
     >
       {
         tm.members.map((member, index) => (
           <article
             class:list={[
-              'tablet:w-full relative w-3/4',
+              'tb:w-full relative w-3/4',
               member.offsetClass ?? '',
               {
-                'tablet:mx-0 mr-auto': index % 2 === 0,
-                'tablet:mx-0 ml-auto': index % 2 !== 0,
+                'tb:mx-0 mr-auto': index % 2 === 0,
+                'tb:mx-0 ml-auto': index % 2 !== 0,
               },
             ]}
             data-anim="member-card"

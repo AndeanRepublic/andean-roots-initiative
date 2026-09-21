@@ -24,10 +24,10 @@ const supportLinks = f.supportLinks.map((link) => ({
 }));
 ---
 
-<footer id="contact" class="bg-black px-4 py-12 text-white tablet:px-6 desktop:px-6xl desktop:py-6xl">
+<footer id="contact" class="bg-black px-4 py-12 text-white tb:px-6 dk:px-6xl dk:py-6xl">
   <div class="mx-auto flex w-full max-w-328 flex-col gap-12">
-    <div class="border-gray/50 flex flex-col gap-10 border-b-[0.025rem] pb-12 desktop:flex-row desktop:justify-between">
-      <div class="w-full desktop:w-100">
+    <div class="border-gray/50 flex flex-col gap-10 border-b-[0.025rem] pb-12 dk:flex-row dk:justify-between">
+      <div class="w-full dk:w-100">
         <a href={getLocalizedPath(lang, 'Home')} class="inline-flex w-fit items-center" aria-label="Andean Roots Initiative">
           <img
             src="/home-assets/logo.png"
@@ -40,7 +40,7 @@ const supportLinks = f.supportLinks.map((link) => ({
         </a>
       </div>
 
-      <div class="grid gap-10 tablet:grid-cols-2 desktop:grid-cols-[6.0625rem_8.8125rem_11.375rem] desktop:gap-30">
+      <div class="grid gap-10 tb:grid-cols-2 dk:grid-cols-[6.0625rem_8.8125rem_11.375rem] dk:gap-30">
         <div class="flex flex-col gap-6">
           <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{f.quickLinksTitle}</h3>
           <ul class="flex flex-col gap-4">
@@ -67,7 +67,7 @@ const supportLinks = f.supportLinks.map((link) => ({
           </ul>
         </div>
 
-        <div class="flex flex-col gap-8 desktop:gap-20">
+        <div class="flex flex-col gap-8 dk:gap-20">
           <div class="flex flex-col gap-6">
             <h3 class="text-[1.125rem] leading-[1.4] font-semibold">{f.contactsTitle}</h3>
             <ul class="flex flex-col gap-4">

@@ -18,12 +18,12 @@ interface Props {
 const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
 ---
 
-<article data-anim="program-card" class="tablet:grid-cols-[1fr_1fr] grid items-stretch gap-[10px]">
+<article data-anim="program-card" class="tb:grid-cols-[1fr_1fr] grid items-stretch gap-[10px]">
   <div class="overflow-hidden rounded-lg">
     <img
       src={imageSrc}
       alt={imageAlt}
-      class="tablet:h-[280px] h-[230px] w-full object-cover"
+      class="tb:h-[280px] h-[230px] w-full object-cover"
       loading="lazy"
     />
   </div>
@@ -31,10 +31,10 @@ const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
   <div
     class={cn(
       'flex flex-col justify-between rounded-lg bg-light',
-      'tablet:h-[280px] tablet:min-h-0 ',
-      'items-center tablet:items-start',
-      'gap-5 tablet:gap-0',
-      'tablet:p-[16px] desktop:p-[24px] p-[24px]',
+      'tb:h-[280px] tb:min-h-0 ',
+      'items-center tb:items-start',
+      'gap-5 tb:gap-0',
+      'tb:p-[16px] dk:p-[24px] p-[24px]',
     )}
   >
     <span class="bg-main flex size-12 items-center justify-center rounded-full">
@@ -44,7 +44,7 @@ const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
       {icon === 'cart' && <CartIcon class="h-6 w-6 text-white" />}
     </span>
 
-    <div class={cn('flex flex-col gap-md', 'text-center tablet:text-start')}>
+    <div class={cn('flex flex-col gap-md', 'text-center tb:text-start')}>
       <h3 class="font-manrope text-[24px] leading-[1.4] font-semibold text-black">{title}</h3>
       <p class="body-md-l text-gray">{description}</p>
     </div>

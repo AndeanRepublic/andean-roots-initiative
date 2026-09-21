@@ -15,8 +15,8 @@ const t = useTranslations(lang);
 const v = t.aboutPage.values;
 ---
 
-<section id="about-values" class="px-2xl desktop:py-6xl bg-white py-12">
-  <div class="desktop:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
+<section id="about-values" class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="dk:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
     <div class="flex flex-col gap-4" data-anim="header">
       <div class="gap-sm flex items-center" data-anim="label">
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
@@ -24,7 +24,7 @@ const v = t.aboutPage.values;
       </div>
 
       <div
-        class="desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-10 flex flex-col gap-4"
+        class="dk:flex-row dk:items-start dk:justify-between dk:gap-10 flex flex-col gap-4"
       >
         <h2 class="auxiliar-h-lg-skrawk-r text-main" data-anim="title" data-values-text-line>
           {v.title}
@@ -35,11 +35,11 @@ const v = t.aboutPage.values;
       </div>
     </div>
 
-    <div class="desktop:grid-cols-3 desktop:gap-10 grid gap-6" data-anim="cards">
+    <div class="dk:grid-cols-3 dk:gap-10 grid gap-6" data-anim="cards">
       {
         v.items.map((item) => (
           <article
-            class="desktop:min-h-79 bg-main tablet:min-h-60 flex min-h-70 flex-col justify-between gap-8 rounded-lg p-8 text-white"
+            class="dk:min-h-79 bg-main tb:min-h-60 flex min-h-70 flex-col justify-between gap-8 rounded-lg p-8 text-white"
             data-anim="card"
             data-values-card-tilt
           >

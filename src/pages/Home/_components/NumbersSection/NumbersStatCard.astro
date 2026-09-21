@@ -11,13 +11,13 @@ const { value, label } = Astro.props as Props;
 
 <article
   data-anim="stat-card"
-  class={cn('flex flex-col gap-sm', 'items-center tablet:items-start ')}
+  class={cn('flex flex-col gap-sm', 'items-center tb:items-start ')}
 >
   <p
     data-anim="stat-value"
     data-numbers-counter={value}
     class={cn(
-      'text-[4rem] tablet:text-[2.625rem] desktop:text-[3.5rem]',
+      'text-[4rem] tb:text-[2.625rem] dk:text-[3.5rem]',
       'font-nunito-sans font-semibold leading-none tracking-normal text-white',
     )}
   >

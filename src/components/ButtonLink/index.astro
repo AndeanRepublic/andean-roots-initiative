@@ -34,10 +34,10 @@ const innerClass = 'button-link will-change-[transform] inline-flex shrink-0 ite
 const borderClass = bordered ? 'border border-white' : '';
 
 const variantClass = isInverse
-  ? `rounded-full bg-white text-main gap-[0.6rem] desktop:gap-[0.75rem] desktop:pl-[1.25rem] pl-[0.8rem] pr-[0.375rem] py-[0.375rem] ${borderClass}`
+  ? `rounded-full bg-white text-main gap-[0.6rem] dk:gap-[0.75rem] dk:pl-[1.25rem] pl-[0.8rem] pr-[0.375rem] py-[0.375rem] ${borderClass}`
   : isPrimary
-    ? `rounded-full bg-main text-white gap-[0.6rem] desktop:gap-[0.75rem] pl-[0.8rem] desktop:pl-[1.25rem] pr-[0.375rem] py-[0.375rem] ${borderClass}`
-    : `text-main gap-[0.6rem] desktop:gap-[0.75rem] ${borderClass}`;
+    ? `rounded-full bg-main text-white gap-[0.6rem] dk:gap-[0.75rem] pl-[0.8rem] dk:pl-[1.25rem] pr-[0.375rem] py-[0.375rem] ${borderClass}`
+    : `text-main gap-[0.6rem] dk:gap-[0.75rem] ${borderClass}`;
 const textClass = isMobile
   ? 'text-[0.75rem] font-semibold leading-[1.5]'
   : 'text-[1.125rem] font-semibold leading-[1.5]';

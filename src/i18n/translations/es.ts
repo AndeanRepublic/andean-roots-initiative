@@ -261,7 +261,7 @@ const es = {
         {
           imageSrc: '/about-assets/history/history-1.png',
           imageAlt: 'Mujer andina en campo de cultivo',
-          offsetClass: 'desktop:pt-16',
+          offsetClass: 'dk:pt-16',
           paragraphs: [
             'En los Andes, el talento está en todas partes. En las manos que tejen, en quienes cultivan la tierra, en jóvenes con ideas y ganas de aprender.',
             'Pero durante años, ese talento ha crecido con oportunidades limitadas, sin acceso a educación de calidad, herramientas tecnológicas o caminos claros para desarrollarse.',
@@ -279,7 +279,7 @@ const es = {
         {
           imageSrc: '/about-assets/history/history-3.png',
           imageAlt: 'Niña andina con vestimenta tradicional',
-          offsetClass: 'desktop:pt-35',
+          offsetClass: 'dk:pt-35',
           paragraphs: [
             'Es desde esta realidad que nace Andean Roots Initiative.',
             'Una iniciativa que busca cerrar esa brecha, fortaleciendo capacidades locales y construyendo un puente entre las comunidades andinas y las oportunidades del mundo actual.',
@@ -356,27 +356,27 @@ const es = {
           description:
             'Trabajamos desde el conocimiento, la cultura y las capacidades propias de cada comunidad.',
           icon: 'group' as const,
-          offsetClass: 'desktop:self-start',
+          offsetClass: 'dk:self-start',
         },
         {
           title: 'Innovación con propósito',
           description:
             'Integramos tecnología, educación e innovación para generar soluciones relevantes y sostenibles.',
           icon: 'bulb' as const,
-          offsetClass: 'desktop:self-end',
+          offsetClass: 'dk:self-end',
         },
         {
           title: 'Articulación de actores',
           description: 'Conectamos comunidades con empresas, instituciones y aliados estratégicos.',
           icon: 'handshake' as const,
-          offsetClass: 'desktop:self-end',
+          offsetClass: 'dk:self-end',
         },
         {
           title: 'Sostenibilidad a largo plazo',
           description:
             'Buscamos generar capacidades que permanezcan en el tiempo y no dependan de intervenciones externas.',
           icon: 'sustainability' as const,
-          offsetClass: 'desktop:self-start',
+          offsetClass: 'dk:self-start',
         },
       ],
     },
@@ -391,7 +391,7 @@ const es = {
           role: 'Fundador y director',
           imageSrc: '/about-assets/team/team-1.png',
           imageAlt: 'Retrato de Daniel Yupanqui',
-          offsetClass: 'desktop:pt-20',
+          offsetClass: 'dk:pt-20',
         },
         {
           name: 'Cecilia Núñez',
@@ -405,7 +405,7 @@ const es = {
           role: 'Desarrolladora de proyectos',
           imageSrc: '/about-assets/team/team-3.png',
           imageAlt: 'Retrato de Ruth Arce',
-          offsetClass: 'desktop:pt-20',
+          offsetClass: 'dk:pt-20',
         },
         {
           name: 'Marcelo Luna',

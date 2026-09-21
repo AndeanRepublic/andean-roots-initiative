@@ -1,7 +1,7 @@
 /* ============================================ */
 /* SISTEMA DE DISEÑO - Andean Roots Initiative */
 /* Generado desde Variables de Figma          */
-/* Fecha: 2026-09-18T19:06:08.966Z         */
+/* Fecha: 2026-09-18T19:29:36.111Z         */
 /* ============================================ */
 
 /* ========================================== */
@@ -9,12 +9,17 @@
 /* Desde: Devices                          */
 /* ========================================== */
 
-/* Devices Variables */
+/* Devices: only mb / tb / dk / dk-lg. Default Tailwind sm–2xl are unset. */
 @theme {
-  --breakpoint-desktop-lg: 1700px;
-  --breakpoint-desktop: 1200px;
-  --breakpoint-tablet: 744px;
-  --breakpoint-mobile: 430px;
+  --breakpoint-sm: initial;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+  --breakpoint-dk-lg: 1700px;
+  --breakpoint-dk: 1200px;
+  --breakpoint-tb: 744px;
+  --breakpoint-mb: 430px;
 }
 
 /* ========================================== */
@@ -237,916 +242,916 @@
 /* Padding, Margin, Gap & Space Utility Classes */
 @layer {
   .p-none {
-    @apply tablet:p-[0px] desktop:p-[0px] p-[0px];
+    @apply tb:p-[0px] dk:p-[0px] p-[0px];
   }
   .pt-none {
-    @apply tablet:pt-[0px] desktop:pt-[0px] pt-[0px];
+    @apply tb:pt-[0px] dk:pt-[0px] pt-[0px];
   }
   .pb-none {
-    @apply tablet:pb-[0px] desktop:pb-[0px] pb-[0px];
+    @apply tb:pb-[0px] dk:pb-[0px] pb-[0px];
   }
   .pl-none {
-    @apply tablet:pl-[0px] desktop:pl-[0px] pl-[0px];
+    @apply tb:pl-[0px] dk:pl-[0px] pl-[0px];
   }
   .pr-none {
-    @apply tablet:pr-[0px] desktop:pr-[0px] pr-[0px];
+    @apply tb:pr-[0px] dk:pr-[0px] pr-[0px];
   }
   .px-none {
-    @apply tablet:px-[0px] desktop:px-[0px] px-[0px];
+    @apply tb:px-[0px] dk:px-[0px] px-[0px];
   }
   .py-none {
-    @apply tablet:py-[0px] desktop:py-[0px] py-[0px];
+    @apply tb:py-[0px] dk:py-[0px] py-[0px];
   }
   .m-none {
-    @apply tablet:m-[0px] desktop:m-[0px] m-[0px];
+    @apply tb:m-[0px] dk:m-[0px] m-[0px];
   }
   .mt-none {
-    @apply tablet:mt-[0px] desktop:mt-[0px] mt-[0px];
+    @apply tb:mt-[0px] dk:mt-[0px] mt-[0px];
   }
   .mb-none {
-    @apply tablet:mb-[0px] desktop:mb-[0px] mb-[0px];
+    @apply tb:mb-[0px] dk:mb-[0px] mb-[0px];
   }
   .ml-none {
-    @apply tablet:ml-[0px] desktop:ml-[0px] ml-[0px];
+    @apply tb:ml-[0px] dk:ml-[0px] ml-[0px];
   }
   .mr-none {
-    @apply tablet:mr-[0px] desktop:mr-[0px] mr-[0px];
+    @apply tb:mr-[0px] dk:mr-[0px] mr-[0px];
   }
   .mx-none {
-    @apply tablet:mx-[0px] desktop:mx-[0px] mx-[0px];
+    @apply tb:mx-[0px] dk:mx-[0px] mx-[0px];
   }
   .my-none {
-    @apply tablet:my-[0px] desktop:my-[0px] my-[0px];
+    @apply tb:my-[0px] dk:my-[0px] my-[0px];
   }
   .gap-none {
-    @apply tablet:gap-[0px] desktop:gap-[0px] gap-[0px];
+    @apply tb:gap-[0px] dk:gap-[0px] gap-[0px];
   }
   .gap-x-none {
-    @apply tablet:gap-x-[0px] desktop:gap-x-[0px] gap-x-[0px];
+    @apply tb:gap-x-[0px] dk:gap-x-[0px] gap-x-[0px];
   }
   .gap-y-none {
-    @apply tablet:gap-y-[0px] desktop:gap-y-[0px] gap-y-[0px];
+    @apply tb:gap-y-[0px] dk:gap-y-[0px] gap-y-[0px];
   }
   .space-x-none {
-    @apply tablet:space-x-[0px] desktop:space-x-[0px] space-x-[0px];
+    @apply tb:space-x-[0px] dk:space-x-[0px] space-x-[0px];
   }
   .space-y-none {
-    @apply tablet:space-y-[0px] desktop:space-y-[0px] space-y-[0px];
+    @apply tb:space-y-[0px] dk:space-y-[0px] space-y-[0px];
   }
   .p-2xs {
-    @apply tablet:p-[0px] desktop:p-[2px] p-[0px];
+    @apply tb:p-[0px] dk:p-[2px] p-[0px];
   }
   .pt-2xs {
-    @apply tablet:pt-[0px] desktop:pt-[2px] pt-[0px];
+    @apply tb:pt-[0px] dk:pt-[2px] pt-[0px];
   }
   .pb-2xs {
-    @apply tablet:pb-[0px] desktop:pb-[2px] pb-[0px];
+    @apply tb:pb-[0px] dk:pb-[2px] pb-[0px];
   }
   .pl-2xs {
-    @apply tablet:pl-[0px] desktop:pl-[2px] pl-[0px];
+    @apply tb:pl-[0px] dk:pl-[2px] pl-[0px];
   }
   .pr-2xs {
-    @apply tablet:pr-[0px] desktop:pr-[2px] pr-[0px];
+    @apply tb:pr-[0px] dk:pr-[2px] pr-[0px];
   }
   .px-2xs {
-    @apply tablet:px-[0px] desktop:px-[2px] px-[0px];
+    @apply tb:px-[0px] dk:px-[2px] px-[0px];
   }
   .py-2xs {
-    @apply tablet:py-[0px] desktop:py-[2px] py-[0px];
+    @apply tb:py-[0px] dk:py-[2px] py-[0px];
   }
   .m-2xs {
-    @apply tablet:m-[0px] desktop:m-[2px] m-[0px];
+    @apply tb:m-[0px] dk:m-[2px] m-[0px];
   }
   .mt-2xs {
-    @apply tablet:mt-[0px] desktop:mt-[2px] mt-[0px];
+    @apply tb:mt-[0px] dk:mt-[2px] mt-[0px];
   }
   .mb-2xs {
-    @apply tablet:mb-[0px] desktop:mb-[2px] mb-[0px];
+    @apply tb:mb-[0px] dk:mb-[2px] mb-[0px];
   }
   .ml-2xs {
-    @apply tablet:ml-[0px] desktop:ml-[2px] ml-[0px];
+    @apply tb:ml-[0px] dk:ml-[2px] ml-[0px];
   }
   .mr-2xs {
-    @apply tablet:mr-[0px] desktop:mr-[2px] mr-[0px];
+    @apply tb:mr-[0px] dk:mr-[2px] mr-[0px];
   }
   .mx-2xs {
-    @apply tablet:mx-[0px] desktop:mx-[2px] mx-[0px];
+    @apply tb:mx-[0px] dk:mx-[2px] mx-[0px];
   }
   .my-2xs {
-    @apply tablet:my-[0px] desktop:my-[2px] my-[0px];
+    @apply tb:my-[0px] dk:my-[2px] my-[0px];
   }
   .gap-2xs {
-    @apply tablet:gap-[0px] desktop:gap-[2px] gap-[0px];
+    @apply tb:gap-[0px] dk:gap-[2px] gap-[0px];
   }
   .gap-x-2xs {
-    @apply tablet:gap-x-[0px] desktop:gap-x-[2px] gap-x-[0px];
+    @apply tb:gap-x-[0px] dk:gap-x-[2px] gap-x-[0px];
   }
   .gap-y-2xs {
-    @apply tablet:gap-y-[0px] desktop:gap-y-[2px] gap-y-[0px];
+    @apply tb:gap-y-[0px] dk:gap-y-[2px] gap-y-[0px];
   }
   .space-x-2xs {
-    @apply tablet:space-x-[0px] desktop:space-x-[2px] space-x-[0px];
+    @apply tb:space-x-[0px] dk:space-x-[2px] space-x-[0px];
   }
   .space-y-2xs {
-    @apply tablet:space-y-[0px] desktop:space-y-[2px] space-y-[0px];
+    @apply tb:space-y-[0px] dk:space-y-[2px] space-y-[0px];
   }
   .p-xs {
-    @apply tablet:p-[4px] desktop:p-[4px] p-[2px];
+    @apply tb:p-[4px] dk:p-[4px] p-[2px];
   }
   .pt-xs {
-    @apply tablet:pt-[4px] desktop:pt-[4px] pt-[2px];
+    @apply tb:pt-[4px] dk:pt-[4px] pt-[2px];
   }
   .pb-xs {
-    @apply tablet:pb-[4px] desktop:pb-[4px] pb-[2px];
+    @apply tb:pb-[4px] dk:pb-[4px] pb-[2px];
   }
   .pl-xs {
-    @apply tablet:pl-[4px] desktop:pl-[4px] pl-[2px];
+    @apply tb:pl-[4px] dk:pl-[4px] pl-[2px];
   }
   .pr-xs {
-    @apply tablet:pr-[4px] desktop:pr-[4px] pr-[2px];
+    @apply tb:pr-[4px] dk:pr-[4px] pr-[2px];
   }
   .px-xs {
-    @apply tablet:px-[4px] desktop:px-[4px] px-[2px];
+    @apply tb:px-[4px] dk:px-[4px] px-[2px];
   }
   .py-xs {
-    @apply tablet:py-[4px] desktop:py-[4px] py-[2px];
+    @apply tb:py-[4px] dk:py-[4px] py-[2px];
   }
   .m-xs {
-    @apply tablet:m-[4px] desktop:m-[4px] m-[2px];
+    @apply tb:m-[4px] dk:m-[4px] m-[2px];
   }
   .mt-xs {
-    @apply tablet:mt-[4px] desktop:mt-[4px] mt-[2px];
+    @apply tb:mt-[4px] dk:mt-[4px] mt-[2px];
   }
   .mb-xs {
-    @apply tablet:mb-[4px] desktop:mb-[4px] mb-[2px];
+    @apply tb:mb-[4px] dk:mb-[4px] mb-[2px];
   }
   .ml-xs {
-    @apply tablet:ml-[4px] desktop:ml-[4px] ml-[2px];
+    @apply tb:ml-[4px] dk:ml-[4px] ml-[2px];
   }
   .mr-xs {
-    @apply tablet:mr-[4px] desktop:mr-[4px] mr-[2px];
+    @apply tb:mr-[4px] dk:mr-[4px] mr-[2px];
   }
   .mx-xs {
-    @apply tablet:mx-[4px] desktop:mx-[4px] mx-[2px];
+    @apply tb:mx-[4px] dk:mx-[4px] mx-[2px];
   }
   .my-xs {
-    @apply tablet:my-[4px] desktop:my-[4px] my-[2px];
+    @apply tb:my-[4px] dk:my-[4px] my-[2px];
   }
   .gap-xs {
-    @apply tablet:gap-[4px] desktop:gap-[4px] gap-[2px];
+    @apply tb:gap-[4px] dk:gap-[4px] gap-[2px];
   }
   .gap-x-xs {
-    @apply tablet:gap-x-[4px] desktop:gap-x-[4px] gap-x-[2px];
+    @apply tb:gap-x-[4px] dk:gap-x-[4px] gap-x-[2px];
   }
   .gap-y-xs {
-    @apply tablet:gap-y-[4px] desktop:gap-y-[4px] gap-y-[2px];
+    @apply tb:gap-y-[4px] dk:gap-y-[4px] gap-y-[2px];
   }
   .space-x-xs {
-    @apply tablet:space-x-[4px] desktop:space-x-[4px] space-x-[2px];
+    @apply tb:space-x-[4px] dk:space-x-[4px] space-x-[2px];
   }
   .space-y-xs {
-    @apply tablet:space-y-[4px] desktop:space-y-[4px] space-y-[2px];
+    @apply tb:space-y-[4px] dk:space-y-[4px] space-y-[2px];
   }
   .p-sm {
-    @apply tablet:p-[8px] desktop:p-[8px] p-[4px];
+    @apply tb:p-[8px] dk:p-[8px] p-[4px];
   }
   .pt-sm {
-    @apply tablet:pt-[8px] desktop:pt-[8px] pt-[4px];
+    @apply tb:pt-[8px] dk:pt-[8px] pt-[4px];
   }
   .pb-sm {
-    @apply tablet:pb-[8px] desktop:pb-[8px] pb-[4px];
+    @apply tb:pb-[8px] dk:pb-[8px] pb-[4px];
   }
   .pl-sm {
-    @apply tablet:pl-[8px] desktop:pl-[8px] pl-[4px];
+    @apply tb:pl-[8px] dk:pl-[8px] pl-[4px];
   }
   .pr-sm {
-    @apply tablet:pr-[8px] desktop:pr-[8px] pr-[4px];
+    @apply tb:pr-[8px] dk:pr-[8px] pr-[4px];
   }
   .px-sm {
-    @apply tablet:px-[8px] desktop:px-[8px] px-[4px];
+    @apply tb:px-[8px] dk:px-[8px] px-[4px];
   }
   .py-sm {
-    @apply tablet:py-[8px] desktop:py-[8px] py-[4px];
+    @apply tb:py-[8px] dk:py-[8px] py-[4px];
   }
   .m-sm {
-    @apply tablet:m-[8px] desktop:m-[8px] m-[4px];
+    @apply tb:m-[8px] dk:m-[8px] m-[4px];
   }
   .mt-sm {
-    @apply tablet:mt-[8px] desktop:mt-[8px] mt-[4px];
+    @apply tb:mt-[8px] dk:mt-[8px] mt-[4px];
   }
   .mb-sm {
-    @apply tablet:mb-[8px] desktop:mb-[8px] mb-[4px];
+    @apply tb:mb-[8px] dk:mb-[8px] mb-[4px];
   }
   .ml-sm {
-    @apply tablet:ml-[8px] desktop:ml-[8px] ml-[4px];
+    @apply tb:ml-[8px] dk:ml-[8px] ml-[4px];
   }
   .mr-sm {
-    @apply tablet:mr-[8px] desktop:mr-[8px] mr-[4px];
+    @apply tb:mr-[8px] dk:mr-[8px] mr-[4px];
   }
   .mx-sm {
-    @apply tablet:mx-[8px] desktop:mx-[8px] mx-[4px];
+    @apply tb:mx-[8px] dk:mx-[8px] mx-[4px];
   }
   .my-sm {
-    @apply tablet:my-[8px] desktop:my-[8px] my-[4px];
+    @apply tb:my-[8px] dk:my-[8px] my-[4px];
   }
   .gap-sm {
-    @apply tablet:gap-[8px] desktop:gap-[8px] gap-[4px];
+    @apply tb:gap-[8px] dk:gap-[8px] gap-[4px];
   }
   .gap-x-sm {
-    @apply tablet:gap-x-[8px] desktop:gap-x-[8px] gap-x-[4px];
+    @apply tb:gap-x-[8px] dk:gap-x-[8px] gap-x-[4px];
   }
   .gap-y-sm {
-    @apply tablet:gap-y-[8px] desktop:gap-y-[8px] gap-y-[4px];
+    @apply tb:gap-y-[8px] dk:gap-y-[8px] gap-y-[4px];
   }
   .space-x-sm {
-    @apply tablet:space-x-[8px] desktop:space-x-[8px] space-x-[4px];
+    @apply tb:space-x-[8px] dk:space-x-[8px] space-x-[4px];
   }
   .space-y-sm {
-    @apply tablet:space-y-[8px] desktop:space-y-[8px] space-y-[4px];
+    @apply tb:space-y-[8px] dk:space-y-[8px] space-y-[4px];
   }
   .p-md {
-    @apply tablet:p-[10px] desktop:p-[12px] p-[8px];
+    @apply tb:p-[10px] dk:p-[12px] p-[8px];
   }
   .pt-md {
-    @apply tablet:pt-[10px] desktop:pt-[12px] pt-[8px];
+    @apply tb:pt-[10px] dk:pt-[12px] pt-[8px];
   }
   .pb-md {
-    @apply tablet:pb-[10px] desktop:pb-[12px] pb-[8px];
+    @apply tb:pb-[10px] dk:pb-[12px] pb-[8px];
   }
   .pl-md {
-    @apply tablet:pl-[10px] desktop:pl-[12px] pl-[8px];
+    @apply tb:pl-[10px] dk:pl-[12px] pl-[8px];
   }
   .pr-md {
-    @apply tablet:pr-[10px] desktop:pr-[12px] pr-[8px];
+    @apply tb:pr-[10px] dk:pr-[12px] pr-[8px];
   }
   .px-md {
-    @apply tablet:px-[10px] desktop:px-[12px] px-[8px];
+    @apply tb:px-[10px] dk:px-[12px] px-[8px];
   }
   .py-md {
-    @apply tablet:py-[10px] desktop:py-[12px] py-[8px];
+    @apply tb:py-[10px] dk:py-[12px] py-[8px];
   }
   .m-md {
-    @apply tablet:m-[10px] desktop:m-[12px] m-[8px];
+    @apply tb:m-[10px] dk:m-[12px] m-[8px];
   }
   .mt-md {
-    @apply tablet:mt-[10px] desktop:mt-[12px] mt-[8px];
+    @apply tb:mt-[10px] dk:mt-[12px] mt-[8px];
   }
   .mb-md {
-    @apply tablet:mb-[10px] desktop:mb-[12px] mb-[8px];
+    @apply tb:mb-[10px] dk:mb-[12px] mb-[8px];
   }
   .ml-md {
-    @apply tablet:ml-[10px] desktop:ml-[12px] ml-[8px];
+    @apply tb:ml-[10px] dk:ml-[12px] ml-[8px];
   }
   .mr-md {
-    @apply tablet:mr-[10px] desktop:mr-[12px] mr-[8px];
+    @apply tb:mr-[10px] dk:mr-[12px] mr-[8px];
   }
   .mx-md {
-    @apply tablet:mx-[10px] desktop:mx-[12px] mx-[8px];
+    @apply tb:mx-[10px] dk:mx-[12px] mx-[8px];
   }
   .my-md {
-    @apply tablet:my-[10px] desktop:my-[12px] my-[8px];
+    @apply tb:my-[10px] dk:my-[12px] my-[8px];
   }
   .gap-md {
-    @apply tablet:gap-[10px] desktop:gap-[12px] gap-[8px];
+    @apply tb:gap-[10px] dk:gap-[12px] gap-[8px];
   }
   .gap-x-md {
-    @apply tablet:gap-x-[10px] desktop:gap-x-[12px] gap-x-[8px];
+    @apply tb:gap-x-[10px] dk:gap-x-[12px] gap-x-[8px];
   }
   .gap-y-md {
-    @apply tablet:gap-y-[10px] desktop:gap-y-[12px] gap-y-[8px];
+    @apply tb:gap-y-[10px] dk:gap-y-[12px] gap-y-[8px];
   }
   .space-x-md {
-    @apply tablet:space-x-[10px] desktop:space-x-[12px] space-x-[8px];
+    @apply tb:space-x-[10px] dk:space-x-[12px] space-x-[8px];
   }
   .space-y-md {
-    @apply tablet:space-y-[10px] desktop:space-y-[12px] space-y-[8px];
+    @apply tb:space-y-[10px] dk:space-y-[12px] space-y-[8px];
   }
   .p-lg {
-    @apply tablet:p-[12px] desktop:p-[16px] p-[10px];
+    @apply tb:p-[12px] dk:p-[16px] p-[10px];
   }
   .pt-lg {
-    @apply tablet:pt-[12px] desktop:pt-[16px] pt-[10px];
+    @apply tb:pt-[12px] dk:pt-[16px] pt-[10px];
   }
   .pb-lg {
-    @apply tablet:pb-[12px] desktop:pb-[16px] pb-[10px];
+    @apply tb:pb-[12px] dk:pb-[16px] pb-[10px];
   }
   .pl-lg {
-    @apply tablet:pl-[12px] desktop:pl-[16px] pl-[10px];
+    @apply tb:pl-[12px] dk:pl-[16px] pl-[10px];
   }
   .pr-lg {
-    @apply tablet:pr-[12px] desktop:pr-[16px] pr-[10px];
+    @apply tb:pr-[12px] dk:pr-[16px] pr-[10px];
   }
   .px-lg {
-    @apply tablet:px-[12px] desktop:px-[16px] px-[10px];
+    @apply tb:px-[12px] dk:px-[16px] px-[10px];
   }
   .py-lg {
-    @apply tablet:py-[12px] desktop:py-[16px] py-[10px];
+    @apply tb:py-[12px] dk:py-[16px] py-[10px];
   }
   .m-lg {
-    @apply tablet:m-[12px] desktop:m-[16px] m-[10px];
+    @apply tb:m-[12px] dk:m-[16px] m-[10px];
   }
   .mt-lg {
-    @apply tablet:mt-[12px] desktop:mt-[16px] mt-[10px];
+    @apply tb:mt-[12px] dk:mt-[16px] mt-[10px];
   }
   .mb-lg {
-    @apply tablet:mb-[12px] desktop:mb-[16px] mb-[10px];
+    @apply tb:mb-[12px] dk:mb-[16px] mb-[10px];
   }
   .ml-lg {
-    @apply tablet:ml-[12px] desktop:ml-[16px] ml-[10px];
+    @apply tb:ml-[12px] dk:ml-[16px] ml-[10px];
   }
   .mr-lg {
-    @apply tablet:mr-[12px] desktop:mr-[16px] mr-[10px];
+    @apply tb:mr-[12px] dk:mr-[16px] mr-[10px];
   }
   .mx-lg {
-    @apply tablet:mx-[12px] desktop:mx-[16px] mx-[10px];
+    @apply tb:mx-[12px] dk:mx-[16px] mx-[10px];
   }
   .my-lg {
-    @apply tablet:my-[12px] desktop:my-[16px] my-[10px];
+    @apply tb:my-[12px] dk:my-[16px] my-[10px];
   }
   .gap-lg {
-    @apply tablet:gap-[12px] desktop:gap-[16px] gap-[10px];
+    @apply tb:gap-[12px] dk:gap-[16px] gap-[10px];
   }
   .gap-x-lg {
-    @apply tablet:gap-x-[12px] desktop:gap-x-[16px] gap-x-[10px];
+    @apply tb:gap-x-[12px] dk:gap-x-[16px] gap-x-[10px];
   }
   .gap-y-lg {
-    @apply tablet:gap-y-[12px] desktop:gap-y-[16px] gap-y-[10px];
+    @apply tb:gap-y-[12px] dk:gap-y-[16px] gap-y-[10px];
   }
   .space-x-lg {
-    @apply tablet:space-x-[12px] desktop:space-x-[16px] space-x-[10px];
+    @apply tb:space-x-[12px] dk:space-x-[16px] space-x-[10px];
   }
   .space-y-lg {
-    @apply tablet:space-y-[12px] desktop:space-y-[16px] space-y-[10px];
+    @apply tb:space-y-[12px] dk:space-y-[16px] space-y-[10px];
   }
   .p-xl {
-    @apply tablet:p-[16px] desktop:p-[24px] p-[12px];
+    @apply tb:p-[16px] dk:p-[24px] p-[12px];
   }
   .pt-xl {
-    @apply tablet:pt-[16px] desktop:pt-[24px] pt-[12px];
+    @apply tb:pt-[16px] dk:pt-[24px] pt-[12px];
   }
   .pb-xl {
-    @apply tablet:pb-[16px] desktop:pb-[24px] pb-[12px];
+    @apply tb:pb-[16px] dk:pb-[24px] pb-[12px];
   }
   .pl-xl {
-    @apply tablet:pl-[16px] desktop:pl-[24px] pl-[12px];
+    @apply tb:pl-[16px] dk:pl-[24px] pl-[12px];
   }
   .pr-xl {
-    @apply tablet:pr-[16px] desktop:pr-[24px] pr-[12px];
+    @apply tb:pr-[16px] dk:pr-[24px] pr-[12px];
   }
   .px-xl {
-    @apply tablet:px-[16px] desktop:px-[24px] px-[12px];
+    @apply tb:px-[16px] dk:px-[24px] px-[12px];
   }
   .py-xl {
-    @apply tablet:py-[16px] desktop:py-[24px] py-[12px];
+    @apply tb:py-[16px] dk:py-[24px] py-[12px];
   }
   .m-xl {
-    @apply tablet:m-[16px] desktop:m-[24px] m-[12px];
+    @apply tb:m-[16px] dk:m-[24px] m-[12px];
   }
   .mt-xl {
-    @apply tablet:mt-[16px] desktop:mt-[24px] mt-[12px];
+    @apply tb:mt-[16px] dk:mt-[24px] mt-[12px];
   }
   .mb-xl {
-    @apply tablet:mb-[16px] desktop:mb-[24px] mb-[12px];
+    @apply tb:mb-[16px] dk:mb-[24px] mb-[12px];
   }
   .ml-xl {
-    @apply tablet:ml-[16px] desktop:ml-[24px] ml-[12px];
+    @apply tb:ml-[16px] dk:ml-[24px] ml-[12px];
   }
   .mr-xl {
-    @apply tablet:mr-[16px] desktop:mr-[24px] mr-[12px];
+    @apply tb:mr-[16px] dk:mr-[24px] mr-[12px];
   }
   .mx-xl {
-    @apply tablet:mx-[16px] desktop:mx-[24px] mx-[12px];
+    @apply tb:mx-[16px] dk:mx-[24px] mx-[12px];
   }
   .my-xl {
-    @apply tablet:my-[16px] desktop:my-[24px] my-[12px];
+    @apply tb:my-[16px] dk:my-[24px] my-[12px];
   }
   .gap-xl {
-    @apply tablet:gap-[16px] desktop:gap-[24px] gap-[12px];
+    @apply tb:gap-[16px] dk:gap-[24px] gap-[12px];
   }
   .gap-x-xl {
-    @apply tablet:gap-x-[16px] desktop:gap-x-[24px] gap-x-[12px];
+    @apply tb:gap-x-[16px] dk:gap-x-[24px] gap-x-[12px];
   }
   .gap-y-xl {
-    @apply tablet:gap-y-[16px] desktop:gap-y-[24px] gap-y-[12px];
+    @apply tb:gap-y-[16px] dk:gap-y-[24px] gap-y-[12px];
   }
   .space-x-xl {
-    @apply tablet:space-x-[16px] desktop:space-x-[24px] space-x-[12px];
+    @apply tb:space-x-[16px] dk:space-x-[24px] space-x-[12px];
   }
   .space-y-xl {
-    @apply tablet:space-y-[16px] desktop:space-y-[24px] space-y-[12px];
+    @apply tb:space-y-[16px] dk:space-y-[24px] space-y-[12px];
   }
   .p-2xl {
-    @apply tablet:p-[24px] desktop:p-[32px] p-[16px];
+    @apply tb:p-[24px] dk:p-[32px] p-[16px];
   }
   .pt-2xl {
-    @apply tablet:pt-[24px] desktop:pt-[32px] pt-[16px];
+    @apply tb:pt-[24px] dk:pt-[32px] pt-[16px];
   }
   .pb-2xl {
-    @apply tablet:pb-[24px] desktop:pb-[32px] pb-[16px];
+    @apply tb:pb-[24px] dk:pb-[32px] pb-[16px];
   }
   .pl-2xl {
-    @apply tablet:pl-[24px] desktop:pl-[32px] pl-[16px];
+    @apply tb:pl-[24px] dk:pl-[32px] pl-[16px];
   }
   .pr-2xl {
-    @apply tablet:pr-[24px] desktop:pr-[32px] pr-[16px];
+    @apply tb:pr-[24px] dk:pr-[32px] pr-[16px];
   }
   .px-2xl {
-    @apply tablet:px-[24px] desktop:px-[32px] px-[16px];
+    @apply tb:px-[24px] dk:px-[32px] px-[16px];
   }
   .py-2xl {
-    @apply tablet:py-[24px] desktop:py-[32px] py-[16px];
+    @apply tb:py-[24px] dk:py-[32px] py-[16px];
   }
   .m-2xl {
-    @apply tablet:m-[24px] desktop:m-[32px] m-[16px];
+    @apply tb:m-[24px] dk:m-[32px] m-[16px];
   }
   .mt-2xl {
-    @apply tablet:mt-[24px] desktop:mt-[32px] mt-[16px];
+    @apply tb:mt-[24px] dk:mt-[32px] mt-[16px];
   }
   .mb-2xl {
-    @apply tablet:mb-[24px] desktop:mb-[32px] mb-[16px];
+    @apply tb:mb-[24px] dk:mb-[32px] mb-[16px];
   }
   .ml-2xl {
-    @apply tablet:ml-[24px] desktop:ml-[32px] ml-[16px];
+    @apply tb:ml-[24px] dk:ml-[32px] ml-[16px];
   }
   .mr-2xl {
-    @apply tablet:mr-[24px] desktop:mr-[32px] mr-[16px];
+    @apply tb:mr-[24px] dk:mr-[32px] mr-[16px];
   }
   .mx-2xl {
-    @apply tablet:mx-[24px] desktop:mx-[32px] mx-[16px];
+    @apply tb:mx-[24px] dk:mx-[32px] mx-[16px];
   }
   .my-2xl {
-    @apply tablet:my-[24px] desktop:my-[32px] my-[16px];
+    @apply tb:my-[24px] dk:my-[32px] my-[16px];
   }
   .gap-2xl {
-    @apply tablet:gap-[24px] desktop:gap-[32px] gap-[16px];
+    @apply tb:gap-[24px] dk:gap-[32px] gap-[16px];
   }
   .gap-x-2xl {
-    @apply tablet:gap-x-[24px] desktop:gap-x-[32px] gap-x-[16px];
+    @apply tb:gap-x-[24px] dk:gap-x-[32px] gap-x-[16px];
   }
   .gap-y-2xl {
-    @apply tablet:gap-y-[24px] desktop:gap-y-[32px] gap-y-[16px];
+    @apply tb:gap-y-[24px] dk:gap-y-[32px] gap-y-[16px];
   }
   .space-x-2xl {
-    @apply tablet:space-x-[24px] desktop:space-x-[32px] space-x-[16px];
+    @apply tb:space-x-[24px] dk:space-x-[32px] space-x-[16px];
   }
   .space-y-2xl {
-    @apply tablet:space-y-[24px] desktop:space-y-[32px] space-y-[16px];
+    @apply tb:space-y-[24px] dk:space-y-[32px] space-y-[16px];
   }
   .p-3xl {
-    @apply tablet:p-[28px] desktop:p-[40px] p-[24px];
+    @apply tb:p-[28px] dk:p-[40px] p-[24px];
   }
   .pt-3xl {
-    @apply tablet:pt-[28px] desktop:pt-[40px] pt-[24px];
+    @apply tb:pt-[28px] dk:pt-[40px] pt-[24px];
   }
   .pb-3xl {
-    @apply tablet:pb-[28px] desktop:pb-[40px] pb-[24px];
+    @apply tb:pb-[28px] dk:pb-[40px] pb-[24px];
   }
   .pl-3xl {
-    @apply tablet:pl-[28px] desktop:pl-[40px] pl-[24px];
+    @apply tb:pl-[28px] dk:pl-[40px] pl-[24px];
   }
   .pr-3xl {
-    @apply tablet:pr-[28px] desktop:pr-[40px] pr-[24px];
+    @apply tb:pr-[28px] dk:pr-[40px] pr-[24px];
   }
   .px-3xl {
-    @apply tablet:px-[28px] desktop:px-[40px] px-[24px];
+    @apply tb:px-[28px] dk:px-[40px] px-[24px];
   }
   .py-3xl {
-    @apply tablet:py-[28px] desktop:py-[40px] py-[24px];
+    @apply tb:py-[28px] dk:py-[40px] py-[24px];
   }
   .m-3xl {
-    @apply tablet:m-[28px] desktop:m-[40px] m-[24px];
+    @apply tb:m-[28px] dk:m-[40px] m-[24px];
   }
   .mt-3xl {
-    @apply tablet:mt-[28px] desktop:mt-[40px] mt-[24px];
+    @apply tb:mt-[28px] dk:mt-[40px] mt-[24px];
   }
   .mb-3xl {
-    @apply tablet:mb-[28px] desktop:mb-[40px] mb-[24px];
+    @apply tb:mb-[28px] dk:mb-[40px] mb-[24px];
   }
   .ml-3xl {
-    @apply tablet:ml-[28px] desktop:ml-[40px] ml-[24px];
+    @apply tb:ml-[28px] dk:ml-[40px] ml-[24px];
   }
   .mr-3xl {
-    @apply tablet:mr-[28px] desktop:mr-[40px] mr-[24px];
+    @apply tb:mr-[28px] dk:mr-[40px] mr-[24px];
   }
   .mx-3xl {
-    @apply tablet:mx-[28px] desktop:mx-[40px] mx-[24px];
+    @apply tb:mx-[28px] dk:mx-[40px] mx-[24px];
   }
   .my-3xl {
-    @apply tablet:my-[28px] desktop:my-[40px] my-[24px];
+    @apply tb:my-[28px] dk:my-[40px] my-[24px];
   }
   .gap-3xl {
-    @apply tablet:gap-[28px] desktop:gap-[40px] gap-[24px];
+    @apply tb:gap-[28px] dk:gap-[40px] gap-[24px];
   }
   .gap-x-3xl {
-    @apply tablet:gap-x-[28px] desktop:gap-x-[40px] gap-x-[24px];
+    @apply tb:gap-x-[28px] dk:gap-x-[40px] gap-x-[24px];
   }
   .gap-y-3xl {
-    @apply tablet:gap-y-[28px] desktop:gap-y-[40px] gap-y-[24px];
+    @apply tb:gap-y-[28px] dk:gap-y-[40px] gap-y-[24px];
   }
   .space-x-3xl {
-    @apply tablet:space-x-[28px] desktop:space-x-[40px] space-x-[24px];
+    @apply tb:space-x-[28px] dk:space-x-[40px] space-x-[24px];
   }
   .space-y-3xl {
-    @apply tablet:space-y-[28px] desktop:space-y-[40px] space-y-[24px];
+    @apply tb:space-y-[28px] dk:space-y-[40px] space-y-[24px];
   }
   .p-4xl {
-    @apply tablet:p-[36px] desktop:p-[48px] p-[28px];
+    @apply tb:p-[36px] dk:p-[48px] p-[28px];
   }
   .pt-4xl {
-    @apply tablet:pt-[36px] desktop:pt-[48px] pt-[28px];
+    @apply tb:pt-[36px] dk:pt-[48px] pt-[28px];
   }
   .pb-4xl {
-    @apply tablet:pb-[36px] desktop:pb-[48px] pb-[28px];
+    @apply tb:pb-[36px] dk:pb-[48px] pb-[28px];
   }
   .pl-4xl {
-    @apply tablet:pl-[36px] desktop:pl-[48px] pl-[28px];
+    @apply tb:pl-[36px] dk:pl-[48px] pl-[28px];
   }
   .pr-4xl {
-    @apply tablet:pr-[36px] desktop:pr-[48px] pr-[28px];
+    @apply tb:pr-[36px] dk:pr-[48px] pr-[28px];
   }
   .px-4xl {
-    @apply tablet:px-[36px] desktop:px-[48px] px-[28px];
+    @apply tb:px-[36px] dk:px-[48px] px-[28px];
   }
   .py-4xl {
-    @apply tablet:py-[36px] desktop:py-[48px] py-[28px];
+    @apply tb:py-[36px] dk:py-[48px] py-[28px];
   }
   .m-4xl {
-    @apply tablet:m-[36px] desktop:m-[48px] m-[28px];
+    @apply tb:m-[36px] dk:m-[48px] m-[28px];
   }
   .mt-4xl {
-    @apply tablet:mt-[36px] desktop:mt-[48px] mt-[28px];
+    @apply tb:mt-[36px] dk:mt-[48px] mt-[28px];
   }
   .mb-4xl {
-    @apply tablet:mb-[36px] desktop:mb-[48px] mb-[28px];
+    @apply tb:mb-[36px] dk:mb-[48px] mb-[28px];
   }
   .ml-4xl {
-    @apply tablet:ml-[36px] desktop:ml-[48px] ml-[28px];
+    @apply tb:ml-[36px] dk:ml-[48px] ml-[28px];
   }
   .mr-4xl {
-    @apply tablet:mr-[36px] desktop:mr-[48px] mr-[28px];
+    @apply tb:mr-[36px] dk:mr-[48px] mr-[28px];
   }
   .mx-4xl {
-    @apply tablet:mx-[36px] desktop:mx-[48px] mx-[28px];
+    @apply tb:mx-[36px] dk:mx-[48px] mx-[28px];
   }
   .my-4xl {
-    @apply tablet:my-[36px] desktop:my-[48px] my-[28px];
+    @apply tb:my-[36px] dk:my-[48px] my-[28px];
   }
   .gap-4xl {
-    @apply tablet:gap-[36px] desktop:gap-[48px] gap-[28px];
+    @apply tb:gap-[36px] dk:gap-[48px] gap-[28px];
   }
   .gap-x-4xl {
-    @apply tablet:gap-x-[36px] desktop:gap-x-[48px] gap-x-[28px];
+    @apply tb:gap-x-[36px] dk:gap-x-[48px] gap-x-[28px];
   }
   .gap-y-4xl {
-    @apply tablet:gap-y-[36px] desktop:gap-y-[48px] gap-y-[28px];
+    @apply tb:gap-y-[36px] dk:gap-y-[48px] gap-y-[28px];
   }
   .space-x-4xl {
-    @apply tablet:space-x-[36px] desktop:space-x-[48px] space-x-[28px];
+    @apply tb:space-x-[36px] dk:space-x-[48px] space-x-[28px];
   }
   .space-y-4xl {
-    @apply tablet:space-y-[36px] desktop:space-y-[48px] space-y-[28px];
+    @apply tb:space-y-[36px] dk:space-y-[48px] space-y-[28px];
   }
   .p-5xl {
-    @apply tablet:p-[40px] desktop:p-[56px] p-[32px];
+    @apply tb:p-[40px] dk:p-[56px] p-[32px];
   }
   .pt-5xl {
-    @apply tablet:pt-[40px] desktop:pt-[56px] pt-[32px];
+    @apply tb:pt-[40px] dk:pt-[56px] pt-[32px];
   }
   .pb-5xl {
-    @apply tablet:pb-[40px] desktop:pb-[56px] pb-[32px];
+    @apply tb:pb-[40px] dk:pb-[56px] pb-[32px];
   }
   .pl-5xl {
-    @apply tablet:pl-[40px] desktop:pl-[56px] pl-[32px];
+    @apply tb:pl-[40px] dk:pl-[56px] pl-[32px];
   }
   .pr-5xl {
-    @apply tablet:pr-[40px] desktop:pr-[56px] pr-[32px];
+    @apply tb:pr-[40px] dk:pr-[56px] pr-[32px];
   }
   .px-5xl {
-    @apply tablet:px-[40px] desktop:px-[56px] px-[32px];
+    @apply tb:px-[40px] dk:px-[56px] px-[32px];
   }
   .py-5xl {
-    @apply tablet:py-[40px] desktop:py-[56px] py-[32px];
+    @apply tb:py-[40px] dk:py-[56px] py-[32px];
   }
   .m-5xl {
-    @apply tablet:m-[40px] desktop:m-[56px] m-[32px];
+    @apply tb:m-[40px] dk:m-[56px] m-[32px];
   }
   .mt-5xl {
-    @apply tablet:mt-[40px] desktop:mt-[56px] mt-[32px];
+    @apply tb:mt-[40px] dk:mt-[56px] mt-[32px];
   }
   .mb-5xl {
-    @apply tablet:mb-[40px] desktop:mb-[56px] mb-[32px];
+    @apply tb:mb-[40px] dk:mb-[56px] mb-[32px];
   }
   .ml-5xl {
-    @apply tablet:ml-[40px] desktop:ml-[56px] ml-[32px];
+    @apply tb:ml-[40px] dk:ml-[56px] ml-[32px];
   }
   .mr-5xl {
-    @apply tablet:mr-[40px] desktop:mr-[56px] mr-[32px];
+    @apply tb:mr-[40px] dk:mr-[56px] mr-[32px];
   }
   .mx-5xl {
-    @apply tablet:mx-[40px] desktop:mx-[56px] mx-[32px];
+    @apply tb:mx-[40px] dk:mx-[56px] mx-[32px];
   }
   .my-5xl {
-    @apply tablet:my-[40px] desktop:my-[56px] my-[32px];
+    @apply tb:my-[40px] dk:my-[56px] my-[32px];
   }
   .gap-5xl {
-    @apply tablet:gap-[40px] desktop:gap-[56px] gap-[32px];
+    @apply tb:gap-[40px] dk:gap-[56px] gap-[32px];
   }
   .gap-x-5xl {
-    @apply tablet:gap-x-[40px] desktop:gap-x-[56px] gap-x-[32px];
+    @apply tb:gap-x-[40px] dk:gap-x-[56px] gap-x-[32px];
   }
   .gap-y-5xl {
-    @apply tablet:gap-y-[40px] desktop:gap-y-[56px] gap-y-[32px];
+    @apply tb:gap-y-[40px] dk:gap-y-[56px] gap-y-[32px];
   }
   .space-x-5xl {
-    @apply tablet:space-x-[40px] desktop:space-x-[56px] space-x-[32px];
+    @apply tb:space-x-[40px] dk:space-x-[56px] space-x-[32px];
   }
   .space-y-5xl {
-    @apply tablet:space-y-[40px] desktop:space-y-[56px] space-y-[32px];
+    @apply tb:space-y-[40px] dk:space-y-[56px] space-y-[32px];
   }
   .p-6xl {
-    @apply tablet:p-[48px] desktop:p-[64px] p-[32px];
+    @apply tb:p-[48px] dk:p-[64px] p-[32px];
   }
   .pt-6xl {
-    @apply tablet:pt-[48px] desktop:pt-[64px] pt-[32px];
+    @apply tb:pt-[48px] dk:pt-[64px] pt-[32px];
   }
   .pb-6xl {
-    @apply tablet:pb-[48px] desktop:pb-[64px] pb-[32px];
+    @apply tb:pb-[48px] dk:pb-[64px] pb-[32px];
   }
   .pl-6xl {
-    @apply tablet:pl-[48px] desktop:pl-[64px] pl-[32px];
+    @apply tb:pl-[48px] dk:pl-[64px] pl-[32px];
   }
   .pr-6xl {
-    @apply tablet:pr-[48px] desktop:pr-[64px] pr-[32px];
+    @apply tb:pr-[48px] dk:pr-[64px] pr-[32px];
   }
   .px-6xl {
-    @apply tablet:px-[48px] desktop:px-[64px] px-[32px];
+    @apply tb:px-[48px] dk:px-[64px] px-[32px];
   }
   .py-6xl {
-    @apply tablet:py-[48px] desktop:py-[64px] py-[32px];
+    @apply tb:py-[48px] dk:py-[64px] py-[32px];
   }
   .m-6xl {
-    @apply tablet:m-[48px] desktop:m-[64px] m-[32px];
+    @apply tb:m-[48px] dk:m-[64px] m-[32px];
   }
   .mt-6xl {
-    @apply tablet:mt-[48px] desktop:mt-[64px] mt-[32px];
+    @apply tb:mt-[48px] dk:mt-[64px] mt-[32px];
   }
   .mb-6xl {
-    @apply tablet:mb-[48px] desktop:mb-[64px] mb-[32px];
+    @apply tb:mb-[48px] dk:mb-[64px] mb-[32px];
   }
   .ml-6xl {
-    @apply tablet:ml-[48px] desktop:ml-[64px] ml-[32px];
+    @apply tb:ml-[48px] dk:ml-[64px] ml-[32px];
   }
   .mr-6xl {
-    @apply tablet:mr-[48px] desktop:mr-[64px] mr-[32px];
+    @apply tb:mr-[48px] dk:mr-[64px] mr-[32px];
   }
   .mx-6xl {
-    @apply tablet:mx-[48px] desktop:mx-[64px] mx-[32px];
+    @apply tb:mx-[48px] dk:mx-[64px] mx-[32px];
   }
   .my-6xl {
-    @apply tablet:my-[48px] desktop:my-[64px] my-[32px];
+    @apply tb:my-[48px] dk:my-[64px] my-[32px];
   }
   .gap-6xl {
-    @apply tablet:gap-[48px] desktop:gap-[64px] gap-[32px];
+    @apply tb:gap-[48px] dk:gap-[64px] gap-[32px];
   }
   .gap-x-6xl {
-    @apply tablet:gap-x-[48px] desktop:gap-x-[64px] gap-x-[32px];
+    @apply tb:gap-x-[48px] dk:gap-x-[64px] gap-x-[32px];
   }
   .gap-y-6xl {
-    @apply tablet:gap-y-[48px] desktop:gap-y-[64px] gap-y-[32px];
+    @apply tb:gap-y-[48px] dk:gap-y-[64px] gap-y-[32px];
   }
   .space-x-6xl {
-    @apply tablet:space-x-[48px] desktop:space-x-[64px] space-x-[32px];
+    @apply tb:space-x-[48px] dk:space-x-[64px] space-x-[32px];
   }
   .space-y-6xl {
-    @apply tablet:space-y-[48px] desktop:space-y-[64px] space-y-[32px];
+    @apply tb:space-y-[48px] dk:space-y-[64px] space-y-[32px];
   }
   .p-7xl {
-    @apply tablet:p-[60px] desktop:p-[80px] p-[32px];
+    @apply tb:p-[60px] dk:p-[80px] p-[32px];
   }
   .pt-7xl {
-    @apply tablet:pt-[60px] desktop:pt-[80px] pt-[32px];
+    @apply tb:pt-[60px] dk:pt-[80px] pt-[32px];
   }
   .pb-7xl {
-    @apply tablet:pb-[60px] desktop:pb-[80px] pb-[32px];
+    @apply tb:pb-[60px] dk:pb-[80px] pb-[32px];
   }
   .pl-7xl {
-    @apply tablet:pl-[60px] desktop:pl-[80px] pl-[32px];
+    @apply tb:pl-[60px] dk:pl-[80px] pl-[32px];
   }
   .pr-7xl {
-    @apply tablet:pr-[60px] desktop:pr-[80px] pr-[32px];
+    @apply tb:pr-[60px] dk:pr-[80px] pr-[32px];
   }
   .px-7xl {
-    @apply tablet:px-[60px] desktop:px-[80px] px-[32px];
+    @apply tb:px-[60px] dk:px-[80px] px-[32px];
   }
   .py-7xl {
-    @apply tablet:py-[60px] desktop:py-[80px] py-[32px];
+    @apply tb:py-[60px] dk:py-[80px] py-[32px];
   }
   .m-7xl {
-    @apply tablet:m-[60px] desktop:m-[80px] m-[32px];
+    @apply tb:m-[60px] dk:m-[80px] m-[32px];
   }
   .mt-7xl {
-    @apply tablet:mt-[60px] desktop:mt-[80px] mt-[32px];
+    @apply tb:mt-[60px] dk:mt-[80px] mt-[32px];
   }
   .mb-7xl {
-    @apply tablet:mb-[60px] desktop:mb-[80px] mb-[32px];
+    @apply tb:mb-[60px] dk:mb-[80px] mb-[32px];
   }
   .ml-7xl {
-    @apply tablet:ml-[60px] desktop:ml-[80px] ml-[32px];
+    @apply tb:ml-[60px] dk:ml-[80px] ml-[32px];
   }
   .mr-7xl {
-    @apply tablet:mr-[60px] desktop:mr-[80px] mr-[32px];
+    @apply tb:mr-[60px] dk:mr-[80px] mr-[32px];
   }
   .mx-7xl {
-    @apply tablet:mx-[60px] desktop:mx-[80px] mx-[32px];
+    @apply tb:mx-[60px] dk:mx-[80px] mx-[32px];
   }
   .my-7xl {
-    @apply tablet:my-[60px] desktop:my-[80px] my-[32px];
+    @apply tb:my-[60px] dk:my-[80px] my-[32px];
   }
   .gap-7xl {
-    @apply tablet:gap-[60px] desktop:gap-[80px] gap-[32px];
+    @apply tb:gap-[60px] dk:gap-[80px] gap-[32px];
   }
   .gap-x-7xl {
-    @apply tablet:gap-x-[60px] desktop:gap-x-[80px] gap-x-[32px];
+    @apply tb:gap-x-[60px] dk:gap-x-[80px] gap-x-[32px];
   }
   .gap-y-7xl {
-    @apply tablet:gap-y-[60px] desktop:gap-y-[80px] gap-y-[32px];
+    @apply tb:gap-y-[60px] dk:gap-y-[80px] gap-y-[32px];
   }
   .space-x-7xl {
-    @apply tablet:space-x-[60px] desktop:space-x-[80px] space-x-[32px];
+    @apply tb:space-x-[60px] dk:space-x-[80px] space-x-[32px];
   }
   .space-y-7xl {
-    @apply tablet:space-y-[60px] desktop:space-y-[80px] space-y-[32px];
+    @apply tb:space-y-[60px] dk:space-y-[80px] space-y-[32px];
   }
   .p-8xl {
-    @apply tablet:p-[80px] desktop:p-[120px] p-[52px];
+    @apply tb:p-[80px] dk:p-[120px] p-[52px];
   }
   .pt-8xl {
-    @apply tablet:pt-[80px] desktop:pt-[120px] pt-[52px];
+    @apply tb:pt-[80px] dk:pt-[120px] pt-[52px];
   }
   .pb-8xl {
-    @apply tablet:pb-[80px] desktop:pb-[120px] pb-[52px];
+    @apply tb:pb-[80px] dk:pb-[120px] pb-[52px];
   }
   .pl-8xl {
-    @apply tablet:pl-[80px] desktop:pl-[120px] pl-[52px];
+    @apply tb:pl-[80px] dk:pl-[120px] pl-[52px];
   }
   .pr-8xl {
-    @apply tablet:pr-[80px] desktop:pr-[120px] pr-[52px];
+    @apply tb:pr-[80px] dk:pr-[120px] pr-[52px];
   }
   .px-8xl {
-    @apply tablet:px-[80px] desktop:px-[120px] px-[52px];
+    @apply tb:px-[80px] dk:px-[120px] px-[52px];
   }
   .py-8xl {
-    @apply tablet:py-[80px] desktop:py-[120px] py-[52px];
+    @apply tb:py-[80px] dk:py-[120px] py-[52px];
   }
   .m-8xl {
-    @apply tablet:m-[80px] desktop:m-[120px] m-[52px];
+    @apply tb:m-[80px] dk:m-[120px] m-[52px];
   }
   .mt-8xl {
-    @apply tablet:mt-[80px] desktop:mt-[120px] mt-[52px];
+    @apply tb:mt-[80px] dk:mt-[120px] mt-[52px];
   }
   .mb-8xl {
-    @apply tablet:mb-[80px] desktop:mb-[120px] mb-[52px];
+    @apply tb:mb-[80px] dk:mb-[120px] mb-[52px];
   }
   .ml-8xl {
-    @apply tablet:ml-[80px] desktop:ml-[120px] ml-[52px];
+    @apply tb:ml-[80px] dk:ml-[120px] ml-[52px];
   }
   .mr-8xl {
-    @apply tablet:mr-[80px] desktop:mr-[120px] mr-[52px];
+    @apply tb:mr-[80px] dk:mr-[120px] mr-[52px];
   }
   .mx-8xl {
-    @apply tablet:mx-[80px] desktop:mx-[120px] mx-[52px];
+    @apply tb:mx-[80px] dk:mx-[120px] mx-[52px];
   }
   .my-8xl {
-    @apply tablet:my-[80px] desktop:my-[120px] my-[52px];
+    @apply tb:my-[80px] dk:my-[120px] my-[52px];
   }
   .gap-8xl {
-    @apply tablet:gap-[80px] desktop:gap-[120px] gap-[52px];
+    @apply tb:gap-[80px] dk:gap-[120px] gap-[52px];
   }
   .gap-x-8xl {
-    @apply tablet:gap-x-[80px] desktop:gap-x-[120px] gap-x-[52px];
+    @apply tb:gap-x-[80px] dk:gap-x-[120px] gap-x-[52px];
   }
   .gap-y-8xl {
-    @apply tablet:gap-y-[80px] desktop:gap-y-[120px] gap-y-[52px];
+    @apply tb:gap-y-[80px] dk:gap-y-[120px] gap-y-[52px];
   }
   .space-x-8xl {
-    @apply tablet:space-x-[80px] desktop:space-x-[120px] space-x-[52px];
+    @apply tb:space-x-[80px] dk:space-x-[120px] space-x-[52px];
   }
   .space-y-8xl {
-    @apply tablet:space-y-[80px] desktop:space-y-[120px] space-y-[52px];
+    @apply tb:space-y-[80px] dk:space-y-[120px] space-y-[52px];
   }
   .p-9xl {
-    @apply tablet:p-[100px] desktop:p-[140px] p-[64px];
+    @apply tb:p-[100px] dk:p-[140px] p-[64px];
   }
   .pt-9xl {
-    @apply tablet:pt-[100px] desktop:pt-[140px] pt-[64px];
+    @apply tb:pt-[100px] dk:pt-[140px] pt-[64px];
   }
   .pb-9xl {
-    @apply tablet:pb-[100px] desktop:pb-[140px] pb-[64px];
+    @apply tb:pb-[100px] dk:pb-[140px] pb-[64px];
   }
   .pl-9xl {
-    @apply tablet:pl-[100px] desktop:pl-[140px] pl-[64px];
+    @apply tb:pl-[100px] dk:pl-[140px] pl-[64px];
   }
   .pr-9xl {
-    @apply tablet:pr-[100px] desktop:pr-[140px] pr-[64px];
+    @apply tb:pr-[100px] dk:pr-[140px] pr-[64px];
   }
   .px-9xl {
-    @apply tablet:px-[100px] desktop:px-[140px] px-[64px];
+    @apply tb:px-[100px] dk:px-[140px] px-[64px];
   }
   .py-9xl {
-    @apply tablet:py-[100px] desktop:py-[140px] py-[64px];
+    @apply tb:py-[100px] dk:py-[140px] py-[64px];
   }
   .m-9xl {
-    @apply tablet:m-[100px] desktop:m-[140px] m-[64px];
+    @apply tb:m-[100px] dk:m-[140px] m-[64px];
   }
   .mt-9xl {
-    @apply tablet:mt-[100px] desktop:mt-[140px] mt-[64px];
+    @apply tb:mt-[100px] dk:mt-[140px] mt-[64px];
   }
   .mb-9xl {
-    @apply tablet:mb-[100px] desktop:mb-[140px] mb-[64px];
+    @apply tb:mb-[100px] dk:mb-[140px] mb-[64px];
   }
   .ml-9xl {
-    @apply tablet:ml-[100px] desktop:ml-[140px] ml-[64px];
+    @apply tb:ml-[100px] dk:ml-[140px] ml-[64px];
   }
   .mr-9xl {
-    @apply tablet:mr-[100px] desktop:mr-[140px] mr-[64px];
+    @apply tb:mr-[100px] dk:mr-[140px] mr-[64px];
   }
   .mx-9xl {
-    @apply tablet:mx-[100px] desktop:mx-[140px] mx-[64px];
+    @apply tb:mx-[100px] dk:mx-[140px] mx-[64px];
   }
   .my-9xl {
-    @apply tablet:my-[100px] desktop:my-[140px] my-[64px];
+    @apply tb:my-[100px] dk:my-[140px] my-[64px];
   }
   .gap-9xl {
-    @apply tablet:gap-[100px] desktop:gap-[140px] gap-[64px];
+    @apply tb:gap-[100px] dk:gap-[140px] gap-[64px];
   }
   .gap-x-9xl {
-    @apply tablet:gap-x-[100px] desktop:gap-x-[140px] gap-x-[64px];
+    @apply tb:gap-x-[100px] dk:gap-x-[140px] gap-x-[64px];
   }
   .gap-y-9xl {
-    @apply tablet:gap-y-[100px] desktop:gap-y-[140px] gap-y-[64px];
+    @apply tb:gap-y-[100px] dk:gap-y-[140px] gap-y-[64px];
   }
   .space-x-9xl {
-    @apply tablet:space-x-[100px] desktop:space-x-[140px] space-x-[64px];
+    @apply tb:space-x-[100px] dk:space-x-[140px] space-x-[64px];
   }
   .space-y-9xl {
-    @apply tablet:space-y-[100px] desktop:space-y-[140px] space-y-[64px];
+    @apply tb:space-y-[100px] dk:space-y-[140px] space-y-[64px];
   }
   .p-10xl {
-    @apply tablet:p-[140px] desktop:p-[180px] p-[120px];
+    @apply tb:p-[140px] dk:p-[180px] p-[120px];
   }
   .pt-10xl {
-    @apply tablet:pt-[140px] desktop:pt-[180px] pt-[120px];
+    @apply tb:pt-[140px] dk:pt-[180px] pt-[120px];
   }
   .pb-10xl {
-    @apply tablet:pb-[140px] desktop:pb-[180px] pb-[120px];
+    @apply tb:pb-[140px] dk:pb-[180px] pb-[120px];
   }
   .pl-10xl {
-    @apply tablet:pl-[140px] desktop:pl-[180px] pl-[120px];
+    @apply tb:pl-[140px] dk:pl-[180px] pl-[120px];
   }
   .pr-10xl {
-    @apply tablet:pr-[140px] desktop:pr-[180px] pr-[120px];
+    @apply tb:pr-[140px] dk:pr-[180px] pr-[120px];
   }
   .px-10xl {
-    @apply tablet:px-[140px] desktop:px-[180px] px-[120px];
+    @apply tb:px-[140px] dk:px-[180px] px-[120px];
   }
   .py-10xl {
-    @apply tablet:py-[140px] desktop:py-[180px] py-[120px];
+    @apply tb:py-[140px] dk:py-[180px] py-[120px];
   }
   .m-10xl {
-    @apply tablet:m-[140px] desktop:m-[180px] m-[120px];
+    @apply tb:m-[140px] dk:m-[180px] m-[120px];
   }
   .mt-10xl {
-    @apply tablet:mt-[140px] desktop:mt-[180px] mt-[120px];
+    @apply tb:mt-[140px] dk:mt-[180px] mt-[120px];
   }
   .mb-10xl {
-    @apply tablet:mb-[140px] desktop:mb-[180px] mb-[120px];
+    @apply tb:mb-[140px] dk:mb-[180px] mb-[120px];
   }
   .ml-10xl {
-    @apply tablet:ml-[140px] desktop:ml-[180px] ml-[120px];
+    @apply tb:ml-[140px] dk:ml-[180px] ml-[120px];
   }
   .mr-10xl {
-    @apply tablet:mr-[140px] desktop:mr-[180px] mr-[120px];
+    @apply tb:mr-[140px] dk:mr-[180px] mr-[120px];
   }
   .mx-10xl {
-    @apply tablet:mx-[140px] desktop:mx-[180px] mx-[120px];
+    @apply tb:mx-[140px] dk:mx-[180px] mx-[120px];
   }
   .my-10xl {
-    @apply tablet:my-[140px] desktop:my-[180px] my-[120px];
+    @apply tb:my-[140px] dk:my-[180px] my-[120px];
   }
   .gap-10xl {
-    @apply tablet:gap-[140px] desktop:gap-[180px] gap-[120px];
+    @apply tb:gap-[140px] dk:gap-[180px] gap-[120px];
   }
   .gap-x-10xl {
-    @apply tablet:gap-x-[140px] desktop:gap-x-[180px] gap-x-[120px];
+    @apply tb:gap-x-[140px] dk:gap-x-[180px] gap-x-[120px];
   }
   .gap-y-10xl {
-    @apply tablet:gap-y-[140px] desktop:gap-y-[180px] gap-y-[120px];
+    @apply tb:gap-y-[140px] dk:gap-y-[180px] gap-y-[120px];
   }
   .space-x-10xl {
-    @apply tablet:space-x-[140px] desktop:space-x-[180px] space-x-[120px];
+    @apply tb:space-x-[140px] dk:space-x-[180px] space-x-[120px];
   }
   .space-y-10xl {
-    @apply tablet:space-y-[140px] desktop:space-y-[180px] space-y-[120px];
+    @apply tb:space-y-[140px] dk:space-y-[180px] space-y-[120px];
   }
 }
 
@@ -1173,328 +1178,328 @@
 /* Border Radius Utility Classes */
 @layer {
   .rounded-none {
-    @apply tablet:rounded-[0px] desktop:rounded-[0px] rounded-[0px];
+    @apply tb:rounded-[0px] dk:rounded-[0px] rounded-[0px];
   }
   .rounded-t-none {
-    @apply tablet:rounded-t-[0px] desktop:rounded-t-[0px] rounded-t-[0px];
+    @apply tb:rounded-t-[0px] dk:rounded-t-[0px] rounded-t-[0px];
   }
   .rounded-b-none {
-    @apply tablet:rounded-b-[0px] desktop:rounded-b-[0px] rounded-b-[0px];
+    @apply tb:rounded-b-[0px] dk:rounded-b-[0px] rounded-b-[0px];
   }
   .rounded-l-none {
-    @apply tablet:rounded-l-[0px] desktop:rounded-l-[0px] rounded-l-[0px];
+    @apply tb:rounded-l-[0px] dk:rounded-l-[0px] rounded-l-[0px];
   }
   .rounded-r-none {
-    @apply tablet:rounded-r-[0px] desktop:rounded-r-[0px] rounded-r-[0px];
+    @apply tb:rounded-r-[0px] dk:rounded-r-[0px] rounded-r-[0px];
   }
   .rounded-tl-none {
-    @apply tablet:rounded-tl-[0px] desktop:rounded-tl-[0px] rounded-tl-[0px];
+    @apply tb:rounded-tl-[0px] dk:rounded-tl-[0px] rounded-tl-[0px];
   }
   .rounded-tr-none {
-    @apply tablet:rounded-tr-[0px] desktop:rounded-tr-[0px] rounded-tr-[0px];
+    @apply tb:rounded-tr-[0px] dk:rounded-tr-[0px] rounded-tr-[0px];
   }
   .rounded-bl-none {
-    @apply tablet:rounded-bl-[0px] desktop:rounded-bl-[0px] rounded-bl-[0px];
+    @apply tb:rounded-bl-[0px] dk:rounded-bl-[0px] rounded-bl-[0px];
   }
   .rounded-br-none {
-    @apply tablet:rounded-br-[0px] desktop:rounded-br-[0px] rounded-br-[0px];
+    @apply tb:rounded-br-[0px] dk:rounded-br-[0px] rounded-br-[0px];
   }
   .rounded-2xs {
-    @apply tablet:rounded-[4px] desktop:rounded-[4px] rounded-[2px];
+    @apply tb:rounded-[4px] dk:rounded-[4px] rounded-[2px];
   }
   .rounded-t-2xs {
-    @apply tablet:rounded-t-[4px] desktop:rounded-t-[4px] rounded-t-[2px];
+    @apply tb:rounded-t-[4px] dk:rounded-t-[4px] rounded-t-[2px];
   }
   .rounded-b-2xs {
-    @apply tablet:rounded-b-[4px] desktop:rounded-b-[4px] rounded-b-[2px];
+    @apply tb:rounded-b-[4px] dk:rounded-b-[4px] rounded-b-[2px];
   }
   .rounded-l-2xs {
-    @apply tablet:rounded-l-[4px] desktop:rounded-l-[4px] rounded-l-[2px];
+    @apply tb:rounded-l-[4px] dk:rounded-l-[4px] rounded-l-[2px];
   }
   .rounded-r-2xs {
-    @apply tablet:rounded-r-[4px] desktop:rounded-r-[4px] rounded-r-[2px];
+    @apply tb:rounded-r-[4px] dk:rounded-r-[4px] rounded-r-[2px];
   }
   .rounded-tl-2xs {
-    @apply tablet:rounded-tl-[4px] desktop:rounded-tl-[4px] rounded-tl-[2px];
+    @apply tb:rounded-tl-[4px] dk:rounded-tl-[4px] rounded-tl-[2px];
   }
   .rounded-tr-2xs {
-    @apply tablet:rounded-tr-[4px] desktop:rounded-tr-[4px] rounded-tr-[2px];
+    @apply tb:rounded-tr-[4px] dk:rounded-tr-[4px] rounded-tr-[2px];
   }
   .rounded-bl-2xs {
-    @apply tablet:rounded-bl-[4px] desktop:rounded-bl-[4px] rounded-bl-[2px];
+    @apply tb:rounded-bl-[4px] dk:rounded-bl-[4px] rounded-bl-[2px];
   }
   .rounded-br-2xs {
-    @apply tablet:rounded-br-[4px] desktop:rounded-br-[4px] rounded-br-[2px];
+    @apply tb:rounded-br-[4px] dk:rounded-br-[4px] rounded-br-[2px];
   }
   .rounded-xs {
-    @apply tablet:rounded-[4px] desktop:rounded-[6px] rounded-[3px];
+    @apply tb:rounded-[4px] dk:rounded-[6px] rounded-[3px];
   }
   .rounded-t-xs {
-    @apply tablet:rounded-t-[4px] desktop:rounded-t-[6px] rounded-t-[3px];
+    @apply tb:rounded-t-[4px] dk:rounded-t-[6px] rounded-t-[3px];
   }
   .rounded-b-xs {
-    @apply tablet:rounded-b-[4px] desktop:rounded-b-[6px] rounded-b-[3px];
+    @apply tb:rounded-b-[4px] dk:rounded-b-[6px] rounded-b-[3px];
   }
   .rounded-l-xs {
-    @apply tablet:rounded-l-[4px] desktop:rounded-l-[6px] rounded-l-[3px];
+    @apply tb:rounded-l-[4px] dk:rounded-l-[6px] rounded-l-[3px];
   }
   .rounded-r-xs {
-    @apply tablet:rounded-r-[4px] desktop:rounded-r-[6px] rounded-r-[3px];
+    @apply tb:rounded-r-[4px] dk:rounded-r-[6px] rounded-r-[3px];
   }
   .rounded-tl-xs {
-    @apply tablet:rounded-tl-[4px] desktop:rounded-tl-[6px] rounded-tl-[3px];
+    @apply tb:rounded-tl-[4px] dk:rounded-tl-[6px] rounded-tl-[3px];
   }
   .rounded-tr-xs {
-    @apply tablet:rounded-tr-[4px] desktop:rounded-tr-[6px] rounded-tr-[3px];
+    @apply tb:rounded-tr-[4px] dk:rounded-tr-[6px] rounded-tr-[3px];
   }
   .rounded-bl-xs {
-    @apply tablet:rounded-bl-[4px] desktop:rounded-bl-[6px] rounded-bl-[3px];
+    @apply tb:rounded-bl-[4px] dk:rounded-bl-[6px] rounded-bl-[3px];
   }
   .rounded-br-xs {
-    @apply tablet:rounded-br-[4px] desktop:rounded-br-[6px] rounded-br-[3px];
+    @apply tb:rounded-br-[4px] dk:rounded-br-[6px] rounded-br-[3px];
   }
   .rounded-sm {
-    @apply tablet:rounded-[7px] desktop:rounded-[8px] rounded-[5px];
+    @apply tb:rounded-[7px] dk:rounded-[8px] rounded-[5px];
   }
   .rounded-t-sm {
-    @apply tablet:rounded-t-[7px] desktop:rounded-t-[8px] rounded-t-[5px];
+    @apply tb:rounded-t-[7px] dk:rounded-t-[8px] rounded-t-[5px];
   }
   .rounded-b-sm {
-    @apply tablet:rounded-b-[7px] desktop:rounded-b-[8px] rounded-b-[5px];
+    @apply tb:rounded-b-[7px] dk:rounded-b-[8px] rounded-b-[5px];
   }
   .rounded-l-sm {
-    @apply tablet:rounded-l-[7px] desktop:rounded-l-[8px] rounded-l-[5px];
+    @apply tb:rounded-l-[7px] dk:rounded-l-[8px] rounded-l-[5px];
   }
   .rounded-r-sm {
-    @apply tablet:rounded-r-[7px] desktop:rounded-r-[8px] rounded-r-[5px];
+    @apply tb:rounded-r-[7px] dk:rounded-r-[8px] rounded-r-[5px];
   }
   .rounded-tl-sm {
-    @apply tablet:rounded-tl-[7px] desktop:rounded-tl-[8px] rounded-tl-[5px];
+    @apply tb:rounded-tl-[7px] dk:rounded-tl-[8px] rounded-tl-[5px];
   }
   .rounded-tr-sm {
-    @apply tablet:rounded-tr-[7px] desktop:rounded-tr-[8px] rounded-tr-[5px];
+    @apply tb:rounded-tr-[7px] dk:rounded-tr-[8px] rounded-tr-[5px];
   }
   .rounded-bl-sm {
-    @apply tablet:rounded-bl-[7px] desktop:rounded-bl-[8px] rounded-bl-[5px];
+    @apply tb:rounded-bl-[7px] dk:rounded-bl-[8px] rounded-bl-[5px];
   }
   .rounded-br-sm {
-    @apply tablet:rounded-br-[7px] desktop:rounded-br-[8px] rounded-br-[5px];
+    @apply tb:rounded-br-[7px] dk:rounded-br-[8px] rounded-br-[5px];
   }
   .rounded-md {
-    @apply tablet:rounded-[10px] desktop:rounded-[12px] rounded-[7px];
+    @apply tb:rounded-[10px] dk:rounded-[12px] rounded-[7px];
   }
   .rounded-t-md {
-    @apply tablet:rounded-t-[10px] desktop:rounded-t-[12px] rounded-t-[7px];
+    @apply tb:rounded-t-[10px] dk:rounded-t-[12px] rounded-t-[7px];
   }
   .rounded-b-md {
-    @apply tablet:rounded-b-[10px] desktop:rounded-b-[12px] rounded-b-[7px];
+    @apply tb:rounded-b-[10px] dk:rounded-b-[12px] rounded-b-[7px];
   }
   .rounded-l-md {
-    @apply tablet:rounded-l-[10px] desktop:rounded-l-[12px] rounded-l-[7px];
+    @apply tb:rounded-l-[10px] dk:rounded-l-[12px] rounded-l-[7px];
   }
   .rounded-r-md {
-    @apply tablet:rounded-r-[10px] desktop:rounded-r-[12px] rounded-r-[7px];
+    @apply tb:rounded-r-[10px] dk:rounded-r-[12px] rounded-r-[7px];
   }
   .rounded-tl-md {
-    @apply tablet:rounded-tl-[10px] desktop:rounded-tl-[12px] rounded-tl-[7px];
+    @apply tb:rounded-tl-[10px] dk:rounded-tl-[12px] rounded-tl-[7px];
   }
   .rounded-tr-md {
-    @apply tablet:rounded-tr-[10px] desktop:rounded-tr-[12px] rounded-tr-[7px];
+    @apply tb:rounded-tr-[10px] dk:rounded-tr-[12px] rounded-tr-[7px];
   }
   .rounded-bl-md {
-    @apply tablet:rounded-bl-[10px] desktop:rounded-bl-[12px] rounded-bl-[7px];
+    @apply tb:rounded-bl-[10px] dk:rounded-bl-[12px] rounded-bl-[7px];
   }
   .rounded-br-md {
-    @apply tablet:rounded-br-[10px] desktop:rounded-br-[12px] rounded-br-[7px];
+    @apply tb:rounded-br-[10px] dk:rounded-br-[12px] rounded-br-[7px];
   }
   .rounded-lg {
-    @apply tablet:rounded-[16px] desktop:rounded-[16px] rounded-[14px];
+    @apply tb:rounded-[16px] dk:rounded-[16px] rounded-[14px];
   }
   .rounded-t-lg {
-    @apply tablet:rounded-t-[16px] desktop:rounded-t-[16px] rounded-t-[14px];
+    @apply tb:rounded-t-[16px] dk:rounded-t-[16px] rounded-t-[14px];
   }
   .rounded-b-lg {
-    @apply tablet:rounded-b-[16px] desktop:rounded-b-[16px] rounded-b-[14px];
+    @apply tb:rounded-b-[16px] dk:rounded-b-[16px] rounded-b-[14px];
   }
   .rounded-l-lg {
-    @apply tablet:rounded-l-[16px] desktop:rounded-l-[16px] rounded-l-[14px];
+    @apply tb:rounded-l-[16px] dk:rounded-l-[16px] rounded-l-[14px];
   }
   .rounded-r-lg {
-    @apply tablet:rounded-r-[16px] desktop:rounded-r-[16px] rounded-r-[14px];
+    @apply tb:rounded-r-[16px] dk:rounded-r-[16px] rounded-r-[14px];
   }
   .rounded-tl-lg {
-    @apply tablet:rounded-tl-[16px] desktop:rounded-tl-[16px] rounded-tl-[14px];
+    @apply tb:rounded-tl-[16px] dk:rounded-tl-[16px] rounded-tl-[14px];
   }
   .rounded-tr-lg {
-    @apply tablet:rounded-tr-[16px] desktop:rounded-tr-[16px] rounded-tr-[14px];
+    @apply tb:rounded-tr-[16px] dk:rounded-tr-[16px] rounded-tr-[14px];
   }
   .rounded-bl-lg {
-    @apply tablet:rounded-bl-[16px] desktop:rounded-bl-[16px] rounded-bl-[14px];
+    @apply tb:rounded-bl-[16px] dk:rounded-bl-[16px] rounded-bl-[14px];
   }
   .rounded-br-lg {
-    @apply tablet:rounded-br-[16px] desktop:rounded-br-[16px] rounded-br-[14px];
+    @apply tb:rounded-br-[16px] dk:rounded-br-[16px] rounded-br-[14px];
   }
   .rounded-xl {
-    @apply tablet:rounded-[18px] desktop:rounded-[20px] rounded-[14px];
+    @apply tb:rounded-[18px] dk:rounded-[20px] rounded-[14px];
   }
   .rounded-t-xl {
-    @apply tablet:rounded-t-[18px] desktop:rounded-t-[20px] rounded-t-[14px];
+    @apply tb:rounded-t-[18px] dk:rounded-t-[20px] rounded-t-[14px];
   }
   .rounded-b-xl {
-    @apply tablet:rounded-b-[18px] desktop:rounded-b-[20px] rounded-b-[14px];
+    @apply tb:rounded-b-[18px] dk:rounded-b-[20px] rounded-b-[14px];
   }
   .rounded-l-xl {
-    @apply tablet:rounded-l-[18px] desktop:rounded-l-[20px] rounded-l-[14px];
+    @apply tb:rounded-l-[18px] dk:rounded-l-[20px] rounded-l-[14px];
   }
   .rounded-r-xl {
-    @apply tablet:rounded-r-[18px] desktop:rounded-r-[20px] rounded-r-[14px];
+    @apply tb:rounded-r-[18px] dk:rounded-r-[20px] rounded-r-[14px];
   }
   .rounded-tl-xl {
-    @apply tablet:rounded-tl-[18px] desktop:rounded-tl-[20px] rounded-tl-[14px];
+    @apply tb:rounded-tl-[18px] dk:rounded-tl-[20px] rounded-tl-[14px];
   }
   .rounded-tr-xl {
-    @apply tablet:rounded-tr-[18px] desktop:rounded-tr-[20px] rounded-tr-[14px];
+    @apply tb:rounded-tr-[18px] dk:rounded-tr-[20px] rounded-tr-[14px];
   }
   .rounded-bl-xl {
-    @apply tablet:rounded-bl-[18px] desktop:rounded-bl-[20px] rounded-bl-[14px];
+    @apply tb:rounded-bl-[18px] dk:rounded-bl-[20px] rounded-bl-[14px];
   }
   .rounded-br-xl {
-    @apply tablet:rounded-br-[18px] desktop:rounded-br-[20px] rounded-br-[14px];
+    @apply tb:rounded-br-[18px] dk:rounded-br-[20px] rounded-br-[14px];
   }
   .rounded-2xl {
-    @apply tablet:rounded-[24px] desktop:rounded-[24px] rounded-[20px];
+    @apply tb:rounded-[24px] dk:rounded-[24px] rounded-[20px];
   }
   .rounded-t-2xl {
-    @apply tablet:rounded-t-[24px] desktop:rounded-t-[24px] rounded-t-[20px];
+    @apply tb:rounded-t-[24px] dk:rounded-t-[24px] rounded-t-[20px];
   }
   .rounded-b-2xl {
-    @apply tablet:rounded-b-[24px] desktop:rounded-b-[24px] rounded-b-[20px];
+    @apply tb:rounded-b-[24px] dk:rounded-b-[24px] rounded-b-[20px];
   }
   .rounded-l-2xl {
-    @apply tablet:rounded-l-[24px] desktop:rounded-l-[24px] rounded-l-[20px];
+    @apply tb:rounded-l-[24px] dk:rounded-l-[24px] rounded-l-[20px];
   }
   .rounded-r-2xl {
-    @apply tablet:rounded-r-[24px] desktop:rounded-r-[24px] rounded-r-[20px];
+    @apply tb:rounded-r-[24px] dk:rounded-r-[24px] rounded-r-[20px];
   }
   .rounded-tl-2xl {
-    @apply tablet:rounded-tl-[24px] desktop:rounded-tl-[24px] rounded-tl-[20px];
+    @apply tb:rounded-tl-[24px] dk:rounded-tl-[24px] rounded-tl-[20px];
   }
   .rounded-tr-2xl {
-    @apply tablet:rounded-tr-[24px] desktop:rounded-tr-[24px] rounded-tr-[20px];
+    @apply tb:rounded-tr-[24px] dk:rounded-tr-[24px] rounded-tr-[20px];
   }
   .rounded-bl-2xl {
-    @apply tablet:rounded-bl-[24px] desktop:rounded-bl-[24px] rounded-bl-[20px];
+    @apply tb:rounded-bl-[24px] dk:rounded-bl-[24px] rounded-bl-[20px];
   }
   .rounded-br-2xl {
-    @apply tablet:rounded-br-[24px] desktop:rounded-br-[24px] rounded-br-[20px];
+    @apply tb:rounded-br-[24px] dk:rounded-br-[24px] rounded-br-[20px];
   }
   .rounded-3xl {
-    @apply tablet:rounded-[26px] desktop:rounded-[28px] rounded-[22px];
+    @apply tb:rounded-[26px] dk:rounded-[28px] rounded-[22px];
   }
   .rounded-t-3xl {
-    @apply tablet:rounded-t-[26px] desktop:rounded-t-[28px] rounded-t-[22px];
+    @apply tb:rounded-t-[26px] dk:rounded-t-[28px] rounded-t-[22px];
   }
   .rounded-b-3xl {
-    @apply tablet:rounded-b-[26px] desktop:rounded-b-[28px] rounded-b-[22px];
+    @apply tb:rounded-b-[26px] dk:rounded-b-[28px] rounded-b-[22px];
   }
   .rounded-l-3xl {
-    @apply tablet:rounded-l-[26px] desktop:rounded-l-[28px] rounded-l-[22px];
+    @apply tb:rounded-l-[26px] dk:rounded-l-[28px] rounded-l-[22px];
   }
   .rounded-r-3xl {
-    @apply tablet:rounded-r-[26px] desktop:rounded-r-[28px] rounded-r-[22px];
+    @apply tb:rounded-r-[26px] dk:rounded-r-[28px] rounded-r-[22px];
   }
   .rounded-tl-3xl {
-    @apply tablet:rounded-tl-[26px] desktop:rounded-tl-[28px] rounded-tl-[22px];
+    @apply tb:rounded-tl-[26px] dk:rounded-tl-[28px] rounded-tl-[22px];
   }
   .rounded-tr-3xl {
-    @apply tablet:rounded-tr-[26px] desktop:rounded-tr-[28px] rounded-tr-[22px];
+    @apply tb:rounded-tr-[26px] dk:rounded-tr-[28px] rounded-tr-[22px];
   }
   .rounded-bl-3xl {
-    @apply tablet:rounded-bl-[26px] desktop:rounded-bl-[28px] rounded-bl-[22px];
+    @apply tb:rounded-bl-[26px] dk:rounded-bl-[28px] rounded-bl-[22px];
   }
   .rounded-br-3xl {
-    @apply tablet:rounded-br-[26px] desktop:rounded-br-[28px] rounded-br-[22px];
+    @apply tb:rounded-br-[26px] dk:rounded-br-[28px] rounded-br-[22px];
   }
   .rounded-4xl {
-    @apply tablet:rounded-[30px] desktop:rounded-[32px] rounded-[26px];
+    @apply tb:rounded-[30px] dk:rounded-[32px] rounded-[26px];
   }
   .rounded-t-4xl {
-    @apply tablet:rounded-t-[30px] desktop:rounded-t-[32px] rounded-t-[26px];
+    @apply tb:rounded-t-[30px] dk:rounded-t-[32px] rounded-t-[26px];
   }
   .rounded-b-4xl {
-    @apply tablet:rounded-b-[30px] desktop:rounded-b-[32px] rounded-b-[26px];
+    @apply tb:rounded-b-[30px] dk:rounded-b-[32px] rounded-b-[26px];
   }
   .rounded-l-4xl {
-    @apply tablet:rounded-l-[30px] desktop:rounded-l-[32px] rounded-l-[26px];
+    @apply tb:rounded-l-[30px] dk:rounded-l-[32px] rounded-l-[26px];
   }
   .rounded-r-4xl {
-    @apply tablet:rounded-r-[30px] desktop:rounded-r-[32px] rounded-r-[26px];
+    @apply tb:rounded-r-[30px] dk:rounded-r-[32px] rounded-r-[26px];
   }
   .rounded-tl-4xl {
-    @apply tablet:rounded-tl-[30px] desktop:rounded-tl-[32px] rounded-tl-[26px];
+    @apply tb:rounded-tl-[30px] dk:rounded-tl-[32px] rounded-tl-[26px];
   }
   .rounded-tr-4xl {
-    @apply tablet:rounded-tr-[30px] desktop:rounded-tr-[32px] rounded-tr-[26px];
+    @apply tb:rounded-tr-[30px] dk:rounded-tr-[32px] rounded-tr-[26px];
   }
   .rounded-bl-4xl {
-    @apply tablet:rounded-bl-[30px] desktop:rounded-bl-[32px] rounded-bl-[26px];
+    @apply tb:rounded-bl-[30px] dk:rounded-bl-[32px] rounded-bl-[26px];
   }
   .rounded-br-4xl {
-    @apply tablet:rounded-br-[30px] desktop:rounded-br-[32px] rounded-br-[26px];
+    @apply tb:rounded-br-[30px] dk:rounded-br-[32px] rounded-br-[26px];
   }
   .rounded-5xl {
-    @apply tablet:rounded-[36px] desktop:rounded-[40px] rounded-[32px];
+    @apply tb:rounded-[36px] dk:rounded-[40px] rounded-[32px];
   }
   .rounded-t-5xl {
-    @apply tablet:rounded-t-[36px] desktop:rounded-t-[40px] rounded-t-[32px];
+    @apply tb:rounded-t-[36px] dk:rounded-t-[40px] rounded-t-[32px];
   }
   .rounded-b-5xl {
-    @apply tablet:rounded-b-[36px] desktop:rounded-b-[40px] rounded-b-[32px];
+    @apply tb:rounded-b-[36px] dk:rounded-b-[40px] rounded-b-[32px];
   }
   .rounded-l-5xl {
-    @apply tablet:rounded-l-[36px] desktop:rounded-l-[40px] rounded-l-[32px];
+    @apply tb:rounded-l-[36px] dk:rounded-l-[40px] rounded-l-[32px];
   }
   .rounded-r-5xl {
-    @apply tablet:rounded-r-[36px] desktop:rounded-r-[40px] rounded-r-[32px];
+    @apply tb:rounded-r-[36px] dk:rounded-r-[40px] rounded-r-[32px];
   }
   .rounded-tl-5xl {
-    @apply tablet:rounded-tl-[36px] desktop:rounded-tl-[40px] rounded-tl-[32px];
+    @apply tb:rounded-tl-[36px] dk:rounded-tl-[40px] rounded-tl-[32px];
   }
   .rounded-tr-5xl {
-    @apply tablet:rounded-tr-[36px] desktop:rounded-tr-[40px] rounded-tr-[32px];
+    @apply tb:rounded-tr-[36px] dk:rounded-tr-[40px] rounded-tr-[32px];
   }
   .rounded-bl-5xl {
-    @apply tablet:rounded-bl-[36px] desktop:rounded-bl-[40px] rounded-bl-[32px];
+    @apply tb:rounded-bl-[36px] dk:rounded-bl-[40px] rounded-bl-[32px];
   }
   .rounded-br-5xl {
-    @apply tablet:rounded-br-[36px] desktop:rounded-br-[40px] rounded-br-[32px];
+    @apply tb:rounded-br-[36px] dk:rounded-br-[40px] rounded-br-[32px];
   }
   .rounded-full {
-    @apply tablet:rounded-[999px] desktop:rounded-[999px] rounded-[999px];
+    @apply tb:rounded-[999px] dk:rounded-[999px] rounded-[999px];
   }
   .rounded-t-full {
-    @apply tablet:rounded-t-[999px] desktop:rounded-t-[999px] rounded-t-[999px];
+    @apply tb:rounded-t-[999px] dk:rounded-t-[999px] rounded-t-[999px];
   }
   .rounded-b-full {
-    @apply tablet:rounded-b-[999px] desktop:rounded-b-[999px] rounded-b-[999px];
+    @apply tb:rounded-b-[999px] dk:rounded-b-[999px] rounded-b-[999px];
   }
   .rounded-l-full {
-    @apply tablet:rounded-l-[999px] desktop:rounded-l-[999px] rounded-l-[999px];
+    @apply tb:rounded-l-[999px] dk:rounded-l-[999px] rounded-l-[999px];
   }
   .rounded-r-full {
-    @apply tablet:rounded-r-[999px] desktop:rounded-r-[999px] rounded-r-[999px];
+    @apply tb:rounded-r-[999px] dk:rounded-r-[999px] rounded-r-[999px];
   }
   .rounded-tl-full {
-    @apply tablet:rounded-tl-[999px] desktop:rounded-tl-[999px] rounded-tl-[999px];
+    @apply tb:rounded-tl-[999px] dk:rounded-tl-[999px] rounded-tl-[999px];
   }
   .rounded-tr-full {
-    @apply tablet:rounded-tr-[999px] desktop:rounded-tr-[999px] rounded-tr-[999px];
+    @apply tb:rounded-tr-[999px] dk:rounded-tr-[999px] rounded-tr-[999px];
   }
   .rounded-bl-full {
-    @apply tablet:rounded-bl-[999px] desktop:rounded-bl-[999px] rounded-bl-[999px];
+    @apply tb:rounded-bl-[999px] dk:rounded-bl-[999px] rounded-bl-[999px];
   }
   .rounded-br-full {
-    @apply tablet:rounded-br-[999px] desktop:rounded-br-[999px] rounded-br-[999px];
+    @apply tb:rounded-br-[999px] dk:rounded-br-[999px] rounded-br-[999px];
   }
 }
 

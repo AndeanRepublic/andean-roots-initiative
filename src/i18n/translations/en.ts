@@ -262,7 +262,7 @@ const en: Translations = {
         {
           imageSrc: '/about-assets/history/history-1.png',
           imageAlt: 'Andean woman in a crop field',
-          offsetClass: 'desktop:pt-16',
+          offsetClass: 'dk:pt-16',
           paragraphs: [
             'In the Andes, talent is everywhere. In the hands that weave, in those who cultivate the land, in young people with ideas and a desire to learn.',
             'But for years, that talent has grown with limited opportunities, without access to quality education, technological tools or clear paths for development.',
@@ -280,7 +280,7 @@ const en: Translations = {
         {
           imageSrc: '/about-assets/history/history-3.png',
           imageAlt: 'Andean girl in traditional clothing',
-          offsetClass: 'desktop:pt-35',
+          offsetClass: 'dk:pt-35',
           paragraphs: [
             'It is from this reality that Andean Roots Initiative was born.',
             'An initiative that seeks to close that gap, strengthening local capacities and building a bridge between Andean communities and the opportunities of the modern world.',
@@ -353,27 +353,27 @@ const en: Translations = {
           title: 'Development from the local',
           description: 'We work from the knowledge, culture and capacities of each community.',
           icon: 'group' as const,
-          offsetClass: 'desktop:self-start',
+          offsetClass: 'dk:self-start',
         },
         {
           title: 'Innovation with purpose',
           description:
             'We integrate technology, education and innovation to generate relevant and sustainable solutions.',
           icon: 'bulb' as const,
-          offsetClass: 'desktop:self-end',
+          offsetClass: 'dk:self-end',
         },
         {
           title: 'Actor articulation',
           description: 'We connect communities with companies, institutions and strategic allies.',
           icon: 'handshake' as const,
-          offsetClass: 'desktop:self-end',
+          offsetClass: 'dk:self-end',
         },
         {
           title: 'Long-term sustainability',
           description:
             'We seek to generate capacities that endure over time and do not depend on external interventions.',
           icon: 'sustainability' as const,
-          offsetClass: 'desktop:self-start',
+          offsetClass: 'dk:self-start',
         },
       ],
     },
@@ -388,7 +388,7 @@ const en: Translations = {
           role: 'Founder and director',
           imageSrc: '/about-assets/team/team-1.png',
           imageAlt: 'Portrait of Daniel Yupanqui',
-          offsetClass: 'desktop:pt-20',
+          offsetClass: 'dk:pt-20',
         },
         {
           name: 'Cecilia Núñez',
@@ -402,7 +402,7 @@ const en: Translations = {
           role: 'Project developer',
           imageSrc: '/about-assets/team/team-3.png',
           imageAlt: 'Portrait of Ruth Arce',
-          offsetClass: 'desktop:pt-20',
+          offsetClass: 'dk:pt-20',
         },
         {
           name: 'Marcelo Luna',

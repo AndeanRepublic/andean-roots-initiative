@@ -15,7 +15,7 @@ const t = useTranslations(lang);
 const c = t.challenge;
 ---
 
-<div class="desktop:block hidden w-full">
+<div class="dk:block hidden w-full">
   <section class={cn('challenge-flip-stage', 'relative flex w-full items-center justify-center')}>
     <div
       class={cn(
@@ -57,7 +57,7 @@ const c = t.challenge;
           <div
             class={cn(
               'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-stone-200 p-xl text-left',
-              'tablet:min-h-[350px] min-h-[250px]',
+              'tb:min-h-[350px] min-h-[250px]',
             )}
           >
             <h3 class="font-manrope text-main text-[24px] leading-[1.4] font-semibold">
@@ -65,7 +65,7 @@ const c = t.challenge;
             </h3>
             <div class="gap-sm flex flex-col">
               <p
-                class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-md:text-[40px]"
+                class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-tb:text-[40px]"
               >
                 {c.firstCardHeadline}
               </p>
@@ -116,7 +116,7 @@ const c = t.challenge;
               </span>
             </div>
             <div class="gap-sm relative z-10 flex flex-col">
-              <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-md:text-[44px]">
+              <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-tb:text-[44px]">
                 {c.secondCardTitle}
               </h3>
               <p class="body-sm-l text-white">{c.secondCardDescription}</p>
@@ -158,13 +158,13 @@ const c = t.challenge;
           <div
             class={cn(
               'flex h-full min-h-0 w-full flex-col justify-between rounded-[inherit] bg-main p-xl text-white',
-              'tablet:min-h-[350px] min-h-[280px]',
+              'tb:min-h-[350px] min-h-[280px]',
             )}
           >
             <div class="gap-lg flex flex-col">
               <p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
               <h3
-                class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]"
+                class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-tb:text-[44px]"
               >
                 {c.thirdCardTitle}
               </h3>

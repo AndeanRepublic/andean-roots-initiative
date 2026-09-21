@@ -15,34 +15,34 @@ const t = useTranslations(lang);
 const sp = t.strategicPrograms;
 ---
 
-<section id="programs" class="px-2xl desktop:px-6xl desktop:py-6xl bg-white py-12">
+<section id="programs" class="px-2xl dk:px-6xl dk:py-6xl bg-white py-12">
   <div
     class={cn(
       'mx-auto w-full max-w-328 rounded-lg ',
-      'bg-white tablet:bg-light',
-      'py-6 tablet:py-10 px-0 tablet:px-10',
+      'bg-white tb:bg-light',
+      'py-6 tb:py-10 px-0 tb:px-10',
     )}
   >
     <div class="flex flex-col gap-4">
       <div
-        class="gap-sm tablet:flex hidden items-center justify-center rounded-full"
+        class="gap-sm tb:flex hidden items-center justify-center rounded-full"
         data-anim="label-desktop"
       >
         <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
         <p class="body-md-sb text-main">{sp.label}</p>
       </div>
-      <p class="heading-md-sb text-main tablet:hidden text-center" data-anim="label-mobile">
+      <p class="heading-md-sb text-main tb:hidden text-center" data-anim="label-mobile">
         {sp.label.charAt(0).toUpperCase() + sp.label.slice(1).toLowerCase()}
       </p>
 
       <div
-        class="desktop:flex-row desktop:items-start desktop:justify-between flex flex-col gap-6"
+        class="dk:flex-row dk:items-start dk:justify-between flex flex-col gap-6"
         data-anim="header"
       >
         <h2
           class={cn(
-            'font-skrawk-serif text-[3rem] leading-[0.8] text-main tablet:text-[4.25rem]',
-            'text-center tablet:text-start',
+            'font-skrawk-serif text-[3rem] leading-[0.8] text-main tb:text-[4.25rem]',
+            'text-center tb:text-start',
           )}
           data-anim="title"
           data-programs-text-line
@@ -54,13 +54,13 @@ const sp = t.strategicPrograms;
           text={sp.ctaText}
           device="desktop"
           kind="primary"
-          class="tablet:self-start desktop:self-auto self-center"
+          class="tb:self-start dk:self-auto self-center"
           data-anim="cta"
         />
       </div>
     </div>
 
-    <div class="tablet:gap-0 mt-10 flex flex-col gap-4" data-anim="program-list">
+    <div class="tb:gap-0 mt-10 flex flex-col gap-4" data-anim="program-list">
       {
         sp.items.map((item) => (
           <StrategicProgramItem

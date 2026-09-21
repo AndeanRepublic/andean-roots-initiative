@@ -17,14 +17,14 @@ const c = t.challenge;
 
 <div
   class={cn(
-    'challenge-cards-mobile grid w-full max-w-[948px] gap-xl lg:grid-cols-3',
-    'desktop:hidden',
+    'challenge-cards-mobile grid w-full max-w-[948px] gap-xl tb:grid-cols-3',
+    'dk:hidden',
   )}
 >
   <article
     class={cn(
       'flex flex-col justify-between rounded-lg bg-stone-200 p-xl',
-      'desktop:h-[350px] h-[250px]',
+      'dk:h-[350px] h-[250px]',
     )}
     data-anim="mobile-card"
   >
@@ -34,7 +34,7 @@ const c = t.challenge;
 
     <div class="gap-sm flex flex-col">
       <p
-        class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-md:text-[40px]"
+        class="font-skrawk-serif text-[3rem] leading-[1.2] tracking-[-2px] text-black max-tb:text-[40px]"
       >
         {c.firstCardHeadline}
       </p>
@@ -43,7 +43,7 @@ const c = t.challenge;
   </article>
 
   <article
-    class="p-xl tablet:h-[400px] relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg text-white"
+    class="p-xl tb:h-[400px] relative flex h-[350px] flex-col justify-between overflow-hidden rounded-lg text-white"
     data-anim="mobile-card"
   >
     <img
@@ -63,7 +63,7 @@ const c = t.challenge;
     </div>
 
     <div class="gap-sm relative z-10 flex flex-col">
-      <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-md:text-[44px]">
+      <h3 class="font-skrawk-serif text-[2.25rem] leading-[1.4] text-white max-tb:text-[44px]">
         {c.secondCardTitle}
       </h3>
       <p class="body-sm-l text-white">{c.secondCardDescription}</p>
@@ -73,14 +73,14 @@ const c = t.challenge;
   <article
     class={cn(
       'flex flex-col justify-between rounded-lg bg-main p-xl text-white',
-      'desktop:h-[350px] h-[280px]',
+      'dk:h-[350px] h-[280px]',
     )}
     data-anim="mobile-card"
   >
     <div class="gap-lg flex flex-col">
       <p class="body-sm-l text-center text-white">{c.thirdCardTag}</p>
       <h3
-        class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-md:text-[44px]"
+        class="font-skrawk-serif text-center text-[2.25rem] leading-[0.8] text-white max-tb:text-[44px]"
       >
         {c.thirdCardTitle}
       </h3>

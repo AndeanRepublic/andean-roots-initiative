@@ -15,7 +15,7 @@ const pi = t.programsPage.intro;
 
 <section
   id="programs-intro"
-  class="px-2xl desktop:py-6xl bg-white py-12"
+  class="px-2xl dk:py-6xl bg-white py-12"
   aria-labelledby="programs-intro-heading"
 >
   <div class="mx-auto flex w-full max-w-320 flex-col gap-20">
@@ -28,7 +28,7 @@ const pi = t.programsPage.intro;
         <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
           <span
             class={cn(
-              'text-[3rem] tablet:text-[3rem] desktop:text-[5rem]',
+              'text-[3rem] tb:text-[3rem] dk:text-[5rem]',
               'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
             )}
             data-programs-intro-text-line
@@ -37,7 +37,7 @@ const pi = t.programsPage.intro;
           </span>
           <span
             class={cn(
-              'text-[1.5rem] tablet:text-[1.5rem] desktop:text-[2rem]',
+              'text-[1.5rem] tb:text-[1.5rem] dk:text-[2rem]',
               'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
               'pt-1',
             )}
@@ -49,7 +49,7 @@ const pi = t.programsPage.intro;
         <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
           <span
             class={cn(
-              'text-[1.5rem] tablet:text-[1.5rem] desktop:text-[2rem]',
+              'text-[1.5rem] tb:text-[1.5rem] dk:text-[2rem]',
               'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
               'pt-1',
             )}
@@ -59,7 +59,7 @@ const pi = t.programsPage.intro;
           </span>
           <span
             class={cn(
-              'text-[3rem] tablet:text-[3rem] desktop:text-[5rem]',
+              'text-[3rem] tb:text-[3rem] dk:text-[5rem]',
               'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
             )}
             data-programs-intro-text-line
@@ -71,8 +71,8 @@ const pi = t.programsPage.intro;
 
       <p
         class={cn(
-          'desktop:text-[2rem] desktop:leading-[1.4]',
-          'tablet:text-[1.5rem] tablet:leading-[1.4]',
+          'dk:text-[2rem] dk:leading-[1.4]',
+          'tb:text-[1.5rem] tb:leading-[1.4]',
           'text-[1.125rem] leading-[1.5] text-black',
           'font-manrope font-medium',
         )}
@@ -86,13 +86,13 @@ const pi = t.programsPage.intro;
     </div>
 
     <div
-      class="tablet:gap-10 desktop:gap-16 mx-auto flex w-full max-w-190 items-stretch justify-center gap-6"
+      class="tb:gap-10 dk:gap-16 mx-auto flex w-full max-w-190 items-stretch justify-center gap-6"
     >
       {
         pi.stats.map((item, index) => (
           <>
             {index > 0 && (
-              <div class="bg-gray/30 tablet:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
+              <div class="bg-gray/30 tb:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
             )}
             <article
               class="flex min-w-0 flex-1 flex-col items-center gap-2 text-center"

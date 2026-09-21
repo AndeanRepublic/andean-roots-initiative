@@ -17,22 +17,22 @@ const { titleTop, titleBottom } = Astro.props as Props;
         data-hero-text-line
         class={cn(
           'hero__title-line font-fredericka font-normal uppercase wrap-break-word',
-          'w-full max-w-full desktop:-mb-5',
-          'text-[3rem] leading-[1.2] tablet:text-[4.25rem] desktop:text-[7.5rem]',
+          'w-full max-w-full dk:-mb-5',
+          'text-[3rem] leading-[1.2] tb:text-[4.25rem] dk:text-[7.5rem]',
         )}
       >
         {titleTop}
       </span>
       <span
         class={cn(
-          'flex w-full items-center tablet:justify-center',
-          'tablet:pl-48px desktop:pl-180px',
+          'flex w-full items-center tb:justify-center',
+          'tb:pl-48px dk:pl-180px',
         )}
       >
         <span
           data-hero-text-line
           class={cn(
-            'hero__title-line font-fredericka font-normal wrap-break-word desktop:whitespace-nowrap',
+            'hero__title-line font-fredericka font-normal wrap-break-word dk:whitespace-nowrap',
             'max-w-full text-[length:var(--text-86)] leading-[1.2]',
           )}
         >

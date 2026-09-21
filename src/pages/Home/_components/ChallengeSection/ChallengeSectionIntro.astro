@@ -14,18 +14,18 @@ const c = t.challenge;
 ---
 
 <div class="gap-xl flex w-full max-w-[1000px] flex-col items-center">
-  <div class="gap-sm tablet:flex hidden items-center justify-center rounded-full">
+  <div class="gap-sm tb:flex hidden items-center justify-center rounded-full">
     <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
     <p class="body-md-sb text-main">{c.label}</p>
   </div>
 
-  <p class="heading-lg-sb text-main tablet:hidden text-center">
+  <p class="heading-lg-sb text-main tb:hidden text-center">
     {c.label.charAt(0).toUpperCase() + c.label.slice(1).toLowerCase()}
   </p>
 
   <p
     class={cn(
-      'text-[1.25rem] tablet:text-[1.5rem] desktop-lg:text-[2rem]',
+      'text-[1.25rem] tb:text-[1.5rem] dk-lg:text-[2rem]',
       'font-nunito-sans font-semibold leading-[140%] tracking-normal text-black',
       'max-w-[900px] text-center',
     )}

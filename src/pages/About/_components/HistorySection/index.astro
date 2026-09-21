@@ -12,8 +12,8 @@ const t = useTranslations(lang);
 const h = t.aboutPage.history;
 ---
 
-<section id="about-history" class="px-2xl desktop:py-6xl bg-white py-12">
-  <div class="desktop:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
+<section id="about-history" class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="dk:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
     <h2
       class="auxiliar-h-lg-skrawk-r text-main text-center"
       data-anim="title"
@@ -22,7 +22,7 @@ const h = t.aboutPage.history;
       {h.title}
     </h2>
 
-    <div class="desktop:grid-cols-3 desktop:gap-8 grid gap-8" data-anim="cards">
+    <div class="dk:grid-cols-3 dk:gap-8 grid gap-8" data-anim="cards">
       {
         h.cards.map((card) => (
           <article class={`flex flex-col gap-6 ${card.offsetClass ?? ''}`} data-anim="card">
@@ -30,7 +30,7 @@ const h = t.aboutPage.history;
               <img
                 src={card.imageSrc}
                 alt={card.imageAlt}
-                class="desktop:h-auto desktop:min-h-76.5 h-76.5 w-full object-cover"
+                class="dk:h-auto dk:min-h-76.5 h-76.5 w-full object-cover"
                 loading="lazy"
                 data-anim="card-image"
               />

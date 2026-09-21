@@ -152,7 +152,7 @@ export const initChallengeSectionCards = createScrollSectionController({
       let isGapAnimationCompleted = false;
       let isFlipAnimationCompleted = false;
 
-      // Timeline pinneado de desktop: primero apertura/espaciado, luego flip de cards.
+      // Timeline pinneado de dk: primero apertura/espaciado, luego flip de cards.
       const st = ScrollTrigger.create({
         trigger: challengeSection,
         start: 'top top',

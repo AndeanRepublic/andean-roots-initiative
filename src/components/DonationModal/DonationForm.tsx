@@ -113,7 +113,7 @@ export function DonationForm({ onClose }: DonationFormProps) {
 
       <div
         ref={cardRef}
-        className="desktop:max-w-[60%] relative z-10 flex h-auto max-h-[92dvh] min-h-[60dvh] w-full max-w-[90%] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity] sm:h-[60%] sm:max-h-none"
+        className="dk:max-w-[60%] relative z-10 flex h-auto max-h-[92dvh] min-h-[60dvh] w-full max-w-[90%] overflow-hidden rounded-2xl bg-white shadow-2xl will-change-[transform,opacity] tb:h-[60%] tb:max-h-none"
       >
         {/* Close button — absolute at the top-right corner of the whole card */}
         <button
@@ -131,7 +131,7 @@ export function DonationForm({ onClose }: DonationFormProps) {
           </svg>
         </button>
 
-        <div className="flex min-h-0 w-full flex-col gap-8 p-6 sm:w-[55%] sm:gap-10 sm:p-8">
+        <div className="flex min-h-0 w-full flex-col gap-8 p-6 tb:w-[55%] tb:gap-10 tb:p-8">
           <ModalHeader />
 
           {/* Step content — this element slides in/out on step transitions */}
@@ -188,7 +188,7 @@ function ModalHeader() {
 
 function ImagePanel() {
   return (
-    <div className="relative hidden sm:block sm:w-[80%]">
+    <div className="relative hidden tb:block tb:w-[80%]">
       <img
         src="/donate-assets/donate-main-img.png"
         alt="Comunidad andina"

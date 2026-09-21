@@ -16,10 +16,10 @@ const t = useTranslations(lang);
 const f = t.aboutPage.focus;
 ---
 
-<section id="about-focus" class="px-2xl desktop:py-6xl bg-white py-12">
-  <div class="desktop:gap-8 mx-auto flex w-full max-w-328 flex-col gap-8">
+<section id="about-focus" class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="dk:gap-8 mx-auto flex w-full max-w-328 flex-col gap-8">
     <div
-      class="desktop:grid-cols-[19.0625rem_1fr_19rem] desktop:gap-px grid items-end gap-6"
+      class="dk:grid-cols-[19.0625rem_1fr_19rem] dk:gap-px grid items-end gap-6"
       data-anim="hero-grid"
     >
       <div class="overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
@@ -64,11 +64,11 @@ const f = t.aboutPage.focus;
       </div>
     </div>
 
-    <div class="desktop:grid-cols-4 tablet:grid-cols-2 desktop:gap-8 grid gap-6" data-anim="cards">
+    <div class="dk:grid-cols-4 tb:grid-cols-2 dk:gap-8 grid gap-6" data-anim="cards">
       {
         f.cards.map((card) => (
           <article
-            class={`bg-light desktop:min-h-81 tablet:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
+            class={`bg-light dk:min-h-81 tb:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
             data-anim="focus-card"
           >
             <span

@@ -16,16 +16,16 @@ const faq = t.contactPage.faq;
 
 <section
   id="contact-faq"
-  class="px-2xl desktop:py-6xl bg-white py-12"
+  class="px-2xl dk:py-6xl bg-white py-12"
   aria-labelledby="contact-faq-heading"
 >
-  <div class="desktop:gap-12 desktop:grid-cols-[3fr_4fr] mx-auto grid w-full max-w-328 gap-10">
+  <div class="dk:gap-12 dk:grid-cols-[3fr_4fr] mx-auto grid w-full max-w-328 gap-10">
     <div class="flex min-w-0 flex-col gap-8">
       <div class="flex max-w-160 flex-col gap-3" data-anim="faq-intro">
         <h2
           id="contact-faq-heading"
           class={cn(
-            'text-[1.875rem] tablet:text-[2.5rem] desktop:text-[3rem]',
+            'text-[1.875rem] tb:text-[2.5rem] dk:text-[3rem]',
             'font-nunito-sans font-semibold leading-[120%] tracking-normal',
             'text-main',
           )}
@@ -55,7 +55,7 @@ const faq = t.contactPage.faq;
       </div>
     </div>
 
-    <div class="desktop:sticky desktop:top-32 h-min">
+    <div class="dk:sticky dk:top-32 h-min">
       <div class="flex flex-col gap-4">
         {
           faq.items.map((item) => (

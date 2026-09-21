@@ -1,24 +1,24 @@
 /**
- * Breakpoints aligned with `src/styles/figma_var.css` (@theme breakpoints).
+ * Breakpoints aligned with `src/styles/figma_var.css` (`mb`, `tb`, `dk`, `dk-lg`).
  * Use only in the browser (client scripts / islands).
  */
 
 export const BREAKPOINT_QUERIES = {
-  /** Viewport width ≤ 744px */
-  mobile: '(max-width: 744px)',
-  /** 744px ≤ width ≤ 1200px (same ranges as the former React hook) */
-  tablet: '(min-width: 744px) and (max-width: 1200px)',
+  /** Viewport width < 744px */
+  mb: '(max-width: 743px)',
+  /** 744px ≤ width < 1200px */
+  tb: '(min-width: 744px) and (max-width: 1199px)',
   /** width ≥ 1200px */
-  desktop: '(min-width: 1200px)',
+  dk: '(min-width: 1200px)',
   /** width ≥ 1700px */
-  largeDesktop: '(min-width: 1700px)',
+  dkLg: '(min-width: 1700px)',
 } as const;
 
 export type BreakpointFlags = {
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-  isLargeDesktop: boolean;
+  isMb: boolean;
+  isTb: boolean;
+  isDk: boolean;
+  isDkLg: boolean;
   isSmallScreen: boolean;
   isBigScreen: boolean;
 };
@@ -26,27 +26,27 @@ export type BreakpointFlags = {
 export function getBreakpointFlags(): BreakpointFlags {
   if (typeof window === 'undefined') {
     return {
-      isMobile: false,
-      isTablet: false,
-      isDesktop: false,
-      isLargeDesktop: false,
+      isMb: false,
+      isTb: false,
+      isDk: false,
+      isDkLg: false,
       isSmallScreen: false,
       isBigScreen: false,
     };
   }
 
-  const isMobile = window.matchMedia(BREAKPOINT_QUERIES.mobile).matches;
-  const isTablet = window.matchMedia(BREAKPOINT_QUERIES.tablet).matches;
-  const isDesktop = window.matchMedia(BREAKPOINT_QUERIES.desktop).matches;
-  const isLargeDesktop = window.matchMedia(BREAKPOINT_QUERIES.largeDesktop).matches;
+  const isMb = window.matchMedia(BREAKPOINT_QUERIES.mb).matches;
+  const isTb = window.matchMedia(BREAKPOINT_QUERIES.tb).matches;
+  const isDk = window.matchMedia(BREAKPOINT_QUERIES.dk).matches;
+  const isDkLg = window.matchMedia(BREAKPOINT_QUERIES.dkLg).matches;
 
   return {
-    isMobile,
-    isTablet,
-    isDesktop,
-    isLargeDesktop,
-    isSmallScreen: isMobile || isTablet,
-    isBigScreen: isDesktop || isLargeDesktop,
+    isMb,
+    isTb,
+    isDk,
+    isDkLg,
+    isSmallScreen: isMb || isTb,
+    isBigScreen: isDk || isDkLg,
   };
 }
 
@@ -60,10 +60,10 @@ export function subscribeBreakpoints(onChange: () => void): () => void {
   }
 
   const mediaQueries = [
-    window.matchMedia(BREAKPOINT_QUERIES.mobile),
-    window.matchMedia(BREAKPOINT_QUERIES.tablet),
-    window.matchMedia(BREAKPOINT_QUERIES.desktop),
-    window.matchMedia(BREAKPOINT_QUERIES.largeDesktop),
+    window.matchMedia(BREAKPOINT_QUERIES.mb),
+    window.matchMedia(BREAKPOINT_QUERIES.tb),
+    window.matchMedia(BREAKPOINT_QUERIES.dk),
+    window.matchMedia(BREAKPOINT_QUERIES.dkLg),
   ];
 
   const handler = () => {

@@ -12,14 +12,14 @@ const t = useTranslations(lang);
 const { content } = t.termsPage;
 ---
 
-<section class="bg-white px-2xl py-16 desktop:py-24">
+<section class="bg-white px-2xl py-16 dk:py-24">
   <div class="mx-auto w-full max-w-328">
 
     <!-- Two-column layout: sticky TOC on left, content on right -->
-    <div class="desktop:grid desktop:grid-cols-[18rem_1fr] desktop:gap-20">
+    <div class="dk:grid dk:grid-cols-[18rem_1fr] dk:gap-20">
 
       <!-- Table of contents (desktop sticky sidebar) -->
-      <aside class="hidden desktop:block">
+      <aside class="hidden dk:block">
         <div class="sticky top-32">
           <p class="body-sm-l mb-4 uppercase tracking-widest text-black/40">
             {lang === 'es' ? 'Contenido' : 'Contents'}

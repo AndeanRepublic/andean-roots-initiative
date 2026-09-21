@@ -15,9 +15,9 @@ const t = useTranslations(lang);
 const n = t.numbers;
 ---
 
-<section id="impact" data-anim="section" class="px-2xl desktop:py-6xl bg-white py-12">
+<section id="impact" data-anim="section" class="px-2xl dk:py-6xl bg-white py-12">
   <div class="mx-auto w-full max-w-328">
-    <div class="bg-main tablet:px-10 relative overflow-hidden rounded-lg px-6 py-10">
+    <div class="bg-main tb:px-10 relative overflow-hidden rounded-lg px-6 py-10">
       <img
         src="/home-assets/Numbers/vector.png"
         alt=""
@@ -27,24 +27,24 @@ const n = t.numbers;
       />
 
       <div
-        class="desktop:flex-row desktop:items-end desktop:justify-between relative flex flex-col gap-10"
+        class="dk:flex-row dk:items-end dk:justify-between relative flex flex-col gap-10"
       >
         <div
           data-anim="meta"
-          class={cn('flex max-w-90 flex-col gap-10', 'items-center tablet:items-start')}
+          class={cn('flex max-w-90 flex-col gap-10', 'items-center tb:items-start')}
         >
           <span
-            class="desktop:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
+            class="dk:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
           >
-            <WorldIcon class="desktop:size-6 size-10" />
+            <WorldIcon class="dk:size-6 size-10" />
           </span>
 
-          <p class="body-md-l tablet:text-start text-center text-white">
+          <p class="body-md-l tb:text-start text-center text-white">
             {n.description}
           </p>
         </div>
 
-        <div data-anim="stats" class="tablet:grid-cols-3 grid flex-1 gap-8">
+        <div data-anim="stats" class="tb:grid-cols-3 grid flex-1 gap-8">
           {n.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
         </div>
       </div>

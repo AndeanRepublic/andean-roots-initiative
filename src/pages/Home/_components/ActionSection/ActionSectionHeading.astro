@@ -15,25 +15,25 @@ const a = t.action;
 
 <div class="flex flex-col gap-lg">
   <div
-    class={cn('flex items-center gap-sm', 'hidden tablet:flex')}
+    class={cn('flex items-center gap-sm', 'hidden tb:flex')}
     data-anim="label"
   >
     <span class="size-2 rounded-full bg-main" aria-hidden="true"></span>
     <p class="body-md-sb text-main">{a.label}</p>
   </div>
 
-  <div class="grid items-end gap-2xl lg:grid-cols-[1fr_25rem]">
+  <div class="grid items-end gap-2xl dk:grid-cols-[1fr_25rem]">
     <h2
       class={cn(
         'flex max-w-187.75 flex-col text-main',
-        'items-center tablet:items-start',
-        'text-center tablet:text-start',
+        'items-center tb:items-start',
+        'text-center tb:text-start',
       )}
       data-anim="title"
     >
       <span class="heading-md-sb" data-action-text-line>{a.headingTop}</span>
       <span
-        class="font-skrawk-serif text-[3rem] leading-[0.8] tablet:text-[4.25rem]"
+        class="font-skrawk-serif text-[3rem] leading-[0.8] tb:text-[4.25rem]"
         data-action-text-line>{a.headingBottom}</span
       >
     </h2>

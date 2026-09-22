@@ -10,6 +10,10 @@ import {
   isHomePathname,
 } from '../../../../utils/home-hero-nav-context';
 import { BREAKPOINT_QUERIES } from '../../../../utils/breakpoints';
+import {
+  RESTORE_SCROLL_ON_RELOAD,
+  isElementAboveViewport,
+} from '../../../../utils/scroll-restoration';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('hop', '.8, 0, .3, 1');
@@ -115,6 +119,7 @@ export function initHomeHeroRevealAnimation() {
   heroIntroTl = null;
   releaseHeroScrollLock?.();
   const isMobile = window.innerWidth <= 1000;
+  const heroIsAboveViewport = isElementAboveViewport(container);
 
   gsap.killTweensOf([
     preloader,
@@ -131,6 +136,28 @@ export function initHomeHeroRevealAnimation() {
     ...gsap.utils.toArray<HTMLElement>(`${INTRO} .initiative`),
     ...gsap.utils.toArray<HTMLElement>(`${PRE} .char span, ${SPLIT} .char span`),
   ]);
+
+  // Only when reload-at-position is on. Otherwise Home always starts at the Hero.
+  if (RESTORE_SCROLL_ON_RELOAD && heroIsAboveViewport) {
+    resetIntroSplit();
+    if (heroTitleRevealRoot) {
+      resetTextRevealTargets(heroTitleRevealRoot, '[data-hero-text-line]');
+    }
+
+    introRoot.style.visibility = 'hidden';
+    introRoot.style.pointerEvents = 'none';
+    gsap.set([preloader, splitOverlay], { autoAlpha: 0, pointerEvents: 'none' });
+    gsap.set(container, {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+    });
+    gsap.set(heroImg, { scale: 1 });
+    gsap.set(titleLineEls, { opacity: 1, y: 0 });
+    if (subEl) gsap.set(subEl, { opacity: 1, y: 0 });
+    if (ctaEl) gsap.set(ctaEl, { opacity: 1, y: 0 });
+    if (scrollEl) gsap.set(scrollEl, { opacity: 1, y: 0 });
+    if (siteHeader) gsap.set(siteHeader, { opacity: 1, y: 0 });
+    return;
+  }
 
   if (skipIntro) {
     resetIntroSplit();

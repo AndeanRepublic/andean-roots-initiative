@@ -1,0 +1,128 @@
+<div id="home-hero-intro-root" aria-hidden="true">
+	<div class="preloader" data-anim="hero-preloader">
+		<div class="andean">
+			<h2 style="visibility: hidden">ANDEAN</h2>
+		</div>
+		<div class="roots">
+			<h2 style="visibility: hidden">ROOTS</h2>
+		</div>
+		<div class="initiative">
+			<h2 style="visibility: hidden">INITIATIVE</h2>
+		</div>
+	</div>
+
+	<div class="split-overlay" data-anim="hero-split-overlay">
+		<div class="andean">
+			<h2 style="visibility: hidden">ANDEAN</h2>
+		</div>
+		<div class="roots">
+			<h2 style="visibility: hidden">ROOTS</h2>
+		</div>
+		<div class="initiative">
+			<h2 style="visibility: hidden">INITIATIVE</h2>
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Ported from `example-animation/hero-reveal-2/example.css` (demo-only globals removed). */
+	.preloader,
+	.split-overlay {
+		position: fixed;
+		width: 100vw;
+		height: 100dvh;
+		min-height: 100dvh;
+		background-color: #9b7627;
+		color: #fff;
+	}
+
+	/*
+   * Debajo del header del sitio (z-50) pero por encima del fondo del hero:
+   * el section del hero debe pintar ENCIMA de estos overlays para que el
+   * clip-path muestre la franja del hero (en el demo, .container comparte z con .preloader y va después en el DOM).
+   */
+	.split-overlay {
+		z-index: 18;
+	}
+
+	.preloader {
+		z-index: 19;
+	}
+
+	.preloader h2,
+	.split-overlay h2 {
+		font-family: 'Montserrat', sans-serif;
+		text-transform: uppercase;
+		font-size: 4rem;
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	@media (max-width: 1000px) {
+		.preloader h2,
+		.split-overlay h2 {
+			font-size: 2.5rem;
+		}
+	}
+
+	.andean {
+		position: absolute;
+		top: 50%;
+		left: calc(50% - 21rem);
+		transform: translate(-50%, -50%);
+		width: 100%;
+		text-align: center;
+	}
+
+	@media (max-width: 1000px) {
+		.andean {
+			left: 50%;
+		}
+	}
+
+	.roots {
+		position: absolute;
+		top: 50%;
+		left: calc(50% - 2rem);
+		transform: translate(-50%, -50%);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 1000px) {
+		.roots {
+			left: 50%;
+		}
+	}
+
+	.initiative {
+		position: absolute;
+		top: 50%;
+		left: calc(50% + 19rem);
+		transform: translate(-50%, -50%);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 1000px) {
+		.initiative {
+			left: 50%;
+		}
+	}
+
+	.andean :global(.char),
+	.roots :global(.char),
+	.initiative :global(.char) {
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		margin-top: 0.75rem;
+	}
+
+	.andean :global(.char span),
+	.roots :global(.char span),
+	.initiative :global(.char span) {
+		position: relative;
+		display: inline-block;
+		transform: translateY(-100%);
+		will-change: transform;
+	}
+</style>

@@ -13,6 +13,7 @@ import StrategicProgramsSection from '../../Home/_components/StrategicProgramsSe
 import PartnershipSection from '../../Home/_components/PartnershipSection/index.astro';
 import CTA from '../../../components/CTA/index.astro';
 import Footer from '../../../components/Footer/index.astro';
+import { RESTORE_SCROLL_ON_RELOAD } from '../../../utils/scroll-restoration';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -22,6 +23,16 @@ const { lang } = Astro.params as { lang: Locale };
 ---
 
 <Layout lang={lang}>
+  <!--
+    Runs while the document is still parsing, before the browser restores scroll.
+    The bundled script below repeats the same policy after client-side navigations.
+  -->
+  <script is:inline define:vars={{ restoreScrollOnReload: RESTORE_SCROLL_ON_RELOAD }}>
+    if (!restoreScrollOnReload && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
+  </script>
   <Header lang={lang} heroEntrance />
   <HeroSection lang={lang} />
   <ChallengeSection lang={lang} />
@@ -35,12 +46,7 @@ const { lang } = Astro.params as { lang: Locale };
 </Layout>
 
 <script>
-  const resetHomeScrollToTop = () => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  };
+  import { applyScrollRestorationPolicy } from '../../../utils/scroll-restoration';
 
-  document.addEventListener('astro:page-load', resetHomeScrollToTop);
+  applyScrollRestorationPolicy();
 </script>

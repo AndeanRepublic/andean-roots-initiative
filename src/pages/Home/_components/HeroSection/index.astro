@@ -3,13 +3,13 @@ import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { getLocalizedPath, useTranslations } from '../../../../i18n/utils';
+import HeroPreloader from '../../../../components/HeroPreloader/index.astro';
 import HeroIntroCopy from './HeroIntroCopy.astro';
-import HeroPreloader from './HeroPreloader.astro';
 import LandingBackground from './LandingBackground.astro';
 import LandingContent from './LandingContent.astro';
 
 interface Props {
-	lang?: Locale;
+  lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -18,72 +18,84 @@ const heroContent = t.hero;
 const heroCtaHref = getLocalizedPath(lang, 'contact');
 
 const introCopyProps = {
-	subheading: heroContent.subheading,
-	ctaText: heroContent.ctaText,
-	ctaHref: heroCtaHref,
+  subheading: heroContent.subheading,
+  ctaText: heroContent.ctaText,
+  ctaHref: heroCtaHref,
 };
 
 const titleProps = {
-	titleTop: heroContent.titleTop,
-	titleBottom: heroContent.titleBottom,
+  titleTop: heroContent.titleTop,
+  titleBottom: heroContent.titleBottom,
 };
 ---
 
 <HeroPreloader />
 <section
-	data-anim="hero-container"
-	class={cn(
-		'hero bg-main',
-		'relative z-20 overflow-hidden',
-		'flex flex-col',
-		'px-6xl pb-6xl',
-		'h-dvh min-h-dvh w-full',
-	)}
+  data-anim="hero-container"
+  class={cn(
+    'hero bg-main',
+    'relative z-20 overflow-hidden',
+    'flex flex-col',
+    'px-6xl pb-6xl',
+    'h-dvh min-h-dvh w-full',
+  )}
 >
-	<LandingBackground imageSrc="/home-assets/Hero/Hero.png" />
+  <LandingBackground imageSrc="/home-assets/Hero/Hero.png" />
 
-	<div
-		data-hero-layout="desktop"
-		class={cn('relative z-10 hidden flex-1 flex-col justify-between', 'dk:flex')}
-	>
-		<div class="mt-180px mx-auto flex w-full max-w-328 justify-end">
-			<HeroIntroCopy {...introCopyProps} layout="desktop" />
-		</div>
+  <div
+    data-hero-layout="desktop"
+    class={cn('relative z-10 hidden flex-1 flex-col justify-between', 'dk:flex')}
+  >
+    <div class="mt-180px mx-auto flex w-full max-w-328 justify-end">
+      <HeroIntroCopy {...introCopyProps} layout="desktop" />
+    </div>
 
-		<div class="hero__body mx-auto w-full max-w-328">
-			<LandingContent {...titleProps} />
-		</div>
-	</div>
+    <div class="hero__body mx-auto w-full max-w-328">
+      <LandingContent {...titleProps} />
+    </div>
+  </div>
 
-	<div
-		data-hero-layout="compact"
-		class={cn('relative z-10 flex flex-1 flex-col justify-end', 'dk:hidden')}
-	>
-		<div class="gap-xl mx-auto flex w-full max-w-328 flex-col">
-			<LandingContent {...titleProps} />
-			<HeroIntroCopy {...introCopyProps} layout="compact" />
-		</div>
-	</div>
+  <div
+    data-hero-layout="compact"
+    class={cn('relative z-10 flex flex-1 flex-col justify-end', 'dk:hidden')}
+  >
+    <div class="gap-xl mx-auto flex w-full max-w-328 flex-col">
+      <LandingContent {...titleProps} />
+      <HeroIntroCopy {...introCopyProps} layout="compact" />
+    </div>
+  </div>
 </section>
 
 <!-- Initial clip on the hero “container” (same as example `.container`). -->
 <style>
-	[data-anim='hero-container'] {
-		clip-path: polygon(0 49%, 0 49%, 0 51%, 0 51%);
-		will-change: clip-path;
-	}
+  [data-anim='hero-container'] {
+    clip-path: polygon(0 49%, 0 49%, 0 51%, 0 51%);
+    will-change: clip-path;
+  }
 
-	@media (max-width: 1000px) {
-		[data-anim='hero-container'] {
-			clip-path: polygon(0 49.5%, 0 49.5%, 0 50.5%, 0 50.5%);
-		}
-	}
+  @media (max-width: 1000px) {
+    [data-anim='hero-container'] {
+      clip-path: polygon(0 49.5%, 0 49.5%, 0 50.5%, 0 50.5%);
+    }
+  }
 </style>
 
 <script>
-	import { initHomeHeroRevealAnimation } from './animation';
+  import { initHomeHeroRevealAnimation } from './animation';
+  import {
+    RESTORE_SCROLL_ON_RELOAD,
+    afterNativeScrollRestoration,
+    applyScrollRestorationPolicy,
+  } from '../../../../utils/scroll-restoration';
 
-	const boot = () => initHomeHeroRevealAnimation();
+  const startIntro = () => {
+    applyScrollRestorationPolicy();
+    initHomeHeroRevealAnimation();
+  };
 
-	document.addEventListener('astro:page-load', boot);
+  const boot = RESTORE_SCROLL_ON_RELOAD
+    ? afterNativeScrollRestoration(startIntro)
+    : startIntro;
+
+  document.addEventListener('astro:page-load', boot);
 </script>

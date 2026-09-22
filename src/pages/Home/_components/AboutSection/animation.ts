@@ -1,7 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
-import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
 import { setupAboutOriginCardHover } from './origin-card-hover';
 import { setupAboutTagPillsHover } from './tag-pills-hover';
 
@@ -9,24 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
-const T_TITLE = 0.18;
 const T_TAGS = 0.3;
-const T_DESC = 0.5;
 const T_IMAGE = 0.7;
 const T_CARD = 0.9;
-
-/** Construye targets de texto para stagger y conserva el texto original para cleanup/reinit. */
-function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root, '[data-about-text-line], [data-about-text-words]');
-
-  const titleLines = Array.from(root.querySelectorAll<HTMLElement>('[data-about-text-line]'));
-  const description = root.querySelector<HTMLElement>('[data-about-text-words]');
-
-  const titleChars = titleLines.flatMap((line) => splitChars(line, 'about-title-char'));
-  const descriptionWords = description ? splitWords(description, 'about-description-word') : [];
-
-  return { titleChars, descriptionWords };
-}
 
 function clearAboutSectionStyles(root: HTMLElement) {
   root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
@@ -36,7 +20,6 @@ function clearAboutSectionStyles(root: HTMLElement) {
     el.dataset.tagView = 'text';
   });
   gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root, '[data-about-text-line], [data-about-text-words]');
 }
 
 export const initAboutSectionAnimation = createScrollSectionController({
@@ -44,9 +27,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
-      const title = root.querySelector<HTMLElement>('[data-anim="title"]');
       const tagsContainer = root.querySelector<HTMLElement>('[data-anim="tags"]');
-      const description = root.querySelector<HTMLElement>('[data-anim="description"]');
       const image = root.querySelector<HTMLElement>('[data-anim="image"]');
       const originCard = root.querySelector<HTMLElement>('[data-anim="origin-card"]');
       const originCardInner = root.querySelector<HTMLElement>('[data-anim="origin-card-inner"]');
@@ -54,19 +35,9 @@ export const initAboutSectionAnimation = createScrollSectionController({
         ? Array.from(tagsContainer.querySelectorAll<HTMLElement>('[data-anim="tag-pill"]'))
         : [];
       const cardInnerChildren = originCardInner ? Array.from(originCardInner.children) : [];
-      const { titleChars, descriptionWords } = buildTextNodes(root);
-
-      const titleTargets =
-        titleChars.length > 0 ? titleChars : title ? Array.from(title.children) : [];
 
       if (label) gsap.set(label, { opacity: 0, y: 20, rotateZ: -2 });
-      if (titleTargets.length) gsap.set(titleTargets, { opacity: 0, yPercent: 45 });
       if (tags.length) gsap.set(tags, { opacity: 0, y: 30, scale: 0.9, rotateZ: -3 });
-      if (descriptionWords.length > 0) {
-        gsap.set(descriptionWords, { opacity: 0.15, y: 18, filter: 'blur(2px)' });
-      } else if (description) {
-        gsap.set(description, { opacity: 0.15, y: 18, filter: 'blur(2px)' });
-      }
       if (image) {
         gsap.set(image, {
           opacity: 0,
@@ -86,9 +57,7 @@ export const initAboutSectionAnimation = createScrollSectionController({
       }
 
       let labelIn = false;
-      let titleIn = false;
       let tagsIn = false;
-      let descIn = false;
       let imageIn = false;
       let cardIn = false;
 
@@ -122,30 +91,6 @@ export const initAboutSectionAnimation = createScrollSectionController({
           }
         }
 
-        if (titleTargets.length) {
-          if (p >= T_TITLE && !titleIn) {
-            gsap.to(titleTargets, {
-              opacity: 1,
-              yPercent: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.015,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            titleIn = true;
-          } else if (p < T_TITLE && titleIn) {
-            gsap.to(titleTargets, {
-              opacity: 0,
-              yPercent: 45,
-              duration: d,
-              stagger: immediate ? 0 : -0.012,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            titleIn = false;
-          }
-        }
-
         if (tags.length) {
           if (p >= T_TAGS && !tagsIn) {
             gsap.to(tags, {
@@ -171,54 +116,6 @@ export const initAboutSectionAnimation = createScrollSectionController({
               overwrite: true,
             });
             tagsIn = false;
-          }
-        }
-
-        if (descriptionWords.length > 0) {
-          if (p >= T_DESC && !descIn) {
-            gsap.to(descriptionWords, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.5,
-              stagger: immediate ? 0 : 0.02,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            descIn = true;
-          } else if (p < T_DESC && descIn) {
-            gsap.to(descriptionWords, {
-              opacity: 0.15,
-              y: 18,
-              filter: 'blur(2px)',
-              duration: 0.1,
-              stagger: immediate ? 0 : -0.015,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            descIn = false;
-          }
-        } else if (description) {
-          if (p >= T_DESC && !descIn) {
-            gsap.to(description, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: d,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            descIn = true;
-          } else if (p < T_DESC && descIn) {
-            gsap.to(description, {
-              opacity: 0.15,
-              y: 18,
-              filter: 'blur(2px)',
-              duration: d,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            descIn = false;
           }
         }
 

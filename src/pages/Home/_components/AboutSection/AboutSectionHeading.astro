@@ -1,4 +1,5 @@
 ---
+import Copy from '../../../../components/Copy/index.astro';
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -13,28 +14,31 @@ const t = useTranslations(lang);
 const a = t.about;
 ---
 
-<div class="relative z-10 flex w-full flex-col items-center gap-2xl">
-  <div class="flex items-center justify-center gap-sm" data-anim="label">
+<div class="gap-2xl relative z-10 flex w-full flex-col items-center">
+  <div class="gap-sm flex items-center justify-center" data-anim="label">
     <span class="bg-main size-2 shrink-0 rounded-full" aria-hidden="true"></span>
     <p class="body-md-sb text-main">{a.label}</p>
   </div>
 
-  <h2 class="flex w-fit max-w-full flex-col items-start text-main" data-anim="title">
-    <span class="heading-eyebrow w-full" data-about-text-line>
-      {a.titleTop}
-    </span>
-    <span
-      class={cn(
-        'flex w-full items-center tb:justify-center',
-        'tb:pl-40px dk:pl-120px',
-      )}
-    >
-      <span
-        class="section-heading max-w-full uppercase wrap-break-word dk:whitespace-nowrap"
-        data-about-text-line
-      >
-        {a.titleBottom}
+  <Copy
+    variant="slideFromBottom"
+    type="words"
+    reverse
+    ease="power3.out"
+    duration={0.9}
+    delay={0}
+    stagger={0.2}
+    animateOnScroll={true}
+    start="top 80%"
+    class="w-fit max-w-full"
+  >
+    <h2 class="text-main flex w-fit max-w-full flex-col items-start">
+      <span class="heading-eyebrow w-full">{a.titleTop}</span>
+      <span class={cn('flex w-full items-center tb:justify-center', 'tb:pl-40px dk:pl-120px')}>
+        <span class="section-heading dk:whitespace-nowrap max-w-full wrap-break-word uppercase">
+          {a.titleBottom}
+        </span>
       </span>
-    </span>
-  </h2>
+    </h2>
+  </Copy>
 </div>

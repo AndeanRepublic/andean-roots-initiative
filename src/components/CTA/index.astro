@@ -1,5 +1,6 @@
 ---
 import ButtonLink from '../ButtonLink/index.astro';
+import Copy from '../Copy/index.astro';
 import DonationModal from '../DonationModal/index';
 import type { Locale } from '../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../i18n/locales';
@@ -25,16 +26,42 @@ const ctaButtonClass =
       <img
         src="/home-assets/Numbers/vector.png"
         alt=""
-        class="pointer-events-none absolute inset-0 size-full object-cover opacity-25 dk:-top-59.75 dk:h-196.5"
+        class="dk:-top-59.75 dk:h-196.5 pointer-events-none absolute inset-0 size-full object-cover opacity-25"
         loading="lazy"
         aria-hidden="true"
       />
 
       <div class="gap-xl relative z-10 flex w-full flex-col items-center">
-        <h2 class="section-heading w-full text-white uppercase">{c.title}</h2>
-        <p class="body-md-l text-light max-w-150">
-          {c.description}
-        </p>
+        <Copy
+          variant="slideFromBottom"
+          type="words"
+          reverse
+          ease="power3.out"
+          duration={0.9}
+          delay={0}
+          stagger={0.2}
+          animateOnScroll={true}
+          start="top 80%"
+          class="w-full"
+        >
+          <h2 class="section-heading w-full text-white uppercase">{c.title}</h2>
+        </Copy>
+        <Copy
+          variant="slideFromBottom"
+          type="lines"
+          reverse
+          ease="power3.out"
+          duration={0.9}
+          delay={1}
+          stagger={0.1}
+          animateOnScroll={true}
+          start="top 80%"
+          class="w-full max-w-150"
+        >
+          <p class="body-md-l text-light max-w-150">
+            {c.description}
+          </p>
+        </Copy>
       </div>
 
       <div class="gap-xl relative z-10 flex flex-wrap items-center justify-center">

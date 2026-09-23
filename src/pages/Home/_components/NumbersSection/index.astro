@@ -1,4 +1,5 @@
 ---
+import Copy from '../../../../components/Copy/index.astro';
 import WorldIcon from '../../../../icons/WorldIcon.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -26,22 +27,31 @@ const n = t.numbers;
         aria-hidden="true"
       />
 
-      <div
-        class="dk:flex-row dk:items-end dk:justify-between relative flex flex-col gap-10"
-      >
-        <div
-          data-anim="meta"
-          class={cn('flex max-w-90 flex-col gap-10', 'items-center tb:items-start')}
-        >
+      <div class="dk:flex-row dk:items-end dk:justify-between relative flex flex-col gap-10">
+        <div class={cn('flex max-w-90 flex-col gap-10', 'items-center tb:items-start')}>
           <span
+            data-anim="meta"
             class="dk:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
           >
             <WorldIcon class="dk:size-6 size-10" />
           </span>
 
-          <p class="body-md-l tb:text-start text-center text-white">
-            {n.description}
-          </p>
+          <Copy
+            variant="slideFromBottom"
+            type="lines"
+            reverse
+            ease="power3.out"
+            duration={0.9}
+            delay={1}
+            stagger={0.1}
+            animateOnScroll={true}
+            start="top 80%"
+            class="w-full"
+          >
+            <p class="body-md-l tb:text-start text-center text-white">
+              {n.description}
+            </p>
+          </Copy>
         </div>
 
         <div data-anim="stats" class="tb:grid-cols-3 grid flex-1 gap-8">

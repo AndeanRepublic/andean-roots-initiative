@@ -1,29 +1,22 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
-import { resetSplitText, splitWords } from '../../../../utils/split-text';
 import { setupPartnerLogosHover } from './logo-hover';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const T_LABEL = 0.14;
-const T_DESCRIPTION = 0.2;
 const T_LOGOS = 0.3;
 
-/** Parte el texto descriptivo para stagger por palabra en reveal/reverse. */
-function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root, '[data-partners-text-words]');
-  const description = root.querySelector<HTMLElement>('[data-partners-text-words]');
-  return description ? splitWords(description, 'partners-description-word') : [];
-}
-
-/** Devuelve la sección a su estado base: estilos inline, tweens y texto partido. */
+/** Devuelve la sección a su estado base: estilos inline y tweens. */
 function clearPartnershipStyles(root: HTMLElement) {
-  root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
+  const scrollNodes = root.querySelectorAll(
+    '[data-anim="label-desktop"], [data-anim="label-mobile"], [data-anim="logo-item"], [data-anim="logo-image"]',
+  );
+  scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
   });
-  gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root, '[data-partners-text-words]');
+  gsap.killTweensOf(gsap.utils.toArray(scrollNodes));
 }
 
 export const initPartnershipSectionAnimation = createScrollSectionController({
@@ -34,11 +27,8 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
     const logos = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="logo-item"]'));
     const logoImages = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="logo-image"]'));
     const labelTargets = [labelDesktop, labelMobile].filter(Boolean) as HTMLElement[];
-    const descriptionWords = buildTextNodes(root);
 
     if (labelTargets.length) gsap.set(labelTargets, { opacity: 0, y: 16 });
-    if (descriptionWords.length)
-      gsap.set(descriptionWords, { opacity: 0.12, y: 12, filter: 'blur(2px)' });
     if (logos.length)
       gsap.set(logos, {
         opacity: 0,
@@ -49,10 +39,9 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
     if (logoImages.length) gsap.set(logoImages, { filter: 'grayscale(100%) brightness(0.88)' });
 
     let labelIn = false;
-    let descriptionIn = false;
     let logosIn = false;
 
-    /** Secuencia de entrada por umbrales de progreso: labels -> descripción -> logos. */
+    /** Secuencia de entrada por umbrales de progreso: labels -> logos. */
     const handleThresholds = (p: number, immediate = false) => {
       const d = immediate ? 0 : 0.52;
 
@@ -77,32 +66,6 @@ export const initPartnershipSectionAnimation = createScrollSectionController({
             overwrite: true,
           });
           labelIn = false;
-        }
-      }
-
-      if (descriptionWords.length) {
-        if (p >= T_DESCRIPTION && !descriptionIn) {
-          gsap.to(descriptionWords, {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.4,
-            stagger: immediate ? 0 : 0.01,
-            ease: 'power2.out',
-            overwrite: true,
-          });
-          descriptionIn = true;
-        } else if (p < T_DESCRIPTION && descriptionIn) {
-          gsap.to(descriptionWords, {
-            opacity: 0.12,
-            y: 12,
-            filter: 'blur(2px)',
-            duration: 0.2,
-            stagger: immediate ? 0 : -0.008,
-            ease: 'power2.in',
-            overwrite: true,
-          });
-          descriptionIn = false;
         }
       }
 

@@ -1,63 +1,35 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
-import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
-const T_TITLE = 0.18;
-const T_SUB = 0.32;
 const T_PROGRAMS = 0.48;
-
-/** Prepara los nodos de texto partidos para stagger y devuelve referencias animables. */
-function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root, '[data-action-text-line], [data-action-text-words]');
-
-  const titleLines = Array.from(root.querySelectorAll<HTMLElement>('[data-action-text-line]'));
-  const subheading = root.querySelector<HTMLElement>('[data-action-text-words]');
-
-  const titleChars = titleLines.flatMap((line) => splitChars(line, 'action-title-char'));
-  const subheadingWords = subheading ? splitWords(subheading, 'action-subheading-word') : [];
-
-  return { titleChars, subheadingWords };
-}
 
 function clearActionSectionStyles(root: HTMLElement) {
   const scrollNodes = root.querySelectorAll(
-    '[data-anim="label"], [data-anim="title"], [data-anim="title"] *, [data-anim="subheading"], [data-anim="subheading"] *, [data-anim="programs"], [data-anim="program-card"]',
+    '[data-anim="label"], [data-anim="programs"], [data-anim="program-card"]',
   );
   scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
   });
   gsap.killTweensOf(gsap.utils.toArray(scrollNodes));
-  resetSplitText(root, '[data-action-text-line], [data-action-text-words]');
 }
 
 export const initActionSectionAnimation = createScrollSectionController({
   rootId: 'actions',
   setup: ({ root, mm }) => {
     const label = root.querySelector<HTMLElement>('[data-anim="label"]');
-    const title = root.querySelector<HTMLElement>('[data-anim="title"]');
-    const subheading = root.querySelector<HTMLElement>('[data-anim="subheading"]');
     const programs = root.querySelector<HTMLElement>('[data-anim="programs"]');
     const programCards = programs
       ? Array.from(programs.querySelectorAll<HTMLElement>('[data-anim="program-card"]'))
       : [];
-    const { titleChars, subheadingWords } = buildTextNodes(root);
-    const titleTargets =
-      titleChars.length > 0 ? titleChars : title ? Array.from(title.children) : [];
 
     /** Estado visual base para que cada reinicio del controller sea determinista. */
     const setInitialState = () => {
       if (label) gsap.set(label, { opacity: 0, y: 20, rotateZ: -2 });
-      if (titleTargets.length) gsap.set(titleTargets, { opacity: 0, yPercent: 45 });
-      if (subheadingWords.length > 0) {
-        gsap.set(subheadingWords, { opacity: 0.15, y: 18, filter: 'blur(2px)' });
-      } else if (subheading) {
-        gsap.set(subheading, { opacity: 0.15, y: 18, filter: 'blur(2px)' });
-      }
       if (programCards.length) {
         gsap.set(programCards, { opacity: 0, y: 36, scale: 0.94, rotateZ: -2 });
       }
@@ -95,13 +67,11 @@ export const initActionSectionAnimation = createScrollSectionController({
 
     /**
      * Trigger principal de sección:
-     * - siempre controla label/title/subheading
+     * - siempre controla el label
      * - opcionalmente controla programs (desktop)
      */
     const createSectionThresholdTrigger = (includeProgramThreshold: boolean) => {
       let labelIn = false;
-      let titleIn = false;
-      let subIn = false;
       let programsIn = false;
 
       const tweenDur = (immediate: boolean) => (immediate ? 0 : 0.55);
@@ -130,78 +100,6 @@ export const initActionSectionAnimation = createScrollSectionController({
               overwrite: true,
             });
             labelIn = false;
-          }
-        }
-
-        if (titleTargets.length) {
-          if (p >= T_TITLE && !titleIn) {
-            gsap.to(titleTargets, {
-              opacity: 1,
-              yPercent: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.015,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            titleIn = true;
-          } else if (p < T_TITLE && titleIn) {
-            gsap.to(titleTargets, {
-              opacity: 0,
-              yPercent: 45,
-              duration: d,
-              stagger: immediate ? 0 : -0.012,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            titleIn = false;
-          }
-        }
-
-        if (subheadingWords.length > 0) {
-          if (p >= T_SUB && !subIn) {
-            gsap.to(subheadingWords, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.5,
-              stagger: immediate ? 0 : 0.02,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            subIn = true;
-          } else if (p < T_SUB && subIn) {
-            gsap.to(subheadingWords, {
-              opacity: 0.15,
-              y: 18,
-              filter: 'blur(2px)',
-              duration: 0.1,
-              stagger: immediate ? 0 : -0.015,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            subIn = false;
-          }
-        } else if (subheading) {
-          if (p >= T_SUB && !subIn) {
-            gsap.to(subheading, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: d,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            subIn = true;
-          } else if (p < T_SUB && subIn) {
-            gsap.to(subheading, {
-              opacity: 0.15,
-              y: 18,
-              filter: 'blur(2px)',
-              duration: d,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            subIn = false;
           }
         }
 

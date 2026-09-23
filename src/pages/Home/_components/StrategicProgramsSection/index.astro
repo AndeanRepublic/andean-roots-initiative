@@ -1,5 +1,6 @@
 ---
 import ButtonLink from '../../../../components/ButtonLink/index.astro';
+import Copy from '../../../../components/Copy/index.astro';
 import StrategicProgramItem from './StrategicProgramItem.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -23,14 +24,23 @@ const sp = t.strategicPrograms;
           <p class="body-md-sb text-main">{sp.label}</p>
         </div>
 
-        <h2 class="text-main flex w-full flex-col items-end" data-anim="title">
-          <span class="section-heading w-full uppercase" data-programs-text-line>
-            {sp.headingTop}
-          </span>
-          <span class="heading-eyebrow w-full text-right" data-programs-text-line>
-            {sp.headingBottom}
-          </span>
-        </h2>
+        <Copy
+          variant="slideFromBottom"
+          type="words"
+          reverse
+          ease="power3.out"
+          duration={0.9}
+          delay={0}
+          stagger={0.2}
+          animateOnScroll={true}
+          start="top 80%"
+          class="w-full"
+        >
+          <h2 class="text-main flex w-full flex-col items-end">
+            <span class="section-heading w-full uppercase">{sp.headingTop}</span>
+            <span class="heading-eyebrow w-full text-right">{sp.headingBottom}</span>
+          </h2>
+        </Copy>
       </div>
 
       <ButtonLink
@@ -38,7 +48,7 @@ const sp = t.strategicPrograms;
         text={sp.ctaText}
         device="desktop"
         kind="primary"
-        class="self-start **:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 dk:self-auto [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5"
+        class="dk:self-auto self-start **:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5"
         data-anim="cta"
       />
     </div>

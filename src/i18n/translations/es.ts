@@ -292,7 +292,8 @@ const es = {
     },
     organization: {
       label: 'NUESTRA ORGANIZACIÓN',
-      title: 'Nuestro propósito y visión',
+      titleTop: 'Nuestro',
+      titleBottom: 'Propósito',
       coverImageSrc: '/about-assets/mision-vision/mission-vision.png',
       coverImageAlt: 'Representante andino en paisaje altoandino',
       points: [
@@ -314,7 +315,8 @@ const es = {
     },
     values: {
       label: 'NUESTROS VALORES',
-      title: 'Lo que nos mueve',
+      titleTop: 'Lo que',
+      titleBottom: 'nos mueve',
       description:
         'Nuestros valores guían cada acción, decisión y colaboración que impulsamos en las comunidades andinas.',
       items: [
@@ -340,7 +342,9 @@ const es = {
     },
     focus: {
       label: 'ENFOQUE',
-      title: 'Fortaleciendo capacidades locales',
+      titleTop: 'Fortaleciendo',
+      titleMiddle: 'capacidades',
+      titleBottom: 'locales',
       description:
         'Creemos que el desarrollo sostenible en los Andes no depende únicamente de recursos externos, sino de potenciar el talento, la identidad y las capacidades que ya existen en las comunidades, conectándolas con oportunidades reales.',
       sideImages: [
@@ -359,27 +363,27 @@ const es = {
           description:
             'Trabajamos desde el conocimiento, la cultura y las capacidades propias de cada comunidad.',
           icon: 'group' as const,
-          offsetClass: 'dk:self-start',
+          offsetClass: '',
         },
         {
           title: 'Innovación con propósito',
           description:
             'Integramos tecnología, educación e innovación para generar soluciones relevantes y sostenibles.',
           icon: 'bulb' as const,
-          offsetClass: 'dk:self-end',
+          offsetClass: 'dk:mt-19',
         },
         {
           title: 'Articulación de actores',
           description: 'Conectamos comunidades con empresas, instituciones y aliados estratégicos.',
           icon: 'handshake' as const,
-          offsetClass: 'dk:self-end',
+          offsetClass: 'dk:mt-19',
         },
         {
           title: 'Sostenibilidad a largo plazo',
           description:
             'Buscamos generar capacidades que permanezcan en el tiempo y no dependan de intervenciones externas.',
           icon: 'sustainability' as const,
-          offsetClass: 'dk:self-start',
+          offsetClass: '',
         },
       ],
     },
@@ -518,13 +522,12 @@ const es = {
       ],
     },
     impact: {
-      label: 'IMPACTO',
-      headlineBefore: 'AYÚDANOS A CONSTRUIR OPORTUNIDADES DONDE MÁS SE NECESITAN ',
-      headlineHighlight: 'AHORA',
-      paragraphs: [
-        'Cada alianza, inversión e iniciativa impulsa un objetivo claro: fortalecer comunidades andinas mediante educación, innovación y acceso a oportunidades sostenibles y medibles.',
+      line1: 'Ayúdanos a construir',
+      line2: 'Oportunidades',
+      line3: 'donde más se necesitan',
+      line4: 'Ahora',
+      description:
         'Si buscas generar impacto, explorar colaboraciones estratégicas o apoyar el desarrollo de nuevos proyectos, este es el punto de partida. Hablemos.',
-      ],
     },
     channels: {
       sectionId: 'canales',
@@ -554,30 +557,27 @@ const es = {
     },
     form: {
       sectionId: 'contacto-form',
-      title: 'Contáctanos y construyamos impacto juntos.',
-      subtitle:
-        'Completa los campos y te responderemos con una propuesta clara para avanzar juntos.',
-      socialPrompt: 'Encuéntranos en',
-      submitLabel: 'Enviar',
+      title: 'Envíanos un mensaje',
+      fullNameLabel: 'Nombre completo',
+      fullNamePlaceholder: 'Ingresa tu nombre completo',
+      emailLabel: 'Correo electrónico',
+      emailPlaceholder: 'Ingresa tu correo electrónico',
+      phoneLabel: 'Número de teléfono',
+      phonePlaceholder: 'Ingresa tu número de teléfono',
+      messageLabel: 'Mensaje',
+      messagePlaceholder: 'Escribe tu mensaje aquí',
+      submitLabel: 'Enviar mensaje',
       sendingLabel: 'Enviando…',
       successMessage:
         '¡Gracias por contactarnos! Tu mensaje ha sido enviado. Te responderemos pronto.',
       errorMessage:
         'No pudimos enviar el mensaje. Intenta de nuevo o usa el correo o el teléfono directamente.',
-      missingConfigMessage:
-        'Configura PUBLIC_CONTACT_FORMSUBMIT_EMAIL para habilitar el envío (FormSubmit).',
-      selectTopicError: 'Selecciona un tipo de consulta antes de enviar.',
-      inquiryTypePlaceholder: 'Tipo de consulta',
-      fullNameLabel: 'Nombre completo',
-      emailLabel: 'Correo electrónico',
-      messageLabel: 'Mensaje',
-      inquiryTypes: [
-        { value: 'alianzas', label: 'Alianzas / partnerships' },
-        { value: 'programas', label: 'Programas y convocatorias' },
-        { value: 'medios', label: 'Medios y prensa' },
-        { value: 'voluntariado', label: 'Voluntariado' },
-        { value: 'otro', label: 'Otro' },
-      ],
+      imageSrc: '/contact-assets/form/contact-form.jpg',
+      imageAlt: 'Artesanos andinos trabajando lana de colores',
+      phone: '+51 943 223 123',
+      phoneHref: 'tel:+51943223123',
+      email: 'hola@andeanroots.org',
+      emailHref: 'mailto:hola@andeanroots.org',
     },
     faq: {
       label: 'FAQ',

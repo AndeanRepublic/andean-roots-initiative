@@ -1,31 +1,28 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
-import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const T_CONTENT = 0.14;
-const T_DESCRIPTION = 0.26;
 const T_CARDS = 0.46;
 
-/** Construye targets de título/descripcion para stagger por char/word. */
-function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root, '[data-focus-text-line], [data-focus-text-words]');
-  const title = root.querySelector<HTMLElement>('[data-focus-text-line]');
-  const words = Array.from(root.querySelectorAll<HTMLElement>('[data-focus-text-words]'));
-  return {
-    titleChars: title ? splitChars(title, 'about-focus-title-char') : [],
-    bodyWords: words.flatMap((line) => splitWords(line, 'about-focus-word')),
-  };
-}
+const SCROLL_NODES = [
+  '[data-anim="label"]',
+  '[data-anim="side-media-left"]',
+  '[data-anim="side-media-right"]',
+  '[data-anim="side-image-left"]',
+  '[data-anim="side-image-right"]',
+  '[data-anim="focus-card"]',
+  '[data-anim="focus-card-icon"]',
+].join(', ');
 
 function clearFocusSectionStyles(root: HTMLElement) {
-  root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
+  const scrollNodes = root.querySelectorAll(SCROLL_NODES);
+  scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
   });
-  gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root, '[data-focus-text-line], [data-focus-text-words]');
+  gsap.killTweensOf(gsap.utils.toArray(scrollNodes));
 }
 
 function setupDesktopFocusReveal(root: HTMLElement) {
@@ -36,11 +33,8 @@ function setupDesktopFocusReveal(root: HTMLElement) {
   const rightImage = root.querySelector<HTMLElement>('[data-anim="side-image-right"]');
   const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="focus-card"]'));
   const cardIcons = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="focus-card-icon"]'));
-  const { titleChars, bodyWords } = buildTextNodes(root);
 
   if (label) gsap.set(label, { opacity: 0, y: 20 });
-  if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 42 });
-  if (bodyWords.length) gsap.set(bodyWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
   if (leftMedia) {
     gsap.set(leftMedia, {
       opacity: 0,
@@ -66,66 +60,19 @@ function setupDesktopFocusReveal(root: HTMLElement) {
   if (cardIcons.length) gsap.set(cardIcons, { scale: 0.85, rotate: -8 });
 
   let contentIn = false;
-  let descriptionIn = false;
   let cardsIn = false;
   let mediaIn = false;
 
   const handleThresholds = (p: number, immediate = false) => {
     const d = immediate ? 0 : 0.56;
 
-    if (p >= T_CONTENT && !contentIn) {
-      if (label)
+    if (label) {
+      if (p >= T_CONTENT && !contentIn) {
         gsap.to(label, { opacity: 1, y: 0, duration: d, ease: 'power2.out', overwrite: true });
-      if (titleChars.length) {
-        gsap.to(titleChars, {
-          opacity: 1,
-          yPercent: 0,
-          duration: d,
-          stagger: immediate ? 0 : 0.014,
-          ease: 'power2.out',
-          overwrite: true,
-        });
-      }
-      contentIn = true;
-    } else if (p < T_CONTENT && contentIn) {
-      if (label)
+        contentIn = true;
+      } else if (p < T_CONTENT && contentIn) {
         gsap.to(label, { opacity: 0, y: 20, duration: d, ease: 'power2.in', overwrite: true });
-      if (titleChars.length) {
-        gsap.to(titleChars, {
-          opacity: 0,
-          yPercent: 42,
-          duration: d,
-          stagger: immediate ? 0 : -0.01,
-          ease: 'power2.in',
-          overwrite: true,
-        });
-      }
-      contentIn = false;
-    }
-
-    if (bodyWords.length) {
-      if (p >= T_DESCRIPTION && !descriptionIn) {
-        gsap.to(bodyWords, {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 0.44,
-          stagger: immediate ? 0 : 0.004,
-          ease: 'power2.out',
-          overwrite: true,
-        });
-        descriptionIn = true;
-      } else if (p < T_DESCRIPTION && descriptionIn) {
-        gsap.to(bodyWords, {
-          opacity: 0.15,
-          y: 12,
-          filter: 'blur(2px)',
-          duration: 0.2,
-          stagger: immediate ? 0 : -0.003,
-          ease: 'power2.in',
-          overwrite: true,
-        });
-        descriptionIn = false;
+        contentIn = false;
       }
     }
 
@@ -242,24 +189,14 @@ function setupDesktopFocusReveal(root: HTMLElement) {
 
 function setupMobileFocusReveal(root: HTMLElement) {
   const label = root.querySelector<HTMLElement>('[data-anim="label"]');
-  const title = root.querySelector<HTMLElement>('[data-focus-text-line]');
-  const introDescription = root.querySelector<HTMLElement>(
-    '[data-anim="description"][data-focus-text-words]',
-  );
   const leftMedia = root.querySelector<HTMLElement>('[data-anim="side-media-left"]');
   const rightMedia = root.querySelector<HTMLElement>('[data-anim="side-media-right"]');
   const leftImage = root.querySelector<HTMLElement>('[data-anim="side-image-left"]');
   const rightImage = root.querySelector<HTMLElement>('[data-anim="side-image-right"]');
   const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="focus-card"]'));
   const cardIcons = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="focus-card-icon"]'));
-  const { titleChars, bodyWords } = buildTextNodes(root);
-  const introWords = introDescription
-    ? Array.from(introDescription.querySelectorAll<HTMLElement>('.about-focus-word'))
-    : [];
 
   if (label) gsap.set(label, { opacity: 0, y: 20 });
-  if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 42 });
-  if (bodyWords.length) gsap.set(bodyWords, { opacity: 0.15, y: 12, filter: 'blur(2px)' });
   if (leftMedia) {
     gsap.set(leftMedia, {
       opacity: 0,
@@ -287,7 +224,7 @@ function setupMobileFocusReveal(root: HTMLElement) {
   const timelines: gsap.core.Timeline[] = [];
   const tweens: gsap.core.Tween[] = [];
 
-  if (label || titleChars.length || introWords.length) {
+  if (label) {
     const contentTl = gsap.timeline({
       scrollTrigger: {
         trigger: root,
@@ -296,46 +233,13 @@ function setupMobileFocusReveal(root: HTMLElement) {
       },
     });
 
-    if (label) {
-      contentTl.to(label, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        overwrite: true,
-      });
-    }
-
-    if (titleChars.length) {
-      contentTl.to(
-        titleChars,
-        {
-          opacity: 1,
-          yPercent: 0,
-          duration: 0.5,
-          stagger: 0.014,
-          ease: 'power2.out',
-          overwrite: true,
-        },
-        label ? '<' : 0,
-      );
-    }
-
-    if (introWords.length) {
-      contentTl.to(
-        introWords,
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 0.4,
-          stagger: 0.004,
-          ease: 'power2.out',
-          overwrite: true,
-        },
-        '-=0.2',
-      );
-    }
+    contentTl.to(label, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+      overwrite: true,
+    });
 
     timelines.push(contentTl);
   }
@@ -391,7 +295,6 @@ function setupMobileFocusReveal(root: HTMLElement) {
 
   const cardTweens = cards.flatMap((card, index) => {
     const cardIcon = cardIcons[index];
-    const cardWords = Array.from(card.querySelectorAll<HTMLElement>('.about-focus-word'));
     const group: gsap.core.Tween[] = [];
 
     group.push(
@@ -418,25 +321,6 @@ function setupMobileFocusReveal(root: HTMLElement) {
           rotate: 0,
           duration: 0.5,
           ease: 'back.out(1.4)',
-          overwrite: true,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
-          },
-        }),
-      );
-    }
-
-    if (cardWords.length) {
-      group.push(
-        gsap.to(cardWords, {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 0.35,
-          stagger: 0.003,
-          ease: 'power2.out',
           overwrite: true,
           scrollTrigger: {
             trigger: card,

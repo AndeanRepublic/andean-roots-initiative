@@ -1,8 +1,11 @@
 ---
+import Copy from '../../../../components/Copy/index.astro';
+import MailIcon from '../../../../icons/MailIcon.astro';
+import PhoneIcon from '../../../../icons/PhoneIcon.astro';
+import UpRightArrowIcon from '../../../../icons/UpRightArrowIcon.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
-import ContactFormSocialLinks from './ContactFormSocialLinks.astro';
 
 interface Props {
   lang?: Locale;
@@ -13,172 +16,145 @@ const t = useTranslations(lang);
 const cf = t.contactPage.form;
 ---
 
-<section
-  id={cf.sectionId}
-  class="px-2xl dk:py-6xl dk:scroll-mt-32 scroll-mt-28 py-12 text-white"
->
-  <div
-    class="tb:px-8 dk:px-12 dk:py-10 bg-main mx-auto w-full max-w-328 rounded-2xl border px-6 py-8"
-  >
-    <div
-      class="dk:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] dk:min-h-88 dk:gap-14 grid gap-10"
-    >
-      <div class="dk:justify-between flex flex-col gap-8" data-anim="form-aside">
-        <div class="flex flex-col gap-5">
-          <h2
-            class="font-bebas-neue tb:text-[2.8rem] dk:text-[4rem] text-[2.15rem] leading-[100%] tracking-[0.015em] text-white"
-          >
-            {cf.title}
-          </h2>
-          <p class="body-md-l max-w-130 text-white/75">
-            {cf.subtitle}
-          </p>
+<section id={cf.sectionId} class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="dk:flex-row dk:items-stretch dk:justify-center dk:gap-6 mx-auto flex w-full max-w-328 flex-col gap-6">
+    <div class="bg-light dk:max-w-132.5 dk:h-full flex w-full flex-col gap-8 rounded-20px p-6">
+      <Copy
+        variant="slideFromBottom"
+        type="words"
+        reverse
+        ease="power3.out"
+        duration={0.9}
+        delay={0}
+        stagger={0.2}
+        animateOnScroll={true}
+        start="top 80%"
+        class="w-full"
+      >
+        <h2 class="heading-md-sb text-black">{cf.title}</h2>
+      </Copy>
+
+      <form class="dk:flex-1 flex flex-col justify-between gap-8" data-contact-form novalidate>
+        <div aria-live="polite" class="body-sm-l text-gray empty:hidden" data-contact-form-status>
         </div>
-        <div class="flex flex-col gap-3">
-          <p class="body-sm-l tracking-widest text-white/70 uppercase">
-            {cf.socialPrompt}
-          </p>
-          <ContactFormSocialLinks lang={lang} />
-        </div>
-      </div>
 
-      <form class="flex flex-col" data-contact-form data-anim="form-panel" novalidate>
-        <div aria-live="polite" class="body-sm-l mb-4 text-white/85" data-contact-form-status></div>
-
-        <div class="flex flex-col gap-5">
-          <div class="flex flex-col gap-2">
-            <div class="relative" data-contact-topic-select>
-              <input type="hidden" name="topic" value="" data-contact-topic-input />
-              <button
-                id="contact-topic-trigger"
-                type="button"
-                class="body-md-l w-full border-b-2 border-white/60 pb-2 text-left text-white transition-colors outline-none hover:border-white"
-                data-contact-topic-trigger
-                aria-haspopup="listbox"
-                aria-expanded="false"
-              >
-                <span data-contact-topic-label>{cf.inquiryTypePlaceholder}</span>
-                <span
-                  class="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 text-white/65"
-                >
-                  <svg viewBox="0 0 24 24" class="size-4 fill-current" aria-hidden="true">
-                    <path
-                      d="M12 13.828L6.485 8.314a1 1 0 1 0-1.414 1.414l6 6a1 1 0 0 0 1.414 0l6-6a1 1 0 0 0-1.414-1.414L12 13.828Z"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
-              <div
-                class="absolute top-[calc(100%+0.6rem)] left-0 z-20 hidden w-full rounded-lg border border-white/15 bg-black p-1 shadow-xl"
-                data-contact-topic-menu
-                role="listbox"
-              >
-                {
-                  cf.inquiryTypes.map((option) => (
-                    <button
-                      type="button"
-                      class="body-md-l w-full rounded-md px-3 py-2 text-left text-white transition-colors hover:bg-white/10"
-                      data-contact-topic-option
-                      data-value={option.value}
-                    >
-                      {option.label}
-                    </button>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
+          <label class="flex flex-col gap-3">
+            <span class="body-md-sb text-black">{cf.fullNameLabel}</span>
             <input
-              id="contact-full-name"
               name="name"
               type="text"
               autocomplete="name"
               required
-              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={cf.fullNameLabel}
+              placeholder={cf.fullNamePlaceholder}
+              class="body-md-l text-black placeholder:text-gray rounded-sm bg-white p-2.5 outline-none"
             />
-          </div>
+          </label>
 
-          <div class="flex flex-col gap-2">
+          <label class="flex flex-col gap-3">
+            <span class="body-md-sb text-black">{cf.emailLabel}</span>
             <input
-              id="contact-email"
               name="email"
               type="email"
               autocomplete="email"
               required
-              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={cf.emailLabel}
+              placeholder={cf.emailPlaceholder}
+              class="body-md-l text-black placeholder:text-gray rounded-sm bg-white p-2.5 outline-none"
             />
-          </div>
+          </label>
 
-          <div class="flex flex-col gap-2">
+          <label class="flex flex-col gap-3">
+            <span class="body-md-sb text-black">{cf.phoneLabel}</span>
+            <input
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              placeholder={cf.phonePlaceholder}
+              class="body-md-l text-black placeholder:text-gray rounded-sm bg-white p-2.5 outline-none"
+            />
+          </label>
+
+          <label class="flex flex-col gap-3">
+            <span class="body-md-sb text-black">{cf.messageLabel}</span>
             <textarea
-              id="contact-message"
               name="message"
-              rows="5"
               required
-              class="body-md-l border-b-2 border-white/60 bg-transparent pb-2 text-white transition-colors outline-none placeholder:text-white hover:border-white"
-              placeholder={cf.messageLabel}></textarea>
-          </div>
+              placeholder={cf.messagePlaceholder}
+              class="body-md-l text-black placeholder:text-gray min-h-32.25 resize-none rounded-sm bg-white p-2.5 outline-none"
+            ></textarea>
+          </label>
         </div>
 
-        <div class="mt-7">
-          <button
-            type="submit"
-            class="body-md-l hover:bg-light text-main inline-flex cursor-pointer items-center justify-center rounded-[100px] border border-white bg-white px-5 py-1.5 tracking-widest uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-            data-contact-form-submit
-          >
-            {cf.submitLabel}
-          </button>
-        </div>
+        <input type="hidden" name="topic" value="general" />
 
         <div class="sr-only" aria-hidden="true">
           <label for="contact-company">Company</label>
           <input id="contact-company" name="_honey" type="text" tabindex="-1" autocomplete="off" />
         </div>
+
+        <button
+          type="submit"
+          data-contact-form-submit
+          class="bg-main gap-4 rounded-full py-2 pr-2 pl-6 text-white inline-flex w-full cursor-pointer items-center justify-end disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <span class="body-md-sb text-white" data-contact-form-submit-label>{cf.submitLabel}</span>
+          <span class="flex items-center justify-center rounded-full bg-white p-2">
+            <UpRightArrowIcon class="size-5 text-main" />
+          </span>
+        </button>
       </form>
     </div>
-  </div>
 
-  <!-- Pass i18n strings to the client-side script via data attributes -->
-  <div
-    id="contact-form-strings"
-    hidden
-    data-submit-label={cf.submitLabel}
-    data-sending-label={cf.sendingLabel}
-    data-success-message={cf.successMessage}
-    data-error-message={cf.errorMessage}
-    data-missing-config={cf.missingConfigMessage}
-    data-select-topic-error={cf.selectTopicError}
-    data-inquiry-placeholder={cf.inquiryTypePlaceholder}
-  >
+    <div class="dk:max-w-132.5 flex w-full flex-col gap-6">
+      <div class="dk:h-126 h-70 overflow-hidden rounded-20px">
+        <img
+          src={cf.imageSrc}
+          alt={cf.imageAlt}
+          class="size-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="bg-light flex flex-col gap-4 rounded-20px p-6">
+        <a href={cf.phoneHref} class="gap-4 inline-flex items-end">
+          <PhoneIcon class="size-9 text-black" />
+          <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
+            {cf.phone}
+          </span>
+        </a>
+        <a href={cf.emailHref} class="gap-4 inline-flex items-start">
+          <MailIcon class="size-9 text-black" />
+          <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
+            {cf.email}
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+<div
+  id="contact-form-strings"
+  hidden
+  data-submit-label={cf.submitLabel}
+  data-sending-label={cf.sendingLabel}
+  data-success-message={cf.successMessage}
+  data-error-message={cf.errorMessage}
+>
+</div>
 
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   const statusEl = document.querySelector<HTMLElement>('[data-contact-form-status]');
   const submitBtn = document.querySelector<HTMLButtonElement>('[data-contact-form-submit]');
-  const topicSelect = document.querySelector<HTMLElement>('[data-contact-topic-select]');
-  const topicTrigger = document.querySelector<HTMLButtonElement>('[data-contact-topic-trigger]');
-  const topicMenu = document.querySelector<HTMLElement>('[data-contact-topic-menu]');
-  const topicLabel = document.querySelector<HTMLElement>('[data-contact-topic-label]');
-  const topicInput = document.querySelector<HTMLInputElement>('[data-contact-topic-input]');
-  const topicOptions = Array.from(
-    document.querySelectorAll<HTMLButtonElement>('[data-contact-topic-option]'),
-  );
-
+  const submitLabelEl = document.querySelector<HTMLElement>('[data-contact-form-submit-label]');
   const stringsEl = document.getElementById('contact-form-strings');
+
   const strings = {
     submitLabel: stringsEl?.dataset.submitLabel ?? 'Send',
     sendingLabel: stringsEl?.dataset.sendingLabel ?? 'Sending…',
     successMessage: stringsEl?.dataset.successMessage ?? 'Message sent.',
     errorMessage: stringsEl?.dataset.errorMessage ?? 'Error sending message.',
-    missingConfigMessage: stringsEl?.dataset.missingConfig ?? 'Missing config.',
-    selectTopicError: stringsEl?.dataset.selectTopicError ?? 'Please select a topic.',
-    inquiryPlaceholder: stringsEl?.dataset.inquiryPlaceholder ?? 'Inquiry type',
   };
 
   const showToast = (message: string) => {
@@ -223,64 +199,14 @@ const cf = t.contactPage.form;
     }, 5000);
   };
 
-  const closeTopicMenu = () => {
-    if (!topicMenu || !topicTrigger) return;
-    topicMenu.classList.add('hidden');
-    topicTrigger.setAttribute('aria-expanded', 'false');
-  };
-
-  const openTopicMenu = () => {
-    if (!topicMenu || !topicTrigger) return;
-    topicMenu.classList.remove('hidden');
-    topicTrigger.setAttribute('aria-expanded', 'true');
-  };
-
-  if (form && statusEl && submitBtn) {
-    if (topicSelect && topicTrigger && topicMenu && topicInput && topicLabel) {
-      topicTrigger.addEventListener('click', () => {
-        if (topicMenu.classList.contains('hidden')) {
-          openTopicMenu();
-        } else {
-          closeTopicMenu();
-        }
-      });
-
-      topicOptions.forEach((option) => {
-        option.addEventListener('click', () => {
-          const value = option.dataset.value ?? '';
-          topicInput.value = value;
-          topicLabel.textContent = option.textContent ?? strings.inquiryPlaceholder;
-          closeTopicMenu();
-          statusEl.textContent = '';
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!topicSelect.contains(event.target as Node)) {
-          closeTopicMenu();
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeTopicMenu();
-      });
-    }
-
-    const defaultSubmitLabel = strings.submitLabel;
-    const sendingLabel = strings.sendingLabel;
-
+  if (form && statusEl && submitBtn && submitLabelEl) {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       if (!form.reportValidity()) return;
-      if (topicInput && !topicInput.value) {
-        statusEl.textContent = strings.selectTopicError;
-        topicTrigger?.focus();
-        return;
-      }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = sendingLabel;
+      submitLabelEl.textContent = strings.sendingLabel;
       statusEl.textContent = '';
 
       const formData = new FormData(form);
@@ -302,24 +228,12 @@ const cf = t.contactPage.form;
 
         showToast(strings.successMessage);
         form.reset();
-        if (topicLabel && topicInput) {
-          topicInput.value = '';
-          topicLabel.textContent = strings.inquiryPlaceholder;
-        }
       } catch {
         statusEl.textContent = strings.errorMessage;
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = defaultSubmitLabel;
+        submitLabelEl.textContent = strings.submitLabel;
       }
     });
   }
-</script>
-
-<script>
-  import { initContactFormSectionAnimation } from './animation';
-
-  const boot = () => initContactFormSectionAnimation();
-
-  document.addEventListener('astro:page-load', boot);
 </script>

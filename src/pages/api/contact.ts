@@ -3,14 +3,6 @@ import { Resend } from 'resend';
 
 export const prerender = false;
 
-const ALLOWED_TOPICS = [
-  'volunteer',
-  'donate',
-  'partnership',
-  'media',
-  'general',
-] as const;
-
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -38,8 +30,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const email = typeof body.email === 'string' ? body.email.trim() : '';
+  const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
   const message = typeof body.message === 'string' ? body.message.trim() : '';
-  const topic = typeof body.topic === 'string' ? body.topic.trim() : '';
+  const topic = typeof body.topic === 'string' && body.topic.trim() ? body.topic.trim() : 'general';
   const honey = typeof body._honey === 'string' ? body._honey : '';
 
   // Honeypot anti-spam
@@ -50,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  if (!name || !isValidEmail(email) || !message || !topic) {
+  if (!name || !isValidEmail(email) || !message) {
     return new Response(JSON.stringify({ error: 'Missing or invalid fields.' }), {
       status: 422,
       headers: { 'Content-Type': 'application/json' },
@@ -70,6 +63,7 @@ export const POST: APIRoute = async ({ request }) => {
       <table cellpadding="6">
         <tr><td><strong>Nombre</strong></td><td>${name}</td></tr>
         <tr><td><strong>Email</strong></td><td><a href="mailto:${email}">${email}</a></td></tr>
+        ${phone ? `<tr><td><strong>Teléfono</strong></td><td>${phone}</td></tr>` : ''}
         <tr><td><strong>Tema</strong></td><td>${topic}</td></tr>
       </table>
       <hr />

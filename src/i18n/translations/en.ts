@@ -293,7 +293,8 @@ const en: Translations = {
     },
     organization: {
       label: 'OUR ORGANIZATION',
-      title: 'Our purpose and vision',
+      titleTop: 'Our',
+      titleBottom: 'Purpose',
       coverImageSrc: '/about-assets/mision-vision/mission-vision.png',
       coverImageAlt: 'Andean representative in highland landscape',
       points: [
@@ -315,7 +316,8 @@ const en: Translations = {
     },
     values: {
       label: 'OUR VALUES',
-      title: 'What moves us',
+      titleTop: 'What',
+      titleBottom: 'moves us',
       description:
         'Our values guide every action, decision and collaboration we drive in Andean communities.',
       items: [
@@ -341,7 +343,9 @@ const en: Translations = {
     },
     focus: {
       label: 'FOCUS',
-      title: 'Strengthening local capacities',
+      titleTop: 'Strengthening',
+      titleMiddle: 'local',
+      titleBottom: 'capacities',
       description:
         'We believe that sustainable development in the Andes does not depend solely on external resources, but on enhancing the talent, identity and capabilities that already exist in communities, connecting them to real opportunities.',
       sideImages: [
@@ -356,27 +360,27 @@ const en: Translations = {
           title: 'Development from the local',
           description: 'We work from the knowledge, culture and capacities of each community.',
           icon: 'group' as const,
-          offsetClass: 'dk:self-start',
+          offsetClass: '',
         },
         {
           title: 'Innovation with purpose',
           description:
             'We integrate technology, education and innovation to generate relevant and sustainable solutions.',
           icon: 'bulb' as const,
-          offsetClass: 'dk:self-end',
+          offsetClass: 'dk:mt-19',
         },
         {
           title: 'Actor articulation',
           description: 'We connect communities with companies, institutions and strategic allies.',
           icon: 'handshake' as const,
-          offsetClass: 'dk:self-end',
+          offsetClass: 'dk:mt-19',
         },
         {
           title: 'Long-term sustainability',
           description:
             'We seek to generate capacities that endure over time and do not depend on external interventions.',
           icon: 'sustainability' as const,
-          offsetClass: 'dk:self-start',
+          offsetClass: '',
         },
       ],
     },
@@ -515,13 +519,12 @@ const en: Translations = {
       ],
     },
     impact: {
-      label: 'IMPACT',
-      headlineBefore: 'HELP US BUILD OPPORTUNITIES WHERE THEY ARE NEEDED MOST ',
-      headlineHighlight: 'NOW',
-      paragraphs: [
-        'Every alliance, investment and initiative drives a clear goal: strengthen Andean communities through education, innovation and access to sustainable and measurable opportunities.',
-        "If you seek to generate impact, explore strategic collaborations or support the development of new projects, this is the starting point. Let's talk.",
-      ],
+      line1: 'Help us build',
+      line2: 'Opportunities',
+      line3: 'where they are needed most',
+      line4: 'Now',
+      description:
+        'If you seek to generate impact, explore strategic collaborations or support the development of new projects, this is the starting point. Let’s talk.',
     },
     channels: {
       sectionId: 'canales',
@@ -551,28 +554,26 @@ const en: Translations = {
     },
     form: {
       sectionId: 'contacto-form',
-      title: "Contact us and let's build impact together.",
-      subtitle:
-        'Fill in the fields and we will respond with a clear proposal to move forward together.',
-      socialPrompt: 'Find us on',
-      submitLabel: 'Send',
+      title: 'Send Us a Message',
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'Enter your full name',
+      emailLabel: 'Email',
+      emailPlaceholder: 'Enter your email',
+      phoneLabel: 'Phone Number',
+      phonePlaceholder: 'Enter your Phone Number',
+      messageLabel: 'Message',
+      messagePlaceholder: 'Type your message here',
+      submitLabel: 'Send Message',
       sendingLabel: 'Sending…',
       successMessage:
         'Thank you for reaching out! Your message has been sent. We will get back to you soon.',
       errorMessage: 'We could not send the message. Try again or use email or phone directly.',
-      missingConfigMessage: 'Set PUBLIC_CONTACT_FORMSUBMIT_EMAIL to enable sending (FormSubmit).',
-      selectTopicError: 'Please select an inquiry type before submitting.',
-      inquiryTypePlaceholder: 'Inquiry type',
-      fullNameLabel: 'Full name',
-      emailLabel: 'Email address',
-      messageLabel: 'Message',
-      inquiryTypes: [
-        { value: 'alliances', label: 'Alliances / partnerships' },
-        { value: 'programs', label: 'Programs and calls' },
-        { value: 'media', label: 'Media and press' },
-        { value: 'volunteering', label: 'Volunteering' },
-        { value: 'other', label: 'Other' },
-      ],
+      imageSrc: '/contact-assets/form/contact-form.jpg',
+      imageAlt: 'Andean artisans working with colorful yarn',
+      phone: '+51 943 223 123',
+      phoneHref: 'tel:+51943223123',
+      email: 'hola@andeanroots.org',
+      emailHref: 'mailto:hola@andeanroots.org',
     },
     faq: {
       label: 'FAQ',

@@ -1,4 +1,5 @@
 ---
+import Copy from '../../../../components/Copy/index.astro';
 import GroupIcon from '../../../../icons/Group.astro';
 import BulbIcon from '../../../../icons/Bulb.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
@@ -8,7 +9,7 @@ import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -17,89 +18,125 @@ const f = t.aboutPage.focus;
 ---
 
 <section id="about-focus" class="px-2xl dk:py-6xl bg-white py-12">
-  <div class="dk:gap-8 mx-auto flex w-full max-w-328 flex-col gap-8">
-    <div
-      class="dk:grid-cols-[19.0625rem_1fr_19rem] dk:gap-px grid items-end gap-6"
-      data-anim="hero-grid"
-    >
-      <div class="overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
-        <img
-          src={f.sideImages[0].src}
-          alt={f.sideImages[0].alt}
-          class="h-50 w-full object-cover"
-          loading="lazy"
-          data-anim="side-image-left"
-        />
-      </div>
+	<div class="dk:gap-0 mx-auto flex w-full max-w-328 flex-col gap-8">
+		<div
+			class="dk:grid-cols-[19.0625rem_1fr_19rem] dk:gap-px dk:items-start grid items-end gap-6"
+			data-anim="hero-grid"
+		>
+			<div class="dk:rotate-2 overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
+				<img
+					src={f.sideImages[0].src}
+					alt={f.sideImages[0].alt}
+					class="h-70 w-full object-cover"
+					loading="lazy"
+					data-anim="side-image-left"
+				/>
+			</div>
 
-      <div class="flex flex-col items-center gap-8 px-4" data-anim="content">
-        <div class="gap-sm flex items-center" data-anim="label">
-          <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-          <p class="body-md-sb text-main">{f.label}</p>
-        </div>
-        <h2
-          class="auxiliar-h-lg-skrawk-r text-main text-center"
-          data-anim="title"
-          data-focus-text-line
-        >
-          {f.title}
-        </h2>
-        <p
-          class="body-md-l text-gray max-w-140 text-center"
-          data-anim="description"
-          data-focus-text-words
-        >
-          {f.description}
-        </p>
-      </div>
+			<div class="gap-2xl flex flex-col items-center px-4" data-anim="content">
+				<div class="gap-lg flex flex-col items-center">
+					<div class="gap-sm flex items-center" data-anim="label">
+						<span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
+						<p class="body-md-sb text-main">{f.label}</p>
+					</div>
+					<Copy
+						variant="slideFromBottom"
+						type="words"
+						reverse
+						ease="power3.out"
+						duration={0.9}
+						delay={0}
+						stagger={0.2}
+						animateOnScroll={true}
+						start="top 80%"
+						class="w-full"
+					>
+						<h2
+							class="font-fredericka text-main tb:text-[3rem] dk:text-[4rem] flex w-full flex-col items-center text-center text-[2rem] leading-[1.1] font-normal uppercase"
+						>
+							<span>{f.titleTop}</span>
+							<span>{f.titleMiddle}</span>
+							<span>{f.titleBottom}</span>
+						</h2>
+					</Copy>
+				</div>
+				<Copy
+					variant="slideFromBottom"
+					type="lines"
+					reverse
+					ease="power3.out"
+					duration={0.9}
+					delay={1}
+					stagger={0.1}
+					animateOnScroll={true}
+					start="top 80%"
+					class="w-full max-w-140"
+				>
+					<p class="body-md-l text-gray text-center">{f.description}</p>
+				</Copy>
+			</div>
 
-      <div class="overflow-hidden rounded-lg" data-anim="side-media-right">
-        <img
-          src={f.sideImages[1].src}
-          alt={f.sideImages[1].alt}
-          class="h-50 w-full object-cover"
-          loading="lazy"
-          data-anim="side-image-right"
-        />
-      </div>
-    </div>
+			<div class="dk:-rotate-2 overflow-hidden rounded-lg" data-anim="side-media-right">
+				<img
+					src={f.sideImages[1].src}
+					alt={f.sideImages[1].alt}
+					class="h-70 w-full object-cover"
+					loading="lazy"
+					data-anim="side-image-right"
+				/>
+			</div>
+		</div>
 
-    <div class="dk:grid-cols-4 tb:grid-cols-2 dk:gap-8 grid gap-6" data-anim="cards">
-      {
-        f.cards.map((card) => (
-          <article
-            class={`bg-light dk:min-h-81 tb:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
-            data-anim="focus-card"
-          >
-            <span
-              class="bg-main flex size-12 items-center justify-center rounded-full"
-              data-anim="focus-card-icon"
-            >
-              {card.icon === 'group' && <GroupIcon class="h-5 w-8" />}
-              {card.icon === 'bulb' && <BulbIcon class="h-8 w-6.5 text-white" />}
-              {card.icon === 'handshake' && (
-                <HandshakeIcon class="h-5 w-8 brightness-0 invert saturate-0" />
-              )}
-              {card.icon === 'sustainability' && <SustainabilityIcon class="h-8 w-6.5" />}
-            </span>
+		<div
+			class="dk:grid-cols-4 tb:grid-cols-2 dk:-mt-8 dk:items-start dk:gap-8 grid gap-6"
+			data-anim="cards"
+		>
+			{
+				f.cards.map((card) => (
+					<article
+						class={`bg-light dk:min-h-81 tb:min-h-50 flex min-h-60 flex-col justify-between gap-6 rounded-lg p-8 ${card.offsetClass ?? ''}`}
+						data-anim="focus-card"
+					>
+						<span
+							class="bg-main flex size-12 items-center justify-center rounded-full"
+							data-anim="focus-card-icon"
+						>
+							{card.icon === 'group' && <GroupIcon class="h-5 w-8" />}
+							{card.icon === 'bulb' && <BulbIcon class="h-8 w-6.5 text-white" />}
+							{card.icon === 'handshake' && (
+								<HandshakeIcon class="h-5 w-8 brightness-0 invert saturate-0" />
+							)}
+							{card.icon === 'sustainability' && <SustainabilityIcon class="h-8 w-6.5" />}
+						</span>
 
-            <div class="flex flex-col gap-4" data-anim="focus-card-body">
-              <h3 class="heading-sm-sb text-black">{card.title}</h3>
-              <p class="body-md-l text-gray" data-focus-text-words>
-                {card.description}
-              </p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+						<div class="flex flex-col gap-4">
+							<h3 class="heading-sm-sb text-black">{card.title}</h3>
+							<Copy
+								variant="slideFromBottom"
+								type="lines"
+								reverse
+								ease="power3.out"
+								duration={0.9}
+								delay={1}
+								stagger={0.1}
+								animateOnScroll={true}
+								start="top 80%"
+								class="w-full"
+							>
+								<p class="body-md-l text-gray">{card.description}</p>
+							</Copy>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initFocusSectionAnimation } from './animation';
+	import { initFocusSectionAnimation } from './animation';
 
-  const init = () => initFocusSectionAnimation();
+	const init = () => initFocusSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

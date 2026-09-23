@@ -1,29 +1,23 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScrollSectionController } from '../../../../utils/create-scroll-section-controller';
-import { resetSplitText, splitChars, splitWords } from '../../../../utils/split-text';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** Construye targets de texto para header y puntos de organización. */
-function buildTextNodes(root: HTMLElement) {
-  resetSplitText(root, '[data-organization-text-line], [data-organization-text-words]');
-  const title = root.querySelector<HTMLElement>('[data-organization-text-line]');
-  const descriptions = Array.from(
-    root.querySelectorAll<HTMLElement>('[data-organization-text-words]'),
-  );
-  return {
-    titleChars: title ? splitChars(title, 'about-organization-title-char') : [],
-    descriptionWords: descriptions.flatMap((line) => splitWords(line, 'about-organization-word')),
-  };
-}
+const SCROLL_NODES = [
+  '[data-anim="label"]',
+  '[data-anim="cover-wrap"]',
+  '[data-anim="cover-image"]',
+  '[data-anim="point-card"]',
+  '[data-anim="point-icon"]',
+].join(', ');
 
 function clearOrganizationSectionStyles(root: HTMLElement) {
-  root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
+  const scrollNodes = root.querySelectorAll(SCROLL_NODES);
+  scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
   });
-  gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
-  resetSplitText(root, '[data-organization-text-line], [data-organization-text-words]');
+  gsap.killTweensOf(gsap.utils.toArray(scrollNodes));
 }
 
 export const initOrganizationSectionAnimation = createScrollSectionController({
@@ -35,10 +29,8 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
       const coverImage = root.querySelector<HTMLElement>('[data-anim="cover-image"]');
       const pointCards = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="point-card"]'));
       const pointIcons = Array.from(root.querySelectorAll<HTMLElement>('[data-anim="point-icon"]'));
-      const { titleChars, descriptionWords } = buildTextNodes(root);
 
       if (label) gsap.set(label, { opacity: 0, x: -22 });
-      if (titleChars.length) gsap.set(titleChars, { opacity: 0, yPercent: 40 });
       if (coverWrap) {
         gsap.set(coverWrap, {
           opacity: 0,
@@ -50,13 +42,12 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
       }
       if (pointCards.length) gsap.set(pointCards, { opacity: 0, y: 42, rotateZ: 1.5 });
       if (pointIcons.length) gsap.set(pointIcons, { rotate: -10, scale: 0.86 });
-      if (descriptionWords.length) gsap.set(descriptionWords, { opacity: 0.2, y: 10 });
 
       const tweens: gsap.core.Tween[] = [];
       const timelines: gsap.core.Timeline[] = [];
       const triggers: ScrollTrigger[] = [];
 
-      if (label || titleChars.length) {
+      if (label) {
         const headerTl = gsap.timeline({
           scrollTrigger: {
             trigger: root,
@@ -65,30 +56,13 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
           },
         });
 
-        if (label) {
-          headerTl.to(label, {
-            opacity: 1,
-            x: 0,
-            duration: 0.56,
-            ease: 'power2.out',
-            overwrite: true,
-          });
-        }
-
-        if (titleChars.length) {
-          headerTl.to(
-            titleChars,
-            {
-              opacity: 1,
-              yPercent: 0,
-              duration: 0.56,
-              stagger: 0.014,
-              ease: 'power2.out',
-              overwrite: true,
-            },
-            label ? '<' : 0,
-          );
-        }
+        headerTl.to(label, {
+          opacity: 1,
+          x: 0,
+          duration: 0.56,
+          ease: 'power2.out',
+          overwrite: true,
+        });
 
         timelines.push(headerTl);
       }
@@ -138,9 +112,6 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
 
       const pointTweens = pointCards.flatMap((card, index) => {
         const cardIcon = pointIcons[index];
-        const cardWords = Array.from(
-          card.querySelectorAll<HTMLElement>('.about-organization-word'),
-        );
         const cardTweenGroup: gsap.core.Tween[] = [];
 
         cardTweenGroup.push(
@@ -171,25 +142,6 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
               scrollTrigger: {
                 trigger: card,
                 start: 'top 70%',
-                toggleActions: 'play none none reverse',
-              },
-            }),
-          );
-        }
-
-        if (cardWords.length) {
-          cardTweenGroup.push(
-            gsap.to(cardWords, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.4,
-              stagger: 0.003,
-              ease: 'power2.out',
-              overwrite: true,
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 78%',
                 toggleActions: 'play none none reverse',
               },
             }),

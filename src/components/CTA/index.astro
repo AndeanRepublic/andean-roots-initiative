@@ -12,81 +12,53 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 const c = t.cta;
+
+const ctaButtonClass =
+  '**:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5';
 ---
 
-<section id="impacto" class="px-2xl dk:py-6xl bg-white py-12">
+<section id="impacto" class="px-2xl py-6xl dk:px-6xl bg-white">
   <div class="mx-auto w-full max-w-328">
     <div
-      class="bg-main tb:min-h-112 tb:px-10 tb:py-16 dk:min-h-125 dk:px-8xl dk:py-6xl relative flex min-h-88 flex-col items-center justify-center overflow-hidden rounded-lg px-6 py-12"
+      class="gap-7xl bg-main p-8xl relative flex flex-col items-center overflow-hidden rounded-lg text-center"
     >
       <img
         src="/home-assets/Numbers/vector.png"
         alt=""
-        class="pointer-events-none absolute inset-0 size-full object-cover opacity-25"
+        class="pointer-events-none absolute inset-0 size-full object-cover opacity-25 dk:-top-59.75 dk:h-196.5"
         loading="lazy"
         aria-hidden="true"
       />
 
-      <div
-        class="tb:gap-10 dk:gap-20 relative z-10 flex w-full max-w-150 flex-col items-center gap-8 text-center"
-      >
-        <h2
-          class="font-skrawk-serif tb:text-[3rem] dk:text-[3.5rem] dk:leading-[0.8] text-[2rem] leading-[0.8] text-white"
-        >
-          {c.title}
-        </h2>
+      <div class="gap-xl relative z-10 flex w-full flex-col items-center">
+        <h2 class="section-heading w-full text-white uppercase">{c.title}</h2>
         <p class="body-md-l text-light max-w-150">
           {c.description}
         </p>
-        <div
-          class="tb:gap-6 dk:flex hidden w-full flex-row items-center justify-center gap-4"
-        >
-          <span data-donation-trigger>
-            <ButtonLink
-              class="inline-flex"
-              href="#"
-              text={c.donateText}
-              device="desktop"
-              kind="primary-inverse"
-              bordered
-            />
-          </span>
+      </div>
+
+      <div class="gap-xl relative z-10 flex flex-wrap items-center justify-center">
+        <span data-donation-trigger>
           <ButtonLink
-            class="inline-flex"
-            href={getLocalizedPath(lang, c.ctaSlug)}
-            text={c.ctaText}
+            href="#"
+            text={c.donateText}
             device="desktop"
             kind="primary"
             bordered
+            class={ctaButtonClass}
           />
-        </div>
-        <div
-          class="tb:gap-6 dk:hidden flex w-full flex-row items-center justify-center gap-4"
-        >
-          <span data-donation-trigger>
-            <ButtonLink
-              class="inline-flex"
-              href="#"
-              text={c.donateText}
-              device="mobile"
-              kind="primary-inverse"
-              bordered
-            />
-          </span>
-          <ButtonLink
-            class="inline-flex"
-            href={getLocalizedPath(lang, c.ctaSlug)}
-            text={c.ctaText}
-            device="mobile"
-            kind="primary"
-            bordered
-          />
-        </div>
+        </span>
+        <ButtonLink
+          href={getLocalizedPath(lang, c.ctaSlug)}
+          text={c.ctaText}
+          device="desktop"
+          kind="primary-inverse"
+          class={ctaButtonClass}
+        />
       </div>
     </div>
   </div>
 
-  <!-- Island: invisible hasta que se abre, escucha el CustomEvent del boton -->
   <DonationModal client:load />
 
   <script>

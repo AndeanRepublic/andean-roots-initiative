@@ -258,7 +258,8 @@ const es = {
       ],
     },
     history: {
-      title: 'Nuestra historia',
+      titleTop: 'Nuestra',
+      titleBottom: 'Historia',
       cards: [
         {
           imageSrc: '/about-assets/history/history-1.png',

@@ -259,7 +259,8 @@ const en: Translations = {
       ],
     },
     history: {
-      title: 'Our history',
+      titleTop: 'Our',
+      titleBottom: 'History',
       cards: [
         {
           imageSrc: '/about-assets/history/history-1.png',

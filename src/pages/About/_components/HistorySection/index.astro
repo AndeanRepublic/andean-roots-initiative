@@ -1,10 +1,11 @@
 ---
+import Copy from '../../../../components/Copy/index.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -12,48 +13,69 @@ const t = useTranslations(lang);
 const h = t.aboutPage.history;
 ---
 
-<section id="about-history" class="px-2xl dk:py-6xl bg-white py-12">
-  <div class="dk:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
-    <h2
-      class="auxiliar-h-lg-skrawk-r text-main text-center"
-      data-anim="title"
-      data-history-text-line
-    >
-      {h.title}
-    </h2>
+<section id="about-history" class="px-2xl py-6xl dk:px-6xl bg-white">
+	<div class="gap-6xl mx-auto flex w-full max-w-328 flex-col items-center">
+		<Copy
+			variant="slideFromBottom"
+			type="words"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={0}
+			stagger={0.2}
+			animateOnScroll={true}
+			start="top 80%"
+			class="w-full"
+		>
+			<h2 class="section-heading text-main flex w-full flex-col items-center text-center uppercase">
+				<span>{h.titleTop}</span>
+				<span>{h.titleBottom}</span>
+			</h2>
+		</Copy>
 
-    <div class="dk:grid-cols-3 dk:gap-8 grid gap-8" data-anim="cards">
-      {
-        h.cards.map((card) => (
-          <article class={`flex flex-col gap-6 ${card.offsetClass ?? ''}`} data-anim="card">
-            <div class="overflow-hidden rounded-lg" data-anim="card-media">
-              <img
-                src={card.imageSrc}
-                alt={card.imageAlt}
-                class="dk:h-auto dk:min-h-76.5 h-76.5 w-full object-cover"
-                loading="lazy"
-                data-anim="card-image"
-              />
-            </div>
+		<div class="gap-2xl dk:grid-cols-3 grid w-full" data-anim="cards">
+			{
+				h.cards.map((card, index) => (
+					<article class={`gap-xl flex flex-col ${card.offsetClass ?? ''}`} data-anim="card">
+						<div class="overflow-hidden rounded-lg" data-anim="card-media">
+							<img
+								src={card.imageSrc}
+								alt={card.imageAlt}
+								class="dk:h-auto dk:min-h-76.5 h-76.5 w-full object-cover"
+								loading="lazy"
+								data-anim="card-image"
+							/>
+						</div>
 
-            <div class="text-gray flex flex-col gap-3" data-anim="card-body">
-              {card.paragraphs.map((paragraph) => (
-                <p class="body-md-l" data-history-text-words>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+						<Copy
+							variant="slideFromBottom"
+							type="lines"
+							reverse
+							ease="power3.out"
+							duration={0.9}
+							delay={1 + index * 1}
+							stagger={0.1}
+							animateOnScroll={true}
+							start="top 80%"
+							class="w-full"
+						>
+							<div class="gap-md text-gray flex flex-col">
+								{card.paragraphs.map((paragraph) => (
+									<p class="body-md-l">{paragraph}</p>
+								))}
+							</div>
+						</Copy>
+					</article>
+				))
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initHistorySectionAnimation } from './animation';
+	import { initHistorySectionAnimation } from './animation';
 
-  const init = () => initHistorySectionAnimation();
+	const init = () => initHistorySectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

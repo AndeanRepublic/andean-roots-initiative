@@ -1,5 +1,4 @@
 ---
-import { cn } from '../../../../cn';
 import ComputerIcon from '../../../../icons/ComputerIcon.astro';
 import GearIcon from '../../../../icons/GearIcon.astro';
 import ChessHorseIcon from '../../../../icons/ChessHorseIcon.astro';
@@ -8,45 +7,139 @@ import CartIcon from '../../../../icons/CartIcon.astro';
 type IconName = 'computer' | 'gear' | 'chess' | 'cart';
 
 interface Props {
-  imageSrc: string;
-  imageAlt: string;
-  title: string;
-  description: string;
-  icon: IconName;
+	imageSrc: string;
+	imageAlt: string;
+	title: string;
+	description: string;
+	icon: IconName;
 }
 
 const { imageSrc, imageAlt, title, description, icon } = Astro.props as Props;
+
+const iconClass: Record<IconName, string> = {
+	computer: 'w-12 h-auto',
+	gear: 'size-12',
+	chess: 'h-12 w-auto',
+	cart: 'h-12 w-auto',
+};
 ---
 
-<article data-anim="program-card" class="tb:grid-cols-[1fr_1fr] grid items-stretch gap-[10px]">
-  <div class="overflow-hidden rounded-lg">
-    <img
-      src={imageSrc}
-      alt={imageAlt}
-      class="tb:h-[280px] h-[230px] w-full object-cover"
-      loading="lazy"
-    />
-  </div>
+<article
+	data-anim="program-card"
+	class="action-card tb:grid-cols-[minmax(0,19.25rem)_minmax(0,1fr)] grid items-stretch gap-3.5"
+>
+	<div class="h-57.5 overflow-hidden rounded-lg tb:h-70">
+		<img
+			src={imageSrc}
+			alt={imageAlt}
+			class="action-card__image size-full object-cover"
+			loading="lazy"
+		/>
+	</div>
 
-  <div
-    class={cn(
-      'flex flex-col justify-between rounded-lg bg-light',
-      'tb:h-[280px] tb:min-h-0 ',
-      'items-center tb:items-start',
-      'gap-5 tb:gap-0',
-      'tb:p-[16px] dk:p-[24px] p-[24px]',
-    )}
-  >
-    <span class="bg-main flex size-12 items-center justify-center rounded-full">
-      {icon === 'computer' && <ComputerIcon class="h-6 w-8 text-white" />}
-      {icon === 'gear' && <GearIcon class="size-7 text-white" />}
-      {icon === 'chess' && <ChessHorseIcon class="h-7 w-5 text-white" />}
-      {icon === 'cart' && <CartIcon class="h-6 w-6 text-white" />}
-    </span>
+	<div class="h-70 rounded-lg bg-light p-xl">
+		<div class="action-card__stage">
+			<span class="action-card__icon text-black">
+				{icon === 'computer' && <ComputerIcon class={iconClass.computer} />}
+				{icon === 'gear' && <GearIcon class={iconClass.gear} />}
+				{icon === 'chess' && <ChessHorseIcon class={iconClass.chess} />}
+				{icon === 'cart' && <CartIcon class={iconClass.cart} />}
+			</span>
 
-    <div class={cn('flex flex-col gap-md', 'text-center tb:text-start')}>
-      <h3 class="font-manrope text-[24px] leading-[1.4] font-semibold text-black">{title}</h3>
-      <p class="body-md-l text-gray">{description}</p>
-    </div>
-  </div>
+			<div class="action-card__copy">
+				<h3 class="font-manrope text-xl leading-[1.4] font-semibold text-black">{title}</h3>
+				<div class="action-card__description">
+					<p class="body-md-l min-h-0 overflow-hidden text-gray">{description}</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </article>
+
+<style>
+	.action-card__image {
+		transform: scale(1.2);
+		transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
+	}
+
+	.action-card__stage {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.action-card__icon {
+		display: flex;
+		width: 4rem;
+		height: 4rem;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.action-card__copy {
+		display: grid;
+		width: 100%;
+		gap: 0.75rem;
+	}
+
+	@media (min-width: 744px) and (hover: hover) {
+		.action-card:hover .action-card__image {
+			transform: scale(1);
+		}
+
+		.action-card__stage {
+			position: relative;
+			display: block;
+		}
+
+		.action-card__icon {
+			position: absolute;
+			top: 0;
+			left: calc(100% - 4rem);
+			transition: left 600ms cubic-bezier(0.65, 0, 0.35, 1);
+		}
+
+		.action-card__copy {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			gap: 0;
+			transition: gap 600ms cubic-bezier(0.65, 0, 0.35, 1);
+		}
+
+		.action-card__description {
+			display: grid;
+			grid-template-rows: 0fr;
+			overflow: hidden;
+			opacity: 0;
+			transition:
+				grid-template-rows 600ms cubic-bezier(0.65, 0, 0.35, 1),
+				opacity 300ms ease;
+		}
+
+		.action-card:hover .action-card__icon {
+			left: 0;
+		}
+
+		.action-card:hover .action-card__copy {
+			gap: 0.75rem;
+		}
+
+		.action-card:hover .action-card__description {
+			grid-template-rows: 1fr;
+			opacity: 1;
+			transition:
+				grid-template-rows 600ms cubic-bezier(0.65, 0, 0.35, 1),
+				opacity 300ms ease 150ms;
+		}
+	}
+
+	@media (max-width: 743px) {
+		.action-card__stage {
+			gap: 1.5rem;
+		}
+	}
+</style>

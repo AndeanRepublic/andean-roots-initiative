@@ -101,14 +101,15 @@ const es = {
   action: {
     label: 'NUESTRA ACCIÓN',
     headingTop: 'Transformando el talento en',
-    headingBottom: 'Oportunidad sostenible',
+    headingOpportunity: 'Oportunidad',
+    headingSustainable: 'Sostenible',
     subheading:
       'Impulsamos programas que cierran la brecha entre el potencial rural y los mercados globales, integrando educación tecnológica con desarrollo productivo de alto nivel.',
     programs: [
       {
         imageSrc: '/home-assets/Actions/education-img.png',
         imageAlt: 'Formación digital en comunidad andina',
-        title: 'Educación del futuro',
+        title: 'Educación del Futuro',
         description:
           'Formamos a jóvenes en habilidades digitales y pensamiento crítico, preparándolos para liderar la economía digital desde sus comunidades.',
         icon: 'computer' as const,
@@ -116,7 +117,7 @@ const es = {
       {
         imageSrc: '/home-assets/Actions/development-img.png',
         imageAlt: 'Participante del programa de desarrollo productivo',
-        title: 'Desarrollo productivo',
+        title: 'Desarrollo Productivo',
         description:
           'Elevamos la competitividad local mediante innovación en diseño de producto, estándares de calidad y branding con identidad cultural.',
         icon: 'gear' as const,
@@ -124,7 +125,7 @@ const es = {
       {
         imageSrc: '/home-assets/Actions/estrategic-img.png',
         imageAlt: 'Alianza estratégica para desarrollo territorial',
-        title: 'Articulación estratégica',
+        title: 'Articulación Estratégica',
         description:
           'Actuamos como motor de enlace entre gobiernos y empresas privadas para financiar y escalar el desarrollo territorial.',
         icon: 'chess' as const,
@@ -132,7 +133,7 @@ const es = {
       {
         imageSrc: '/home-assets/Actions/market-img.png',
         imageAlt: 'Acceso a mercados digitales para productos andinos',
-        title: 'Acceso a mercados',
+        title: 'Acceso a Mercados',
         description:
           'Conectamos el talento andino con plataformas de comercio electrónico y canales de exportación para asegurar ingresos justos y sostenibles.',
         icon: 'cart' as const,

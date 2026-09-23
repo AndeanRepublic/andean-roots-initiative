@@ -102,14 +102,15 @@ const en: Translations = {
   action: {
     label: 'OUR ACTION',
     headingTop: 'Transforming talent into',
-    headingBottom: 'Sustainable opportunity',
+    headingOpportunity: 'Opportunity',
+    headingSustainable: 'Sustainable',
     subheading:
       'We drive programs that close the gap between rural potential and global markets, integrating tech education with high-level productive development.',
     programs: [
       {
         imageSrc: '/home-assets/Actions/education-img.png',
         imageAlt: 'Digital training in an Andean community',
-        title: 'Future education',
+        title: 'Future Education',
         description:
           'We train young people in digital skills and critical thinking, preparing them to lead the digital economy from their communities.',
         icon: 'computer' as const,
@@ -117,7 +118,7 @@ const en: Translations = {
       {
         imageSrc: '/home-assets/Actions/development-img.png',
         imageAlt: 'Participant in productive development program',
-        title: 'Productive development',
+        title: 'Productive Development',
         description:
           'We elevate local competitiveness through innovation in product design, quality standards and cultural branding.',
         icon: 'gear' as const,
@@ -125,7 +126,7 @@ const en: Translations = {
       {
         imageSrc: '/home-assets/Actions/estrategic-img.png',
         imageAlt: 'Strategic alliance for territorial development',
-        title: 'Strategic articulation',
+        title: 'Strategic Articulation',
         description:
           'We act as a link between governments and private companies to fund and scale territorial development.',
         icon: 'chess' as const,
@@ -133,7 +134,7 @@ const en: Translations = {
       {
         imageSrc: '/home-assets/Actions/market-img.png',
         imageAlt: 'Market access for Andean products',
-        title: 'Market access',
+        title: 'Market Access',
         description:
           'We connect Andean talent with e-commerce platforms and export channels to ensure fair and sustainable income.',
         icon: 'cart' as const,

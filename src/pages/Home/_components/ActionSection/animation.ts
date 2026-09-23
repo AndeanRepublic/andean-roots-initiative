@@ -25,10 +25,13 @@ function buildTextNodes(root: HTMLElement) {
 }
 
 function clearActionSectionStyles(root: HTMLElement) {
-  root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
+  const scrollNodes = root.querySelectorAll(
+    '[data-anim="label"], [data-anim="title"], [data-anim="title"] *, [data-anim="subheading"], [data-anim="subheading"] *, [data-anim="programs"], [data-anim="program-card"]',
+  );
+  scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
   });
-  gsap.killTweensOf(gsap.utils.toArray(root.querySelectorAll('[data-anim], [data-anim] *')));
+  gsap.killTweensOf(gsap.utils.toArray(scrollNodes));
   resetSplitText(root, '[data-action-text-line], [data-action-text-words]');
 }
 

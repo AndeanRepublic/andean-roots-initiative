@@ -153,7 +153,8 @@ const es = {
 
   strategicPrograms: {
     label: 'PROGRAMAS ESTRATÉGICOS',
-    heading: 'Innovación social en acción',
+    headingTop: 'Innovación social',
+    headingBottom: 'en acción',
     ctaText: 'VER TODOS LOS PROGRAMAS',
     ctaSlug: 'programs',
     location: 'Cusco, Perú',

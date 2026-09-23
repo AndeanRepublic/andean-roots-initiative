@@ -17,72 +17,90 @@ interface Props {
   imageAlt: string;
   description: string;
   metrics: Metric[];
+  imagePosition?: 'left' | 'right';
 }
 
-const { title, location, readMoreText, readMoreHref, imageSrc, imageAlt, description, metrics } =
-  Astro.props as Props;
+const {
+  title,
+  location,
+  readMoreText,
+  readMoreHref,
+  imageSrc,
+  imageAlt,
+  description,
+  metrics,
+  imagePosition = 'left',
+} = Astro.props as Props;
 ---
 
 <article
-  class={cn(
-    'bg-light tb:bg-transparent',
-    'p-4 tb:p-0 py-4 tb:py-10',
-    'rounded-[0.875rem] tb:rounded-none',
-    'shadow-lg tb:shadow-none',
-    'grid gap-6 tb:border-b border-gray/50 dk:grid-cols-[11rem_25rem_1fr] dk:items-center dk:gap-10 ',
-  )}
+  class={cn('gap-4xl grid rounded-xl bg-light p-3xl', 'dk:grid-cols-2 dk:items-stretch')}
   data-anim="program-card"
 >
-  <div class="flex h-full flex-col justify-between gap-4" data-anim="program-meta">
-    <div class="flex flex-col gap-4" data-anim="program-meta-top">
-      <div class="flex items-center gap-4" data-anim="program-location">
-        <UbicationIcon class="size-6 text-black" />
-        <p class="body-sm-l text-black">{location}</p>
-      </div>
-      <h3
-        class={cn(
-          'text-[2rem] tb:text-[1.25rem] dk:text-[1.5rem]',
-          'font-nunito-sans font-semibold leading-[140%] tracking-normal text-black',
-        )}
-      >
-        {title}
-      </h3>
-    </div>
-
-    <a
-      href={readMoreHref}
-      class="body-md-sb text-main inline-flex items-center gap-2 hover:opacity-90"
-      data-anim="program-link"
-    >
-      {readMoreText}
-      <UpRightArrowIcon class="text-main size-4" />
-    </a>
-  </div>
-
-  <div class="overflow-hidden rounded-lg" data-anim="program-image-wrap">
+  <div
+    class={cn(
+      'h-70 overflow-hidden rounded-lg dk:h-auto dk:min-h-[24.625rem]',
+      imagePosition === 'right' && 'dk:order-2',
+    )}
+    data-anim="program-image-wrap"
+  >
     <img
       src={imageSrc}
       alt={imageAlt}
-      class="h-62.5 w-full object-cover"
+      class="size-full object-cover"
       loading="lazy"
       data-anim="program-image"
     />
   </div>
 
-  <div class="flex h-full flex-col justify-between gap-6 text-black" data-anim="program-body">
-    <p class="body-md-l" data-programs-text-words>{description}</p>
-    <div class="flex flex-col" data-anim="program-metrics">
-      {
-        metrics.map((metric, index) => (
-          <div
-            class={`flex items-center justify-between py-4 ${index < metrics.length - 1 ? 'border-gray/50 border-b' : ''}`}
-            data-anim="program-metric-row"
+  <div
+    class={cn('flex min-w-0 flex-col gap-4', imagePosition === 'right' && 'dk:order-1')}
+    data-anim="program-body"
+  >
+    <div class="dk:h-[6.125rem] flex flex-col justify-center" data-anim="program-meta">
+      <div class="gap-sm flex flex-col">
+        <div class="gap-lg flex items-center" data-anim="program-location">
+          <UbicationIcon class="size-6 text-black" />
+          <p class="body-md-l text-black">{location}</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <h3 class="heading-md-sb min-w-0 flex-1 text-black">
+            {title}
+          </h3>
+
+          <a
+            href={readMoreHref}
+            class="body-md-sb text-main gap-sm inline-flex shrink-0 items-center transition-opacity hover:opacity-70"
+            data-anim="program-link"
           >
-            <p class="body-md-l">{metric.label}</p>
-            <p class="body-md-sb text-right">{metric.value}</p>
-          </div>
-        ))
-      }
+            {readMoreText}
+            <UpRightArrowIcon class="text-main size-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dk:h-70 flex flex-1 flex-col justify-between gap-6 text-black">
+      <p class="body-md-l" data-programs-text-words>{description}</p>
+
+      <div class="flex flex-col" data-anim="program-metrics">
+        {
+          metrics.map((metric, index) => (
+            <div
+              class={cn(
+                'gap-lg py-lg flex items-center justify-between',
+                index < metrics.length - 1 && 'border-gray/50 border-b',
+                index === metrics.length - 1 && 'pb-0',
+              )}
+              data-anim="program-metric-row"
+            >
+              <p class="body-md-l">{metric.label}</p>
+              <p class="body-md-sb text-right">{metric.value}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </article>

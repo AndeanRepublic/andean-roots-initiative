@@ -4,7 +4,6 @@ import StrategicProgramItem from './StrategicProgramItem.astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations, getLocalizedPath } from '../../../../i18n/utils';
-import { cn } from '../../../../cn';
 
 interface Props {
   lang?: Locale;
@@ -15,54 +14,38 @@ const t = useTranslations(lang);
 const sp = t.strategicPrograms;
 ---
 
-<section id="programs" class="px-2xl dk:px-6xl dk:py-6xl bg-white py-12">
-  <div
-    class={cn(
-      'mx-auto w-full max-w-328 rounded-lg ',
-      'bg-white tb:bg-light',
-      'py-6 tb:py-10 px-0 tb:px-10',
-    )}
-  >
-    <div class="flex flex-col gap-4">
-      <div
-        class="gap-sm tb:flex hidden items-center justify-center rounded-full"
-        data-anim="label-desktop"
-      >
-        <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{sp.label}</p>
-      </div>
-      <p class="heading-md-sb text-main tb:hidden text-center" data-anim="label-mobile">
-        {sp.label.charAt(0).toUpperCase() + sp.label.slice(1).toLowerCase()}
-      </p>
+<section id="programs" class="px-2xl py-6xl dk:px-6xl bg-white">
+  <div class="gap-6xl mx-auto flex w-full max-w-328 flex-col">
+    <div class="gap-4xl dk:flex-row dk:items-end dk:justify-between flex flex-col">
+      <div class="gap-4xl flex w-full max-w-190.25 flex-col">
+        <div class="gap-sm flex items-center" data-anim="label-desktop">
+          <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
+          <p class="body-md-sb text-main">{sp.label}</p>
+        </div>
 
-      <div
-        class="dk:flex-row dk:items-start dk:justify-between flex flex-col gap-6"
-        data-anim="header"
-      >
-        <h2
-          class={cn(
-            'font-skrawk-serif text-[3rem] leading-[0.8] text-main tb:text-[4.25rem]',
-            'text-center tb:text-start',
-          )}
-          data-anim="title"
-          data-programs-text-line
-        >
-          {sp.heading}
+        <h2 class="text-main flex w-full flex-col items-end" data-anim="title">
+          <span class="section-heading w-full uppercase" data-programs-text-line>
+            {sp.headingTop}
+          </span>
+          <span class="heading-eyebrow w-full text-right" data-programs-text-line>
+            {sp.headingBottom}
+          </span>
         </h2>
-        <ButtonLink
-          href={getLocalizedPath(lang, sp.ctaSlug)}
-          text={sp.ctaText}
-          device="desktop"
-          kind="primary"
-          class="tb:self-start dk:self-auto self-center"
-          data-anim="cta"
-        />
       </div>
+
+      <ButtonLink
+        href={getLocalizedPath(lang, sp.ctaSlug)}
+        text={sp.ctaText}
+        device="desktop"
+        kind="primary"
+        class="self-start **:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 dk:self-auto [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5"
+        data-anim="cta"
+      />
     </div>
 
-    <div class="tb:gap-0 mt-10 flex flex-col gap-4" data-anim="program-list">
+    <div class="gap-4xl flex flex-col" data-anim="program-list">
       {
-        sp.items.map((item) => (
+        sp.items.map((item, index) => (
           <StrategicProgramItem
             title={item.title}
             location={sp.location}
@@ -72,6 +55,7 @@ const sp = t.strategicPrograms;
             imageAlt={item.imageAlt}
             description={item.description}
             metrics={item.metrics}
+            imagePosition={index % 2 === 0 ? 'left' : 'right'}
           />
         ))
       }

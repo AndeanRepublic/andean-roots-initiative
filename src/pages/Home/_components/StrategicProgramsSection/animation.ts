@@ -12,10 +12,10 @@ const T_CTA = 0.18;
 /** Genera nodos partidos para título y descripciones de cards. */
 function buildTextNodes(root: HTMLElement) {
   resetSplitText(root, '[data-programs-text-line], [data-programs-text-words]');
-  const title = root.querySelector<HTMLElement>('[data-programs-text-line]');
+  const titleLines = Array.from(root.querySelectorAll<HTMLElement>('[data-programs-text-line]'));
   const descriptions = Array.from(root.querySelectorAll<HTMLElement>('[data-programs-text-words]'));
   return {
-    titleChars: title ? splitChars(title, 'programs-title-char') : [],
+    titleChars: titleLines.flatMap((line) => splitChars(line, 'programs-title-char')),
     bodyWords: descriptions.flatMap((el) => splitWords(el, 'programs-body-word')),
   };
 }

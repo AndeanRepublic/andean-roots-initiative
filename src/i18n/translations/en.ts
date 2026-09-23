@@ -154,7 +154,8 @@ const en: Translations = {
 
   strategicPrograms: {
     label: 'STRATEGIC PROGRAMS',
-    heading: 'Social innovation in action',
+    headingTop: 'Social innovation',
+    headingBottom: 'in action',
     ctaText: 'SEE ALL PROGRAMS',
     ctaSlug: 'programs',
     location: 'Cusco, Peru',

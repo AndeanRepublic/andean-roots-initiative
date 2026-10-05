@@ -27,7 +27,6 @@ pnpm-debug.log*
 SCRIPTS/
 example-animation/
 .vscode/
-.cursor/
 
 .vercel
 

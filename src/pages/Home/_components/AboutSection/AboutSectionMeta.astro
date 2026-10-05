@@ -1,5 +1,5 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
@@ -12,6 +12,8 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 const a = t.about;
+const topTags = a.tags.slice(0, 3);
+const bottomTags = a.tags.slice(3);
 ---
 
 <div class="gap-6xl relative z-10 flex w-full flex-col items-start">
@@ -23,8 +25,12 @@ const a = t.about;
       ease="power3.out"
       duration={0.9}
       delay={1}
+      delayMobile={0}
+      delayTablet={0}
       stagger={0.1}
       animateOnScroll={true}
+      trigger="#about"
+      triggerMobile={true}
       start="top 80%"
       class="w-full max-w-[37.5rem]"
     >
@@ -32,7 +38,19 @@ const a = t.about;
     </Copy>
   </div>
 
-  <div class="gap-lg flex w-full flex-wrap" data-anim="tags">
-    {a.tags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+  <!--
+    Mobile/tablet: parent row + each block col → 2 columns of 3.
+    Desktop: parent col + each block row → 2 rows of 3 (Figma Top / Bottom).
+  -->
+  <div
+    data-anim="tags"
+    class="gap-lg flex w-full min-w-0 flex-row items-start dk:w-auto dk:flex-col"
+  >
+    <div class="gap-lg flex min-w-0 flex-col items-start dk:flex-row">
+      {topTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+    </div>
+    <div class="gap-lg flex min-w-0 flex-col items-start dk:flex-row">
+      {bottomTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+    </div>
   </div>
 </div>

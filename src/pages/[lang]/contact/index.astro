@@ -7,7 +7,10 @@ import Header from '../../../components/Header/index.astro';
 import ContactHeroSection from '../../contact/_components/ContactHeroSection/index.astro';
 import ContactImpactSection from '../../contact/_components/ContactImpactSection/index.astro';
 import ContactFormSection from '../../contact/_components/ContactFormSection/index.astro';
+import ContactFaqSection from '../../contact/_components/ContactFaqSection/index.astro';
+import ContactQuoteSection from '../../contact/_components/ContactQuoteSection/index.astro';
 import Footer from '../../../components/Footer/index.astro';
+import FloatingActions from '../../../components/FloatingActions/index.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
@@ -25,5 +28,8 @@ if (lang === DEFAULT_LOCALE) {
   <ContactHeroSection lang={lang} />
   <ContactImpactSection lang={lang} />
   <ContactFormSection lang={lang} />
+  <ContactFaqSection lang={lang} />
+  <ContactQuoteSection lang={lang} />
   <Footer lang={lang} />
+  <FloatingActions lang={lang} />
 </Layout>

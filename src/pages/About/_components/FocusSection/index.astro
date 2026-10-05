@@ -1,5 +1,5 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import GroupIcon from '../../../../icons/Group.astro';
 import BulbIcon from '../../../../icons/Bulb.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
@@ -111,20 +111,7 @@ const f = t.aboutPage.focus;
 
 						<div class="flex flex-col gap-4">
 							<h3 class="heading-sm-sb text-black">{card.title}</h3>
-							<Copy
-								variant="slideFromBottom"
-								type="lines"
-								reverse
-								ease="power3.out"
-								duration={0.9}
-								delay={1}
-								stagger={0.1}
-								animateOnScroll={true}
-								start="top 80%"
-								class="w-full"
-							>
-								<p class="body-md-l text-gray">{card.description}</p>
-							</Copy>
+							<p class="body-md-l text-gray">{card.description}</p>
 						</div>
 					</article>
 				))

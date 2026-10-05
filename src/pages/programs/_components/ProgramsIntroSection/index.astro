@@ -1,4 +1,5 @@
 ---
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -11,6 +12,11 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 const pi = t.programsPage.intro;
+
+const titleDisplay = 'font-fredericka font-normal tracking-normal text-inherit';
+const titleLarge = cn(titleDisplay, 'text-[2.5rem] tb:text-[4rem] dk:text-[6rem] leading-none');
+const titleAside = cn(titleDisplay, 'text-[1.25rem] tb:text-[2rem] dk:text-[3.5rem] leading-none');
+const titleHave = cn(titleDisplay, 'text-[1.125rem] tb:text-[1.75rem] dk:text-[3rem] leading-none');
 ---
 
 <section
@@ -18,76 +24,76 @@ const pi = t.programsPage.intro;
   class="px-2xl dk:py-6xl bg-white py-12"
   aria-labelledby="programs-intro-heading"
 >
-  <div class="mx-auto flex w-full max-w-320 flex-col gap-20">
-    <div class="mx-auto flex w-full max-w-310 flex-col items-center gap-20 text-center">
+  <div class="gap-7xl mx-auto flex w-full max-w-328 flex-col items-center">
+    <Copy
+      variant="slideFromBottom"
+      type="words"
+      reverse
+      ease="power3.out"
+      duration={0.9}
+      delay={0}
+      stagger={0.2}
+      animateOnScroll={true}
+      start="top 80%"
+      class="w-full"
+    >
       <h2
         id="programs-intro-heading"
-        class="text-main flex flex-col items-center gap-2"
-        data-anim="title-wrap"
+        class="text-main flex w-full flex-col items-end gap-5"
       >
-        <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
-          <span
-            class={cn(
-              'text-[3rem] tb:text-[3rem] dk:text-[5rem]',
-              'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
-            )}
-            data-programs-intro-text-line
-          >
-            {pi.titleLeading}
-          </span>
-          <span
-            class={cn(
-              'text-[1.5rem] tb:text-[1.5rem] dk:text-[2rem]',
-              'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
-              'pt-1',
-            )}
-            data-programs-intro-text-line
-          >
-            {pi.titleMiddle}
+        <span class="dk:pr-120px flex w-full flex-col items-start">
+          <span class={titleLarge}>{pi.titleLine1}</span>
+          <span class="flex flex-col items-start gap-1 tb:flex-row tb:items-end tb:gap-3.5">
+            <span class={titleLarge}>{pi.titleLine2}</span>
+            <span class={cn(titleAside, 'tb:pb-1.5')}>{pi.titleAside}</span>
           </span>
         </span>
-        <span class="flex flex-wrap items-end justify-center gap-2" data-anim="title-line">
-          <span
-            class={cn(
-              'text-[1.5rem] tb:text-[1.5rem] dk:text-[2rem]',
-              'font-nunito-sans font-semibold leading-none tracking-normal text-inherit',
-              'pt-1',
-            )}
-            data-programs-intro-text-line
-          >
-            {pi.titleTrailingStart}
-          </span>
-          <span
-            class={cn(
-              'text-[3rem] tb:text-[3rem] dk:text-[5rem]',
-              'font-skrawk-serif font-normal leading-[0.8] tracking-normal text-inherit',
-            )}
-            data-programs-intro-text-line
-          >
-            &nbsp;{pi.titleTrailingEmphasis}
+
+        <span
+          class={cn(
+            'flex w-full flex-col items-end gap-2',
+            'tb:flex-row tb:items-start tb:justify-end',
+            'dk:gap-9.5',
+          )}
+        >
+          <span class={titleHave}>{pi.titleHave}</span>
+          <span class="flex flex-col items-end tb:items-start">
+            <span class={titleLarge}>{pi.titleLine3}</span>
+            <span class={titleLarge}>{pi.titleLine4}</span>
           </span>
         </span>
       </h2>
+    </Copy>
 
+    <Copy
+      variant="slideFromBottom"
+      type="lines"
+      reverse
+      ease="power3.out"
+      duration={0.9}
+      delay={1}
+      stagger={0.1}
+      animateOnScroll={true}
+      start="top 80%"
+      class="w-full max-w-250"
+    >
       <p
         class={cn(
-          'dk:text-[2rem] dk:leading-[1.4]',
+          'font-manrope font-medium text-black',
+          'text-center text-[1.125rem] leading-normal',
           'tb:text-[1.5rem] tb:leading-[1.4]',
-          'text-[1.125rem] leading-[1.5] text-black',
-          'font-manrope font-medium',
+          'dk:text-[2rem] dk:leading-[1.4]',
         )}
-        data-anim="description"
       >
         {pi.descriptionLead}
-        <span class="text-gray">{pi.descriptionMutedA}</span>
+        <em class="text-gray not-italic">{pi.descriptionMutedA}</em>
         {pi.descriptionMiddle}
-        <span class="text-gray">{pi.descriptionMutedB}</span>
+        <em class="text-gray not-italic">{pi.descriptionMutedB}</em>
+        {pi.descriptionEnd}
       </p>
-    </div>
+    </Copy>
 
-    <div
-      class="tb:gap-10 dk:gap-16 mx-auto flex w-full max-w-190 items-stretch justify-center gap-6"
-    >
+    <div class="gap-6xl mx-auto flex w-full max-w-190 items-stretch justify-center">
       {
         pi.stats.map((item, index) => (
           <>
@@ -95,10 +101,13 @@ const pi = t.programsPage.intro;
               <div class="bg-gray/30 tb:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
             )}
             <article
-              class="flex min-w-0 flex-1 flex-col items-center gap-2 text-center"
+              class="flex w-140px min-w-0 flex-col items-center gap-2 text-center"
               data-anim="stat-item"
             >
-              <p class="heading-lg-sb text-black" data-anim="stat-value">
+              <p
+                class="font-nunito-sans text-[2.5rem] tb:text-[3.5rem] dk:text-[4.5rem] leading-[1.2] font-semibold text-black"
+                data-anim="stat-value"
+              >
                 {item.value}
               </p>
               <p class="body-md-l text-black" data-anim="stat-label">

@@ -1,0 +1,62 @@
+---
+import Copy from '@styersonh/odyssey-motion/copy/astro';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const q = t.contactPage.quote;
+---
+
+<section id="contact-quote" class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="bg-light rounded-20px mx-auto w-full max-w-271 overflow-hidden p-6 tb:p-10">
+    <div class="dk:flex-row dk:items-end dk:justify-end dk:gap-12 flex flex-col-reverse items-end gap-8">
+      <div class="dk:max-w-174.25 relative flex w-full flex-col items-end gap-4">
+        <span
+          class="font-mozilla-text pointer-events-none absolute -top-28 right-0 text-[400px] leading-none font-medium text-black/10 dk:-top-58.5"
+          aria-hidden="true"
+        >
+          “
+        </span>
+
+        <Copy
+          variant="slideFromBottom"
+          type="lines"
+          reverse
+          ease="power3.out"
+          duration={0.9}
+          delay={0}
+          stagger={0.1}
+          animateOnScroll={true}
+          start="top 80%"
+          class="w-full"
+        >
+          <blockquote class="font-montserrat text-gray w-full text-right text-[1.5rem] leading-[1.2] font-medium tb:text-[2rem]">
+            “{q.quote}”
+          </blockquote>
+        </Copy>
+
+        <div class="flex w-31.25 flex-col items-end">
+          <p class="body-md-l text-black w-full text-center font-bold">{q.attributionName}</p>
+          <p class="w-full text-right text-[0.75rem] leading-normal font-semibold text-gray">
+            {q.attributionRole}
+          </p>
+        </div>
+      </div>
+
+      <div class="dk:h-95 dk:w-100.25 h-70 w-full overflow-hidden rounded-lg">
+        <img
+          src={q.portraitSrc}
+          alt={q.portraitAlt}
+          class="size-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

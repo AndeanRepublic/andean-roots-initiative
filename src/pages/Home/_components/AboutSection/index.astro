@@ -1,4 +1,5 @@
 ---
+import ImageReveal from '@styersonh/odyssey-motion/image-reveal/astro';
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -8,52 +9,72 @@ import AboutSectionHeading from './AboutSectionHeading.astro';
 import AboutSectionMeta from './AboutSectionMeta.astro';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section id="about" class="bg-white px-6xl py-6xl">
-  <div class="mx-auto flex w-full max-w-[1312px] flex-col gap-5xl">
-    <div class="relative flex flex-col gap-4xl">
-      <img
-        src="/home-assets/About/about-watermark.svg"
-        alt=""
-        width="520"
-        height="407"
-        class="pointer-events-none absolute top-0 left-0 max-w-[40%] select-none"
-        aria-hidden="true"
-      />
-      <AboutSectionHeading lang={lang} />
-      <AboutSectionMeta lang={lang} />
-    </div>
+<section id="about" class="px-6xl py-6xl bg-white">
+	<div class="gap-5xl mx-auto flex w-full max-w-[1312px] flex-col">
+		<div class="gap-4xl relative flex flex-col">
+			<img
+				src="/home-assets/About/about-watermark.svg"
+				alt=""
+				width="520"
+				height="407"
+				class="pointer-events-none absolute top-0 left-0 max-w-[40%] select-none"
+				aria-hidden="true"
+			/>
+			<AboutSectionHeading lang={lang} />
+			<AboutSectionMeta lang={lang} />
+		</div>
 
-    <div
-      class={cn(
-        'rounded-lg relative overflow-hidden',
-        'flex flex-col items-start justify-end',
-        'p-24px tb:p-32px dk:p-40px',
-        'h-[22.5rem] tb:h-[28rem] dk:h-[35.3125rem]',
-      )}
-    >
-      <img
-        src="/home-assets/About/banner-about.png"
-        alt={t.about.bannerImageAlt}
-        class="absolute inset-0 h-full w-full rounded-lg object-cover object-center"
-        loading="lazy"
-        data-anim="image"
-      />
-      <AboutOriginCard lang={lang} />
-    </div>
-  </div>
+		<div class="relative">
+			<div
+				class={cn(
+					'rounded-lg relative overflow-hidden',
+					'h-[22.5rem] tb:h-[28rem] dk:h-[35.3125rem]',
+				)}
+			>
+				<ImageReveal
+					variant="clipPathZoomOut"
+					duration={1.5}
+					scaleFrom={1.4}
+					directionTo="bottom"
+					start="top 75%"
+					startMobile="top 85%"
+					animateOnScroll={true}
+					class="absolute inset-0"
+					markers
+				>
+					<img
+						src="/home-assets/About/banner-about.png"
+						alt={t.about.bannerImageAlt}
+						class="h-full w-full object-cover object-center"
+						loading="lazy"
+						data-image-reveal-item
+					/>
+				</ImageReveal>
+			</div>
+			<div
+				class={cn(
+					'relative z-10 -mt-12 flex justify-start pl-[2rem] pr-6',
+					'tb:pr-8',
+					'dk:absolute dk:bottom-10 dk:left-10 dk:mt-0 dk:block dk:w-full dk:max-w-[28.8125rem] dk:px-0',
+				)}
+			>
+				<AboutOriginCard lang={lang} />
+			</div>
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initAboutSectionAnimation } from './animation';
+	import { initAboutSectionAnimation } from './animation';
 
-  const boot = () => initAboutSectionAnimation();
+	const boot = () => initAboutSectionAnimation();
 
-  document.addEventListener('astro:page-load', boot);
+	document.addEventListener('astro:page-load', boot);
 </script>

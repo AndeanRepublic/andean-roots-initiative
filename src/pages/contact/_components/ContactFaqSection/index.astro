@@ -1,0 +1,90 @@
+---
+import ButtonLink from '../../../../components/ButtonLink/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
+import { cn } from '../../../../cn';
+import type { Locale } from '../../../../i18n/locales';
+import { DEFAULT_LOCALE } from '../../../../i18n/locales';
+import { useTranslations } from '../../../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = useTranslations(lang);
+const faq = t.contactPage.faq;
+const formId = t.contactPage.form.sectionId;
+---
+
+<section id="contact-faq" class="px-2xl dk:py-6xl bg-white py-12">
+  <div class="dk:flex-row dk:items-start dk:gap-16 mx-auto flex w-full max-w-271 flex-col gap-10">
+    <div class="dk:w-118.25 flex w-full shrink-0 flex-col gap-8">
+      <div class="aspect-[610/552] overflow-hidden rounded-20px">
+        <img
+          src={faq.sideImageSrc}
+          alt={faq.sideImageAlt}
+          class="size-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <Copy
+        variant="slideFromBottom"
+        type="words"
+        reverse
+        ease="power3.out"
+        duration={0.9}
+        delay={0}
+        stagger={0.2}
+        animateOnScroll={true}
+        start="top 80%"
+        class="w-full"
+      >
+        <h2
+          class="font-montserrat text-main flex flex-col text-[1.75rem] leading-[1.2] font-black uppercase tb:text-[2rem]"
+        >
+          <span>{faq.titleTop}</span>
+          <span>{faq.titleBottom}</span>
+        </h2>
+      </Copy>
+
+      <ButtonLink href={`#${formId}`} text={faq.ctaText} />
+    </div>
+
+    <div class="flex w-full min-w-0 flex-col gap-6">
+      {
+        faq.items.map((item) => (
+          <details class="faq-item bg-light group rounded-lg">
+            <summary class="gap-4 flex cursor-pointer items-center justify-between py-6 pr-3 pl-6">
+              <span
+                class={cn(
+                  'font-nunito-sans font-semibold',
+                  'text-[14px] tb:text-[15px] dk:text-[16px]',
+                  'leading-[140%]',
+                  'text-[#303030]',
+                )}
+              >
+                {item.q}
+              </span>
+              <span class="w-8.5 shrink-0 text-center text-[1.5rem] leading-none text-black">
+                <span class="group-open:hidden">+</span>
+                <span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <p class="body-md-l text-gray px-6 pb-6">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item summary {
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

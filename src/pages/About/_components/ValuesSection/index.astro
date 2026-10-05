@@ -1,5 +1,5 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import CommitmentIcon from '../../../../icons/CommitmentIcon.astro';
 import ChakanaIcon from '../../../../icons/chakanaIcon.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
@@ -78,20 +78,7 @@ const v = t.aboutPage.values;
 
             <div class="flex flex-col gap-4">
               <h3 class="heading-md-sb text-white">{item.title}</h3>
-              <Copy
-                variant="slideFromBottom"
-                type="lines"
-                reverse
-                ease="power3.out"
-                duration={0.9}
-                delay={1}
-                stagger={0.1}
-                animateOnScroll={true}
-                start="top 80%"
-                class="w-full"
-              >
-                <p class="body-md-l text-white">{item.description}</p>
-              </Copy>
+              <p class="body-md-l text-white">{item.description}</p>
             </div>
           </article>
         ))

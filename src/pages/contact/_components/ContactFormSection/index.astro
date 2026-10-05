@@ -1,5 +1,4 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
 import MailIcon from '../../../../icons/MailIcon.astro';
 import PhoneIcon from '../../../../icons/PhoneIcon.astro';
 import UpRightArrowIcon from '../../../../icons/UpRightArrowIcon.astro';
@@ -17,22 +16,12 @@ const cf = t.contactPage.form;
 ---
 
 <section id={cf.sectionId} class="px-2xl dk:py-6xl bg-white py-12">
-  <div class="dk:flex-row dk:items-stretch dk:justify-center dk:gap-6 mx-auto flex w-full max-w-328 flex-col gap-6">
+  <div
+    class="dk:flex-row dk:items-stretch dk:justify-center dk:gap-6 mx-auto flex w-full max-w-328 flex-col gap-6"
+    data-anim="section"
+  >
     <div class="bg-light dk:max-w-132.5 dk:h-full flex w-full flex-col gap-8 rounded-20px p-6">
-      <Copy
-        variant="slideFromBottom"
-        type="words"
-        reverse
-        ease="power3.out"
-        duration={0.9}
-        delay={0}
-        stagger={0.2}
-        animateOnScroll={true}
-        start="top 80%"
-        class="w-full"
-      >
-        <h2 class="heading-md-sb text-black">{cf.title}</h2>
-      </Copy>
+      <h2 class="heading-md-sb text-black">{cf.title}</h2>
 
       <form class="dk:flex-1 flex flex-col justify-between gap-8" data-contact-form novalidate>
         <div aria-live="polite" class="body-sm-l text-gray empty:hidden" data-contact-form-status>
@@ -95,7 +84,7 @@ const cf = t.contactPage.form;
         <button
           type="submit"
           data-contact-form-submit
-          class="bg-main gap-4 rounded-full py-2 pr-2 pl-6 text-white inline-flex w-full cursor-pointer items-center justify-end disabled:cursor-not-allowed disabled:opacity-40"
+          class="bg-main gap-4 rounded-full py-2 pr-2 pl-6 text-white inline-flex w-auto shrink-0 cursor-pointer items-center self-start disabled:cursor-not-allowed disabled:opacity-40"
         >
           <span class="body-md-sb text-white" data-contact-form-submit-label>{cf.submitLabel}</span>
           <span class="flex items-center justify-center rounded-full bg-white p-2">
@@ -236,4 +225,12 @@ const cf = t.contactPage.form;
       }
     });
   }
+</script>
+
+<script>
+  import { initContactFormSectionAnimation } from './animation';
+
+  const init = () => initContactFormSectionAnimation();
+
+  document.addEventListener('astro:page-load', init);
 </script>

@@ -1,5 +1,5 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -27,8 +27,12 @@ const a = t.about;
     ease="power3.out"
     duration={0.9}
     delay={0}
+    delayMobile={0}
+    delayTablet={0}
     stagger={0.2}
     animateOnScroll={true}
+    trigger="#about"
+    triggerMobile={true}
     start="top 80%"
     class="w-fit max-w-full"
   >

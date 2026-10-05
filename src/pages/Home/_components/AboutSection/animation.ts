@@ -8,9 +8,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
-const T_TAGS = 0.3;
-const T_IMAGE = 0.7;
 const T_CARD = 0.9;
+
+/** Same cut as Copy: dk starts at 1025. Pills share `#about` only from there. */
+const DK_MIN = 1025;
+/** Desktop: after the paragraph Copy (`delay` 1 + `duration` 0.9). */
+const TAGS_DELAY_DK = 2;
 
 function clearAboutSectionStyles(root: HTMLElement) {
   root.querySelectorAll('[data-anim], [data-anim] *').forEach((el) => {
@@ -27,26 +30,11 @@ export const initAboutSectionAnimation = createScrollSectionController({
   setup: ({ root, mm }) => {
     mm.add('(min-width: 0px)', () => {
       const label = root.querySelector<HTMLElement>('[data-anim="label"]');
-      const tagsContainer = root.querySelector<HTMLElement>('[data-anim="tags"]');
-      const image = root.querySelector<HTMLElement>('[data-anim="image"]');
       const originCard = root.querySelector<HTMLElement>('[data-anim="origin-card"]');
       const originCardInner = root.querySelector<HTMLElement>('[data-anim="origin-card-inner"]');
-      const tags = tagsContainer
-        ? Array.from(tagsContainer.querySelectorAll<HTMLElement>('[data-anim="tag-pill"]'))
-        : [];
       const cardInnerChildren = originCardInner ? Array.from(originCardInner.children) : [];
 
       if (label) gsap.set(label, { opacity: 0, y: 20, rotateZ: -2 });
-      if (tags.length) gsap.set(tags, { opacity: 0, y: 30, scale: 0.9, rotateZ: -3 });
-      if (image) {
-        gsap.set(image, {
-          opacity: 0,
-          scale: 1.12,
-          yPercent: 10,
-          clipPath: 'inset(14% 0% 16% 0% round 1rem)',
-          filter: 'saturate(0.65) contrast(0.88)',
-        });
-      }
       if (originCardInner) {
         gsap.set(originCardInner, { opacity: 0 });
         if (cardInnerChildren.length) {
@@ -57,8 +45,6 @@ export const initAboutSectionAnimation = createScrollSectionController({
       }
 
       let labelIn = false;
-      let tagsIn = false;
-      let imageIn = false;
       let cardIn = false;
 
       const tweenDur = (immediate: boolean) => (immediate ? 0 : 0.55);
@@ -88,62 +74,6 @@ export const initAboutSectionAnimation = createScrollSectionController({
               overwrite: true,
             });
             labelIn = false;
-          }
-        }
-
-        if (tags.length) {
-          if (p >= T_TAGS && !tagsIn) {
-            gsap.to(tags, {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              rotateZ: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.06,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            tagsIn = true;
-          } else if (p < T_TAGS && tagsIn) {
-            gsap.to(tags, {
-              opacity: 0,
-              y: 30,
-              scale: 0.9,
-              rotateZ: -3,
-              duration: d,
-              stagger: immediate ? 0 : -0.05,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            tagsIn = false;
-          }
-        }
-
-        if (image) {
-          if (p >= T_IMAGE && !imageIn) {
-            gsap.to(image, {
-              opacity: 1,
-              scale: 1,
-              yPercent: 0,
-              clipPath: 'inset(0% 0% 0% 0% round 1rem)',
-              filter: 'saturate(1) contrast(1)',
-              duration: d,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            imageIn = true;
-          } else if (p < T_IMAGE && imageIn) {
-            gsap.to(image, {
-              opacity: 0,
-              scale: 1.12,
-              yPercent: 10,
-              clipPath: 'inset(14% 0% 16% 0% round 1rem)',
-              filter: 'saturate(0.65) contrast(0.88)',
-              duration: d,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            imageIn = false;
           }
         }
 
@@ -227,5 +157,70 @@ export const initAboutSectionAnimation = createScrollSectionController({
         clearAboutSectionStyles(root);
       };
     });
+
+    const bindTags = (desktop: boolean) => {
+      const tagsContainer = root.querySelector<HTMLElement>('[data-anim="tags"]');
+      const tags = tagsContainer
+        ? Array.from(tagsContainer.querySelectorAll<HTMLElement>('[data-anim="tag-pill"]'))
+        : [];
+      if (!tags.length) return;
+
+      gsap.set(tags, { opacity: 0, y: 30, scale: 0.9, rotateZ: -3 });
+
+      let tagsIn = false;
+      let pending: gsap.core.Tween | null = null;
+
+      const revealTags = () => {
+        if (tagsIn) return;
+        gsap.to(tags, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotateZ: 0,
+          duration: 0.55,
+          stagger: 0.06,
+          ease: 'power2.out',
+          overwrite: true,
+        });
+        tagsIn = true;
+      };
+
+      const hideTags = () => {
+        pending?.kill();
+        pending = null;
+        if (!tagsIn) return;
+        gsap.to(tags, {
+          opacity: 0,
+          y: 30,
+          scale: 0.9,
+          rotateZ: -3,
+          duration: 0.55,
+          stagger: -0.05,
+          ease: 'power2.in',
+          overwrite: true,
+        });
+        tagsIn = false;
+      };
+
+      const st = ScrollTrigger.create({
+        trigger: desktop ? root : tagsContainer,
+        start: 'top 80%',
+        onEnter: () => {
+          pending?.kill();
+          if (desktop) pending = gsap.delayedCall(TAGS_DELAY_DK, revealTags);
+          else revealTags();
+        },
+        onLeaveBack: hideTags,
+      });
+
+      return () => {
+        pending?.kill();
+        st.kill();
+        gsap.set(tags, { clearProps: 'opacity,transform' });
+      };
+    };
+
+    mm.add(`(min-width: ${DK_MIN}px)`, () => bindTags(true));
+    mm.add(`(max-width: ${DK_MIN - 1}px)`, () => bindTags(false));
   },
 });

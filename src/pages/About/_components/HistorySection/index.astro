@@ -1,5 +1,5 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
@@ -53,10 +53,10 @@ const h = t.aboutPage.history;
 							reverse
 							ease="power3.out"
 							duration={0.9}
-							delay={1 + index * 1}
+							delay={1 + index * 0.5}
 							stagger={0.1}
 							animateOnScroll={true}
-							start="top 80%"
+							start="top 95%"
 							class="w-full"
 						>
 							<div class="gap-md text-gray flex flex-col">

@@ -17,6 +17,7 @@
     "@astrojs/react": "^5.0.4",
     "@astrojs/vercel": "^10.0.6",
     "@paypal/react-paypal-js": "^9.1.1",
+    "@styersonh/odyssey-motion": "^0.1.1",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.1.10",
     "astro-lenis": "^1.0.5",

@@ -1,11 +1,11 @@
 ---
-import Copy from '../../../../components/Copy/index.astro';
+import Copy from '@styersonh/odyssey-motion/copy/astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -14,44 +14,47 @@ const ci = t.contactPage.impact;
 ---
 
 <section id="contact-impact" class="px-2xl dk:px-6xl dk:py-6xl bg-white py-12">
-  <div
-    class="dk:flex-row dk:items-end dk:justify-between dk:gap-6xl mx-auto flex w-full max-w-328 flex-col gap-8"
-  >
-    <Copy
-      variant="slideFromBottom"
-      type="words"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={0}
-      stagger={0.2}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full min-w-0 flex-1"
-    >
-      <h2 class="font-fredericka text-main flex w-full flex-col uppercase">
-        <span class="text-[1.75rem] leading-[1.1] tb:text-[2.5rem] dk:text-[3.5rem]">{ci.line1}</span>
-        <span class="text-[2.75rem] leading-[1.1] tb:text-[4.25rem] dk:text-center dk:text-[6.25rem]">
-          {ci.line2}
-        </span>
-        <span class="text-[1.5rem] leading-[1.1] tb:text-[2.25rem] dk:text-[3rem]">{ci.line3}</span>
-        <span class="text-[3.5rem] leading-none tb:text-[5.5rem] dk:text-[8.75rem]">{ci.line4}</span>
-      </h2>
-    </Copy>
+	<div
+		class="dk:flex-row dk:items-end dk:justify-between dk:gap-6xl mx-auto flex w-full max-w-328 flex-col gap-8"
+	>
+		<Copy
+			variant="slideFromBottom"
+			type="words"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={0}
+			stagger={0.2}
+			animateOnScroll={true}
+			start="top 80%"
+			class="w-full min-w-0 flex-1"
+		>
+			<h2 class="font-fredericka text-main flex w-full flex-col uppercase">
+				<span class="tb:text-[2.5rem] dk:text-[3.5rem] text-[1.75rem] leading-[1.1]"
+					>{ci.line1}</span
+				>
+				<span class="tb:text-[4.25rem] dk:text-[6.25rem] text-[2.3rem] leading-[1.1]">
+					{ci.line2}
+				</span>
+				<span class="tb:text-[2.25rem] dk:text-[3rem] text-[1.5rem] leading-[1.1]">{ci.line3}</span>
+				<span class="tb:text-[5.5rem] dk:text-[8.75rem] text-[3.5rem] leading-none">{ci.line4}</span
+				>
+			</h2>
+		</Copy>
 
-    <Copy
-      variant="slideFromBottom"
-      type="lines"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={1}
-      stagger={0.1}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full dk:w-80"
-    >
-      <p class="body-md-l text-gray">{ci.description}</p>
-    </Copy>
-  </div>
+		<Copy
+			variant="slideFromBottom"
+			type="lines"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={1}
+			stagger={0.1}
+			animateOnScroll={true}
+			start="top 80%"
+			class="dk:w-80 w-full"
+		>
+			<p class="body-md-l text-gray">{ci.description}</p>
+		</Copy>
+	</div>
 </section>

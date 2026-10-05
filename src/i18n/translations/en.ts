@@ -445,18 +445,21 @@ const en: Translations = {
       ],
     },
     intro: {
-      titleLeading: 'Big challenges. ',
-      titleMiddle: ' No problem.',
-      titleTrailingStart: 'We have ',
-      titleTrailingEmphasis: 'even bigger ideas.',
+      titleLine1: 'BIG',
+      titleLine2: 'CHALLENGES',
+      titleAside: ', no problem',
+      titleHave: 'we have',
+      titleLine3: 'EVEN BIGGER',
+      titleLine4: 'IDEAS',
       descriptionLead:
-        'At Andean Roots Initiative we design programs that respond directly to the needs of Andean communities.',
-      descriptionMutedA: ' Through education, technology and productive development',
+        'At Andean Roots Initiative we design programs that respond directly to the needs of Andean communities.  ',
+      descriptionMutedA: 'Through education, technology and productive development',
       descriptionMiddle: ', we seek to close gaps and generate sustainable opportunities ',
-      descriptionMutedB: 'that emerge from the local context itself.',
+      descriptionMutedB: 'that emerge from the local context itself',
+      descriptionEnd: '.',
       stats: [
-        { value: '300+', label: 'Beneficiaries' },
-        { value: '5+', label: 'Articulated communities' },
+        { value: '300+', label: 'beneficiaries' },
+        { value: '5+', label: 'Communities Articulated' },
         { value: '3', label: 'Active programs' },
       ],
     },
@@ -576,11 +579,9 @@ const en: Translations = {
       emailHref: 'mailto:hola@andeanroots.org',
     },
     faq: {
-      label: 'FAQ',
-      title: 'Frequently asked questions',
-      subtitle:
-        'These are the most frequently asked questions about Andean Roots. If you have any additional questions, feel free to contact us.',
-      ctaText: 'See more FAQs',
+      titleTop: 'Have questions?',
+      titleBottom: "We're here to help",
+      ctaText: 'Ask a question',
       sideImageSrc: '/about-assets/enfoque/enfoque-1.png',
       sideImageAlt: 'Local team in community activity',
       items: [
@@ -593,7 +594,7 @@ const en: Translations = {
           a: 'Yes. Tell us the approximate amount, the type of support and whether you seek visibility or silent impact.',
         },
         {
-          q: 'Do you respond in Spanish?',
+          q: 'Do you respond in English?',
           a: 'Yes. Write to us in the language you prefer (ES/EN).',
         },
         {
@@ -614,7 +615,7 @@ const en: Translations = {
       quote:
         'We believe that territorial change begins with honest conversations, clear alliances and actions that respect the identity of each community.',
       attributionName: 'Daniel Yupanqui',
-      attributionRole: 'Founder and director',
+      attributionRole: 'Founder',
       portraitSrc: '/about-assets/team/team-1.png',
       portraitAlt: 'Portrait of Daniel Yupanqui',
     },

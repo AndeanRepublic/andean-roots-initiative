@@ -6,7 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Umbrales de progreso del ScrollTrigger (0–1): al cruzarlos se disparan tweens, no un mapeo continuo. */
 const T_LABEL = 0.06;
-const T_PROGRAMS = 0.48;
+
+/** Same cut as Copy: desktop trigger starts at 1025. */
+const DK_MIN = 1025;
+/** Desktop: after the paragraph Copy (`delay` 1 + `duration` 0.9). */
+const CARDS_DELAY_DK = 2;
 
 function clearActionSectionStyles(root: HTMLElement) {
   const scrollNodes = root.querySelectorAll(
@@ -65,14 +69,9 @@ export const initActionSectionAnimation = createScrollSectionController({
       });
     };
 
-    /**
-     * Trigger principal de sección:
-     * - siempre controla el label
-     * - opcionalmente controla programs (desktop)
-     */
-    const createSectionThresholdTrigger = (includeProgramThreshold: boolean) => {
+    /** El label sigue el progreso de la sección. Las cards tienen su propio disparador. */
+    const createSectionThresholdTrigger = () => {
       let labelIn = false;
-      let programsIn = false;
 
       const tweenDur = (immediate: boolean) => (immediate ? 0 : 0.55);
 
@@ -102,21 +101,11 @@ export const initActionSectionAnimation = createScrollSectionController({
             labelIn = false;
           }
         }
-
-        if (includeProgramThreshold && programCards.length) {
-          if (p >= T_PROGRAMS && !programsIn) {
-            revealPrograms(immediate);
-            programsIn = true;
-          } else if (p < T_PROGRAMS && programsIn) {
-            hidePrograms(immediate);
-            programsIn = false;
-          }
-        }
       };
 
       const st = ScrollTrigger.create({
         trigger: root,
-        start: 'top 70%',
+        start: 'top 60%',
         end: 'top top',
         onUpdate: (self) => {
           handleThresholds(self.progress, false);
@@ -135,7 +124,7 @@ export const initActionSectionAnimation = createScrollSectionController({
       return programCards.map((card) =>
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 70%',
+          start: 'top 80%',
           end: 'bottom 15%',
           onEnter: () => {
             gsap.to(card, {
@@ -174,20 +163,43 @@ export const initActionSectionAnimation = createScrollSectionController({
       );
     };
 
-    mm.add('(min-width: 1200px)', () => {
+    mm.add(`(min-width: ${DK_MIN}px)`, () => {
       setInitialState();
-      const sectionTrigger = createSectionThresholdTrigger(true);
+      const sectionTrigger = createSectionThresholdTrigger();
+      let pending: gsap.core.Tween | null = null;
+      let programsIn = false;
+
+      const cardsTrigger = ScrollTrigger.create({
+        trigger: root,
+        start: 'top 80%',
+        onEnter: () => {
+          pending?.kill();
+          pending = gsap.delayedCall(CARDS_DELAY_DK, () => {
+            revealPrograms(false);
+            programsIn = true;
+          });
+        },
+        onLeaveBack: () => {
+          pending?.kill();
+          pending = null;
+          if (!programsIn) return;
+          hidePrograms(false);
+          programsIn = false;
+        },
+      });
 
       return () => {
+        pending?.kill();
+        cardsTrigger.kill();
         sectionTrigger.kill();
 
         clearActionSectionStyles(root);
       };
     });
 
-    mm.add('(max-width: 1199px)', () => {
+    mm.add(`(max-width: ${DK_MIN - 1}px)`, () => {
       setInitialState();
-      const sectionTrigger = createSectionThresholdTrigger(false);
+      const sectionTrigger = createSectionThresholdTrigger();
       const cardTriggers = createProgramCardTriggers();
 
       return () => {

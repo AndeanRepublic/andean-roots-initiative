@@ -17,7 +17,10 @@ const sp = t.strategicPrograms;
 
 <section id="programs" class="px-2xl py-6xl dk:px-6xl bg-white">
   <div class="gap-6xl mx-auto flex w-full max-w-328 flex-col">
-    <div class="gap-4xl dk:flex-row dk:items-end dk:justify-between flex flex-col">
+    <div
+      class="gap-4xl dk:flex-row dk:items-end dk:justify-between relative z-30 flex flex-col"
+      data-anim="section-head"
+    >
       <div class="gap-4xl flex w-full max-w-190.25 flex-col">
         <div class="gap-sm flex items-center" data-anim="label-desktop">
           <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
@@ -31,8 +34,12 @@ const sp = t.strategicPrograms;
           ease="power3.out"
           duration={0.9}
           delay={0}
+          delayMobile={0}
+          delayTablet={0}
           stagger={0.2}
           animateOnScroll={true}
+          trigger="#programs"
+          triggerMobile={true}
           start="top 80%"
           class="w-full"
         >
@@ -53,7 +60,7 @@ const sp = t.strategicPrograms;
       />
     </div>
 
-    <div class="gap-4xl flex flex-col" data-anim="program-list">
+    <div class="gap-4xl relative z-20 flex flex-col dk:gap-0" data-anim="program-list">
       {
         sp.items.map((item, index) => (
           <StrategicProgramItem

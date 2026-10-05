@@ -6,7 +6,7 @@ import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -15,71 +15,72 @@ const p = t.partners;
 ---
 
 <section id="partners" class="px-2xl dk:px-6xl dk:py-6xl bg-white py-12">
-  <div
-    class="dk:flex-row dk:items-center dk:gap-10 dk:py-16 mx-auto flex w-full max-w-328 flex-col gap-8 py-8"
-  >
-    <div
-      class="border-gray/50 dk:border-r dk:pb-0 dk:pr-10 flex shrink-0 flex-col gap-1 border-r-0 pb-8"
-      data-anim="intro"
-    >
-      <div
-        class="gap-sm tb:flex hidden items-center justify-start rounded-full"
-        data-anim="label-desktop"
-      >
-        <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{p.label}</p>
-      </div>
-      <p class="heading-lg-sb text-main tb:hidden pb-4 text-center" data-anim="label-mobile">
-        {p.label.charAt(0).toUpperCase() + p.label.slice(1).toLowerCase()}
-      </p>
-      <Copy
-        variant="slideFromBottom"
-        type="lines"
-        reverse
-        ease="power3.out"
-        duration={0.9}
-        delay={1}
-        stagger={0.1}
-        animateOnScroll={true}
-        start="top 80%"
-        class="w-full max-w-100"
-      >
-        <p class="body-md-l max-w-100 text-gray">{p.description}</p>
-      </Copy>
-    </div>
+	<div
+		class="dk:flex-row dk:items-center dk:gap-10 dk:py-16 mx-auto flex w-full max-w-328 flex-col gap-8 py-8"
+	>
+		<div
+			class="border-gray/50 dk:border-r dk:pb-0 dk:pr-10 flex shrink-0 flex-col gap-1 border-r-0 pb-8"
+			data-anim="intro"
+		>
+			<div
+				class="gap-sm tb:flex hidden items-center justify-start rounded-full"
+				data-anim="label-desktop"
+			>
+				<span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
+				<p class="body-md-sb text-main">{p.label}</p>
+			</div>
+			<p class="heading-lg-sb text-main tb:hidden pb-4 text-center" data-anim="label-mobile">
+				{p.label.charAt(0).toUpperCase() + p.label.slice(1).toLowerCase()}
+			</p>
+			<Copy
+				variant="slideFromBottom"
+				type="lines"
+				reverse
+				ease="power3.out"
+				duration={0.9}
+				delay={0.5}
+				stagger={0.1}
+				animateOnScroll={true}
+				trigger="#partners"
+				start="top 80%"
+				class="w-full max-w-100"
+			>
+				<p class="body-md-l text-gray max-w-100">{p.description}</p>
+			</Copy>
+		</div>
 
-    <div
-      class={cn(
-        'flex min-h-0 min-w-0 flex-1 flex-wrap items-center justify-center dk:justify-start dk:gap-12',
-        'gap-8 ',
-      )}
-      data-anim="logos"
-    >
-      {
-        p.logos.map((logo: { src: string; alt: string }) => (
-          <div
-            class="dk:w-40 h-full w-36 overflow-hidden"
-            data-anim="logo-item"
-            data-partner-logo-hover
-          >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              class="h-auto w-full object-contain"
-              loading="lazy"
-              data-anim="logo-image"
-            />
-          </div>
-        ))
-      }
-    </div>
-  </div>
+		<div
+			class={cn(
+				'flex min-h-0 min-w-0 flex-1 flex-wrap items-center justify-center dk:justify-start dk:gap-12',
+				'gap-8 ',
+			)}
+			data-anim="logos"
+		>
+			{
+				p.logos.map((logo: { src: string; alt: string }) => (
+					<div
+						class="dk:w-40 h-full w-36 overflow-hidden"
+						data-anim="logo-item"
+						data-partner-logo-hover
+					>
+						<img
+							src={logo.src}
+							alt={logo.alt}
+							class="h-auto w-full object-contain"
+							loading="lazy"
+							data-anim="logo-image"
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initPartnershipSectionAnimation } from './animation';
+	import { initPartnershipSectionAnimation } from './animation';
 
-  const init = () => initPartnershipSectionAnimation();
+	const init = () => initPartnershipSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

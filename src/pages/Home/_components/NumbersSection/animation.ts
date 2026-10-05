@@ -4,6 +4,11 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
+/** Same cut as Copy: desktop trigger starts at 1025. */
+const DK_MIN = 1025;
+/** Desktop: after the paragraph Copy (`delay` 1 + `duration` 0.9). */
+const NUMBERS_DELAY_DK = 1;
+
 type CounterParts = {
   prefix: string;
   suffix: string;
@@ -109,14 +114,17 @@ export const initNumbersSectionAnimation = createScrollSectionController({
       counterTweens.clear();
     };
 
-    mm.add('(min-width: 1200px)', () => {
+    mm.add(`(min-width: ${DK_MIN}px)`, () => {
       setInitialState();
+      let pending: gsap.core.Tween | null = null;
+      let numbersIn = false;
 
-      /** Reveal coordinado de bloque + cards + counters al entrar al viewport. */
-      const revealSection = () => {
-        if (meta) {
-          gsap.to(meta, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out', overwrite: true });
-        }
+      const revealIcon = () => {
+        if (!meta) return;
+        gsap.to(meta, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out', overwrite: true });
+      };
+
+      const revealNumbers = () => {
         if (cards.length) {
           gsap.to(cards, {
             opacity: 1,
@@ -129,15 +137,18 @@ export const initNumbersSectionAnimation = createScrollSectionController({
           });
         }
         counters.forEach((counter) => animateCounter(counter, 1.9));
+        numbersIn = true;
       };
 
       /** Salida al hacer scroll hacia atrás para permitir replay del count-up. */
       const hideSection = () => {
+        pending?.kill();
+        pending = null;
         stopAllCounters();
         if (meta) {
           gsap.to(meta, { opacity: 0, x: -24, duration: 0.35, ease: 'power2.in', overwrite: true });
         }
-        if (cards.length) {
+        if (numbersIn && cards.length) {
           gsap.to(cards, {
             opacity: 0,
             y: 30,
@@ -148,32 +159,40 @@ export const initNumbersSectionAnimation = createScrollSectionController({
             overwrite: true,
           });
         }
+        numbersIn = false;
         counters.forEach((counter) => resetCounter(counter));
       };
 
       const st = ScrollTrigger.create({
         trigger: root,
-        start: 'top 82%',
-        end: 'bottom top',
-        onEnter: () => revealSection(),
-        onEnterBack: () => revealSection(),
-        onLeaveBack: () => hideSection(),
+        start: 'top 80%',
+        onEnter: () => {
+          revealIcon();
+          pending?.kill();
+          pending = gsap.delayedCall(NUMBERS_DELAY_DK, revealNumbers);
+        },
+        onEnterBack: () => {
+          revealIcon();
+          pending?.kill();
+          pending = gsap.delayedCall(NUMBERS_DELAY_DK, revealNumbers);
+        },
+        onLeaveBack: hideSection,
       });
 
       return () => {
+        pending?.kill();
         stopAllCounters();
         st.kill();
         clearNumbersSectionStyles(root);
       };
     });
 
-    mm.add('(max-width: 1199px)', () => {
+    mm.add(`(max-width: ${DK_MIN - 1}px)`, () => {
       setInitialState();
 
       const metaTrigger = ScrollTrigger.create({
-        trigger: root,
-        start: 'top 82%',
-        end: 'bottom top',
+        trigger: meta ?? root,
+        start: 'top 80%',
         onEnter: () => {
           if (meta)
             gsap.to(meta, {
@@ -212,7 +231,7 @@ export const initNumbersSectionAnimation = createScrollSectionController({
 
         return ScrollTrigger.create({
           trigger: card,
-          start: 'top 86%',
+          start: 'top 80%',
           end: 'bottom 18%',
           onEnter: () => {
             gsap.to(card, {

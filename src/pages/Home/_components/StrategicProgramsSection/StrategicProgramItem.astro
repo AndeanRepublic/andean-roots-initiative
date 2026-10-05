@@ -34,7 +34,10 @@ const {
 ---
 
 <article
-  class={cn('gap-4xl grid rounded-xl bg-light p-3xl', 'dk:grid-cols-2 dk:items-stretch')}
+  class={cn(
+    'program-card gap-4xl relative grid rounded-xl bg-light p-3xl',
+    'dk:grid-cols-2 dk:items-stretch',
+  )}
   data-anim="program-card"
 >
   <div
@@ -90,3 +93,17 @@ const {
     </div>
   </div>
 </article>
+
+<style>
+  /* Darkens the pinned card as the next one covers it. Clicks pass through. */
+  .program-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background-color: rgb(0 0 0 / 0.5);
+    opacity: var(--after-opacity, 0);
+    pointer-events: none;
+  }
+</style>

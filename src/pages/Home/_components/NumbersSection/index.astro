@@ -8,7 +8,7 @@ import { cn } from '../../../../cn';
 import NumbersStatCard from './NumbersStatCard.astro';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -17,55 +17,59 @@ const n = t.numbers;
 ---
 
 <section id="impact" data-anim="section" class="px-2xl dk:py-6xl bg-white py-12">
-  <div class="mx-auto w-full max-w-328">
-    <div class="bg-main tb:px-10 relative overflow-hidden rounded-lg px-6 py-10">
-      <img
-        src="/home-assets/Numbers/vector.png"
-        alt=""
-        class="pointer-events-none absolute inset-0 size-full object-cover opacity-75"
-        loading="lazy"
-        aria-hidden="true"
-      />
+	<div class="mx-auto w-full max-w-328">
+		<div class="bg-main tb:px-10 relative overflow-hidden rounded-lg px-6 py-10">
+			<img
+				src="/home-assets/Numbers/vector.png"
+				alt=""
+				class="pointer-events-none absolute inset-0 size-full object-cover opacity-75"
+				loading="lazy"
+				aria-hidden="true"
+			/>
 
-      <div class="dk:flex-row dk:items-end dk:justify-between relative flex flex-col gap-10">
-        <div class={cn('flex max-w-90 flex-col gap-10', 'items-center tb:items-start')}>
-          <span
-            data-anim="meta"
-            class="dk:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
-          >
-            <WorldIcon class="dk:size-6 size-10" />
-          </span>
+			<div class="dk:flex-row dk:items-end dk:justify-between relative flex flex-col gap-10">
+				<div class={cn('flex max-w-90 flex-col gap-10', 'items-center tb:items-start')}>
+					<span
+						data-anim="meta"
+						class="dk:size-10 bg-light flex size-16 items-center justify-center rounded-full p-2"
+					>
+						<WorldIcon class="dk:size-6 size-10" />
+					</span>
 
-          <Copy
-            variant="slideFromBottom"
-            type="lines"
-            reverse
-            ease="power3.out"
-            duration={0.9}
-            delay={1}
-            stagger={0.1}
-            animateOnScroll={true}
-            start="top 80%"
-            class="w-full"
-          >
-            <p class="body-md-l tb:text-start text-center text-white">
-              {n.description}
-            </p>
-          </Copy>
-        </div>
+					<Copy
+						variant="slideFromBottom"
+						type="lines"
+						reverse
+						ease="power3.out"
+						duration={0.9}
+						delay={0.5}
+						delayMobile={0}
+						delayTablet={0}
+						stagger={0.1}
+						animateOnScroll={true}
+						trigger="#impact"
+						triggerMobile={true}
+						start="top 80%"
+						class="w-full"
+					>
+						<p class="body-md-l tb:text-start text-center text-white">
+							{n.description}
+						</p>
+					</Copy>
+				</div>
 
-        <div data-anim="stats" class="tb:grid-cols-3 grid flex-1 gap-8">
-          {n.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
-        </div>
-      </div>
-    </div>
-  </div>
+				<div data-anim="stats" class="tb:grid-cols-3 grid flex-1 gap-8">
+					{n.stats.map((stat) => <NumbersStatCard value={stat.value} label={stat.label} />)}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initNumbersSectionAnimation } from './animation';
+	import { initNumbersSectionAnimation } from './animation';
 
-  const boot = () => initNumbersSectionAnimation();
+	const boot = () => initNumbersSectionAnimation();
 
-  document.addEventListener('astro:page-load', boot);
+	document.addEventListener('astro:page-load', boot);
 </script>

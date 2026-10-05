@@ -6,7 +6,7 @@ import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -15,53 +15,56 @@ const a = t.action;
 ---
 
 <div class="gap-4xl flex flex-col">
-  <div class={cn('gap-sm flex items-center', 'justify-center tb:justify-start')} data-anim="label">
-    <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-    <p class="body-md-sb text-main">{a.label}</p>
-  </div>
+	<div class={cn('gap-sm flex items-center', 'justify-center tb:justify-start')} data-anim="label">
+		<span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
+		<p class="body-md-sb text-main">{a.label}</p>
+	</div>
 
-  <div class="gap-2xl tb:items-end dk:grid-cols-[minmax(0,46.875rem)_25rem] grid items-center">
-    <Copy
-      variant="slideFromBottom"
-      type="words"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={0}
-      stagger={0.2}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full max-w-187.5"
-    >
-      <h2
-        class={cn('text-main flex max-w-187.5 flex-col gap-sm', 'text-center tb:text-start')}
-      >
-        <span class="heading-eyebrow">{a.headingTop}</span>
-        <span class="flex flex-col">
-          <span class="section-heading tb:whitespace-nowrap uppercase">
-            {a.headingOpportunity}
-          </span>
-          <span
-            class="section-heading tb:whitespace-nowrap tb:pl-[1.6em] dk:pl-[2.35em] pl-[0.85em] uppercase"
-          >
-            {a.headingSustainable}
-          </span>
-        </span>
-      </h2>
-    </Copy>
-    <Copy
-      variant="slideFromBottom"
-      type="lines"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={1}
-      stagger={0.1}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full"
-    >
-      <p class="body-md-l text-gray tb:pb-sm">{a.subheading}</p>
-    </Copy>
-  </div>
+	<div class="gap-2xl tb:items-end dk:grid-cols-[minmax(0,46.875rem)_25rem] grid items-center">
+		<Copy
+			variant="slideFromBottom"
+			type="words"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={0}
+			delayMobile={0}
+			delayTablet={0}
+			stagger={0.2}
+			animateOnScroll={true}
+			trigger="#actions"
+			triggerMobile={true}
+			start="top 80%"
+			class="w-full max-w-187.5"
+		>
+			<h2 class={cn('text-main flex max-w-187.5 flex-col gap-sm', 'text-center tb:text-start')}>
+				<span class="heading-eyebrow">{a.headingTop}</span>
+				<span class="flex flex-col">
+					<span class="section-heading tb:whitespace-nowrap uppercase">
+						{a.headingOpportunity}
+					</span>
+					<span
+						class="section-heading tb:whitespace-nowrap tb:pl-[1.6em] dk:pl-[2.35em] pl-[0.85em] uppercase"
+					>
+						{a.headingSustainable}
+					</span>
+				</span>
+			</h2>
+		</Copy>
+		<Copy
+			variant="slideFromBottom"
+			type="lines"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={1}
+			stagger={0.1}
+			animateOnScroll={true}
+			trigger="#actions"
+			start="top 80%"
+			class="w-full"
+		>
+			<p class="body-md-l text-gray tb:pb-sm">{a.subheading}</p>
+		</Copy>
+	</div>
 </div>

@@ -6,7 +6,7 @@ import { useTranslations } from '../../../../i18n/utils';
 import AboutTagPill from './AboutTagPill.astro';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -17,40 +17,37 @@ const bottomTags = a.tags.slice(3);
 ---
 
 <div class="gap-6xl relative z-10 flex w-full flex-col items-start">
-  <div class="flex w-full justify-end">
-    <Copy
-      variant="slideFromBottom"
-      type="lines"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={1}
-      delayMobile={0}
-      delayTablet={0}
-      stagger={0.1}
-      animateOnScroll={true}
-      trigger="#about"
-      triggerMobile={true}
-      start="top 80%"
-      class="w-full max-w-[37.5rem]"
-    >
-      <p class="body-md-l text-gray">{a.description}</p>
-    </Copy>
-  </div>
+	<div class="flex w-full justify-end">
+		<Copy
+			variant="slideFromBottom"
+			type="lines"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={1}
+			stagger={0.1}
+			animateOnScroll={true}
+			trigger="#about"
+			start="top 80%"
+			class="w-full max-w-[37.5rem]"
+		>
+			<p class="body-md-l text-gray">{a.description}</p>
+		</Copy>
+	</div>
 
-  <!--
+	<!--
     Mobile/tablet: parent row + each block col → 2 columns of 3.
     Desktop: parent col + each block row → 2 rows of 3 (Figma Top / Bottom).
   -->
-  <div
-    data-anim="tags"
-    class="gap-lg flex w-full min-w-0 flex-row items-start dk:w-auto dk:flex-col"
-  >
-    <div class="gap-lg flex min-w-0 flex-col items-start dk:flex-row">
-      {topTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
-    </div>
-    <div class="gap-lg flex min-w-0 flex-col items-start dk:flex-row">
-      {bottomTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
-    </div>
-  </div>
+	<div
+		data-anim="tags"
+		class="gap-lg dk:w-auto dk:flex-col flex w-full min-w-0 flex-row items-start"
+	>
+		<div class="gap-lg dk:flex-row flex min-w-0 flex-col items-start">
+			{topTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+		</div>
+		<div class="gap-lg dk:flex-row flex min-w-0 flex-col items-start">
+			{bottomTags.map((tag) => <AboutTagPill label={tag.label} icon={tag.icon} />)}
+		</div>
+	</div>
 </div>

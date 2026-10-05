@@ -4,12 +4,13 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const T_LABEL = 0.1;
-const T_CTA = 0.18;
-
+/** Same cut as Copy: desktop trigger starts at 1025. */
+const DK_MIN = 1025;
+/** After the title Copy (`duration` 0.9). */
+const BUTTON_DELAY_DK = 1;
 function clearStrategicProgramsStyles(root: HTMLElement) {
   const scrollNodes = root.querySelectorAll(
-    '[data-anim="label-desktop"], [data-anim="label-mobile"], [data-anim="cta"], [data-anim="program-card"]',
+    '[data-anim="section-head"], [data-anim="label-desktop"], [data-anim="label-mobile"], [data-anim="cta"], [data-anim="program-card"]',
   );
   scrollNodes.forEach((el) => {
     (el as HTMLElement).removeAttribute('style');
@@ -63,74 +64,126 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       });
     };
 
-    /** Misma revelación por card en todos los breakpoints (scroll por elemento). */
-    const createProgramCardScrollTriggers = () =>
-      cards.map((card) =>
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top 70%',
-          end: 'bottom 20%',
-          onEnter: () => revealProgramCard(card),
-          onEnterBack: () => revealProgramCard(card),
-          onLeaveBack: () => hideProgramCard(card),
-        }),
-      );
+    const createCardTrigger = (card: HTMLElement) =>
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 80%',
+        onEnter: () => revealProgramCard(card),
+        onEnterBack: () => revealProgramCard(card),
+        onLeaveBack: () => hideProgramCard(card),
+      });
 
-    mm.add('(min-width: 1200px)', () => {
-      setInitialState();
+    const revealLabel = () => {
+      if (!labelTargets.length) return;
+      gsap.to(labelTargets, {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        stagger: 0.04,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    };
 
-      let labelIn = false;
-      let ctaIn = false;
+    const hideLabel = () => {
+      if (!labelTargets.length) return;
+      gsap.to(labelTargets, {
+        opacity: 0,
+        y: 18,
+        duration: 0.28,
+        ease: 'power2.in',
+        overwrite: true,
+      });
+    };
 
-      const handleThresholds = (p: number, immediate = false) => {
-        const d = immediate ? 0 : 0.56;
+    const revealCta = () => {
+      if (!cta) return;
+      gsap.to(cta, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', overwrite: true });
+    };
 
-        if (labelTargets.length) {
-          if (p >= T_LABEL && !labelIn) {
-            gsap.to(labelTargets, {
-              opacity: 1,
-              y: 0,
-              duration: d,
-              stagger: immediate ? 0 : 0.04,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-            labelIn = true;
-          } else if (p < T_LABEL && labelIn) {
-            gsap.to(labelTargets, {
-              opacity: 0,
-              y: 18,
-              duration: d,
-              stagger: immediate ? 0 : -0.03,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-            labelIn = false;
-          }
-        }
+    const hideCta = () => {
+      if (!cta) return;
+      gsap.to(cta, { opacity: 0, x: 20, duration: 0.28, ease: 'power2.in', overwrite: true });
+    };
 
-        if (cta) {
-          if (p >= T_CTA && !ctaIn) {
-            gsap.to(cta, { opacity: 1, x: 0, duration: d, ease: 'power2.out', overwrite: true });
-            ctaIn = true;
-          } else if (p < T_CTA && ctaIn) {
-            gsap.to(cta, { opacity: 0, x: 20, duration: d, ease: 'power2.in', overwrite: true });
-            ctaIn = false;
-          }
-        }
+    /**
+     * Cards stick in the center. Each one shrinks, tilts, and darkens
+     * as the next card covers it. The last card is not pinned.
+     */
+    const createStickyPins = (items: HTMLElement[]) => {
+      const triggers: ScrollTrigger[] = [];
+      const last = items[items.length - 1];
+      if (!last) return triggers;
+
+      items.forEach((card, index) => {
+        card.style.zIndex = String(index + 1);
+        if (index >= items.length - 1) return;
+
+        triggers.push(
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'center center',
+            endTrigger: last,
+            end: 'center center',
+            pin: true,
+            pinSpacing: false,
+            invalidateOnRefresh: true,
+          }),
+        );
+
+        const next = items[index + 1];
+        triggers.push(
+          ScrollTrigger.create({
+            trigger: next,
+            start: 'top bottom',
+            end: 'center center',
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              gsap.set(card, {
+                scale: 1 - progress * 0.25,
+                rotation: (index % 2 === 0 ? 5 : -5) * progress,
+                transformOrigin: 'center center',
+                '--after-opacity': progress,
+              });
+            },
+          }),
+        );
+      });
+
+      return triggers;
+    };
+
+    mm.add(`(min-width: ${DK_MIN}px)`, () => {
+      if (labelTargets.length) gsap.set(labelTargets, { opacity: 0, y: 18 });
+      if (cta) gsap.set(cta, { opacity: 0, x: 20 });
+      let buttonCall: gsap.core.Tween | null = null;
+
+      const playSequence = () => {
+        revealLabel();
+        buttonCall?.kill();
+        buttonCall = gsap.delayedCall(BUTTON_DELAY_DK, revealCta);
+      };
+
+      const resetSequence = () => {
+        buttonCall?.kill();
+        buttonCall = null;
+        hideLabel();
+        hideCta();
       };
 
       const st = ScrollTrigger.create({
         trigger: root,
         start: 'top 80%',
-        end: 'bottom 18%',
-        onUpdate: (self) => handleThresholds(self.progress),
+        onEnter: playSequence,
+        onEnterBack: playSequence,
+        onLeaveBack: resetSequence,
       });
 
-      handleThresholds(st.progress, true);
-      const cardTriggers = createProgramCardScrollTriggers();
+      const cardTriggers = createStickyPins(cards);
 
       return () => {
+        buttonCall?.kill();
         st.kill();
         cardTriggers.forEach((trigger) => trigger.kill());
 
@@ -138,60 +191,37 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
       };
     });
 
-    mm.add('(max-width: 1199px)', () => {
+    mm.add(`(max-width: ${DK_MIN - 1}px)`, () => {
       setInitialState();
 
-      const sectionTrigger = ScrollTrigger.create({
-        trigger: root,
-        start: 'top 78%',
-        end: 'bottom top',
-        onEnter: () => {
-          if (labelTargets.length) {
-            gsap.to(labelTargets, {
-              opacity: 1,
-              y: 0,
-              duration: 0.45,
-              stagger: 0.03,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-          }
-          if (cta)
-            gsap.to(cta, { opacity: 1, x: 0, duration: 0.42, ease: 'power2.out', overwrite: true });
-        },
-        onEnterBack: () => {
-          if (labelTargets.length) {
-            gsap.to(labelTargets, {
-              opacity: 1,
-              y: 0,
-              duration: 0.35,
-              stagger: 0.02,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-          }
-          if (cta)
-            gsap.to(cta, { opacity: 1, x: 0, duration: 0.32, ease: 'power2.out', overwrite: true });
-        },
-        onLeaveBack: () => {
-          if (labelTargets.length) {
-            gsap.to(labelTargets, {
-              opacity: 0,
-              y: 18,
-              duration: 0.28,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-          }
-          if (cta)
-            gsap.to(cta, { opacity: 0, x: 20, duration: 0.25, ease: 'power2.in', overwrite: true });
-        },
-      });
+      const labelTriggers = labelTargets.map((label) =>
+        ScrollTrigger.create({
+          trigger: label,
+          start: 'top 80%',
+          onEnter: () =>
+            gsap.to(label, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', overwrite: true }),
+          onEnterBack: () =>
+            gsap.to(label, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', overwrite: true }),
+          onLeaveBack: () =>
+            gsap.to(label, { opacity: 0, y: 18, duration: 0.28, ease: 'power2.in', overwrite: true }),
+        }),
+      );
 
-      const cardTriggers = createProgramCardScrollTriggers();
+      const ctaTrigger = cta
+        ? ScrollTrigger.create({
+            trigger: cta,
+            start: 'top 80%',
+            onEnter: revealCta,
+            onEnterBack: revealCta,
+            onLeaveBack: hideCta,
+          })
+        : null;
+
+      const cardTriggers = cards.map(createCardTrigger);
 
       return () => {
-        sectionTrigger.kill();
+        labelTriggers.forEach((trigger) => trigger.kill());
+        ctaTrigger?.kill();
         cardTriggers.forEach((trigger) => trigger.kill());
 
         clearStrategicProgramsStyles(root);

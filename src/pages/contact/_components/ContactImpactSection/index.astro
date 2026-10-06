@@ -27,6 +27,9 @@ const ci = t.contactPage.impact;
 			stagger={0.2}
 			animateOnScroll={true}
 			start="top 80%"
+			trigger="#contact-impact"
+			triggerMobile={true}
+			triggerTablet={true}
 			class="w-full min-w-0 flex-1"
 		>
 			<h2 class="font-fredericka text-main flex w-full flex-col uppercase">
@@ -48,10 +51,15 @@ const ci = t.contactPage.impact;
 			reverse
 			ease="power3.out"
 			duration={0.9}
-			delay={1}
+			delay={2.7}
+			delayMobile={0}
+			delayTablet={0}
 			stagger={0.1}
 			animateOnScroll={true}
 			start="top 80%"
+			trigger="#contact-impact"
+			triggerMobile={true}
+			triggerTablet={true}
 			class="dk:w-80 w-full"
 		>
 			<p class="body-md-l text-gray">{ci.description}</p>

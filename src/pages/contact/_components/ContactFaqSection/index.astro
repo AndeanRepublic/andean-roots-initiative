@@ -1,6 +1,8 @@
 ---
 import ButtonLink from '../../../../components/ButtonLink/index.astro';
 import Copy from '@styersonh/odyssey-motion/copy/astro';
+import ImageReveal from '@styersonh/odyssey-motion/image-reveal/astro';
+import Reveal from '@styersonh/odyssey-motion/reveal/astro';
 import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
@@ -20,38 +22,77 @@ const formId = t.contactPage.form.sectionId;
   <div class="dk:flex-row dk:items-start dk:gap-16 mx-auto flex w-full max-w-271 flex-col gap-10">
     <div class="dk:w-118.25 flex w-full shrink-0 flex-col gap-8">
       <div class="aspect-[610/552] overflow-hidden rounded-20px">
-        <img
-          src={faq.sideImageSrc}
-          alt={faq.sideImageAlt}
-          class="size-full object-cover"
-          loading="lazy"
-        />
+        <ImageReveal
+          variant="clipPathZoomOut"
+          directionTo="right"
+          duration={1.5}
+          scaleFrom={1.4}
+          start="top 75%"
+          startMobile="top 85%"
+          animateOnScroll={true}
+          class="size-full"
+        >
+          <img
+            src={faq.sideImageSrc}
+            alt={faq.sideImageAlt}
+            class="size-full object-cover"
+            loading="lazy"
+            data-image-reveal-item
+          />
+        </ImageReveal>
       </div>
 
-      <Copy
-        variant="slideFromBottom"
-        type="words"
-        reverse
-        ease="power3.out"
-        duration={0.9}
-        delay={0}
-        stagger={0.2}
-        animateOnScroll={true}
-        start="top 80%"
-        class="w-full"
-      >
-        <h2
-          class="font-montserrat text-main flex flex-col text-[1.75rem] leading-[1.2] font-black uppercase tb:text-[2rem]"
+      <div class="flex w-full flex-col gap-8" data-contact-faq-copy>
+        <Copy
+          variant="slideFromBottom"
+          type="words"
+          reverse
+          ease="power3.out"
+          duration={0.9}
+          delay={0}
+          stagger={0.2}
+          animateOnScroll={true}
+          start="top 80%"
+          trigger="[data-contact-faq-copy]"
+          class="w-full"
         >
-          <span>{faq.titleTop}</span>
-          <span>{faq.titleBottom}</span>
-        </h2>
-      </Copy>
+          <h2
+            class="font-montserrat text-main flex flex-col text-[1.75rem] leading-[1.2] font-black uppercase tb:text-[2rem]"
+          >
+            <span>{faq.titleTop}</span>
+            <span>{faq.titleBottom}</span>
+          </h2>
+        </Copy>
 
-      <ButtonLink href={`#${formId}`} text={faq.ctaText} />
+        <Reveal
+          from="bottom"
+          reverse
+          ease="power3.out"
+          duration={0.8}
+          delay={2}
+          distance={28}
+          animateOnScroll={true}
+          start="top 80%"
+          trigger="[data-contact-faq-copy]"
+          class="w-fit"
+        >
+          <ButtonLink href={`#${formId}`} text={faq.ctaText} />
+        </Reveal>
+      </div>
     </div>
 
-    <div class="flex w-full min-w-0 flex-col gap-6">
+    <Reveal
+      from="bottom"
+      reverse
+      ease="power3.out"
+      duration={0.75}
+      stagger={0.12}
+      distance={28}
+      animateOnScroll={true}
+      start="top 80%"
+      startMobile="top 88%"
+      class="flex w-full min-w-0 flex-col gap-6"
+    >
       {
         faq.items.map((item) => (
           <details class="faq-item bg-light group rounded-lg">
@@ -71,11 +112,11 @@ const formId = t.contactPage.form.sectionId;
                 <span class="hidden group-open:inline">−</span>
               </span>
             </summary>
-            <p class="body-md-l text-gray px-6 pb-6">{item.a}</p>
+            <div class="body-md-l text-gray px-6 pb-6">{item.a}</div>
           </details>
         ))
       }
-    </div>
+    </Reveal>
   </div>
 </section>
 

@@ -1,4 +1,7 @@
 ---
+import Copy from '@styersonh/odyssey-motion/copy/astro';
+import ImageReveal from '@styersonh/odyssey-motion/image-reveal/astro';
+import Reveal from '@styersonh/odyssey-motion/reveal/astro';
 import MailIcon from '../../../../icons/MailIcon.astro';
 import PhoneIcon from '../../../../icons/PhoneIcon.astro';
 import UpRightArrowIcon from '../../../../icons/UpRightArrowIcon.astro';
@@ -18,16 +21,44 @@ const cf = t.contactPage.form;
 <section id={cf.sectionId} class="px-2xl dk:py-6xl bg-white py-12">
   <div
     class="dk:flex-row dk:items-stretch dk:justify-center dk:gap-6 mx-auto flex w-full max-w-328 flex-col gap-6"
-    data-anim="section"
   >
-    <div class="bg-light dk:max-w-132.5 dk:h-full flex w-full flex-col gap-8 rounded-20px p-6">
-      <h2 class="heading-md-sb text-black">{cf.title}</h2>
+    <div
+      class="bg-light dk:max-w-132.5 dk:h-full flex w-full flex-col gap-8 rounded-20px p-6"
+      data-contact-form-card
+    >
+      <Copy
+        variant="slideFromBottom"
+        type="words"
+        reverse
+        ease="power3.out"
+        duration={0.9}
+        delay={0}
+        stagger={0.2}
+        animateOnScroll={true}
+        start="top 80%"
+        trigger="[data-contact-form-card]"
+        class="w-full"
+      >
+        <h2 class="heading-md-sb text-black">{cf.title}</h2>
+      </Copy>
 
       <form class="dk:flex-1 flex flex-col justify-between gap-8" data-contact-form novalidate>
         <div aria-live="polite" class="body-sm-l text-gray empty:hidden" data-contact-form-status>
         </div>
 
-        <div class="flex flex-col gap-4">
+        <Reveal
+          from="bottom"
+          reverse
+          ease="power3.out"
+          duration={0.75}
+          delay={1.6}
+          stagger={0.12}
+          distance={28}
+          animateOnScroll={true}
+          start="top 80%"
+          trigger="[data-contact-form-card]"
+          class="flex flex-col gap-4"
+        >
           <label class="flex flex-col gap-3">
             <span class="body-md-sb text-black">{cf.fullNameLabel}</span>
             <input
@@ -72,7 +103,7 @@ const cf = t.contactPage.form;
               class="body-md-l text-black placeholder:text-gray min-h-32.25 resize-none rounded-sm bg-white p-2.5 outline-none"
             ></textarea>
           </label>
-        </div>
+        </Reveal>
 
         <input type="hidden" name="topic" value="general" />
 
@@ -81,43 +112,80 @@ const cf = t.contactPage.form;
           <input id="contact-company" name="_honey" type="text" tabindex="-1" autocomplete="off" />
         </div>
 
-        <button
-          type="submit"
-          data-contact-form-submit
-          class="bg-main gap-4 rounded-full py-2 pr-2 pl-6 text-white inline-flex w-auto shrink-0 cursor-pointer items-center self-start disabled:cursor-not-allowed disabled:opacity-40"
+        <Reveal
+          from="bottom"
+          reverse
+          ease="power3.out"
+          duration={0.75}
+          delay={2.9}
+          distance={28}
+          animateOnScroll={true}
+          start="top 80%"
+          trigger="[data-contact-form-card]"
+          class="self-start"
         >
-          <span class="body-md-sb text-white" data-contact-form-submit-label>{cf.submitLabel}</span>
-          <span class="flex items-center justify-center rounded-full bg-white p-2">
-            <UpRightArrowIcon class="size-5 text-main" />
-          </span>
-        </button>
+          <button
+            type="submit"
+            data-contact-form-submit
+            class="bg-main gap-4 rounded-full py-2 pr-2 pl-6 text-white inline-flex w-auto shrink-0 cursor-pointer items-center self-start disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <span class="body-md-sb text-white" data-contact-form-submit-label>{cf.submitLabel}</span>
+            <span class="flex items-center justify-center rounded-full bg-white p-2">
+              <UpRightArrowIcon class="size-5 text-main" />
+            </span>
+          </button>
+        </Reveal>
       </form>
     </div>
 
     <div class="dk:max-w-132.5 flex w-full flex-col gap-6">
       <div class="dk:h-126 h-70 overflow-hidden rounded-20px">
-        <img
-          src={cf.imageSrc}
-          alt={cf.imageAlt}
-          class="size-full object-cover"
-          loading="lazy"
-        />
+        <ImageReveal
+          variant="clipPathZoomOut"
+          directionTo="left"
+          duration={1.5}
+          scaleFrom={1.4}
+          start="top 80%"
+          startMobile="top 85%"
+          animateOnScroll={true}
+          class="size-full"
+        >
+          <img
+            src={cf.imageSrc}
+            alt={cf.imageAlt}
+            class="size-full object-cover"
+            loading="lazy"
+            data-image-reveal-item
+          />
+        </ImageReveal>
       </div>
 
-      <div class="bg-light flex flex-col gap-4 rounded-20px p-6">
-        <a href={cf.phoneHref} class="gap-4 inline-flex items-end">
-          <PhoneIcon class="size-9 text-black" />
-          <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
-            {cf.phone}
-          </span>
-        </a>
-        <a href={cf.emailHref} class="gap-4 inline-flex items-start">
-          <MailIcon class="size-9 text-black" />
-          <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
-            {cf.email}
-          </span>
-        </a>
-      </div>
+      <Reveal
+        from="bottom"
+        reverse
+        ease="power3.out"
+        duration={0.75}
+        stagger={0.1}
+        distance={24}
+        animateOnScroll={true}
+        start="top 85%"
+        class="w-full"
+      >
+        <div class="bg-light flex flex-col gap-4 rounded-20px p-6">
+          <a href={cf.phoneHref} class="gap-4 inline-flex items-end">
+            <PhoneIcon class="size-9 text-black" />
+            <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
+              {cf.phone}
+            </span>
+          </a>
+          <a href={cf.emailHref} class="gap-4 inline-flex items-start">
+            <MailIcon class="size-9 text-black" />
+            <span class="font-manrope text-[1.25rem] leading-normal font-light text-black">
+              {cf.email}
+            </span>
+          </a>
+        </div>
+      </Reveal>
     </div>
   </div>
 </section>
@@ -227,10 +295,3 @@ const cf = t.contactPage.form;
   }
 </script>
 
-<script>
-  import { initContactFormSectionAnimation } from './animation';
-
-  const init = () => initContactFormSectionAnimation();
-
-  document.addEventListener('astro:page-load', init);
-</script>

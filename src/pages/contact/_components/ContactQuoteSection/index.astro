@@ -1,5 +1,7 @@
 ---
 import Copy from '@styersonh/odyssey-motion/copy/astro';
+import ImageReveal from '@styersonh/odyssey-motion/image-reveal/astro';
+import Reveal from '@styersonh/odyssey-motion/reveal/astro';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
@@ -16,7 +18,10 @@ const q = t.contactPage.quote;
 <section id="contact-quote" class="px-2xl dk:py-6xl bg-white py-12">
   <div class="bg-light rounded-20px mx-auto w-full max-w-271 overflow-hidden p-6 tb:p-10">
     <div class="dk:flex-row dk:items-end dk:justify-end dk:gap-12 flex flex-col-reverse items-end gap-8">
-      <div class="dk:max-w-174.25 relative flex w-full flex-col items-end gap-4">
+      <div
+        class="dk:max-w-174.25 relative flex w-full flex-col items-end gap-4"
+        data-contact-quote-text
+      >
         <span
           class="font-mozilla-text pointer-events-none absolute -top-28 right-0 text-[400px] leading-none font-medium text-black/10 dk:-top-58.5"
           aria-hidden="true"
@@ -34,6 +39,7 @@ const q = t.contactPage.quote;
           stagger={0.1}
           animateOnScroll={true}
           start="top 80%"
+          trigger="[data-contact-quote-text]"
           class="w-full"
         >
           <blockquote class="font-montserrat text-gray w-full text-right text-[1.5rem] leading-[1.2] font-medium tb:text-[2rem]">
@@ -41,21 +47,45 @@ const q = t.contactPage.quote;
           </blockquote>
         </Copy>
 
-        <div class="flex w-31.25 flex-col items-end">
+        <Reveal
+          from="bottom"
+          reverse
+          ease="power3.out"
+          duration={0.7}
+          delay={1.3}
+          stagger={0.08}
+          distance={20}
+          animateOnScroll={true}
+          start="top 80%"
+          trigger="[data-contact-quote-text]"
+          class="flex w-31.25 flex-col items-end"
+        >
           <p class="body-md-l text-black w-full text-center font-bold">{q.attributionName}</p>
           <p class="w-full text-right text-[0.75rem] leading-normal font-semibold text-gray">
             {q.attributionRole}
           </p>
-        </div>
+        </Reveal>
       </div>
 
       <div class="dk:h-95 dk:w-100.25 h-70 w-full overflow-hidden rounded-lg">
-        <img
-          src={q.portraitSrc}
-          alt={q.portraitAlt}
-          class="size-full object-cover"
-          loading="lazy"
-        />
+        <ImageReveal
+          variant="clipPathZoomOut"
+          directionTo="left"
+          duration={1.5}
+          scaleFrom={1.4}
+          start="top 80%"
+          startMobile="top 85%"
+          animateOnScroll={true}
+          class="size-full"
+        >
+          <img
+            src={q.portraitSrc}
+            alt={q.portraitAlt}
+            class="size-full object-cover"
+            loading="lazy"
+            data-image-reveal-item
+          />
+        </ImageReveal>
       </div>
     </div>
   </div>

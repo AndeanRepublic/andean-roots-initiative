@@ -24,7 +24,11 @@ const t = useTranslations(lang);
 				alt=""
 				width="520"
 				height="407"
-				class="pointer-events-none absolute top-0 left-0 max-w-[40%] select-none"
+				class={cn(
+					'pointer-events-none absolute select-none',
+					'dk:top-0 dk:left-0 dk:right-auto left-auto right-0',
+					'max-w-[60%] dk:max-w-[40%] ',
+				)}
 				aria-hidden="true"
 			/>
 			<AboutSectionHeading lang={lang} />
@@ -43,7 +47,7 @@ const t = useTranslations(lang);
 					duration={1.5}
 					scaleFrom={1.4}
 					directionTo="bottom"
-					start="top 75%"
+					start="top 90%"
 					startMobile="top 85%"
 					animateOnScroll={true}
 					class="absolute inset-0"

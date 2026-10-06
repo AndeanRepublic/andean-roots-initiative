@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 /** Same cut as Copy: desktop trigger starts at 1025. */
 const DK_MIN = 1025;
 /** Desktop: after the paragraph Copy (`delay` 1 + `duration` 0.9). */
-const NUMBERS_DELAY_DK = 1;
+const NUMBERS_DELAY_DK = 1.2;
 
 type CounterParts = {
   prefix: string;

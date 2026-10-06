@@ -386,6 +386,8 @@ const en: Translations = {
     },
     team: {
       backgroundWord: 'TEAM',
+      titleLine1: 'THE TEAM',
+      titleLine2: 'BEHIND THE INITIATIVE',
       label: 'THE TEAM BEHIND THE INITIATIVE',
       description:
         'A team that believes in the talent of the Andes and works to turn it into real opportunities.',

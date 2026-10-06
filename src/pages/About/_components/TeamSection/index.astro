@@ -1,114 +1,147 @@
 ---
+import Copy from '@styersonh/odyssey-motion/copy/astro';
+import { cn } from '../../../../cn';
 import type { Locale } from '../../../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 const t = useTranslations(lang);
 const tm = t.aboutPage.team;
+const lastMemberIndex = tm.members.length - 1;
 ---
 
-<section id="about-team" class="px-2xl dk:py-6xl relative overflow-hidden bg-white py-12">
-  <p
-    class="text-light tb:top-12 tb:right-4 tb:text-[14rem] tb:tracking-[-0.65rem] dk:top-14 dk:right-16 dk:text-[20rem] dk:tracking-[-0.8rem] pointer-events-none absolute top-10 -right-2 z-0 block text-[7rem] leading-[0.8] font-semibold tracking-[-0.35rem]"
-    aria-hidden="true"
-    data-anim="bg-word"
-  >
-    {tm.backgroundWord}
-  </p>
+<section
+	id="about-team"
+	class="tb:px-6 dk:px-16 dk:py-20 relative overflow-hidden bg-white px-4 py-12"
+>
+	<div class="dk:gap-16 relative mx-auto flex w-full max-w-328 flex-col gap-8">
+		<Copy
+			variant="slideFromBottom"
+			type="words"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={0}
+			stagger={0.2}
+			animateOnScroll={true}
+			start="top 80%"
+			startMobile="top 70%"
+			class="w-full"
+		>
+			<h2 class="font-fredericka text-main font-normal uppercase">
+				<span
+					class={cn(
+						'block text-[2.5rem] tb:text-[4rem] dk:text-[6.25rem]',
+						'dk:leading-[1.1] leading-[1.15]',
+					)}
+				>
+					{tm.titleLine1}
+				</span>
+				<span
+					class={cn(
+						'block text-[1.35rem] leading-[1.2] tb:text-[2rem] dk:text-[3rem]',
+						'dk:leading-[1.1]',
+					)}
+				>
+					{tm.titleLine2}
+				</span>
+			</h2>
+		</Copy>
 
-  <div class="dk:gap-16 relative mx-auto flex w-full max-w-328 flex-col gap-8">
-    <div class="max-w-100 pt-4" data-anim="intro">
-      <div class="gap-sm flex items-center" data-anim="label">
-        <span class="bg-main size-2 rounded-full" aria-hidden="true"></span>
-        <p class="body-md-sb text-main">{tm.label}</p>
-      </div>
-      <p class="body-md-l text-gray mt-10" data-anim="description" data-team-text-words>
-        {tm.description}
-      </p>
-    </div>
+		<div
+			class="tb:grid tb:grid-cols-2 dk:grid-cols-4 dk:items-start dk:gap-6 flex flex-col gap-6"
+			data-anim="cards"
+		>
+			{
+				tm.members.map((member, index) => {
+					const card = (
+						<article
+							class:list={[
+								'tb:w-full relative w-3/4',
+								member.offsetClass ?? '',
+								{
+									'tb:mx-0 mr-auto': index % 2 === 0,
+									'tb:mx-0 ml-auto': index % 2 !== 0,
+								},
+							]}
+							data-anim="member-card"
+						>
+							<div class="relative aspect-[310/380] w-full overflow-hidden rounded-lg" data-anim="member-image-wrap">
+								<img
+									src={member.imageSrc}
+									alt={member.imageAlt}
+									class="size-full object-cover"
+									loading="lazy"
+									data-anim="member-image"
+								/>
+							</div>
 
-    <div
-      class="tb:grid tb:grid-cols-2 dk:grid-cols-4 dk:items-end dk:gap-6 flex flex-col gap-6"
-      data-anim="cards"
-    >
-      {
-        tm.members.map((member, index) => (
-          <article
-            class:list={[
-              'tb:w-full relative w-3/4',
-              member.offsetClass ?? '',
-              {
-                'tb:mx-0 mr-auto': index % 2 === 0,
-                'tb:mx-0 ml-auto': index % 2 !== 0,
-              },
-            ]}
-            data-anim="member-card"
-          >
-            <div class="relative h-115 overflow-hidden rounded-lg" data-anim="member-image-wrap">
-              <img
-                src={member.imageSrc}
-                alt={member.imageAlt}
-                class="size-full object-cover"
-                loading="lazy"
-                data-anim="member-image"
-              />
-            </div>
+							<div
+								class="absolute right-4 bottom-4 left-4 flex items-center gap-6 rounded-2xl bg-black/45 px-4 py-2 backdrop-blur-md"
+								data-anim="member-caption"
+							>
+								<div class="flex-1 text-white">
+									<p class="text-[1.125rem] leading-[1.4] font-semibold">{member.name}</p>
+									<p class="body-sm-l text-light">{member.role}</p>
+								</div>
+								<span class="body-md-sb text-light flex size-10 items-center justify-center rounded-full bg-white/10">
+									IG
+								</span>
+							</div>
+						</article>
+					);
 
-            <div
-              class="absolute right-4 bottom-4 left-4 flex items-center gap-6 rounded-2xl bg-black/45 px-4 py-2 backdrop-blur-md"
-              data-anim="member-caption"
-            >
-              <div class="flex-1 text-white">
-                <p class="text-[1.125rem] leading-[1.4] font-semibold">{member.name}</p>
-                <p class="body-sm-l text-light">{member.role}</p>
-              </div>
-              <span class="body-md-sb text-light flex size-10 items-center justify-center rounded-full bg-white/10">
-                IG
-              </span>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+					if (index !== lastMemberIndex) return card;
 
-    <div class="flex items-center justify-end gap-4" data-anim="controls">
-      <button
-        type="button"
-        aria-label={tm.slider.prevAriaLabel}
-        class="border-main text-main flex size-10 items-center justify-center rounded-full border"
-        data-anim="control-button"
-        data-team-control-hover
-      >
-        &larr;
-      </button>
+					return (
+						<div class="dk:flex dk:w-full dk:flex-col dk:items-end dk:gap-10 contents">
+							{card}
+							<div
+								class="tb:col-span-2 flex w-full items-center justify-end gap-4"
+								data-anim="controls"
+							>
+								<button
+									type="button"
+									aria-label={tm.slider.prevAriaLabel}
+									class="border-main text-main flex size-10 items-center justify-center rounded-full border"
+									data-anim="control-button"
+									data-team-control-hover
+								>
+									&larr;
+								</button>
 
-      <p class="body-md-sb text-main" data-anim="counter">
-        {tm.slider.current}
-        <span class="body-md-l text-gray">- {tm.slider.total}</span>
-      </p>
+								<p class="body-md-sb text-main" data-anim="counter">
+									{tm.slider.current}
+									<span class="body-md-l text-gray">- {tm.slider.total}</span>
+								</p>
 
-      <button
-        type="button"
-        aria-label={tm.slider.nextAriaLabel}
-        class="bg-main flex size-10 items-center justify-center rounded-full text-white"
-        data-anim="control-button"
-        data-team-control-hover
-      >
-        &rarr;
-      </button>
-    </div>
-  </div>
+								<button
+									type="button"
+									aria-label={tm.slider.nextAriaLabel}
+									class="bg-main flex size-10 items-center justify-center rounded-full text-white"
+									data-anim="control-button"
+									data-team-control-hover
+								>
+									&rarr;
+								</button>
+							</div>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initTeamSectionAnimation } from './animation';
+	import { initTeamSectionAnimation } from './animation';
 
-  const init = () => initTeamSectionAnimation();
+	const init = () => initTeamSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

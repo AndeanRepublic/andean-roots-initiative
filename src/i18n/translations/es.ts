@@ -389,6 +389,8 @@ const es = {
     },
     team: {
       backgroundWord: 'TEAM',
+      titleLine1: 'EL EQUIPO',
+      titleLine2: 'DETRÁS DE LA INICIATIVA',
       label: 'EL EQUIPO DETRÁS DE LA INICIATIVA',
       description:
         'Un equipo que cree en el talento de los Andes y trabaja para convertirlo en oportunidades reales.',

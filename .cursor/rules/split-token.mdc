@@ -1,0 +1,44 @@
+---
+description: Split Figma composite utilities into cn() groups with explicit rem breakpoints (split-token pattern)
+globs: src/**/*.astro
+alwaysApply: false
+---
+
+# Split token (`split-token`)
+
+When styling matches a **composite utility** from `src/styles/figma_var.css` (e.g. `heading-lg-sb`, `body-md-l`, or bundled spacing/radius patterns), **decompose it** into Tailwind + `cn()` instead of using that single class—especially if it would **conflict** with other utilities or you need **explicit** `tb:` / `dk:` control.
+
+## Pattern
+
+1. **Look up** the composite class in `figma_var.css` (`@layer utilities` and related `@theme` / `:root` rules).
+2. **Split** into separate `cn()` string arguments. **Order matters for `cn()` / `tailwind-merge`:** utilities like `text-[…rem]` (font-size) share a merge group with `leading-*`. If `leading-*` is listed **before** `text-[…rem]`, merge **drops** `leading-*`. Put **responsive `text-[…rem]` first**, then **`font-*` / `leading-*` / color** in a later argument (or list `text-[…rem]` before `leading-*` in a single string).
+3. **Values in `rem`:** for sizes that come from `--num-*` in `@theme`, use **literal rem**, not `var(--num-*)` in class names: `px ÷ 16` (e.g. `30px` → `1.875rem`, `42px` → `2.625rem`, `56px` → `3.5rem`).
+
+## Typography example
+
+Composite `heading-lg-sb` maps to Nunito Sans, semibold, line-height, and font size steps tied to `--text-56` / `--num-30|42|56`. Prefer (sizes **first** so `leading-*` is not stripped by merge):
+
+```astro
+class={cn(
+  'text-[1.875rem] tb:text-[2.625rem] dk:text-[3.5rem]',
+  'font-nunito-sans font-semibold leading-none tracking-normal text-white',
+)}
+```
+
+Use `leading-[120%]` when matching Figma headings exactly; `leading-none` is common for **display numerals** to tighten vertical space.
+
+## Other tokens
+
+Apply the **same split** when a Figma utility bundles several concerns or responsive steps:
+
+- **Spacing** (`padding`, `margin`, `gap`): static alignment in one argument; responsive `*-[]rem` steps in another, derived from the matching `--num-*` definitions.
+- **Radius / width / height** that change by breakpoint in the design system: same `base tb: dk:` chain with rem from primitives.
+- **Color + type:** keep color utilities with the “static” group; keep responsive size in its own group.
+
+## Breakpoints
+
+Use project Tailwind names from `src/styles/figma_var.css` `@theme` (`tb`, `dk`, `dk-lg`, `mb`). Note: some CSS variables in `:root` use **different min-widths** (e.g. `1440px`) than `dk:` (`1200px`); when fidelity matters, add an explicit variant (e.g. `min-[1440px]:`) for that step.
+
+## When a single composite class is fine
+
+If there is **no merge conflict** and **no need** to override part of the bundle, using the existing utility from `figma_var.css` is still acceptable—this rule applies when you **split** for control or consistency with the pattern above.

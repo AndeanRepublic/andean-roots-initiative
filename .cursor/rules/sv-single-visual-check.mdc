@@ -1,0 +1,18 @@
+---
+description: One visual check when building a UI section, then stop
+alwaysApply: true
+---
+
+# Una sola revisión visual
+
+Al implementar o corregir una sección de UI, cierra así:
+
+1. Escribe el layout y enganchalo a la página.
+2. Si la ruta da 500 y el build pasa, reinicia el dev server una sola vez. Si responde 200, sigue.
+3. Una captura de escritorio y una de móvil, comparadas con el frame.
+4. Corrige solo lo que se vea mal en esas dos capturas (texto cortado, foto girada al revés, color distinto).
+5. Para y di que está listo.
+
+En esa pasada no midas píxeles, no abras Chrome por depuración, no recortes zonas, no parchees `node_modules` y no repitas el mismo diagnóstico. Si algo no cuadra y no se ve en la captura, dilo y espera.
+
+Cierre: «Listo. Revisé 1280 y 375; el titular y el collage coinciden con el frame.»

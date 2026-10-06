@@ -1,0 +1,69 @@
+---
+description: >-
+  Split selected Figma text tokens (heading-sm-sb, body-md-r, display-lg, …)
+  into Tailwind font / text-[mobile] tb:text-[…] dk:text-[…] / leading
+  / color lines. Trigger when the user says stt, split-text-token, or asks to
+  desmembrar/expand a heading-* or body-* class.
+alwaysApply: false
+---
+
+# Split text token (stt)
+
+Rewrite **only the selected** `className` / `cn()` styles. Do not edit other code.
+
+## Speed (mandatory)
+
+- Do **not** run `tsc`, lint, tests, or any verification.
+- Ignore frontend-rules typecheck/lint for this task.
+- Do **not** change layout, spacing, or DOM. Replace the token; keep every other class.
+
+## Tokens
+
+Classes like `heading-sm-sb`, `heading-lg-b`, `body-md-r`, `body-lg-m`, `display-xl`.
+
+Look up the definition in `src/styles/figma_var.css` (`@layer utilities`). Do not guess sizes.
+
+## Expand into these `cn()` lines (in this order)
+
+1. **Font line** — all `font-*`: family then weight (`"font-montserrat font-semibold"`).
+2. **Size line** — `"text-[Npx] tb:text-[Npx] dk:text-[Npx]"`.
+3. **Leading line** — `"leading-[130%]"` (use the CSS `line-height` as-is: `%`, `1`, `110%`, …).
+4. **Color line** — only if a `text-*` color already exists (`"text-gray-900"`). Do not invent a color.
+
+Then keep the rest of the original classes (layout, clamp, cursor, …) after these lines.
+
+Wrap with `cn(...)`. If `cn` is missing, add `import { cn } from "@/app/utils/cn";`.
+
+## Maps
+
+**Family:** `--font-montserrat` → `font-montserrat`; `--font-fraunces` → `font-fraunces`; `--font-black-marker` → `font-black-marker`; `--font-lora` → `font-lora`; `--font-urbanist` → `font-urbanist`.
+
+**Weight:** `400` → `font-normal`; `500` → `font-medium`; `600` → `font-semibold`; `700` → `font-bold`; `800` → `font-extrabold`.
+
+**Size:** `font-size: var(--text-22)` → resolve `--text-22` in the same file:
+
+- `:root` default → base `text-[…]`
+- `@media (width >= 744px)` → `tb:text-[…]`
+- `@media (width >= 1200px)` → `dk:text-[…]`
+- `@media (width >= 1700px)` → `dk-lg:text-[…]` when that step exists
+
+Follow `--text-*` → `--num-*` → pixel value (`--num-15: 15px` → `15px`). Use `px` in the class, not `rem`. Base first, then `tb`, then `dk`.
+
+Delete the token class (`heading-sm-sb`, …) after expanding.
+
+## Example
+
+```tsx
+// before
+<h3 className="flex-1 heading-sm-sb text-gray-900 line-clamp-2 break-words cursor-default">
+
+// after (heading-sm-sb → montserrat 600, --text-22 = 15 / 18 / 22, leading 130%)
+<h3
+  className={cn(
+    "flex-1  line-clamp-2 break-words cursor-default",
+    "font-montserrat font-semibold text-gray-900",
+    "text-[15px] tb:text-[18px] dk:text-[22px]",
+    "leading-[130%]",
+  )}
+>
+```

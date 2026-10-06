@@ -1,0 +1,13 @@
+---
+description: Home content must be centralized in src/data/home-content.ts
+alwaysApply: true
+---
+
+# Home Content Source Of Truth
+
+When working on the Home page:
+
+- Store and update section copy/content in `src/data/home-content.ts`.
+- Avoid hardcoding user-facing text directly inside Home components.
+- Home components should consume text/content via imports from `src/data/home-content.ts`.
+- If new Home sections are added, extend `src/data/home-content.ts` first and then wire components to it.

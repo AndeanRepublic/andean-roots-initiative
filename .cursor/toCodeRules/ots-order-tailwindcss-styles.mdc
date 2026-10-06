@@ -1,0 +1,145 @@
+---
+description: >-
+  Order selected Tailwind className strings with cn(): never one class alone
+  on a line; group by category; property + tb:/dk: variants stay together.
+  Trigger when the user says ordenar, ots, order-tailwindcss-styles, or asks
+  to sort/group Tailwind classes.
+alwaysApply: false
+---
+
+# Order Tailwind CSS styles
+
+Rewrite **only the selected** `className` / `cn()` styles. Do not edit other code.
+
+**Skip this rule when there are fewer than 10 classes.** A short `className` is already readable — do not wrap it in `cn()` or split it onto multiple lines. Apply this rewrite only when the selected string has 10 or more Tailwind classes.
+
+## Speed (mandatory)
+
+- Do **not** run `tsc`, lint, tests, or any verification.
+- Ignore frontend-rules typecheck/lint for this task.
+- Do **not** change class values, tokens, breakpoints, or DOM. Reorder and wrap only.
+
+## How to rewrite
+
+1. Wrap with `cn(...)`. If `cn` is missing in the file, add `import { cn } from "@/app/utils/cn";`.
+2. **PRIORITY — never a single class on a `cn()` argument.** `"relative"`, `"w-full"`, `"gap-10"`, `"dk:px-20"`, `"text-[1.5rem]"`, `"leading-[145%]"`, `"tb:bottom-[0.125rem]"` alone are **forbidden**. Merge the orphan into the **previous or next** argument (same category if possible, else the neighboring line). This rule **beats** splitting by property when a split would leave one class alone.
+3. Walk categories in order (below). Same-category classes without breakpoints may share a line.
+4. **A property and all of its variants stay on one line** when that line has **≥ 2 classes** total, or when merging keeps variants with their property: `text-[15px] tb:text-[18px] dk:text-[22px]`. Never split variants across lines (`"text-[15px]"`, `"tb:text-[18px]"`, `"dk:text-[22px]"`).
+5. Prefer one argument per spacing property (`gap` / `px` / `py`) **only if each line still has ≥ 2 classes** (e.g. `"px-8 tb:px-14"`). If `pb-[7.5rem]` would sit alone, merge it with `pt-*` or other spacing on that block.
+6. One `w-*` and one `h-*` may share the sizing line. Do not split `"dk:w-full"` and `"dk:h-[376px]"` into two arguments.
+7. Keep every original class.
+
+```tsx
+// ❌ NEVER — orphan lines
+cn(
+  "relative",
+  "hidden dk:flex dk:flex-col dk:items-start",
+  "w-full",
+  "dk:px-20",
+  "dk:py-[7.5rem]",
+)
+
+// ✅ — every argument has ≥ 2 classes
+cn(
+  "relative w-full",
+  "hidden dk:flex dk:flex-col dk:items-start",
+  "dk:px-20 dk:py-[7.5rem]",
+)
+```
+
+## Category order
+
+### 1. Visual (prefer first)
+
+`bg-*` · `rounded-*` · `border-*` / `divide-*` / `ring-*` · `shadow-*` / `opacity-*` / `blur-*` · `filter` / `backdrop-*` · `transition-*` / `duration-*` / `ease-*` / `animate-*` · `translate-*` / `rotate-*` / `scale-*` / `origin-*`
+
+### 2. Layout
+
+`relative` / `absolute` / `fixed` / `sticky` · `inset-*` · `top-*` / `right-*` / `bottom-*` / `left-*` · `z-*` · `overflow-*` / `truncate`
+
+Inner: `position` → `inset` → `top` → `right` → `bottom` → `left` → `z-*` → `overflow-*`
+
+Do **not** put `hidden` / `block` / `inline` / `contents` here — those are display and belong on the flex/grid line.
+
+### 3. Flexbox & grid / display (one line)
+
+`hidden` / `block` / `inline` / `contents` · `flex` / `inline-flex` / `grid` · `flex-col` / `flex-row` / `flex-wrap` · `grid-cols-*` · `items-*` · `justify-*` · `content-*` / `place-*` · `self-*` · `order-*` · `flex-1` / `grow` / `shrink` / `basis-*`
+
+`hidden`, `block`, and responsive display toggles (`dk:flex`, `dk:hidden`, `dk:block`, …) live on **this** line with flex/grid — never alone, and never only on the layout line with `relative` without merging if that would orphan `relative`.
+
+```tsx
+// ❌ WRONG — hidden stuck on layout; orphans
+"relative hidden w-full",
+"dk:flex dk:flex-col dk:items-start",
+
+// ✅ RIGHT
+"relative w-full",
+"hidden dk:flex dk:flex-col dk:items-start",
+```
+
+### 4. Spacing
+
+`gap-*` / `space-*` · `px-*` · `py-*` · other `p-*` / `m-*`. Prefer separate lines when each has ≥ 2 classes; otherwise merge spacing onto one line.
+
+### 5. Sizing
+
+`w-*` / `min-w-*` / `max-w-*` · `h-*` / `min-h-*` / `max-h-*` · `size-*` · `aspect-*`
+
+### 6. Typography
+
+- **Font:** `font-montserrat font-semibold` (merge with size/leading/color if any of those would be alone)
+- **Size + variants:** `text-[15px] tb:text-[18px] dk:text-[22px]`
+- **Leading / color / clamp / break:** merge so no singleton lines
+
+### 7. Leftover
+
+`cursor-*` / `pointer-events-*` / `select-*` · unknown — attach to an existing line; never alone.
+
+## Examples
+
+### Layout / flex / sizing
+
+```tsx
+className={cn(
+  "absolute top-0 right-0 left-[35.93%] tb:left-[36%]",
+  "dk:relative dk:inset-auto dk:left-auto",
+  "dk:flex dk:items-center dk:justify-center",
+  "dk:w-full dk:h-[376px]",
+)}
+```
+
+### Typography + flex
+
+```tsx
+className={cn(
+  "flex-1 line-clamp-2 break-words cursor-default",
+  "font-montserrat font-semibold leading-[130%] text-gray-900",
+  "text-[15px] tb:text-[18px] dk:text-[22px]",
+)}
+```
+
+### Mixed section
+
+```tsx
+className={cn(
+  "rounded-[26px] tb:rounded-[32px]",
+  "flex flex-col items-center justify-end self-stretch flex-1 dk:flex-row",
+  "gap-6 dk:gap-20 px-0 py-[16px] tb:py-[24px] dk:py-[32px]",
+)}
+```
+
+### Show / hide by breakpoint
+
+```tsx
+className={cn(
+  "relative w-full",
+  "hidden dk:flex dk:flex-col dk:items-start",
+  "dk:px-20 dk:py-[7.5rem]",
+)}
+
+className={cn(
+  "relative w-full",
+  "flex flex-col items-start dk:hidden",
+  "gap-10 px-8 tb:px-14 pt-12 tb:pt-14 pb-[7.5rem]",
+)}
+```

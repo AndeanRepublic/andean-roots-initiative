@@ -1,0 +1,36 @@
+---
+description: Cómo cablear recarga, ancla y preloader en una página con intro
+alwaysApply: true
+---
+
+# Recarga y preloader
+
+El interruptor es uno solo: `RESTORE_SCROLL_ON_RELOAD` en `src/utils/scroll-restoration.ts`. No se duplica por página.
+
+- `false`: recargar abre en el primer bloque, corre el preloader y el scroll queda bloqueado hasta que termina.
+- `true`: recargar vuelve al mismo punto. Si el ancla ya quedó arriba de la pantalla, el preloader no corre.
+
+## Página sin intro
+
+No hagas nada. Contact, About y similares no llevan ancla, no montan preloader y no llaman al helper.
+
+## Página con intro
+
+Cablea estas cuatro piezas. El interruptor solo no basta.
+
+1. **Ancla.** En el primer bloque visible. Home usa `[data-anim="hero-container"]` (lo lee el helper). Una página nueva usa `data-home-anchor` y el helper tiene que buscar ese selector. Si mudas el Hero, el ancla se muda con él.
+2. **Política en la ruta.** En el `.astro` de la página, un `script is:inline` con `define:vars` de la constante: si es `false`, `history.scrollRestoration = 'manual'` y `window.scrollTo(0, 0)` durante el parseo. Un script de módulo llama a `applyScrollRestorationPolicy()`.
+3. **Preloader.** Lo monta la ruta. Markup y animación son de esa página. No copies el overlay de otro sitio.
+4. **Decisión al arrancar.** En el script de la intro:
+   - navegación interna (`skipIntro` / otra página): no reproducir la intro larga
+   - `false`: reproducir y bloquear el scroll en el inicio
+   - `true`: `afterNativeScrollRestoration` (dos frames) y luego medir el ancla con `isElementAboveViewport`. Si ya pasó, dejar la intro terminada y no bloquear. Si se ve, reproducir sin mandar el scroll a `0`
+
+```astro
+<script is:inline define:vars={{ restoreScrollOnReload: RESTORE_SCROLL_ON_RELOAD }}>
+  if (!restoreScrollOnReload && 'scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }
+</script>
+```

@@ -1,0 +1,26 @@
+---
+description: Frontend implementation and verification rules
+alwaysApply: true
+---
+
+# Frontend rules
+
+## Units
+
+- Use `rem` for layout and component sizing values instead of `px`.
+- This applies to Tailwind arbitrary values and inline style values.
+- Prefer token classes when available; if an arbitrary value is needed, use `rem`.
+
+Examples:
+
+- `size-[7.5rem]` instead of `size-[120px]`
+- `max-w-[90rem]` instead of `max-w-[1440px]`
+- `style={{ width: "12rem" }}` instead of `style={{ width: "192px" }}`
+
+## Verification after frontend changes
+
+- After making frontend code changes, always run:
+  - `pnpm exec tsc --noEmit`
+  - `pnpm lint`
+- Warnings are acceptable, but errors are not.
+- If either command reports errors, fix them before considering the task complete.

@@ -1,0 +1,253 @@
+---
+description: >-
+  Figma→code: match the layer tree; build Figma component instances as code
+  components first; split desktop vs compact trees; resolve sizes via
+  get_variable_defs per breakpoint; use rem. Use for design-to-code.
+alwaysApply: false
+---
+
+# Figma: faithful structure + split breakpoints
+
+`get_design_context` is a **reference**. Extra `div`s for `rotate`, `flex-none`, `hypot()`, or `cqw` are codegen, not layers. Trust **`data-name`** and the Figma tree.
+
+## 1. One Figma node → one DOM node
+
+- 1 Auto Layout / frame → 1 element.
+- 1 image node → 1 wrapper + `<img>`. Put `rounded-*`, `rotate-*`, `aspect-*`, and position **on that wrapper**.
+- Do **not** add shells around rotation or absolute children unless that frame exists in Figma.
+
+```tsx
+// ❌ MCP soup
+<div className="flex h-[23.5rem] items-center">
+  <div className="-rotate-3 flex-none">
+    <div className="overflow-hidden rounded-[1.25rem] aspect-[3/2]">
+      <img />
+    </div>
+  </div>
+</div>
+
+// ✅ matches “about imagery > img 2”
+<div className="-rotate-3 overflow-hidden rounded-[1.25rem] aspect-[3/2] w-full">
+  <img className="size-full object-cover" alt="" />
+</div>
+```
+
+## 2. Figma components first, then the section (CRITICAL)
+
+If the target frame (or its children) uses **component instances** (`<instance …>` in `get_metadata`, or repeated identical subtrees with the same `data-name`):
+
+1. **Find** every distinct component used (by instance name / main-component link) — e.g. `seal`, `card`, `stat`, `button`.
+2. **Build each as its own code component first** — open the **main component** (or one representative instance) with `get_design_context` + `get_variable_defs` at mobile / tablet / desktop as needed.
+3. Map Figma **component properties / variants / text overrides** to React props (content, image, tone, **size**, etc.).
+4. **Only then** build the section layout and **compose** those components (map over cards, place instances in slots).
+
+### Component properties & variants (CRITICAL)
+
+Figma **component sets** expose properties (`size`, `state`, `tone`, boolean toggles, text/image slots). The code component must mirror them — **not** collapse variants into `tb:`/`dk:` unless the Figma file itself is a single variant that only changes by breakpoint.
+
+1. Open the **main component** (or each variant node) in Dev Mode / `get_design_context`.
+2. List every **component property** and its allowed values (e.g. `size`: `small` | `medium` | `large`).
+3. Implement **one React prop per property**, same names when sensible (`size`, not `property1`).
+4. Build a **styles map** (or subcomponents) keyed by variant value — pull numbers from `get_variable_defs` **on that variant node**, not from MCP fallbacks.
+5. The **section** picks the variant per breakpoint tree and passes it down:
+
+```tsx
+// ❌ Variant property folded into responsive utilities
+<Seal className="tb:w-[14.4375rem] dk:w-[16.625rem]" />
+
+// ✅ Figma property `size` → prop; section chooses per tree
+<Seal size="large" ... />   // desktop section
+<Seal size="medium" ... />  // tablet section
+<Seal size="small" ... />   // mobile section
+```
+
+Do **not** substitute a Figma variant (`size=small`) with “mobile breakpoint CSS” on a single component unless Figma has no variant and only tokens change at `tb`/`dk`.
+
+**Image frames inside a component:** use the **visible crop / mask / frame** dimensions from the design for `aspect-*` or `w`/`h` — see `alc-advanced-layouts-to-code` (never the raw asset’s intrinsic ratio).
+
+Do **not** inline-copy the same seal/card markup four times inside the section. Do **not** start the section file until the shared piece exists and matches Figma.
+
+```tsx
+// ❌ Section first — duplicated instance guts
+<section>
+  <div>{/* seal markup copy 1 */}</div>
+  <div>{/* seal markup copy 2 */}</div>
+</section>
+
+// ✅ Component first, then section — Figma `size` variant as prop
+// SealsSection/components/Seal.jsx  ← size: small | medium | large
+// SealsSection/SealsSection.jsx
+<section>
+  {seals.map((item) => (
+    <Seal key={item.id} size="large" {...item} />
+  ))}
+</section>
+```
+
+Reuse an existing project component only if it already matches that Figma component; otherwise create one named after the Figma component (`Seal`, not `SealsSectionCard`).
+
+Nested instances (a card that contains a badge component): **innermost first**, then parents, then the section.
+
+### Where to put the file (default: section-local)
+
+Unless the user **explicitly** says the component will be reused across sections (or a design-system / shared library component), colocate it **inside the section** as a single file under `components/` — no subfolder, no `index.js`. Do **not** create a top-level `src/components/Seal/` sibling.
+
+```
+src/components/SealsSection/
+  SealsSection.jsx
+  index.js
+  components/
+    Seal.jsx
+```
+
+| Scope                                                   | Path                                                                                               |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Default** — built for one section only                | `src/components/<SectionName>/components/<ComponentName>.jsx`                                      |
+| **Explicitly shared** — user says reuse / design system | `src/components/<ComponentName>/<ComponentName>.jsx` (+ `index.js` if the section pattern uses it) |
+
+Import from the section file with a relative path, e.g. `import { Seal } from "./components/Seal";`.
+
+```tsx
+// ❌ Section-only Figma component at repo root
+src / components / Seal / Seal.jsx;
+src / components / SealsSection / SealsSection.jsx;
+
+// ❌ Extra folder + barrel for a section-local piece
+src / components / SealsSection / components / Seal / Seal.jsx;
+src / components / SealsSection / components / Seal / index.js;
+
+// ✅ Default — one file under the section’s components/
+src / components / SealsSection / components / Seal.jsx;
+```
+
+Promote to `src/components/<ComponentName>/` only when the user asks, or when a second section needs the same component.
+
+## 3. Desktop first, then tablet/mobile — two trees if layout differs
+
+If Figma desktop vs tablet/mobile is **not** the same tree (different parent, absolute vs flow, order, overlap):
+
+1. Build **desktop** so it matches the desktop node.
+2. Build **tablet/mobile** so it matches those nodes (they may share one tree).
+3. Toggle — do **not** morph one DOM with a pile of `tb:`/`dk:` on every inset.
+
+```tsx
+<div className="hidden dk:block">{/* desktop layout — inside max-w container */}</div>
+<div className="dk:hidden">{/* mobile + tablet layout */}</div>
+```
+
+Same tree at all sizes (only padding/type/gap change) → **one** DOM + `tb:`/`dk:` is fine.
+
+Apply the same split **inside** shared components when their internal layout differs by breakpoint.
+
+Layout variants are **`<div>` siblings** inside one section shell — not a second `<section>` per breakpoint.
+
+### Section shell (one `<section>` per Figma section frame)
+
+The **exported section component** owns the shell. Padding and max width belong to the Figma **section frame**, not to each desktop/compact layout variant.
+
+```tsx
+// ❌ Fragment + two <section> with duplicated padding
+export function CommunityInfoSection() {
+  return (
+    <>
+      <section className="hidden dk:block dk:px-20 dk:py-[7.5rem]">…</section>
+      <section className="dk:hidden px-4 py-[3.25rem]">…</section>
+    </>
+  );
+}
+
+// ✅ One <section> — padding + max-w; variants are layout-only <div>s
+export function CommunityInfoSection() {
+  return (
+    <section
+      className={cn(
+        "relative w-full",
+        "px-4 tb:px-10 dk:px-20",
+        "pt-[1.75rem] tb:pt-10 dk:pt-[7.5rem]",
+        "pb-[3.25rem] tb:pb-20 dk:pb-[7.5rem]",
+      )}
+    >
+      <div className="mx-auto w-full max-w-[90rem]">
+        <CommunityInfoSectionDesktop />   {/* hidden dk:flex — no padding */}
+        <CommunityInfoSectionCompact />   {/* dk:hidden — no padding */}
+      </div>
+    </section>
+  );
+}
+```
+
+| Layer | Role |
+|---|---|
+| `<section>` | Full width; **section padding** (`px` / `py` / `pt` / `pb`) with `tb:` / `dk:` from `get_variable_defs` on the section frame |
+| Inner `div` | `mx-auto w-full max-w-[90rem]` — caps content at artboard width (1440px) |
+| Layout variants | `hidden` / `dk:hidden` toggles + internal `gap`, order, stagger only |
+
+Full-bleed backgrounds (gradients, images) stay on `<section>` (`absolute`, edge-to-edge). Padding and `max-w` sit **inside** or on the section with content in the centered column — never clip a bleed with `max-w` on the outermost node.
+
+Resolve **section-frame** padding once on the export; do **not** repeat it on desktop/tablet/mobile layout children.
+
+## 4. Sizes: resolve per breakpoint (CRITICAL)
+
+Token **names** in `get_design_context` often look the same (`spacing-8xl`, `Display lg`, `radius-xl`) but the **resolved px change by breakpoint**. The codegen fallback (e.g. `spacing-2xl,32px`) is frequently **wrong**.
+
+### Mandatory checks
+
+For **mobile, tablet, and desktop** nodes separately, call Figma MCP **`get_variable_defs`** on:
+
+- the section / Auto Layout frame (padding, gap)
+- **each Figma component** you implement (not only the outer section)
+- text layers (font size)
+- cards / media frames (radius, border)
+
+Record the **resolved number**, not the fallback in the class string.
+
+| Concern     | Examples to verify                                |
+| ----------- | ------------------------------------------------- |
+| Spacing     | `spacing-*` → `px` / `py` / `pt` / `pb` / `gap`   |
+| Typography  | `Body/*`, `Heading/*`, `Display/*` → `text-[…]`   |
+| Radius      | `radius-*` → `rounded-[…]`                        |
+| Other sizes | fixed `w` / `h` / offsets from layout (still rem) |
+
+### Never
+
+```tsx
+// ❌ Trusting MCP fallback — mobile spacing-2xl was 16, not 32
+className = "px-[var(--spacing-2xl,32px)]"; // or px-8 from that 32
+
+// ❌ One size for all breakpoints when variables differ
+className = "text-[4.875rem]"; // desktop 78; mobile Display lg was 40
+```
+
+### Do
+
+```tsx
+// ✅ After get_variable_defs on each breakpoint node
+// mobile spacing-2xl=16, tablet spacing-5xl=40, desktop spacing-7xl=80
+className = "px-4 tb:px-10 dk:px-20";
+
+// mobile Display lg=40, tablet=60, desktop=78
+className = "text-[2.5rem] tb:text-[3.75rem] dk:text-[4.875rem]";
+
+// mobile radius-xl=14, tablet=18, desktop=20
+className = "rounded-[0.875rem] tb:rounded-[1.125rem] dk:rounded-[1.25rem]";
+```
+
+If the project later has CSS tokens that already switch at `tb`/`dk`, map to those instead of hardcoding rem — still verify each breakpoint once.
+
+## 5. Units: rem (no px hardcoding)
+
+When project CSS tokens are missing:
+
+- Convert resolved Figma **px → rem** with root **16**: `value / 16`.
+- Arbitrary Tailwind: `py-[3.25rem]`, `text-[1.375rem]`, `rounded-[0.875rem]`.
+- Prefer scale utilities (`gap-6`, `px-4`, `px-10`) **only when they equal** the resolved rem.
+- Keep **%** for Scale constraints; unitless/`%` line-heights; **deg** for rotate.
+- Do **not** ship `…px` in classNames when rem is required.
+
+## 6. Order of work
+
+1. Desktop / tablet / mobile nodes (`get_metadata` / `get_design_context`) — note any `<instance>` / shared components.
+2. **Implement each Figma component** (properties/variants → props → styles map → rem via `get_variable_defs` per variant) **before** the section — default path `SectionName/components/ComponentName.jsx`.
+3. **One section shell** on the export (`<section>` + padding + `max-w-[90rem]`) + layout variants as `<div>` children.
+4. Apply **resolved** rem (or project tokens) with `tb:` / `dk:` on the shell and on layout internals as needed.
+5. OTS → raw images (`di-download-raw-images`).

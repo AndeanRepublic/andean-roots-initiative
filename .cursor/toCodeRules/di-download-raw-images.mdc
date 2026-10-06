@@ -1,0 +1,50 @@
+---
+description: >-
+  When a Figma design includes images/photos, download raw source fills via
+  download_assets (rawImages), not rotated/rounded/effected exports. Apply
+  radius, rotation, and effects in code. Use for Figma→code, get_design_context
+  assets, img fills, or community/hero imagery.
+alwaysApply: false
+---
+
+# Figma images: raw assets only
+
+Apply this rule whenever the Figma design (or `get_design_context` output) contains **raster images** (`<img>`, image fills, photos, illustrations as bitmaps).
+
+## Mandatory sourcing
+
+1. Call Figma MCP **`download_assets`** on the image node (or its parent that holds the fill).
+2. Download and commit files from **`rawImages`** only — original uploaded PNG/JPEG/WebP/GIF fills.
+3. **Do not** use `export` URLs as the committed source when the node has rotation, corner radius, masks, or effects.
+4. **Do not** treat `get_design_context` `https://…/api/mcp/asset/…` URLs as final if they bake transforms — prefer `rawImages` for anything you put in `public/`.
+
+## Treat in code, not in the file
+
+Apply in Tailwind/CSS/JSX (not pre-baked into the asset):
+
+- `rounded-*` / overflow clip
+- `rotate-*` / `-rotate-*`
+- shadows, overlays, filters
+- `object-cover` + explicit width/height (or `size-full` inside a sized box)
+
+```tsx
+// ❌ BAD — exported node already rotated + rounded
+<img src="/assets/hero-export.png" alt="" />
+
+// ✅ GOOD — raw fill; treatment in CSS
+<div className="-rotate-3">
+  <div className="overflow-hidden rounded-xl aspect-[3/2]">
+    <img
+      src="/assets/hero.png"
+      alt="…"
+      className="absolute inset-0 size-full object-cover"
+    />
+  </div>
+</div>
+```
+
+## Checklist before finishing
+
+- [ ] Files under `public/` are raw fills (no forced rotation/radius in pixels)
+- [ ] Radius / rotate / effects exist only as classes or styles
+- [ ] Every `<img>` has explicit sizing (no intrinsic blow-up via `height: auto` alone on icons/media boxes)

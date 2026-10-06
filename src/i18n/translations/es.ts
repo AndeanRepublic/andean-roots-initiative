@@ -212,7 +212,7 @@ const es = {
   },
 
   cta: {
-    title: 'Transformemos juntos el territorio andino',
+    title: 'Cambiemos juntos el territorio andino',
     description:
       'Únete como aliado estratégico y ayúdanos a conectar el talento de nuestras comunidades con las oportunidades de la economía global.',
     ctaText: 'SÉ UN ALIADO',
@@ -451,8 +451,8 @@ const es = {
     },
     intro: {
       titleLine1: 'RETOS',
-      titleLine2: 'GRANDES',
-      titleAside: ', no hay problema',
+      titleLine2: 'GRANDES, ',
+      titleAside: 'no hay problema...',
       titleHave: 'tenemos',
       titleLine3: 'IDEAS AÚN',
       titleLine4: 'MÁS GRANDES',
@@ -501,7 +501,7 @@ const es = {
       ],
     },
     cta: {
-      title: 'Transformemos juntos el territorio andino',
+      title: 'Cambiemos juntos el territorio andino',
       description:
         'Únete como aliado estratégico y ayúdanos a conectar el talento de nuestras comunidades con las oportunidades de la economía global.',
       ctaText: 'SÉ UN ALIADO',

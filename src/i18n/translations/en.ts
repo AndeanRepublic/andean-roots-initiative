@@ -448,8 +448,8 @@ const en: Translations = {
     },
     intro: {
       titleLine1: 'BIG',
-      titleLine2: 'CHALLENGES',
-      titleAside: ', no problem',
+      titleLine2: 'CHALLENGES, ',
+      titleAside: 'no problem',
       titleHave: 'we have',
       titleLine3: 'EVEN BIGGER',
       titleLine4: 'IDEAS',

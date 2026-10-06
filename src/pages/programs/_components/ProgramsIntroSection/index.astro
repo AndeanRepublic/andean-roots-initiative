@@ -6,7 +6,7 @@ import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -20,111 +20,114 @@ const titleHave = cn(titleDisplay, 'text-[1.125rem] tb:text-[1.75rem] dk:text-[3
 ---
 
 <section
-  id="programs-intro"
-  class="px-2xl dk:py-6xl bg-white py-12"
-  aria-labelledby="programs-intro-heading"
+	id="programs-intro"
+	class="px-2xl dk:py-6xl bg-white py-12"
+	aria-labelledby="programs-intro-heading"
 >
-  <div class="gap-7xl mx-auto flex w-full max-w-328 flex-col items-center">
-    <Copy
-      variant="slideFromBottom"
-      type="words"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={0}
-      stagger={0.2}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full"
-    >
-      <h2
-        id="programs-intro-heading"
-        class="text-main flex w-full flex-col items-end gap-5"
-      >
-        <span class="dk:pr-120px flex w-full flex-col items-start">
-          <span class={titleLarge}>{pi.titleLine1}</span>
-          <span class="flex flex-col items-start gap-1 tb:flex-row tb:items-end tb:gap-3.5">
-            <span class={titleLarge}>{pi.titleLine2}</span>
-            <span class={cn(titleAside, 'tb:pb-1.5')}>{pi.titleAside}</span>
-          </span>
-        </span>
+	<div class="gap-7xl mx-auto flex w-full max-w-328 flex-col items-center">
+		<Copy
+			variant="slideFromBottom"
+			type="words"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={0}
+			stagger={0.2}
+			animateOnScroll={true}
+			start="top 80%"
+			class="tb:w-[42rem] dk:w-full w-full"
+		>
+			<h2
+				id="programs-intro-heading"
+				class="text-main tb:items-end tb:gap-3 dk:gap-5 tb:text-left flex w-full flex-col items-center gap-2 text-center"
+			>
+				<span class="dk:pr-120px tb:items-start flex w-full flex-col items-center">
+					<span class={titleLarge}>{pi.titleLine1}</span>
+					<span class="tb:flex-row tb:items-end tb:gap-3.5 flex flex-col items-center gap-1">
+						<span class={titleLarge}>{pi.titleLine2}</span>
+						<span class={cn(titleAside, 'tb:pb-1.5')}>{pi.titleAside}</span>
+					</span>
+				</span>
 
-        <span
-          class={cn(
-            'flex w-full flex-col items-end gap-2',
-            'tb:flex-row tb:items-start tb:justify-end',
-            'dk:gap-9.5',
-          )}
-        >
-          <span class={titleHave}>{pi.titleHave}</span>
-          <span class="flex flex-col items-end tb:items-start">
-            <span class={titleLarge}>{pi.titleLine3}</span>
-            <span class={titleLarge}>{pi.titleLine4}</span>
-          </span>
-        </span>
-      </h2>
-    </Copy>
+				<span
+					class={cn(
+						'flex w-full flex-col items-center gap-2',
+						'tb:flex-row tb:items-start tb:justify-end',
+						'dk:gap-9.5',
+					)}
+				>
+					<span class={titleHave}>{pi.titleHave}</span>
+					<span class="tb:items-start flex flex-col items-center">
+						<span class={titleLarge}>{pi.titleLine3}</span>
+						<span class={titleLarge}>{pi.titleLine4}</span>
+					</span>
+				</span>
+			</h2>
+		</Copy>
 
-    <Copy
-      variant="slideFromBottom"
-      type="lines"
-      reverse
-      ease="power3.out"
-      duration={0.9}
-      delay={1}
-      stagger={0.1}
-      animateOnScroll={true}
-      start="top 80%"
-      class="w-full max-w-250"
-    >
-      <p
-        class={cn(
-          'font-manrope font-medium text-black',
-          'text-center text-[1.125rem] leading-normal',
-          'tb:text-[1.5rem] tb:leading-[1.4]',
-          'dk:text-[2rem] dk:leading-[1.4]',
-        )}
-      >
-        {pi.descriptionLead}
-        <em class="text-gray not-italic">{pi.descriptionMutedA}</em>
-        {pi.descriptionMiddle}
-        <em class="text-gray not-italic">{pi.descriptionMutedB}</em>
-        {pi.descriptionEnd}
-      </p>
-    </Copy>
+		<Copy
+			variant="slideFromBottom"
+			type="lines"
+			reverse
+			ease="power3.out"
+			duration={0.9}
+			delay={2.1}
+			delayMobile={2.1}
+			stagger={0.1}
+			animateOnScroll={true}
+			start="top 80%"
+			class="tb:w-[42rem] dk:w-full dk:max-w-250 w-full"
+		>
+			<p
+				data-programs-intro="description"
+				class={cn(
+					'font-manrope font-medium text-black',
+					'text-center text-[1.125rem] leading-normal',
+					'tb:text-[1.5rem] tb:leading-[1.4]',
+					'dk:text-[2rem] dk:leading-[1.4]',
+				)}
+			>
+				{pi.descriptionLead}
+				<em class="text-gray not-italic">{pi.descriptionMutedA}</em>
+				{pi.descriptionMiddle}
+				<em class="text-gray not-italic">{pi.descriptionMutedB}</em>
+				{pi.descriptionEnd}
+			</p>
+		</Copy>
 
-    <div class="gap-6xl mx-auto flex w-full max-w-190 items-stretch justify-center">
-      {
-        pi.stats.map((item, index) => (
-          <>
-            {index > 0 && (
-              <div class="bg-gray/30 tb:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
-            )}
-            <article
-              class="flex w-140px min-w-0 flex-col items-center gap-2 text-center"
-              data-anim="stat-item"
-            >
-              <p
-                class="font-nunito-sans text-[2.5rem] tb:text-[3.5rem] dk:text-[4.5rem] leading-[1.2] font-semibold text-black"
-                data-anim="stat-value"
-              >
-                {item.value}
-              </p>
-              <p class="body-md-l text-black" data-anim="stat-label">
-                {item.label}
-              </p>
-            </article>
-          </>
-        ))
-      }
-    </div>
-  </div>
+		<div class="gap-6xl mx-auto flex w-full max-w-190 items-stretch justify-center">
+			{
+				pi.stats.map((item, index) => (
+					<>
+						{index > 0 && (
+							<div class="bg-gray/30 tb:block mt-2 hidden w-px shrink-0" aria-hidden="true" />
+						)}
+						<article
+							class="w-140px flex min-w-0 flex-col items-center gap-2 text-center"
+							data-anim="stat-item"
+						>
+							<p
+								class="font-nunito-sans tb:text-[3.5rem] dk:text-[4.5rem] text-[2.5rem] leading-[1.2] font-semibold text-black"
+								data-anim="stat-value"
+								data-programs-counter={item.value}
+							>
+								{item.value}
+							</p>
+							<p class="body-md-l text-black" data-anim="stat-label">
+								{item.label}
+							</p>
+						</article>
+					</>
+				))
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initProgramsIntroSectionAnimation } from './animation';
+	import { initProgramsIntroSectionAnimation } from './animation';
 
-  const init = () => initProgramsIntroSectionAnimation();
+	const init = () => initProgramsIntroSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

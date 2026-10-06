@@ -10,10 +10,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "start": "node ./dist/server/entry.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.7",
     "@astrojs/react": "^5.0.4",
     "@astrojs/vercel": "^10.0.6",
     "@paypal/react-paypal-js": "^9.1.1",

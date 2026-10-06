@@ -1,13 +1,14 @@
 ---
 import ButtonLink from '../ButtonLink/index.astro';
 import Copy from '@styersonh/odyssey-motion/copy/astro';
+import Reveal from '@styersonh/odyssey-motion/reveal/astro';
 import DonationModal from '../DonationModal/index';
 import type { Locale } from '../../i18n/locales';
 import { DEFAULT_LOCALE } from '../../i18n/locales';
 import { useTranslations, getLocalizedPath } from '../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -15,91 +16,105 @@ const t = useTranslations(lang);
 const c = t.cta;
 
 const ctaButtonClass =
-  '**:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5';
+	'**:data-button-link:gap-4 **:data-button-link:py-2 **:data-button-link:pr-2 **:data-button-link:pl-6 [&_[data-button-link]>span:first-child]:text-base [&_[data-button-link]>span:last-child]:p-2 [&_[data-button-link]>span:last-child>svg]:size-5';
 ---
 
 <section id="impacto" class="px-2xl py-6xl dk:px-6xl bg-white">
-  <div class="mx-auto w-full max-w-328">
-    <div
-      class="gap-7xl bg-main p-8xl relative flex flex-col items-center overflow-hidden rounded-lg text-center"
-    >
-      <img
-        src="/home-assets/Numbers/vector.png"
-        alt=""
-        class="dk:-top-59.75 dk:h-196.5 pointer-events-none absolute inset-0 size-full object-cover opacity-25"
-        loading="lazy"
-        aria-hidden="true"
-      />
+	<div class="mx-auto w-full max-w-328">
+		<div
+			class="gap-7xl bg-main p-8xl relative flex flex-col items-center overflow-hidden rounded-lg text-center"
+		>
+			<img
+				src="/home-assets/Numbers/vector.png"
+				alt=""
+				class="dk:-top-59.75 dk:h-196.5 pointer-events-none absolute inset-0 size-full object-cover opacity-25"
+				loading="lazy"
+				aria-hidden="true"
+			/>
 
-      <div class="gap-xl relative z-10 flex w-full flex-col items-center">
-        <Copy
-          variant="slideFromBottom"
-          type="words"
-          reverse
-          ease="power3.out"
-          duration={0.9}
-          delay={0}
-          stagger={0.2}
-          animateOnScroll={true}
-          start="top 80%"
-          class="w-full"
-        >
-          <h2 class="section-heading w-full text-white uppercase">{c.title}</h2>
-        </Copy>
-        <Copy
-          variant="slideFromBottom"
-          type="lines"
-          reverse
-          ease="power3.out"
-          duration={0.9}
-          delay={1}
-          stagger={0.1}
-          animateOnScroll={true}
-          start="top 80%"
-          class="w-full max-w-150"
-        >
-          <p class="body-md-l text-light max-w-150">
-            {c.description}
-          </p>
-        </Copy>
-      </div>
+			<div data-cta-sequence class="gap-xl relative z-10 flex w-full flex-col items-center">
+				<Copy
+					variant="slideFromBottom"
+					type="words"
+					reverse
+					ease="power3.out"
+					duration={0.9}
+					delay={0}
+					stagger={0.2}
+					animateOnScroll={true}
+					start="top 80%"
+					trigger="[data-cta-sequence]"
+					class="w-full"
+				>
+					<h2 class="section-heading w-full text-white uppercase">{c.title}</h2>
+				</Copy>
+				<Copy
+					variant="slideFromBottom"
+					type="lines"
+					reverse
+					ease="power3.out"
+					duration={0.9}
+					delay={1}
+					stagger={0.1}
+					animateOnScroll={true}
+					start="top 80%"
+					trigger="[data-cta-sequence]"
+					class="w-full max-w-150"
+				>
+					<p class="body-md-l text-light max-w-150">
+						{c.description}
+					</p>
+				</Copy>
+			</div>
 
-      <div class="gap-xl relative z-10 flex flex-wrap items-center justify-center">
-        <span data-donation-trigger>
-          <ButtonLink
-            href="#"
-            text={c.donateText}
-            device="desktop"
-            kind="primary"
-            bordered
-            class={ctaButtonClass}
-          />
-        </span>
-        <ButtonLink
-          href={getLocalizedPath(lang, c.ctaSlug)}
-          text={c.ctaText}
-          device="desktop"
-          kind="primary-inverse"
-          class={ctaButtonClass}
-        />
-      </div>
-    </div>
-  </div>
+			<Reveal
+				from="bottom"
+				reverse
+				ease="power3.out"
+				duration={0.8}
+				delay={2}
+				stagger={0.14}
+				distance={28}
+				animateOnScroll={true}
+				start="top 80%"
+				trigger="[data-cta-sequence]"
+				class="gap-xl relative z-10 flex flex-wrap items-center justify-center"
+			>
+				<span data-donation-trigger>
+					<ButtonLink
+						href="#"
+						text={c.donateText}
+						device="desktop"
+						kind="primary"
+						bordered
+						class={ctaButtonClass}
+					/>
+				</span>
+				<ButtonLink
+					href={getLocalizedPath(lang, c.ctaSlug)}
+					text={c.ctaText}
+					device="desktop"
+					kind="primary-inverse"
+					class={ctaButtonClass}
+				/>
+			</Reveal>
+		</div>
+	</div>
 
-  <DonationModal client:load />
+	<DonationModal client:load />
 
-  <script>
-    function initDonationTrigger() {
-      document.querySelectorAll('[data-donation-trigger]').forEach((trigger) => {
-        if (trigger instanceof HTMLElement && trigger.dataset.donationBound === '1') return;
-        trigger.addEventListener('click', (e) => {
-          e.preventDefault();
-          document.dispatchEvent(new CustomEvent('open-donation-modal'));
-        });
-        if (trigger instanceof HTMLElement) trigger.dataset.donationBound = '1';
-      });
-    }
+	<script>
+		function initDonationTrigger() {
+			document.querySelectorAll('[data-donation-trigger]').forEach((trigger) => {
+				if (trigger instanceof HTMLElement && trigger.dataset.donationBound === '1') return;
+				trigger.addEventListener('click', (e) => {
+					e.preventDefault();
+					document.dispatchEvent(new CustomEvent('open-donation-modal'));
+				});
+				if (trigger instanceof HTMLElement) trigger.dataset.donationBound = '1';
+			});
+		}
 
-    document.addEventListener('astro:page-load', initDonationTrigger);
-  </script>
+		document.addEventListener('astro:page-load', initDonationTrigger);
+	</script>
 </section>

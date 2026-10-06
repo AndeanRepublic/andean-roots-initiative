@@ -25,6 +25,7 @@ const h = t.aboutPage.history;
 			stagger={0.2}
 			animateOnScroll={true}
 			start="top 80%"
+			startMobile="top 70%"
 			class="w-full"
 		>
 			<h2 class="section-heading text-main flex w-full flex-col items-center text-center uppercase">
@@ -47,24 +48,26 @@ const h = t.aboutPage.history;
 							/>
 						</div>
 
-						<Copy
-							variant="slideFromBottom"
-							type="lines"
-							reverse
-							ease="power3.out"
-							duration={0.9}
-							delay={1 + index * 0.5}
-							stagger={0.1}
-							animateOnScroll={true}
-							start="top 95%"
-							class="w-full"
-						>
-							<div class="gap-md text-gray flex flex-col">
+						<div class="gap-md text-gray flex flex-col">
+							<Copy
+								variant="slideFromBottom"
+								type="lines"
+								reverse
+								ease="power3.out"
+								duration={0.9}
+								delay={0}
+								delayMobile={0}
+								stagger={0.1}
+								animateOnScroll={true}
+								start="top 70%"
+								startMobile="top 85%"
+								class="w-full"
+							>
 								{card.paragraphs.map((paragraph) => (
 									<p class="body-md-l">{paragraph}</p>
 								))}
-							</div>
-						</Copy>
+							</Copy>
+						</div>
 					</article>
 				))
 			}

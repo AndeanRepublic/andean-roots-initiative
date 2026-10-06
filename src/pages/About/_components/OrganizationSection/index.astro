@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE } from '../../../../i18n/locales';
 import { useTranslations } from '../../../../i18n/utils';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -14,76 +14,76 @@ const o = t.aboutPage.organization;
 ---
 
 <section id="about-organization" class="px-2xl dk:py-6xl bg-white py-12">
-  <div class="dk:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
-    <div class="gap-lg flex flex-col" data-anim="header">
-      <div class="gap-sm flex items-center" data-anim="label">
-        <span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
-        <p class="body-md-sb text-main">{o.label}</p>
-      </div>
-      <Copy
-        variant="slideFromBottom"
-        type="words"
-        reverse
-        ease="power3.out"
-        duration={0.9}
-        delay={0}
-        stagger={0.2}
-        animateOnScroll={true}
-        start="top 80%"
-        class="w-full"
-      >
-        <h2 class="section-heading text-main flex w-full flex-col uppercase">
-          <span>{o.titleTop}</span>
-          <span class="pl-[1.6em]">{o.titleBottom}</span>
-        </h2>
-      </Copy>
-    </div>
+	<div class="dk:gap-16 mx-auto flex w-full max-w-328 flex-col gap-8">
+		<div class="gap-lg flex flex-col" data-anim="header">
+			<div class="gap-sm flex items-center" data-anim="label">
+				<span class="bg-main size-2 rounded-full" aria-hidden="true" data-anim="label-dot"></span>
+				<p class="body-md-sb text-main">{o.label}</p>
+			</div>
+			<Copy
+				variant="slideFromBottom"
+				type="words"
+				reverse
+				ease="power3.out"
+				duration={0.9}
+				delay={0}
+				stagger={0.2}
+				animateOnScroll={true}
+				start="top 80%"
+				class="w-full"
+			>
+				<h2 class="section-heading text-main flex w-full flex-col uppercase">
+					<span>{o.titleTop}</span>
+					<span class="pl-[1.6em]">{o.titleBottom}</span>
+				</h2>
+			</Copy>
+		</div>
 
-    <div class="dk:grid-cols-[1fr_1fr] dk:gap-10 grid gap-8">
-      <div class="overflow-hidden rounded-lg" data-anim="cover-wrap">
-        <img
-          src={o.coverImageSrc}
-          alt={o.coverImageAlt}
-          class="h-full min-h-90 w-full object-cover"
-          loading="lazy"
-          data-anim="cover-image"
-        />
-      </div>
+		<div class="dk:grid-cols-[1fr_1fr] dk:gap-10 grid gap-8">
+			<div class="overflow-hidden rounded-lg" data-anim="cover-wrap">
+				<img
+					src={o.coverImageSrc}
+					alt={o.coverImageAlt}
+					class="h-full min-h-90 w-full object-cover"
+					loading="lazy"
+					data-anim="cover-image"
+				/>
+			</div>
 
-      <div
-        class="tb:flex-row dk:flex-col tb:gap-6 dk:gap-10 flex flex-col gap-10"
-        data-anim="points"
-      >
-        {
-          o.points.map((point) => (
-            <article
-              class="bg-light relative flex min-h-70 flex-col justify-end gap-4 rounded-lg p-8"
-              data-anim="point-card"
-            >
-              <img
-                src={point.iconSrc}
-                alt={point.iconAlt}
-                class="pointer-events-none absolute top-6 left-8 h-34 w-auto opacity-40"
-                loading="lazy"
-                data-anim="point-icon"
-              />
+			<div
+				class="tb:flex-row dk:flex-col tb:gap-6 dk:gap-10 flex flex-col gap-6"
+				data-anim="points"
+			>
+				{
+					o.points.map((point) => (
+						<article
+							class="bg-light relative flex min-h-70 flex-col justify-end gap-4 rounded-lg p-8"
+							data-anim="point-card"
+						>
+							<img
+								src={point.iconSrc}
+								alt={point.iconAlt}
+								class="pointer-events-none absolute top-6 left-8 h-34 w-auto opacity-40"
+								loading="lazy"
+								data-anim="point-icon"
+							/>
 
-              <h3 class="text-gray text-right text-[2.5rem] leading-[1.4] font-semibold">
-                {point.title}
-              </h3>
-              <p class="body-md-l text-gray">{point.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </div>
+							<h3 class="text-gray text-right text-[2.5rem] leading-[1.4] font-semibold">
+								{point.title}
+							</h3>
+							<p class="body-md-l text-gray">{point.description}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</div>
 </section>
 
 <script>
-  import { initOrganizationSectionAnimation } from './animation';
+	import { initOrganizationSectionAnimation } from './animation';
 
-  const init = () => initOrganizationSectionAnimation();
+	const init = () => initOrganizationSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

@@ -124,7 +124,7 @@ export const initOrganizationSectionAnimation = createScrollSectionController({
             overwrite: true,
             scrollTrigger: {
               trigger: card,
-              start: 'top 70%',
+              start: 'top 80%',
               toggleActions: 'play none none reverse',
             },
           }),

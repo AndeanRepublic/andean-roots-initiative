@@ -4,7 +4,7 @@ import { createScrollSectionController } from '../../../../utils/create-scroll-s
 
 gsap.registerPlugin(ScrollTrigger);
 
-const T_CARDS = 0.33;
+const T_CARDS = 0.23;
 
 function clearHistorySectionStyles(root: HTMLElement) {
   const scrollNodes = root.querySelectorAll(
@@ -79,7 +79,7 @@ function setupDesktopHistoryReveal(root: HTMLElement) {
 
   const st = ScrollTrigger.create({
     trigger: root,
-    start: 'top 68%',
+    start: 'top 78%',
     end: 'bottom 15%',
     onUpdate: (self) => handleThresholds(self.progress),
   });
@@ -123,6 +123,7 @@ function setupMobileHistoryPerCardReveal(root: HTMLElement) {
           duration: 0.8,
           ease: 'power2.out',
           overwrite: true,
+
           scrollTrigger: {
             trigger: cardImage,
             start: 'top 70%',

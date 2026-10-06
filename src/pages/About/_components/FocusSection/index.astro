@@ -1,5 +1,6 @@
 ---
 import Copy from '@styersonh/odyssey-motion/copy/astro';
+import ImageReveal from '@styersonh/odyssey-motion/image-reveal/astro';
 import GroupIcon from '../../../../icons/Group.astro';
 import BulbIcon from '../../../../icons/Bulb.astro';
 import HandshakeIcon from '../../../../icons/HandshakeIcon.astro';
@@ -17,20 +18,31 @@ const t = useTranslations(lang);
 const f = t.aboutPage.focus;
 ---
 
-<section id="about-focus" class="px-2xl dk:py-6xl bg-white py-12">
+<section id="about-focus" class="px-2xl dk:py-32 bg-white py-12">
 	<div class="dk:gap-0 mx-auto flex w-full max-w-328 flex-col gap-8">
 		<div
 			class="dk:grid-cols-[19.0625rem_1fr_19rem] dk:gap-px dk:items-start grid items-end gap-6"
 			data-anim="hero-grid"
 		>
-			<div class="dk:rotate-2 overflow-hidden rounded-[1.25rem]" data-anim="side-media-left">
-				<img
-					src={f.sideImages[0].src}
-					alt={f.sideImages[0].alt}
-					class="h-70 w-full object-cover"
-					loading="lazy"
-					data-anim="side-image-left"
-				/>
+			<div class="dk:rotate-2 dk:block hidden overflow-hidden rounded-[1.25rem]">
+				<ImageReveal
+					variant="clipPathZoomOut"
+					directionTo="right"
+					duration={1.5}
+					scaleFrom={1.4}
+					start="top 75%"
+					startMobile="top 85%"
+					animateOnScroll={true}
+					class="h-70 w-full"
+				>
+					<img
+						src={f.sideImages[0].src}
+						alt={f.sideImages[0].alt}
+						class="h-70 w-full object-cover"
+						loading="lazy"
+						data-image-reveal-item
+					/>
+				</ImageReveal>
 			</div>
 
 			<div class="gap-2xl flex flex-col items-center px-4" data-anim="content">
@@ -76,14 +88,25 @@ const f = t.aboutPage.focus;
 				</Copy>
 			</div>
 
-			<div class="dk:-rotate-2 overflow-hidden rounded-lg" data-anim="side-media-right">
-				<img
-					src={f.sideImages[1].src}
-					alt={f.sideImages[1].alt}
-					class="h-70 w-full object-cover"
-					loading="lazy"
-					data-anim="side-image-right"
-				/>
+			<div class="dk:-rotate-2 overflow-hidden rounded-lg">
+				<ImageReveal
+					variant="clipPathZoomOut"
+					directionTo="left"
+					duration={1.5}
+					scaleFrom={1.4}
+					start="top 75%"
+					startMobile="top 75%"
+					animateOnScroll={true}
+					class="h-70 w-full"
+				>
+					<img
+						src={f.sideImages[1].src}
+						alt={f.sideImages[1].alt}
+						class="h-70 w-full object-cover"
+						loading="lazy"
+						data-image-reveal-item
+					/>
+				</ImageReveal>
 			</div>
 		</div>
 

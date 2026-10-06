@@ -6,7 +6,7 @@ import { useTranslations } from '../../../../i18n/utils';
 import ProgramCard from './ProgramCard.astro';
 
 interface Props {
-  lang?: Locale;
+	lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
@@ -16,40 +16,40 @@ const { common } = t;
 ---
 
 <section
-  id={pc.sectionId}
-  class="px-2xl dk:py-6xl flex flex-col items-center gap-12 bg-white py-12"
+	id={pc.sectionId}
+	class="px-2xl dk:py-6xl dk:py-12 flex flex-col items-center gap-12 bg-white py-4"
 >
-  <div
-    class={cn(
-      'tb:grid-cols-2 dk:grid-cols-2 dk:gap-8 mx-auto grid w-full max-w-328 gap-6',
-      'tb:[&>article:last-child:nth-child(odd)]:col-span-2',
-      'tb:[&>article:last-child:nth-child(odd)]:w-full',
-      'tb:[&>article:last-child:nth-child(odd)]:max-w-[calc((100%-1.5rem)/2)]',
-      'tb:[&>article:last-child:nth-child(odd)]:justify-self-center',
-      'dk:[&>article:last-child:nth-child(odd)]:max-w-[calc((100%-2rem)/2)]',
-    )}
-  >
-    {
-      pc.items.map((item) => (
-        <ProgramCard
-          title={item.title}
-          imageSrc={item.imageSrc}
-          imageAlt={item.imageAlt}
-          description={item.description}
-          href={common.whatsappHref}
-          location={pc.location}
-          statusLabel={pc.statusLabel}
-          ctaText={pc.ctaText}
-        />
-      ))
-    }
-  </div>
+	<div
+		class={cn(
+			'tb:grid-cols-2 dk:grid-cols-2 dk:gap-8 mx-auto grid w-full max-w-328 gap-6',
+			'tb:[&>article:last-child:nth-child(odd)]:col-span-2',
+			'tb:[&>article:last-child:nth-child(odd)]:w-full',
+			'tb:[&>article:last-child:nth-child(odd)]:max-w-[calc((100%-1.5rem)/2)]',
+			'tb:[&>article:last-child:nth-child(odd)]:justify-self-center',
+			'dk:[&>article:last-child:nth-child(odd)]:max-w-[calc((100%-2rem)/2)]',
+		)}
+	>
+		{
+			pc.items.map((item) => (
+				<ProgramCard
+					title={item.title}
+					imageSrc={item.imageSrc}
+					imageAlt={item.imageAlt}
+					description={item.description}
+					href={common.whatsappHref}
+					location={pc.location}
+					statusLabel={pc.statusLabel}
+					ctaText={pc.ctaText}
+				/>
+			))
+		}
+	</div>
 </section>
 
 <script>
-  import { initProgramsCatalogSectionAnimation } from './animation';
+	import { initProgramsCatalogSectionAnimation } from './animation';
 
-  const init = () => initProgramsCatalogSectionAnimation();
+	const init = () => initProgramsCatalogSectionAnimation();
 
-  document.addEventListener('astro:page-load', init);
+	document.addEventListener('astro:page-load', init);
 </script>

@@ -184,7 +184,7 @@ export const initProgramsCatalogSectionAnimation = createScrollSectionController
       const triggers = cards.map((card) =>
         ScrollTrigger.create({
           trigger: card,
-          start: 'top 76%',
+          start: 'top 80%',
           end: 'bottom 18%',
           onEnter: () => revealBatch.queue(card),
           onEnterBack: () => revealBatch.queue(card),

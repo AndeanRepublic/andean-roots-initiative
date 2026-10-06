@@ -84,10 +84,12 @@ function getCenteredIntroOffsets(
   const rootTop = root.getBoundingClientRect().top;
   const titleY = Number.parseFloat(String(gsap.getProperty(title, 'y'))) || 0;
   const cardY = Number.parseFloat(String(gsap.getProperty(cardContainer, 'y'))) || 0;
+  const stage = cardContainer.parentElement;
+  const stageShift = stage ? Number.parseFloat(String(gsap.getProperty(stage, 'marginTop'))) || 0 : 0;
   const titleRect = title.getBoundingClientRect();
   const cardRect = cardContainer.getBoundingClientRect();
   const naturalTitleTop = titleRect.top - rootTop - titleY;
-  const naturalCardTop = cardRect.top - rootTop - cardY;
+  const naturalCardTop = cardRect.top - rootTop - cardY - stageShift;
   const gap = CENTERED_TITLE_CARD_GAP_REM * 16;
   const groupHeight = titleRect.height + gap + cardRect.height;
   const targetTitleTop = Math.max(0, (window.innerHeight - groupHeight) / 2);
@@ -101,6 +103,7 @@ function getCenteredIntroOffsets(
 
 function clearVisionCardStyles(root: HTMLElement) {
   const animatedSelectors = [
+    '.challenge-flip-stage',
     '.challenge-flip-stage .card',
     DESKTOP_CARD_CONTAINER_SELECTOR,
     INTRO_TITLE_SELECTOR,
@@ -185,16 +188,13 @@ export const initChallengeSectionCards = createScrollSectionController({
     mm.add('(min-width: 1200px)', () => {
       const clearTextAnimation = setupIntroTextReveal(root);
       const title = root.querySelector<HTMLElement>(INTRO_TITLE_SELECTOR);
-      const introChars = Array.from(
-        root.querySelectorAll<HTMLElement>('.challenge-intro-char'),
-      );
+      const introChars = Array.from(root.querySelectorAll<HTMLElement>('.challenge-intro-char'));
       const introLines = groupCharsByVisualLine(introChars);
       const cardContainer = root.querySelector<HTMLElement>(DESKTOP_CARD_CONTAINER_SELECTOR);
-      const cards = Array.from(
-        root.querySelectorAll<HTMLElement>('.challenge-flip-stage .card'),
-      );
+      const stage = cardContainer?.parentElement ?? null;
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('.challenge-flip-stage .card'));
 
-      if (!title || !cardContainer || !cards.length) {
+      if (!title || !cardContainer || !stage || !cards.length) {
         return clearTextAnimation;
       }
 
@@ -232,15 +232,52 @@ export const initChallengeSectionCards = createScrollSectionController({
         },
         'compose',
       );
+      const centeredShift = () =>
+        Math.min(0, getCenteredIntroOffsets(root, title, cardContainer).cardY);
+      // Move the stage in layout, not with translate, so the box rises with the cards.
       timeline.to(
-        cardContainer,
+        stage,
         {
-          y: () => getCenteredIntroOffsets(root, title, cardContainer).cardY,
+          marginTop: centeredShift,
           duration: 1.1,
           ease: 'power2.inOut',
         },
         'compose',
       );
+      const spacer = timeline.scrollTrigger?.spacer;
+      if (spacer) {
+        let phase: 'tall' | 'short' = 'tall';
+        // Pins below were measured against the tall spacer. Remeasure when the shrink finishes,
+        // while this section is still pinned, so the program cards don't overshoot and snap.
+        const realignPinsBelow = () => {
+          ScrollTrigger.getAll().forEach((trigger) => {
+            const node = trigger.trigger;
+            if (!(node instanceof Element) || node === root || root.contains(node)) return;
+            if (trigger.animation) return;
+            trigger.refresh();
+          });
+        };
+
+        timeline.to(
+          spacer,
+          {
+            height: () => spacer.offsetHeight + centeredShift(),
+            duration: 1.1,
+            ease: 'power2.inOut',
+            onUpdate(this: gsap.core.Tween) {
+              const progress = this.progress();
+              if (phase !== 'short' && progress > 0.98) {
+                phase = 'short';
+                requestAnimationFrame(realignPinsBelow);
+              } else if (phase !== 'tall' && progress < 0.02) {
+                phase = 'tall';
+                requestAnimationFrame(realignPinsBelow);
+              }
+            },
+          },
+          'compose',
+        );
+      }
 
       // Briefly hold the centered composition before the image starts separating.
       timeline.to(hold, { progress: 1, duration: 0.35, ease: 'none' });

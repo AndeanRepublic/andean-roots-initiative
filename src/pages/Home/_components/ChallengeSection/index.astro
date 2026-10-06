@@ -13,16 +13,18 @@ interface Props {
 const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
-<section id="challenge" class="sticky-section px-6xl py-6xl bg-white">
-	<div
-		class={cn(
-			'mx-auto flex w-full max-w-328 flex-col items-center',
-			'gap-[32px] tb:gap-[32px] dk:gap-[24px]',
-		)}
-	>
-		<ChallengeSectionIntro lang={lang} />
-		<ChallengeFlipCardsDesktop lang={lang} />
-		<ChallengeCardsMobile lang={lang} />
+<section id="challenge" class="sticky-section bg-white">
+	<div class="px-6xl py-6xl">
+		<div
+			class={cn(
+				'mx-auto flex w-full max-w-328 flex-col items-center',
+				'gap-[32px] tb:gap-[32px] dk:gap-[24px]',
+			)}
+		>
+			<ChallengeSectionIntro lang={lang} />
+			<ChallengeFlipCardsDesktop lang={lang} />
+			<ChallengeCardsMobile lang={lang} />
+		</div>
 	</div>
 </section>
 

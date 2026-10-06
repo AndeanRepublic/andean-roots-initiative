@@ -6,6 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Same cut as Copy: desktop trigger starts at 1025. */
 const DK_MIN = 1025;
+/** Matches `--breakpoint-dk-lg`. */
+const DK_LG_MIN = 1700;
+const PIN_CENTER = 'center center';
+/** Tall viewports: pin above the middle so the card sits higher. */
+const PIN_HIGH = 'center 42%';
 /** After the title Copy (`duration` 0.9). */
 const BUTTON_DELAY_DK = 1;
 function clearStrategicProgramsStyles(root: HTMLElement) {
@@ -107,10 +112,11 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
     };
 
     /**
-     * Cards stick in the center. Each one shrinks, tilts, and darkens
-     * as the next card covers it. The last card is not pinned.
+     * Cards stick at `pinAt` (viewport center on desktop, higher on dk-lg).
+     * Each one shrinks, tilts, and darkens as the next card covers it.
+     * The last card is not pinned.
      */
-    const createStickyPins = (items: HTMLElement[]) => {
+    const createStickyPins = (items: HTMLElement[], pinAt: string) => {
       const triggers: ScrollTrigger[] = [];
       const last = items[items.length - 1];
       if (!last) return triggers;
@@ -122,11 +128,13 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
         triggers.push(
           ScrollTrigger.create({
             trigger: card,
-            start: 'center center',
+            start: pinAt,
             endTrigger: last,
-            end: 'center center',
+            end: pinAt,
             pin: true,
             pinSpacing: false,
+            // Scale and rotation own the transform. A transform pin would lose its y and the card would jump.
+            pinType: 'fixed',
             invalidateOnRefresh: true,
           }),
         );
@@ -136,7 +144,7 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
           ScrollTrigger.create({
             trigger: next,
             start: 'top bottom',
-            end: 'center center',
+            end: pinAt,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const progress = self.progress;
@@ -180,15 +188,30 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
         onLeaveBack: resetSequence,
       });
 
-      const cardTriggers = createStickyPins(cards);
-
       return () => {
         buttonCall?.kill();
         st.kill();
-        cardTriggers.forEach((trigger) => trigger.kill());
-
         clearStrategicProgramsStyles(root);
       };
+    });
+
+    const releasePins = (triggers: ScrollTrigger[]) => {
+      triggers.forEach((trigger) => trigger.kill());
+      cards.forEach((card) => {
+        card.style.zIndex = '';
+        card.style.removeProperty('--after-opacity');
+        gsap.set(card, { clearProps: 'scale,rotation,transformOrigin' });
+      });
+    };
+
+    mm.add(`(min-width: ${DK_MIN}px) and (max-width: ${DK_LG_MIN - 1}px)`, () => {
+      const cardTriggers = createStickyPins(cards, PIN_CENTER);
+      return () => releasePins(cardTriggers);
+    });
+
+    mm.add(`(min-width: ${DK_LG_MIN}px)`, () => {
+      const cardTriggers = createStickyPins(cards, PIN_HIGH);
+      return () => releasePins(cardTriggers);
     });
 
     mm.add(`(max-width: ${DK_MIN - 1}px)`, () => {
@@ -199,11 +222,29 @@ export const initStrategicProgramsSectionAnimation = createScrollSectionControll
           trigger: label,
           start: 'top 80%',
           onEnter: () =>
-            gsap.to(label, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', overwrite: true }),
+            gsap.to(label, {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+              overwrite: true,
+            }),
           onEnterBack: () =>
-            gsap.to(label, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', overwrite: true }),
+            gsap.to(label, {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: 'power2.out',
+              overwrite: true,
+            }),
           onLeaveBack: () =>
-            gsap.to(label, { opacity: 0, y: 18, duration: 0.28, ease: 'power2.in', overwrite: true }),
+            gsap.to(label, {
+              opacity: 0,
+              y: 18,
+              duration: 0.28,
+              ease: 'power2.in',
+              overwrite: true,
+            }),
         }),
       );
 
